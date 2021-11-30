@@ -4,6 +4,7 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import WelcomeCard from "../components/homepage/WelcomeCard";
 import NoticeCard from "../components/homepage/NoticeCard";
+import RecentPosts from "../components/homepage/RecentPosts";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Header />
       <WelcomeCard />
       <NoticeCard />
+      <RecentPosts />
       <Footer />
     </div>
   );
