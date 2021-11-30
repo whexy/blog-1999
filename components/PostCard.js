@@ -1,6 +1,7 @@
 import Link from "next/link";
+import Image from "next/image";
 
-export default function PostCard({ title, date, url, excerpt }) {
+export default function PostCard({ title, date, url, image, excerpt }) {
   return (
     <>
       <div className="flex flex-col -space-y-1 autobg transition-all rounded p-4">
@@ -14,9 +15,13 @@ export default function PostCard({ title, date, url, excerpt }) {
           <div className="text-sm text-gray-700 dark:text-jbgray-light font-light">
             {excerpt}
           </div>
-          <div className="flex-shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
-            {/* {% image post.data.image, post.data.title, "", "", "rounded-xl w-full h-auto" %} */}
-          </div>
+          {image && (
+            <div className="flex-shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
+              <div className="rounded-xl w-full h-auto overflow-hidden">
+                <Image src={image} height={200} width={400} />
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>

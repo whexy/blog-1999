@@ -1,0 +1,112 @@
+---
+title: "Using QEMU to run Linux images on M1 Macbook"
+date: "2021-08-16"
+tags: Tricks
+---
+
+As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the **QEMU** on **macOS** with **Apple Silicon**.
+
+<!-- more -->
+
+~~The M1 is great and blah, blah, blah… but can it run Crisis? Eh.. I mean, QEMU?~~
+
+## Build QEMU on Apple Silicon
+
+### Run Natively
+
+Currently (**24-Aug-2021**), simply using `brew install qemu` won't work for M1 macOS. This situation may change in the future.
+
+In this Coding, we are going to build the native version of QEMU running on macOS with M1 Apple Silicon.
+
+### Patch
+
+My solution is to build QEMU by my own. Some blogs early this year [^1] put that the QEMU doesn't support hypervisor framework (**hvf**) in M1, thus it should be patched with Hypervisor framework written by [@_AlexGraf](https://twitter.com/_AlexGraf). 
+
+Things are changing everyday. Now the main branch has merged some hvf patches, while still not fully support Apple Silicon. Here we use QEMU 6.0 (which is the newest stable version in 24-Aug-2021), and use Alexander Graf's patch v8.
+
+### Building instructions
+
+I got the latest QEMU git in GitHub. To build the qemu, first install the requirement.
+
+```bash
+brew install ninja pkgconfig glib pixman
+```
+
+You may need to checkout my [Debugging Tips](#debugging-tips) first, to make your life easier.
+
+1. Clone the Git repo and checkout to the stable 6.0.0 version
+
+```bash
+git clone https://github.com/qemu/qemu
+cd qemu
+git checkout 3c93dfa42c394fdd55684f2fbf24cf2f39b97d47
+```
+
+2. Patch
+
+```bash
+curl https://patchew.org/QEMU/20210519202253.76782-1-agraf@csgraf.de/mbox | git am
+```
+
+3. Do auto configure and build
+
+```bash
+mkdir build && cd build
+../configure --target-list=aarch64-softmmu
+make -j8
+```
+
+Unlike the blogs written earlier this year, the only argument is just `--target-list=aarch64-softmmu`. Don't put `--enbale-hvf` or `--disable-gnutls` to it.
+
+4. Install QEMU
+
+
+```bash
+sudo make install
+```
+
+Now we have the `qemu-system-aarch64` binary, and we can run it with `qemu-system-aarch64 --version` to see if it's ready.
+
+```
+❯ qemu-system-aarch64 --version
+QEMU emulator version 6.0.50 (v6.0.0-1407-g44242f6937)
+Copyright (c) 2003-2021 Fabrice Bellard and the QEMU Project developers
+```
+
+## Run Linux on QEMU
+
+To test if QEMU actually works on the laptop, I download Ubuntu Server 20.04 (aarch64). The following is a shell to run the VM.
+
+```bash
+#!/bin/sh
+qemu-system-aarch64 \
+    -accel hvf \
+    -m 2048 \
+    -cpu cortex-a57 -M virt,highmem=off  \
+    -drive file=/usr/local/share/qemu/edk2-aarch64-code.fd,if=pflash,format=raw,readonly=on \
+    -drive file=ovmf_vars.fd,if=pflash,format=raw \
+    -serial telnet::4444,server,nowait \
+    -drive if=none,file=disk.qcow2,format=qcow2,id=hd0 \
+    -device virtio-blk-device,drive=hd0,serial="dummyserial" \
+    -device virtio-net-device,netdev=net0 \
+    -netdev user,id=net0 \
+    -vga none -device ramfb \
+    -cdrom ubuntu-20.04.2-live-server-arm64.iso \
+    -device usb-ehci -device usb-kbd -device usb-mouse -usb \
+    -monitor stdio
+```
+
+{% image "https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/zz1pLq.png", "" %}
+
+## Debugging Tips
+
+I actually encounter many problems when installing QEMU. Here is what you might want to do.
+
+- It's suggested to use gcc-11 instead of apple clang (cc). Install gcc with homebrew first. However, I successfully build QEMU with apple clang.
+- Pay attension to the auto config. It will display the infomation whether a feature is enabled or disabled.
+- Use `qemu-system-aarch64 -accel help` to check if your QEMU supports hvf. If not, there are some problems when patching.
+
+
+
+[^1]: [Linux Desktop on Apple Silicon/M1 in Practice](https://gist.github.com/akihikodaki/87df4149e7ca87f18dc56807ec5a1bc5); [在 M1 上用 QEMU 运行 Debian 虚拟机](https://jia.je/software/2021/01/02/aarch64-debian-in-qemu-m1/); etc.
+

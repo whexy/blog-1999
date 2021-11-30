@@ -1,6 +1,6 @@
 import PostCard from "../PostCard";
 
-export default function RecentPosts() {
+export default function RecentPosts({ posts }) {
   return (
     <>
       <div className="my-5 pb-5">
@@ -16,11 +16,12 @@ export default function RecentPosts() {
             </a>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">
-            {[...Array(5)].map((x, i) => (
+            {posts.map((post, i) => (
               <PostCard
-                title={`test-${i}`}
-                date="2022-01-01"
-                excerpt="lorem"
+                title={post.title}
+                date={post.date}
+                image={post.image}
+                excerpt={post.excerpt}
                 key={i}
               />
             ))}

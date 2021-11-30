@@ -1,0 +1,86 @@
+---
+title: 'Inline Assembly Language in C'
+date: "2020-11-14"
+tags: Coding
+---
+
+Writing assembly code is hard and boring! However, if you want to set regisiters, read memories, sometimes you must do the "dirty work".
+
+<!-- more -->
+
+Luckily we have GCC's help. GCC provides a keyword `asm`, which allows you to embed assembler instructions within C code. C language definitely saves our life.
+
+## Basic Asm
+
+A basic `asm` statement has the following syntax:
+
+```c
+asm asm-qualifiers ( Assembler Instructions );
+```
+
+For example, in [PMU settings](https://www.notion.so/PMU-settings-a48f59bad9f741c7ac1d94dcca3800e1) , we want to read the system register `PMCR_EL0`, to make sure whether the PMU is set up successfully. The corresponding assembler instruction is `MRS x0, PMCR_EL0`. In the C code, we can write:
+
+```c
+asm ("mrs x0, PMCR_EL0");
+```
+
+Notice that the `asm-qualifiers` are omitted. All basic `asm` blocks are implicitly "volatile".
+
+You should be warned that GCC doesn't parse the assembler instructions and **have no idea about what they mean or even whether they are valid or not**.
+
+## Extended Asm
+
+Basic `asm` knows nothing about the C syntax around. For example, if you want to put a integer stored in C variable `int_a` into a register, you cannot use basic `asm`.
+
+With extended `asm` you can read and write C variables from assembler and perform jumps from assembler codes to C labels. The extended `asm` has the following syntax:
+
+```c
+asm qualifiers (AssemblerTemplate 
+                 : output_constraint (C lvalue) 
+                 : input_constraint (C expression)
+                 : Clobbers)
+```
+
+Some assembler instructions will have side-effect, and we should explicitly use qualifier `volatile` to tell GCC don't optimize our code (yes, GCC is really smart and sometimes we need to tell it try not be so smart).
+
+### Constraints
+
+Constraint is kind of confusing. We only need to know one common constraint we are likely to use when configuring Ninja. 
+
+The constraint is `r` marks the related calculation result can be stored in a general register, often used in input constraint. On the other hand, `=r` means the same thing, with write-only register, often used in output constraint.
+
+For example, the following code change the value in system register.
+
+```c
+asm volatile("msr pmintenset_el1, %0" : : "r" ((u64)(0 << 31)));
+```
+
+It marks the C expression `(u64) (0<<31)`  to be stored in any general register. While running, GCC will assign a general register to fill the `%0` in the assembler template, and fill it with the calculation result of the expression.
+
+Another example of print the value stored in system register.
+
+```c
+long long f;
+asm("mrs %0, PMCR_EL0" : "=r" (f));
+printk(KERN_INFO "PMCR_EL0 = %llu\n", f);
+```
+
+It marks the C variable `(long long) f` to be handled as any general register. While running, GCC will assign a general register to fill the `%0` in the assembler template, and bind it with variable `f`.
+
+### Clobber List
+
+Extended asm is designed to have a C expression as input and have a C left value written with the output. But sometimes our assembler code have side effects, like we will change the stored value in another register.
+
+Unfortunately, GCC don't know the effect, since it cannot understand assembler instuctions (still remember GCC is designed to understand C code?). So we must explicitly list the registers that is affected, that's why we have clobber list.
+
+Here's an example
+
+```c
+asm( "movl %0,%%eax;\n\tmovl %1,%%ecx;\n\tcall _foo"
+        : /*no outputs*/
+        : "g" (from), "g" (to)
+        : "eax", "ecx"
+    );
+```
+
+That is an x86 example, and feel no worry that you cannot understand because so am I. The only thing we care is that we mark `eax` and `ecx` as clobber, so GCC won't depend on these two register to maintain other things.

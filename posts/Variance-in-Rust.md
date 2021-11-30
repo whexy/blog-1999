@@ -1,0 +1,105 @@
+---
+title: Variance in Rust (Rust 中的协变、逆变与不变)
+date: "2021-02-21"
+tags: Coding
+---
+
+I’m watching Jon Gjengset’s live coding stream. And the topic is “Subtyping and Variance”. This is my note.
+
+<!-- more -->
+[Jon Gjengset’s live coding stream](https://www.youtube.com/watch?v=--wzpkTuCrA&feature=push-lsb&attr_tag=ivAldDGwbw3k1GZn%3A6)
+
+## Lifetime shrinking
+
+The Rust compiler will automatically shrink the lifetime of the parameter to the shortest one.
+For example,
+```rust
+fn main() {
+	let s = String::new();
+	let x = "static str"; // `x` is `&'static str`
+	let mut y = &*s; // `y` is `&'s str`
+	y = x;
+	// Still compilable!
+  // Rust automatically shrink the lifetime static to s.
+}
+```
+That makes sense, because you can always trust a value from who lives longer, without concerning about the value somehow goes invalid. What’s behind the scene is that Rust have a system of subtyping and variance.
+## Subtype
+Just think of an example in Java, class `Cat` is a subtype of the class `Animal`.
+In brief, we say `T` is a subtype of `U` (notation `T <: U`) when `T` is at least as useful as `U`. `T` can do anything that `U` can do, but `T` may have the ability of other things.
+In Rust, the lifetime `’static` is a subtype of every lifetime. Rust compiler then uses different variance rules to check whether the program should be compiled or not.
+## Variance
+You may understand variance in many other programming languages. And there are three types of variance in programming, called **covariance**, **contra-variance**, and **invariance**.
+### Covariance
+Covariance is the most common case. Most things in Rust is covariance.
+For example,
+```rust
+/// define a function which takes an lifetime sticker `a`
+fn foo(_: &'a str) {}
+
+// and you can call the function with
+foo(&'a str);
+// or
+foo(&'static str);
+```
+In the example, we can give the function with parameter whose lifetime is no matter `a` or `static`. That is because `static` is a subtype of `a`. 
+The static str lives longer than the required `’a`, so there should be no concern that the borrowed variable would be unexpectedly dropped.
+### Contra-variance
+Let’s consider the high-rank function example below.
+```rust
+/// define a function which takes a function, 
+/// which takes a lifetime sticker `a`.
+fn foo(bar: Fn(&'a str) -> ()) {
+	bar(str);
+}
+
+let x : Fn(&'a str) -> ();
+foo(x); // that makes sense.
+
+let y : Fn(&'static str) -> ();
+foo(y); // should that make sense ???
+```
+Should `foo(y)` be compilable?  Definitely not! Let’s say if `foo(y)` compiles, then we are actually doing things in the high-rank function like:
+```rust
+let baz = &*String::new(); 
+// lifetime of baz is shorter than 'static
+fn y(_: &'static str) {}
+// an function that needs a static borrowing 
+y(baz); 
+// [!!] Should not compile
+// because a static lifetime is required.
+```
+The caller gives a parameter with limited lifetime. But the function we get requires a static lifetime parameter. That cannot be allowed.
+However, let’s consider another example:
+```rust
+/// define a function which takes a function, 
+/// which takes a parameter with static lifetime.
+fn foo(bar: Fn(&'static str) -> ()) {
+	bar("Hello Whexy~");
+}
+
+let x : Fn(&'static str) -> ();
+foo(x); // that makes sense.
+
+let y : Fn(&'a str) -> ();
+foo(y); // that makes sense too.
+```
+This example is perfect compiled. Because the function `y` requires a parameter with limited lifetime. The caller gives it a static parameter which lives longer. Again, there should be no concern that the borrowed variable would be unexpectedly dropped.
+So the contra-variance is a specific rule.
+`T <: U ==> Fn(U) <: Fn(T)`
+### Invariance
+Invariance means “no variance”. In a short word, “just pass me exact the thing I require, no tricks.”
+Let’s see this example:
+```rust
+fn foo(s: &mut &'a str, x: &'a str) {
+	*s = x;
+}
+let mut x = "Hello"; // x : &'static str
+let z = String::new();
+foo(x, &z); // foo(&'static str, &'z str)
+drop(z);
+println!("{}", x); // OOPS!
+```
+The code cannot compile, because we are going to access `x`, which points to a dropped memory area. In fact, in `&'a mut T`, `T` is invariance. However, the `'a` is covariance. It’s not hard to figure out, so I’m left this to you as an exercise.
+## Reference: variance of types
+Variance of types are listed in [“The Rustonomicon”](https://doc.rust-lang.org/nomicon/subtyping.html)
