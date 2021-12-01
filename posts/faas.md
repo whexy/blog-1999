@@ -99,7 +99,7 @@ AWS Lambda 函数可以用各种语言书写。这里我们就用 Python 来写�
 
 这里我贴出 `view` 函数的实现。可以看到代码很短，充分体现 Serverless 加速开发的优势。
 
-<div class="code-title">thumbs/view.py</div>
+<div className="code-title">thumbs/view.py</div>
 
 ```python
 import os
@@ -131,7 +131,7 @@ def view(event, context):
 
 ![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/0CtP59.png)
 
-你也可以直接试试页面下方的点赞功能。点击 +1 图标，就可以为这篇博客增加一个 <span class="text-pink-500"><i class="fas fa-heart"></i></span>。
+你也可以直接试试页面下方的点赞功能。点击 +1 图标，就可以为这篇博客增加一个 <span className="text-pink-500"><i className="fas fa-heart"></i></span>。
 
 ## 讨论
 

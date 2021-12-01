@@ -30,7 +30,7 @@ Simply put, sideloading is pulling a shrimp out of its shell and stuffing it int
 
 ## Dependency
 
-I've been using the Macbook Air (2020, M1, 16GB) for a while. Thanks to its <span class="text-[#3e8dba] font-black">arm</span>-based CPU, it's super fast compared to my previous Macbook Pro (2018, i5, 8GB).
+I've been using the Macbook Air (2020, M1, 16GB) for a while. Thanks to its <span className="text-[#3e8dba] font-black">arm</span>-based CPU, it's super fast compared to my previous Macbook Pro (2018, i5, 8GB).
 
 <Warn content={`Intel, shame on you!`} />
 
@@ -65,7 +65,7 @@ Of cause I don't want to remove Python. My life depends on it. I found the defau
 /usr/bin/python3 (for architecture arm64e):	Mach-O 64-bit executable arm64e
 ```
 
-Librarys are in the folder at `~/Library/Python/3.8/lib/python/site-packages`. My temporary work-around is to replace the `cryptography` library with its <span class="text-[#2a61a6] font-black">intel</span> version when using the tool and switch back after using it. To install the <span class="text-[#2a61a6] font-black">intel</span> version library, you need to use the <span class="text-[#2a61a6] font-black">intel</span> version Python to run the <span class="text-[#2a61a6] font-black">intel</span> version pip.
+Librarys are in the folder at `~/Library/Python/3.8/lib/python/site-packages`. My temporary work-around is to replace the `cryptography` library with its <span className="text-[#2a61a6] font-black">intel</span> version when using the tool and switch back after using it. To install the <span className="text-[#2a61a6] font-black">intel</span> version library, you need to use the <span className="text-[#2a61a6] font-black">intel</span> version Python to run the <span className="text-[#2a61a6] font-black">intel</span> version pip.
 
 ```shell
 cd ~/Library/Python/3.8/lib/python/site-packages

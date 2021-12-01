@@ -35,7 +35,7 @@ latexdiff a.tex b.tex > difference.tex
 
 在这篇博客[Multiple-file LaTeX diff ](http://dropbearcode.blogspot.com/2011/09/multiple-file-latex-diff.html)中，博主用 Python 写了一个压平多 LaTeX 文件的脚本 `flatten.py`。
 
-<div class="code-title">flatten.py</div>
+<div className="code-title">flatten.py</div>
 
 ```python
 #!/usr/bin/python
@@ -98,7 +98,7 @@ latexdiff old.tex new.tex --disable-citation-markup --exclude-textcmd="section,s
 
 使用 latexdiff 时最好保留所有版本的编译中间件。我展示一下我自用的 Makefile，自动生成比较结果 DIFF.pdf。
 
-<div class="code-title">Makefile</div>
+<div className="code-title">Makefile</div>
 
 ```makefile
 TARGETS = main

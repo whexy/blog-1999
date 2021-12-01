@@ -71,7 +71,7 @@ tags: Tricks
 
 最终我还是搞明白了Shell中8种文本串处理的方法，利用``grep``和``${}``两个命令将execution处理出来了。下面直接分享这个sh文件，希望对大家有所帮助。
 
-<div class="code-title">SUSTech_wifi_login.sh</div>
+<div className="code-title">SUSTech_wifi_login.sh</div>
 
 ```shell
 #!/bin/bash

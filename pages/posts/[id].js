@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Head from "next/head";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import { getAllPostIds, getPostData } from "../../lib/posts";
@@ -7,12 +8,6 @@ import Date from "../../lib/date";
 import metadata from "../../metadata";
 import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
-
-const ResponsiveImage = (props) => (
-  <div style={{ position: "relative", width: "100%", paddingBottom: "90%" }}>
-    <Image alt={props.alt} layout="fill" {...props} objectFit="contain" />
-  </div>
-);
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -44,6 +39,10 @@ const components = {
 export default function Post({ postData }) {
   return (
     <>
+      <Head>
+        <title>{postData.title} | {metadata.title}</title>
+        <description>{postData.excerpt}</description>
+      </Head>
       <main className="bg-white">
         <div className="prose lg:prose-lg sm:py-5 mx-auto overscroll-contain">
           <div className="w-full h-auto rounded-t-xl overflow-hidden pb-5">
