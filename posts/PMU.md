@@ -17,7 +17,7 @@ If you work with hardware-assisted projects, you definitely will come to PMU one
 
 In short, PMU is a group of counters that can count any of the events available in the core. For example, if you want to know how many cycles your program use, you go to PMU. If you want to know how many instructions in a program are executed, you go to PMU. I know what you think, *"okay, a counter counting things that I don't care."* What about this: PMU lets you know how many branches were incorrectly predicted and pre-executed, which is used to improve your program's performance further.
 
-{% image "https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/DeiMrq.jpg", "" %}
+![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/DeiMrq.jpg)
 
 Yes, the hardware world is wild and crazy. Even if your algorithm is perfect, it will still face many problems because of the implementation. For example, issues that affect the runtime spend like memory fragmentation, memory leaks, too many context switches, constantly wrong branch predictions, etc. The bad thing is -- you don't even know these things are happening! As a software designer, it's hard to envision everything that happens on hardware when you code. That's why we need PMU, a component dedicated to counting all kinds of hardware events.
 
@@ -37,9 +37,7 @@ If we want to be notified as soon as possible about events that happen in hardwa
 
 ## Handle PMU Interrupts in the kernel
 
-::: warn
-The following part is based on Armv8, aarch64.
-:::
+<Warn content={`The following part is based on Armv8, aarch64.`} />
 
 Handling an interrupt may sound unfamiliar to you. After all, it should be done by a device driver. Of course, Linux is shipped with a PMU driver, which handles the interrupts correctly. But Linux gives us no chance to customize the build-in interrupt handling process. That's why we need to reimplement it.
 
@@ -50,16 +48,14 @@ cat /proc/interrupts
 ```
 You can see the PMU interrupt handler named "arm-pmu" among them. And do notice that there are two critical numbers in the table. One is the **Logical Interrupt ID**, which is in the first column of the table. Another is the **Hardware Interrupt ID**, which is followed by *Level*. We will use them both in the following steps.
 
-{% image "https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/WikgVn.png", "" %}
+![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/WikgVn.png)
 
 For example, on my device, the logical interrupt ID of PMU in the first CPU is 36, while the hardware interrupt ID is 36. Logical interrupt ID 36~41 on my machine is left for PMU.
 
-::: callout 🤔 Think Further
-Have you ever wondered why Linux maps "hardware interrupt ID" to "logical interrupt ID"? That is because there are various IRQ (interrupt request) domains in the system. Among them, different IRQ handlers take effect on the same hardware interrupt. By interrupt mapping, you can ignore the interrupt you care about when it's not your business.
+<Callout title={`🤔 Think Further`} content={`Have you ever wondered why Linux maps "hardware interrupt ID" to "logical interrupt ID"? That is because there are various IRQ (interrupt request) domains in the system. Among them, different IRQ handlers take effect on the same hardware interrupt. By interrupt mapping, you can ignore the interrupt you care about when it's not your business.
 
 There are different kinds of interrupt mapping in Linux. For example, our Arm64 Linux uses a linear mapping strategy. Linux running on MIPS architecture uses radix tree mapping.
-
-:::
+`} />
 
 Now we can handle the interrupts with these IDs. Programs cannot touch hardware in user mode, so **a kernel module** is necessary. In that module, you can use the Linux API `request_irq()`. The API takes a logical interrupt ID as its first parameter. Here's an example.
 
@@ -79,12 +75,10 @@ However, you cannot register the handler of PMU interrupts simply by running thi
 
 I want the built-in handler can work with my handler together. So I go to the Linux source code and modify the Linux version's handler called arm-pmu. I added the flag `IRQF_SHARED` to it, making the interrupt shareable, which means other handlers can hook it simultaneously.
 
-::: callout 💭 [Bonus] Handle PMU Interrupts securely in the firmware
-
+<Callout title={`💭 [Bonus] Handle PMU Interrupts securely in the firmware`} content={`
 It seems odd to handle PMU interrupts in the firmware, but it's useful, especially for some tracers that don't want to intrude into the operating system.
 
-Here I will only cover some basic thoughts. First, you need to configure GIC, which is short for *Global Interrupt Controller*, to route the interrupts to the highest secure level EL3. Then, In ATF, you should register your own handler. You can also reroute and handle them in Secure-EL1, where you can have your own TEE-OS.
-:::
+Here I will only cover some basic thoughts. First, you need to configure GIC, which is short for *Global Interrupt Controller*, to route the interrupts to the highest secure level EL3. Then, In ATF, you should register your own handler. You can also reroute and handle them in Secure-EL1, where you can have your own TEE-OS.`} />
 
 ## Perf: The easiest way to use PMU
 

@@ -96,7 +96,7 @@ qemu-system-aarch64 \
     -monitor stdio
 ```
 
-{% image "https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/zz1pLq.png", "" %}
+![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/zz1pLq.png)
 
 ## Debugging Tips
 

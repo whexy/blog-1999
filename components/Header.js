@@ -13,13 +13,13 @@ export default function Header() {
             </h1>
           </a>
         </Link>
-        {/* <div className="sm:flex-1 sm:flex sm:flex-row sm:justify-end">
-            <div className="flex flex-row overflow-hidden flex-nowrap text-lg sm:text-xl font-light justify-center items-center divide-x divide-jbgray-light divide-opacity-10">
-                {%- for entry in collections.all | eleventyNavigation %}
-                    <a className=" {{ 'text-gray-200 font-semibold' if entry.url == page.url }} px-2 select-none" href="{{ entry.url | url }}">{{ entry.title }}</a>
-                {%- endfor %}
-            </div>
-        </div> */}
+        <div className="sm:flex-1 sm:flex sm:flex-row sm:justify-end">
+          <div className="flex flex-row overflow-hidden flex-nowrap text-lg sm:text-xl font-light justify-center items-center divide-x divide-jbgray-light divide-opacity-10">
+            <a className="text-gray-200 font-semibold px-2 select-none">
+              Built with Next.js
+            </a>
+          </div>
+        </div>
       </div>
     </header>
   );

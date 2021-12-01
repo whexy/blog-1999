@@ -16,13 +16,14 @@ export default function RecentPosts({ posts }) {
             </a>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">
-            {posts.map((post, i) => (
+            {posts.map((post) => (
               <PostCard
                 title={post.title}
                 date={post.date}
                 image={post.image}
                 excerpt={post.excerpt}
-                key={i}
+                url={`/posts/${post.id}`}
+                key={post.id}
               />
             ))}
           </div>

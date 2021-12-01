@@ -17,9 +17,12 @@ export default function PostCard({ title, date, url, image, excerpt }) {
           </div>
           {image && (
             <div className="flex-shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
-              <div className="rounded-xl w-full h-auto overflow-hidden">
-                <Image src={image} height={200} width={400} />
-              </div>
+              <Image
+                src={image}
+                height={200}
+                width={400}
+                className="rounded-xl w-full h-auto"
+              />
             </div>
           )}
         </div>

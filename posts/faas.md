@@ -16,9 +16,7 @@ image: https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/jFXNDx.jpg
 
 静态博客的评论功能有很多开箱即用的框架，例如我使用的 Utteranc。点赞功能没有类似的框架。乐观地看，点赞的实现比评论简单太多。所以，我们可以自己动手写一个。
 
-::: warn
-引入评论区的一个月里，其实一条评论也没有。
-:::
+<Warn content={`引入评论区的一个月里，其实一条评论也没有。`} />
 
 ### Serverless Function & FaaS
 
@@ -43,26 +41,20 @@ image: https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/jFXNDx.jpg
 
 云服务厂商进一步提出了 FaaS (Function as a Service)，把**计算**和**存储**抽象成一组函数 API。FaaS 是各种 XaaS 的终极形态，是达到“人人可编程”目标的起点。以后的计算机应用技术职业教育可以把重点从体系架构转移到 FaaS 上，FaaS 是真正能促进产业发展的概念。
 
-:::callout 🉑 我看 Serverless
-拥有云服务器相当于买一辆车，使用 Serverless Function 相当于租一辆车。买车你需要上牌照、交保险、关心油费和年检，而租来的车可以直接放心开。当然，我们只能完全支配属于自己的车，所以租车和买车之间需要权衡。
-:::
+<Callout title={`🉑 我看 Serverless`} content={`拥有云服务器相当于买一辆车，使用 Serverless Function 相当于租一辆车。买车你需要上牌照、交保险、关心油费和年检，而租来的车可以直接放心开。当然，我们只能完全支配属于自己的车，所以租车和买车之间需要权衡。`} />
 
 ### AWS Lambda
 
 这次我使用的就是亚马逊的 AWS Lambda。AWS Lambda 可以让开发人员只需编写包含逻辑要求的代码函数，并可部署、调用代码，确保代码的可靠性高、延展性强，而无需管理其他基础架构。这里，我们使用 [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) 定义一个无服务器代码函数。这个代码函数将被部署至 AWS Lambda，使用 Python 编写，然后处理经由传输流接收到的点赞记录。
 
-:::warn
-鄙人不才，正好有一位即将在亚马逊供职的漂亮女友。
-:::
+<Warn content={`鄙人不才，正好有一位即将在亚马逊供职的漂亮女友。`} />
 
 
 ## 需求与 API 设计
 
 我想放在博客里的点赞功能非常简单。用户点击按钮给计数器加一。深思熟虑后我打算放弃一个用户只能点赞一次的后端校验，因为这实现起来有一些难度。当然，前端上还是做了小小的限制，相信绕过它是非常容易的事情。
 
-:::warn
-这绝对不是为了刷赞故意为之。
-:::
+<Warn content={`这绝对不是为了刷赞故意为之。`} />
 
 对于这个需求，我打算开发两个 API：
 
@@ -73,17 +65,13 @@ image: https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/jFXNDx.jpg
 
 前端实现上，将每篇博客的 URL 经过编码后作为 page_id。后端实现上，用 DynamoDB 做点赞数记录。DynamoDB 是一个 NoSQL 数据库，可以理解成一个拥有超能力的 HashMap。
 
-:::callout 🤔 如何实现点赞限制
-如果没有用户注册与登录的功能，用户指纹也可以用来判断身份。指纹算法有非常丰富的实现，因为这是广告联盟做追踪器 (Tracker) 常见的伎俩。用户指纹不是真的指纹，而是通过各种设备信息，如浏览器版本、操作系统、IP 地址等算出的唯一 ID。
-:::
+<Callout title={`🤔 如何实现点赞限制`} content={`如果没有用户注册与登录的功能，用户指纹也可以用来判断身份。指纹算法有非常丰富的实现，因为这是广告联盟做追踪器 (Tracker) 常见的伎俩。用户指纹不是真的指纹，而是通过各种设备信息，如浏览器版本、操作系统、IP 地址等算出的唯一 ID。`} />
 
 ## 实现
 
 正如前文一直强调的一样——Lambda 的实现理应非常简单，而且也确实非常简单。这篇博客旨在强调 FaaS 在特定情形下的优势。
 
-:::warn
-下次遇到相同的需求的时候，记得用 FaaS 去实现。人生苦短，省点时间干点别的吧。
-:::
+<Warn content={`下次遇到相同的需求的时候，记得用 FaaS 去实现。人生苦短，省点时间干点别的吧。`} />
 
 
 ### AWS 配置
@@ -94,9 +82,7 @@ image: https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/jFXNDx.jpg
 
 AWS Lambda 函数可以用各种语言书写。这里我们就用 Python 来写一遍。我在腾讯实习期间用 Python 写过很多 CRUD，一直羞于启齿。为了进一步展示 FaaS 低代码的特性，我决定 ~~放下身段~~ 当众写一遍 CRUD。请你不要笑话我，使用动态语言本身就是一种低代码行为。
 
-:::warn
-后文会谈到，这篇文章原本的基调是 Go 语言…
-:::
+<Warn content={`后文会谈到，这篇文章原本的基调是 Go 语言…`} />
 
 首先在 GitHub 上找找有没有可以抄的案例。不出所料，serverless 框架的 example 里就有这么一项[^2]。它用 Python 实现了 AWS DynamoDB 的调用，并且配置了 HTTP API 的触发器。serverless 框架可以帮助我们自动完成 AWS 中的各种配置。
 
@@ -143,7 +129,7 @@ def view(event, context):
 
 在 Gateway 里绑定域名。添加证书，配置好 DNS——💥boom，一个点赞 API 就诞生了。这个 API 不依赖任何私有服务器，完完全全托管在云上。
 
-{% image "https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/0CtP59.png", "" %}
+![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/0CtP59.png)
 
 你也可以直接试试页面下方的点赞功能。点击 +1 图标，就可以为这篇博客增加一个 <span class="text-pink-500"><i class="fas fa-heart"></i></span>。
 

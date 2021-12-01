@@ -15,9 +15,7 @@ The story might be boring to you. Maybe you want to read my [thundering against 
 
 Sideloading means installing an App that is not in the App Store. Perhaps it's the easiest way to install applications on Windows and Androids. But when it comes to Apple, especially for their "best-ever-made" iOS devices, you cannot install Apps like that! Apple seriously controls their customers' apps that they can't even install an app on their phones without the App Store.
 
-::: warn
-But Tim Cook literally asked me to use an Android device [^1].
-:::
+<Warn content={`But Tim Cook literally asked me to use an Android device [^1].`} />
 
 [^1]: [Tim Cook: Users Who Want to Sideload Apps Can Use Android, While the iPhone Experience Maximizes 'Security and Privacy' - MacRumors](https://www.macrumors.com/2021/11/09/tim-cook-users-sideloading-use-an-android/)
 
@@ -28,17 +26,13 @@ There're two steps you need to follow to sideload an App to your iOS devices.
 
 Simply put, sideloading is pulling a shrimp out of its shell and stuffing it into the new home we've prepared. Isn't that super easy? Wait, wait, wait... Noob, you don't need to do all of the things on your own! [Sideloadly](https://sideloadly.io/) says it can help you do this with just one click.
 
-:::warn
-If it's really "one click," as they said, you won't have the luck to read the blog.
-:::
+<Warn content={`If it's really "one click," as they said, you won't have the luck to read the blog.`} />
 
 ## Dependency
 
 I've been using the Macbook Air (2020, M1, 16GB) for a while. Thanks to its <span class="text-[#3e8dba] font-black">arm</span>-based CPU, it's super fast compared to my previous Macbook Pro (2018, i5, 8GB).
 
-:::warn
-Intel, shame on you!
-:::
+<Warn content={`Intel, shame on you!`} />
 
 The challenge to transfer products to arm-based architecture is the ecosystem. Programs aimed to run on x86/x64 cannot magically runs on arm. Apple tries to solve this problem with its Rosetta 2.
 
@@ -49,7 +43,7 @@ So here comes a messy. On our computer, there are two types of applications that
 Here is the issue I first met when opening sideloadly.
 
 <div class="mx-auto max-w-[400px]">
-  {% image "https://i.loli.net/2021/11/29/VZrPKABMv9RebnT.png" %}
+  ![](https://i.loli.net/2021/11/29/VZrPKABMv9RebnT.png)
 </div>
 
 The error is basically described as sideloadly's inability to find a correct version of `_rust.abi3.so`, which is used for the python library  `cryptography`. Usually, the solution is to install the missing requirements with pip. But I do have `cryptography` on my Mac, and so did the error message say:
@@ -85,7 +79,7 @@ arch -x86_64 /usr/bin/python3 -m pip install cryptography
 ```
 
 <div class="mx-auto max-w-[400px]">
-{% image "https://i.loli.net/2021/11/29/q4QAxhYasvDm17n.jpg" %}
+![](https://i.loli.net/2021/11/29/q4QAxhYasvDm17n.jpg)
 </div>
 
 LGTM. Now I can open Sideloadly and see the GUI.

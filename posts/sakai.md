@@ -16,6 +16,6 @@ tags: Tricks
 
 ## WebDAV 连接与使用
 以 MacOS 操作系统为例。在「访达」页面按下快捷键`⌘+K`，然后输入 Sakai 上显示的 WebDAV 地址。在弹出的登录页面输入之前学号和之前更改的密码。就能以一个文件夹的形式打开 Sakai 上的内容了。
-{% image "https://i.loli.net/2020/02/27/GLI9zeFc7rWfOhb.jpg", "GLI9zeFc7rWfOhb" %}
+![](https://i.loli.net/2020/02/27/GLI9zeFc7rWfOhb.jpg)
 
 

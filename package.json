@@ -8,12 +8,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "date-fns": "^2.27.0",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
+    "markdown-it": "^12.2.0",
+    "markdown-it-anchor": "^8.4.1",
+    "markdown-it-container": "^3.0.0",
+    "markdown-it-footnote": "^3.0.3",
     "next": "12.0.4",
+    "next-mdx-remote": "^3.0.8",
     "path": "^0.12.7",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-markdown": "^7.1.1"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.3.0",
