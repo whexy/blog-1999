@@ -54,19 +54,16 @@ The Berkeley version of Unix (BSD) introduced the`vfork()` system call in the ea
 
 ![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/FwRw4r.jpg)
 
-<Callout title={`🤔 Deadlock`} content={`It was discovered that `vfork()` might introduce a new problem when the application has multiple threads running: deadlock. The deadlock can happen due to the dynamic linker `ld.so.1` involvement in resolving the necessary symbols.  Particularly, suppose the child process calls an external function (such as `exec()`). In that case, the dynamic linker may be invoked to resolve the Procedure Linkage Table (PLT) entry, for which the dynamic linker will acquire a mutex lock. This lock may already be held by a different thread in the parent process. If this happens, it will create a deadlock between the parent and child processes because the parent is suspended until the child has called `exec()` or `exit()`. As a result, both the parent and the child processes will hang.
-
-I found it quite interesting because I just met the same problem when writing asynchronized programs in Rust. See my post [Asynchronous Mutex](http://whexy.com/posts/asynchronous/).`} />
+<Callout title={`🤔 Deadlock`}>
+It was discovered that `vfork()` might introduce a new problem when the application has multiple threads running: deadlock. The deadlock can happen due to the dynamic linker `ld.so.1` involvement in resolving the necessary symbols. Particularly, suppose the child process calls an external function (such as `exec()`). In that case, the dynamic linker may be invoked to resolve the Procedure Linkage Table (PLT) entry, for which the dynamic linker will acquire a mutex lock. This lock may already be held by a different thread in the parent process. If this happens, it will create a deadlock between the parent and child processes because the parent is suspended until the child has called `exec()` or `exit()`. As a result, both the parent and the child processes will hang.
+I found it quite interesting because I just met the same problem when writing asynchronized programs in Rust. See my post [Asynchronous Mutex](http://whexy.com/posts/asynchronous/).
+</Callout>
 
 #### posix_spawn()
 
-On Linux, `posix_spawn()` is just implemented with `fork()` and `exec()`. It will use `vfork()` instead of `fork()` if it is safe. You can use `posix_spawn(2)` with the `POSIX_SPAWN_USEVFORK` flag to avoid the overhead of copying page tables when forking from a large process, while Linux can protect you from the deadlock we mentioned above. 
+On Linux, `posix_spawn()` is just implemented with `fork()` and `exec()`. It will use `vfork()` instead of `fork()` if it is safe. You can use `posix_spawn(2)` with the `POSIX_SPAWN_USEVFORK` flag to avoid the overhead of copying page tables when forking from a large process, while Linux can protect you from the deadlock we mentioned above.
 
 This is the solution we finally adopted. It enables fast creation of new processes, avoids invalid copies of fork, and eliminates the need to create processes in advance, regardless of the pool size.
 
-
-
-[^1]:[Multi-processing in Python; Process vs Pool | by Nikhil Verma | Medium](https://lih-verma.medium.com/multi-processing-in-python-process-vs-pool-5caf0f67eb2b)
-
+[^1]: [Multi-processing in Python; Process vs Pool | by Nikhil Verma | Medium](https://lih-verma.medium.com/multi-processing-in-python-process-vs-pool-5caf0f67eb2b)
 [^2]: [Minimizing Memory Usage for Creating Application Subprocesses (archive.org)](https://web.archive.org/web/20190922113430/https://www.oracle.com/technetwork/server-storage/solaris10/subprocess-136439.html)
-

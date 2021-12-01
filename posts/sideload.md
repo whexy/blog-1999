@@ -5,7 +5,7 @@ tags: Tricks
 image: https://i.loli.net/2021/11/29/kNxHmjTCLG3tnAX.jpg
 ---
 
-So I want to sideload an App *(illegally, both the behavior and the app)* to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.
+So I want to sideload an App _(illegally, both the behavior and the app)_ to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.
 
 <!-- more -->
 
@@ -21,7 +21,7 @@ Sideloading means installing an App that is not in the App Store. Perhaps it's t
 
 There're two steps you need to follow to sideload an App to your iOS devices.
 
-1. Get the IPA file and reverse engineer it to remove the crypto protection (called *shell*).
+1. Get the IPA file and reverse engineer it to remove the crypto protection (called _shell_).
 2. Sign the App with your developer's signature.
 
 Simply put, sideloading is pulling a shrimp out of its shell and stuffing it into the new home we've prepared. Isn't that super easy? Wait, wait, wait... Noob, you don't need to do all of the things on your own! [Sideloadly](https://sideloadly.io/) says it can help you do this with just one click.
@@ -42,11 +42,9 @@ So here comes a messy. On our computer, there are two types of applications that
 
 Here is the issue I first met when opening sideloadly.
 
-<div class="mx-auto max-w-[400px]">
-  ![](https://i.loli.net/2021/11/29/VZrPKABMv9RebnT.png)
-</div>
+![](https://i.loli.net/2021/11/29/VZrPKABMv9RebnT.png)
 
-The error is basically described as sideloadly's inability to find a correct version of `_rust.abi3.so`, which is used for the python library  `cryptography`. Usually, the solution is to install the missing requirements with pip. But I do have `cryptography` on my Mac, and so did the error message say:
+The error is basically described as sideloadly's inability to find a correct version of `_rust.abi3.so`, which is used for the python library `cryptography`. Usually, the solution is to install the missing requirements with pip. But I do have `cryptography` on my Mac, and so did the error message say:
 
 > tried ... (mach-o file, but is an incompatible architecture arm-64, need x86_64)
 
@@ -54,7 +52,7 @@ Again, that is what you always meet when you're trying to use the so-called "Uni
 
 But I have the library installed as an arm version because other arm programs want to use it! What do you expected me to do? Replace them with an intel version? Indeed. The developer suggests to remove Python on my mac to get it fixed [^2].
 
-[^2]:  [[Help/Support\] Sideloadly M1 Max: Failed to init layer 2 - Help & Support - iOSGods](https://iosgods.com/topic/152249-sideloadly-m1-max-failed-to-init-layer-2/#comment-4910001)
+[^2]: [[Help/Support\] Sideloadly M1 Max: Failed to init layer 2 - Help & Support - iOSGods](https://iosgods.com/topic/152249-sideloadly-m1-max-failed-to-init-layer-2/#comment-4910001)
 
 ### Temporary Fix
 
@@ -78,9 +76,7 @@ mv cryptography-3.4.7.dist-info cryptography-3.4.7.dist-info_arm64
 arch -x86_64 /usr/bin/python3 -m pip install cryptography
 ```
 
-<div class="mx-auto max-w-[400px]">
 ![](https://i.loli.net/2021/11/29/q4QAxhYasvDm17n.jpg)
-</div>
 
 LGTM. Now I can open Sideloadly and see the GUI.
 
@@ -97,7 +93,7 @@ It seems we got the correct CFFI (C Foreign Function Interface), but with a wron
 So the main reason is that my Python library overrides theirs. When the program tries to locate the library, it first goes to my default Python library path. To overcome this default behavior without changing the program, I have some ideas.
 
 1. Try using terminal to remove `/usr/bin` from `$PATH` when launching Sideloadly. For example, use `PATH=/usr/local/bin open ~/Applications/Sideloadly.app`. It doesn't work because obviously it depends on other binaries in that folder.
-2. Try renaming `/usr/bin/python3` to something else. It doesn't work because macOS rejects every attempt  to modify protected area. (even if you are root and even if SIP is disabled)
+2. Try renaming `/usr/bin/python3` to something else. It doesn't work because macOS rejects every attempt to modify protected area. (even if you are root and even if SIP is disabled)
 3. Remove the fucking Python from my Mac. It doesn't work because my sanity tells me not.
 4. Remove `cffi` and `cryptography` libraries from the library folder. It works.
 
@@ -109,6 +105,6 @@ But you might find it interesting because we've basically been struggling with t
 
 - Apple doesn't allow sideloading Apps.
 - Apple uses Rosetta 2 to mess up your dependencies.
-- Apple doesn't allow modifying files under  `/usr/bin`.
+- Apple doesn't allow modifying files under `/usr/bin`.
 
 I have to admit, as a developer, I'm a little pissed off. I used to believe in Apple because they brought me the best experience. However, the fact that it went closed has led to a discounting of that experience. It's true that users can be tricked into closing SIP, and they might choose to "trust the certificate" or "grant permission" without knowing the potential consequences. But I think what Apple should be doing is **educating users** rather than simply prohibiting them from making a choice.

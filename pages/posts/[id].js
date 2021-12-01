@@ -8,6 +8,12 @@ import metadata from "../../metadata";
 import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
 
+const ResponsiveImage = (props) => (
+  <div style={{ position: "relative", width: "100%", paddingBottom: "90%" }}>
+    <Image alt={props.alt} layout="fill" {...props} objectFit="contain" />
+  </div>
+);
+
 export async function getStaticPaths() {
   const paths = getAllPostIds();
   return {
@@ -29,6 +35,12 @@ export async function getStaticProps({ params }) {
   };
 }
 
+const components = {
+  // img: ResponsiveImage,
+  Callout,
+  Warn,
+};
+
 export default function Post({ postData }) {
   return (
     <>
@@ -44,7 +56,7 @@ export default function Post({ postData }) {
             </div>
             <Date dateString={postData.date} className="text-gray-600" />
           </div>
-          <MDXRemote {...postData.mdx} components={{Callout, Warn}} />
+          <MDXRemote {...postData.mdx} components={components} />
           {/* <PostContent content={postData.fileContent} /> */}
         </div>
       </main>

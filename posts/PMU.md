@@ -53,7 +53,6 @@ You can see the PMU interrupt handler named "arm-pmu" among them. And do notice 
 For example, on my device, the logical interrupt ID of PMU in the first CPU is 36, while the hardware interrupt ID is 36. Logical interrupt ID 36~41 on my machine is left for PMU.
 
 <Callout title={`🤔 Think Further`} content={`Have you ever wondered why Linux maps "hardware interrupt ID" to "logical interrupt ID"? That is because there are various IRQ (interrupt request) domains in the system. Among them, different IRQ handlers take effect on the same hardware interrupt. By interrupt mapping, you can ignore the interrupt you care about when it's not your business.
-
 There are different kinds of interrupt mapping in Linux. For example, our Arm64 Linux uses a linear mapping strategy. Linux running on MIPS architecture uses radix tree mapping.
 `} />
 
@@ -77,7 +76,6 @@ I want the built-in handler can work with my handler together. So I go to the Li
 
 <Callout title={`💭 [Bonus] Handle PMU Interrupts securely in the firmware`} content={`
 It seems odd to handle PMU interrupts in the firmware, but it's useful, especially for some tracers that don't want to intrude into the operating system.
-
 Here I will only cover some basic thoughts. First, you need to configure GIC, which is short for *Global Interrupt Controller*, to route the interrupts to the highest secure level EL3. Then, In ATF, you should register your own handler. You can also reroute and handle them in Secure-EL1, where you can have your own TEE-OS.`} />
 
 ## Perf: The easiest way to use PMU
