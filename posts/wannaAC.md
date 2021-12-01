@@ -20,11 +20,11 @@ tags: Project
 
 **平台地址：http://ac.whexy.com**
 
-![](https://i.loli.net/2019/09/26/EeTpfxjAwJXZ4tH.png)
+![](/images/EeTpfxjAwJXZ4tH.png)
 
 网站使用很直观，选择题目，选择语言，粘贴代码，上传测试。测试完成后，你可以得到反馈。点击可以复制数据，方便调整。
 
-![](https://i.loli.net/2019/09/26/zxcfPHylaYLbUBr.png)
+![](/images/zxcfPHylaYLbUBr.png)
 
 
 

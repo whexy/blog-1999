@@ -15,7 +15,7 @@ image: https://i.loli.net/2021/11/30/IAiKNDH3ykGw4WR.jpg
 
 迫于在南科大，查询校巴的发车时间过于麻烦，因此写了一个 Apple Watch APP，用于查询南科大校园巴士最近的发车时间。作为 Swift 和 SwiftUI 的上手项目，代码逻辑非常简单，仅用于练习。项目完整代码已经上传到GitHub：https://github.com/whexy/SUSTechBus。
 
-![](https://i.loli.net/2020/07/01/qzVZ9WyJReErI7O.png)
+![](/images/qzVZ9WyJReErI7O.png)
 
 目前南科大的校巴一共有两条线：上山线（终点欣园）和下山线（终点科研楼）。在这个手表APP中，要分别显示这两个线路校巴运行的情况。南科大的校巴运行时刻表也有两个版本：工作日版和节假日版。在APP中我们要能灵活切换时刻表。
 
@@ -30,11 +30,11 @@ Model 是对数据的抽象。在这个应用中，它应该被封装成校巴�
 
 View 是我们需要构建的UI界面。我已经提前设计好了界面：
 
-![](https://i.loli.net/2020/07/09/XM9O2RalSAWxYV1.png)
+![](/images/XM9O2RalSAWxYV1.png)
 
 界面主要是文字构成，辅以两个SF Symbol图标。在watchOS 7.0中，苹果取消了重压操作，所以我们把两个功能按钮藏在主界面下面。
 
-![](https://i.loli.net/2020/07/09/NzZ6kGJmLHgbaoM.png)
+![](/images/NzZ6kGJmLHgbaoM.png)
 
 View Model 是一个有趣的概念。我们应该在 View Model 里把 Model 中的数据进一步转化成 View 中所需要的。此外，我们应该在这里列举所有用户可能的意图(intents)。例如点击“更新时间”，或者“变更运行模式”。
 
@@ -151,7 +151,7 @@ mutating func swichModel() {
 
 最后我们用SwiftUI来构建界面。首先构造主体部分。
 
-![](https://i.loli.net/2020/07/09/pRZ2aNWuoOi9QHB.png)
+![](/images/pRZ2aNWuoOi9QHB.png)
 
 用 HStack 和 VStack 控制界面的嵌套。
 
@@ -183,7 +183,7 @@ struct BusTableView: View {
 
 之后用主体拼成整个界面。
 
-![](https://i.loli.net/2020/07/09/XM9O2RalSAWxYV1.png)
+![](/images/XM9O2RalSAWxYV1.png)
 
 套一个ScrollView，就能直接获得数码表管转动震动等等一系列特性了。
 
@@ -225,7 +225,7 @@ struct BusWorkView: View {
 
 滚动到下面，有两个按钮。
 
-![](https://i.loli.net/2020/07/09/NzZ6kGJmLHgbaoM.png)
+![](/images/NzZ6kGJmLHgbaoM.png)
 
 这两个按钮直接用Button套Text完成。这里我本来套用的是Label，还能搭配图标。很可惜目前 SwiftUI 的 Label 在 watchOS 7.0 Beta 里显示效果一塌糊涂（图标文字没法对齐），所以姑且用Text代替了。
 
@@ -249,4 +249,4 @@ VStack {
 
 <!-- more -->
 
-至此，我们就实现完了一个APP！完整代码在GitHub：https://github.com/whexy/SUSTechBus。这次实现的非常简单，后续还可以加入多条线路选择、向服务器订阅校巴时刻表、假期安排等功能（其实也很简单）。希望南科大校巴多开几条线路，这样下一次博客的内容就有了……
+至此，我们就实现完了一个APP！完整代码在GitHub：[https://github.com/whexy/SUSTechBus](https://github.com/whexy/SUSTechBus)。这次实现的非常简单，后续还可以加入多条线路选择、向服务器订阅校巴时刻表、假期安排等功能（其实也很简单）。希望南科大校巴多开几条线路，这样下一次博客的内容就有了……

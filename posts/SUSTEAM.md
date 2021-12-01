@@ -13,7 +13,7 @@ tags: Project
 
 面向用户，SUSTeam 提供一个网页前端，主要用于浏览与购买。一个客户端，在网页基础上增加了本地游戏库、下载和更新的功能。面向开发者，SUSTeam 提供一个管理平台，以及接入平台服务的 SDK。
 
-![](https://i.loli.net/2021/01/29/2hVdKm5GuszHvDB.png)
+![](/images/2hVdKm5GuszHvDB.png)
 
 ## 用 Kotlin 开发是怎样的体验
 
@@ -31,7 +31,7 @@ tags: Project
 
 不过这里踩了一个坑，那就是用 TypeScript。这个选择搞得大家都很狼狈：我们非常喜欢用 Annotations 的方式把组件写成类的形式，也非常喜欢定义 interface 使得 API 调用更规范，总之严谨的语言很讨喜。然而，不少开源库对 TypeScript 的支持很不好，大量时间被用在修复兼容性上。TypeScript 社区任重而道远吧。
 
-![](https://i.loli.net/2021/01/29/T8czuWo36DqKSHh.png)
+![](/images/T8czuWo36DqKSHh.png)
 
 ## 项目核心工作
 
@@ -41,7 +41,7 @@ OOAD 给出的选项特别多，包括数据库 OJ、课程作业管理平台、
 
 游戏平台不仅要求展示、交易，还对 DLC、折扣、公告、评价、增量更新、好友系统、成就有一系列要求。在平台的基础之上，还要求给开发者提供 SDK，方便接入服务。仔细分析下来，前端后端 SDK，工作量还是不小的。
 
-![](https://i.loli.net/2021/01/29/IJDLXBZViu3U1T7.png)
+![](/images/IJDLXBZViu3U1T7.png)
 
 ### 有趣的工作
 
@@ -67,7 +67,7 @@ OOAD 给出的选项特别多，包括数据库 OJ、课程作业管理平台、
 
 判断用户是否在线不能只依赖于主动离线，客户端可能会闪退。心跳包也许是一个好的设计。我们的思路是，用户但凡触发任何一个实时后端事务，都会更新最后在线时间，超过一个值就判断为离线。责任链的第一棒就负责干这个事。
 
-![](https://i.loli.net/2021/01/29/nWEo1OCU9Vhy5Mp.png)
+![](/images/nWEo1OCU9Vhy5Mp.png)
 
 #### 客户端通知
 
@@ -81,7 +81,7 @@ OOAD 给出的选项特别多，包括数据库 OJ、课程作业管理平台、
 
 我们还有互相代码审计的习惯，虽然不是强制的。在 Github 里可以给代码加评论，对于团队初期磨合特别有用。
 
-![](https://i.loli.net/2021/01/29/cRWe8A1DNvaqQm6.png)
+![](/images/cRWe8A1DNvaqQm6.png)
 
 ## Acknowledgement
 

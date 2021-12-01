@@ -9,7 +9,7 @@ tags: Tricks
 
 南方科技大学（下称“妮科”）作为一所新兴高校，所用的网络系统都比较现代化。学校的若干系统在经历几番迭代后，于2014年完成了CAS认证的统一接入。
 
-![](https://i.loli.net/2019/08/22/vFPkaDR5AH6mj7g.png)
+![](/images/vFPkaDR5AH6mj7g.png)
 
 ## Intro:校园网的一些问题
 
@@ -21,7 +21,7 @@ tags: Tricks
 
 （下图为妮科在每个宿舍门边安装的墙挂式无线AP，用于下发覆盖全校的WiFi信号，以及通过连接设备的网络活动监控学生的学习情况）
 
-![](https://i.loli.net/2019/08/22/MWnAXdoclwkPFCy.jpg)
+![](/images/MWnAXdoclwkPFCy.jpg)
 
 此外，所有连入校园WiFi的设备都需要CAS登录。这使得类似台灯、智能空调管家等不具有交互界面的设备不能正常连入校园网。
 
@@ -65,7 +65,7 @@ tags: Tricks
 
 我不妨贴出Python代码，以解释登录校园网的难点：
 
-![](https://i.loli.net/2019/08/22/ycrZpVNbPOWXSIg.png)
+![](/images/ycrZpVNbPOWXSIg.png)
 
 ## Linux Shell 脚本
 

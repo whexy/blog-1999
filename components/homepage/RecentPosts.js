@@ -8,11 +8,11 @@ export default function RecentPosts({ posts }) {
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-red-600 sm:dark:divide-red-500">
           <div className="sm:flex-shrink-0 w-full sm:w-2/12 whitespace-nowrap sm:pr-2 dark:bg-black-readable">
             <div className="uppercase font-semibold text-sm text-red-600 dark:text-red-500">
-              Recent Posts
+              Posts
             </div>
             <Link href="/posts">
               <div className="font-black text-lg text-black-readable dark:text-white-readable">
-                近期博客
+                博客内容
               </div>
             </Link>
           </div>

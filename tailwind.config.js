@@ -1,10 +1,19 @@
 const colors = require("tailwindcss/colors");
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   mode: "jit",
   darkMode: "media",
-  purge: ['./pages/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './lib/**/*.{js,ts,jsx,tsx}', './posts/**/*.{md, mdx}'],
+  purge: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+    "./lib/**/*.{js,ts,jsx,tsx}",
+    "./posts/**/*.{md, mdx}",
+  ],
   theme: {
     extend: {
+      fontFamily: {
+        display: ['"Inter"'],
+      },
       colors: {
         lime: colors.lime,
         violet: colors.violet,

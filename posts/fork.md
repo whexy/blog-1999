@@ -33,7 +33,7 @@ We immediately thought that dynamic language interpreters face the same problem 
 
 The process pooling technique is a straightforward solution. It creates several empty processes at program initialization before the process grows too large and then assigns tasks to the processes for execution when needed. After the execution is finished, the processes are recycled to the pool to be used. [^1]
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/HzXTFG.jpg)
+![](/images/HzXTFG.jpg)
 
 **Limitation**
 
@@ -46,13 +46,13 @@ The process pooling technique is a straightforward solution. It creates several 
 
 When launching other processes with `exec()`, we know that the copying in the `fork()` is unnecessary since the child process is immediately replaced with a new one. So what exactly does it copy? Well, the most prominent part is **the page table**. The page table is the part that Linux must copy to implement COW. It records whether the data in a particular memory address has been modified or not.
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/So9GLk.jpg)
+![](/images/So9GLk.jpg)
 
 #### vfock()
 
 The Berkeley version of Unix (BSD) introduced the`vfork()` system call in the early 1980s. `vfork(2)` does not copy the parent process to the child. Both processes share the parent's virtual address space; the parent is suspended until the child exits or calls `exec()` [^2]
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/FwRw4r.jpg)
+![](/images/FwRw4r.jpg)
 
 <Callout title={`🤔 Deadlock`}>
 It was discovered that `vfork()` might introduce a new problem when the application has multiple threads running: deadlock. The deadlock can happen due to the dynamic linker `ld.so.1` involvement in resolving the necessary symbols. Particularly, suppose the child process calls an external function (such as `exec()`). In that case, the dynamic linker may be invoked to resolve the Procedure Linkage Table (PLT) entry, for which the dynamic linker will acquire a mutex lock. This lock may already be held by a different thread in the parent process. If this happens, it will create a deadlock between the parent and child processes because the parent is suspended until the child has called `exec()` or `exit()`. As a result, both the parent and the child processes will hang.

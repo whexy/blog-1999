@@ -17,7 +17,7 @@ If you work with hardware-assisted projects, you definitely will come to PMU one
 
 In short, PMU is a group of counters that can count any of the events available in the core. For example, if you want to know how many cycles your program use, you go to PMU. If you want to know how many instructions in a program are executed, you go to PMU. I know what you think, *"okay, a counter counting things that I don't care."* What about this: PMU lets you know how many branches were incorrectly predicted and pre-executed, which is used to improve your program's performance further.
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/DeiMrq.jpg)
+![](/images/DeiMrq.jpg)
 
 Yes, the hardware world is wild and crazy. Even if your algorithm is perfect, it will still face many problems because of the implementation. For example, issues that affect the runtime spend like memory fragmentation, memory leaks, too many context switches, constantly wrong branch predictions, etc. The bad thing is -- you don't even know these things are happening! As a software designer, it's hard to envision everything that happens on hardware when you code. That's why we need PMU, a component dedicated to counting all kinds of hardware events.
 
@@ -48,7 +48,7 @@ cat /proc/interrupts
 ```
 You can see the PMU interrupt handler named "arm-pmu" among them. And do notice that there are two critical numbers in the table. One is the **Logical Interrupt ID**, which is in the first column of the table. Another is the **Hardware Interrupt ID**, which is followed by *Level*. We will use them both in the following steps.
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/WikgVn.png)
+![](/images/WikgVn.png)
 
 For example, on my device, the logical interrupt ID of PMU in the first CPU is 36, while the hardware interrupt ID is 36. Logical interrupt ID 36~41 on my machine is left for PMU.
 

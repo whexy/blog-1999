@@ -143,7 +143,7 @@ diff:
 	rm -rf ./_diff ./_env
 
 clean:  
-	rm -f images/*.aux images/*.log *.aux *.bbl *.blg *.log *.dvi *.bak *~ $(TARGETS:%=%.pdf)
+	rm -f /images/*.aux /images/*.log *.aux *.bbl *.blg *.log *.dvi *.bak *~ $(TARGETS:%=%.pdf)
 	rm -f diff*
 ```
 

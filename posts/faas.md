@@ -129,7 +129,7 @@ def view(event, context):
 
 在 Gateway 里绑定域名。添加证书，配置好 DNS——💥boom，一个点赞 API 就诞生了。这个 API 不依赖任何私有服务器，完完全全托管在云上。
 
-![](https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/0CtP59.png)
+![](/images/0CtP59.png)
 
 你也可以直接试试页面下方的点赞功能。点击 +1 图标，就可以为这篇博客增加一个 <span className="text-pink-500"><i className="fas fa-heart"></i></span>。
 

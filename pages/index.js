@@ -12,7 +12,7 @@ export default function Home({ postsData }) {
       <Head>
         <title>Wenxuan SHI</title>
       </Head>
-      <div className="foodbg dark:bg-black-readable dark:nobgimg text-black-readable dark:text-white-readable">
+      <div className="bg-white-readable dark:bg-black-readable dark:nobgimg text-black-readable dark:text-white-readable">
         <main className="px-5 sm:px-0 mx-auto max-w-3xl bg-white-readable dark:bg-black-readable">
           <BigHi />
           <WelcomeCard />
@@ -26,10 +26,10 @@ export default function Home({ postsData }) {
 
 export async function getStaticProps() {
   const postsData = getSortedPostsData();
-  const recentPosts = postsData.slice(0, 5);
+  const allPosts = postsData;
   return {
     props: {
-      postsData: recentPosts,
+      postsData: allPosts,
     },
   };
 }

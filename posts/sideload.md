@@ -42,7 +42,7 @@ So here comes a messy. On our computer, there are two types of applications that
 
 Here is the issue I first met when opening sideloadly.
 
-![](https://i.loli.net/2021/11/29/VZrPKABMv9RebnT.png)
+![](/images/VZrPKABMv9RebnT.png)
 
 The error is basically described as sideloadly's inability to find a correct version of `_rust.abi3.so`, which is used for the python library `cryptography`. Usually, the solution is to install the missing requirements with pip. But I do have `cryptography` on my Mac, and so did the error message say:
 
@@ -76,7 +76,7 @@ mv cryptography-3.4.7.dist-info cryptography-3.4.7.dist-info_arm64
 arch -x86_64 /usr/bin/python3 -m pip install cryptography
 ```
 
-![](https://i.loli.net/2021/11/29/q4QAxhYasvDm17n.jpg)
+![](/images/q4QAxhYasvDm17n.jpg)
 
 LGTM. Now I can open Sideloadly and see the GUI.
 
