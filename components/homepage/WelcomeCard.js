@@ -56,8 +56,8 @@ export default function WelcomeCard() {
             <a
               href="https://github.com/whexy"
               target="_blank"
-              rel="noopener"
-              className="absolute right-4 bottom-4 w-12 h-12 rounded-full bg-white-readable/90 hover:bg-white-readable/80 grid place-content-center"
+              rel="noreferrer"
+              className="absolute right-4 bottom-4 w-12 h-12 rounded-full grid place-content-center text-gray-400 hover:text-white"
             >
               <i className="fab fa-github text-2xl"></i>
             </a>

@@ -99,9 +99,7 @@ AWS Lambda 函数可以用各种语言书写。这里我们就用 Python 来写�
 
 这里我贴出 `view` 函数的实现。可以看到代码很短，充分体现 Serverless 加速开发的优势。
 
-<div className="code-title">thumbs/view.py</div>
-
-```python
+```python filename=thumbs/view.py
 import os
 import json
 from thumbs import decimalencoder

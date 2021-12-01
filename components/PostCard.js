@@ -19,6 +19,7 @@ export default function PostCard({ title, date, url, image, excerpt }) {
             <div className="flex-shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
               <Image
                 src={image}
+                alt="Cover"
                 height={200}
                 width={400}
                 className="rounded-xl w-full h-auto"

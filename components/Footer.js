@@ -10,7 +10,7 @@ export default function Footer() {
             <span>
               <i className="fas fa-cat text-red-500 text-xl"></i>
             </span>
-            <span>{metadata.author.name}'s Blog.</span>
+            <span>{metadata.author.name}&apos;s Blog.</span>
           </p>
           <p className="text-xs py-1 font-thin">
             Built with <a href="https://nextjs.org/">Next.js</a>, Theme{" "}

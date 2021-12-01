@@ -11,9 +11,9 @@ export default function RecentPosts({ posts }) {
               Posts
             </div>
             <Link href="/posts">
-              <div className="font-black text-lg text-black-readable dark:text-white-readable">
+              <a className="font-black text-lg text-black-readable dark:text-white-readable">
                 博客内容
-              </div>
+              </a>
             </Link>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">

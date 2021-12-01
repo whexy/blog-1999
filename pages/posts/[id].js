@@ -3,6 +3,7 @@ import Link from "next/link";
 import Head from "next/head";
 import { serialize } from "next-mdx-remote/serialize";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
+import rehypePrism from "@mapbox/rehype-prism";
 import { MDXRemote } from "next-mdx-remote";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../lib/date";
@@ -11,6 +12,7 @@ import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
 import Comment from "../../components/posts/Comment";
 import avatar from "../../public/img/android-chrome-192x192.png";
+import placeholder from "../../public/img/placeholder.png";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -25,7 +27,7 @@ export async function getStaticProps({ params }) {
   const rawContent = postData.fileContent;
   const mdxSource = await serialize(rawContent, {
     mdxOptions: {
-      rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }]],
+      rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism],
     },
   });
   postData.mdx = mdxSource;
@@ -42,13 +44,22 @@ const components = {
     <div className="grid place-items-center">
       <Image
         src={src}
-        alt={alt}
+        alt="blog image"
+        className={alt}
         width={width}
         height={height}
         placeholder="blur"
         blurDataURL={blurDataURL}
       />
     </div>
+  ),
+  pre: ({ className, children }) => (
+    <>
+      {children.props.filename && (
+        <div className="code-title">{children.props.filename}</div>
+      )}
+      <pre className={className}>{children}</pre>
+    </>
   ),
   Callout,
   Warn,
@@ -68,20 +79,25 @@ export default function Post({ postData }) {
         />
       </Head>
       <main className="bg-white">
-        <div className="mx-auto max-w-3xl overflow-hidden sm:pt-5 pb-5">
-          <Image
-            src={postData.image}
-            height={612}
-            width={1224}
-            className="sm:rounded-xl"
-          />
-        </div>
-        <article className="font-display prose sm:pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
+        {postData.image && (
+          <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
+            <Image
+              src={postData.image}
+              alt="Cover"
+              height={612}
+              width={1224}
+              className="sm:rounded-xl"
+              placeholder="blur"
+              blurDataURL={placeholder}
+            />
+          </div>
+        )}
+        <article className="font-display prose pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
           <h1>{postData.title}</h1>
           <div className="flex text-sm lg:text-base justify-between -mt-5 pb-5">
             <div className="inline-flex space-x-1 items-center">
               <div className="object-contain w-6 h-6 rounded-full border border-gray-700">
-                <Image src={avatar} />
+                <Image src={avatar} alt={metadata.author.name} />
               </div>
               <Link href="/">{metadata.author.name}</Link>
             </div>

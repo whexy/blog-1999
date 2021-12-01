@@ -13,11 +13,11 @@ The story might be boring to you. Maybe you want to read my [thundering against 
 
 ## Sideload
 
-Sideloading means installing an App that is not in the App Store. Perhaps it's the easiest way to install applications on Windows and Androids. But when it comes to Apple, especially for their "best-ever-made" iOS devices, you cannot install Apps like that! Apple seriously controls their customers' apps that they can't even install an app on their phones without the App Store.
-
-<Warn content={`But Tim Cook literally asked me to use an Android device [^1].`} />
+Sideloading means installing an App that is not in the App Store. Perhaps it's the easiest way to install applications on Windows and Androids. But when it comes to Apple, especially for their "best-ever-made" iOS devices, you cannot install Apps like that! Apple seriously controls their customers' apps that they can't even install an app on their phones without the App Store. Tim Cook, CEO of Apple Inc, literally asked me to use an Android device[^1]. 
 
 [^1]: [Tim Cook: Users Who Want to Sideload Apps Can Use Android, While the iPhone Experience Maximizes 'Security and Privacy' - MacRumors](https://www.macrumors.com/2021/11/09/tim-cook-users-sideloading-use-an-android/)
+
+
 
 There're two steps you need to follow to sideload an App to your iOS devices.
 
