@@ -1,5 +1,5 @@
 ---
-title: 狼跋其胡，載疐其尾：技术博客创作的两难局面
+title: 技术博客创作的两难局面
 date: "2021-11-25"
 tags: Other
 image: https://i.loli.net/2021/11/26/FMYK81ojCNy6LV5.png

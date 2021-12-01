@@ -8,6 +8,8 @@ import Date from "../../lib/date";
 import metadata from "../../metadata";
 import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
+import Comment from "../../components/posts/Comment";
+import avatar from "../../public/img/android-chrome-192x192.png";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -40,23 +42,30 @@ export default function Post({ postData }) {
   return (
     <>
       <Head>
-        <title>{postData.title} | {metadata.title}</title>
+        <title>
+          {postData.title} | {metadata.title}
+        </title>
         <description>{postData.excerpt}</description>
       </Head>
       <main className="bg-white">
-        <div className="prose lg:prose-lg sm:py-5 mx-auto overscroll-contain">
-          <div className="w-full h-auto rounded-t-xl overflow-hidden pb-5">
-            <Image src={postData.image} height={612} width={1224} />
-          </div>
-          <h1 id="web-title">{postData.title}</h1>
+        <div className="mx-auto max-w-3xl overflow-hidden sm:pt-5 pb-5">
+          <Image src={postData.image} height={612} width={1224} />
+        </div>
+        <article className="prose lg:prose-lg sm:pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
+          <h1>{postData.title}</h1>
           <div className="flex text-sm lg:text-base justify-between -mt-5 pb-5">
-            <div>
-              Written by: <Link href="/">{metadata.author.name}</Link>
+            <div className="inline-flex space-x-1 items-center">
+              <div className="object-contain w-6 h-6 rounded-full border border-gray-700">
+                <Image src={avatar} />
+              </div>
+              <Link href="/">{metadata.author.name}</Link>
             </div>
             <Date dateString={postData.date} className="text-gray-600" />
           </div>
           <MDXRemote {...postData.mdx} components={components} />
-          {/* <PostContent content={postData.fileContent} /> */}
+        </article>
+        <div className="max-w-2xl mx-auto px-2 pb-5">
+          <Comment />
         </div>
       </main>
     </>

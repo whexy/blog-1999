@@ -9,6 +9,9 @@ import { getSortedPostsData } from "../lib/posts";
 export default function Home({ postsData }) {
   return (
     <>
+      <Head>
+        <title>Wenxuan SHI</title>
+      </Head>
       <div className="foodbg dark:bg-black-readable dark:nobgimg text-black-readable dark:text-white-readable">
         <main className="px-5 sm:px-0 mx-auto max-w-3xl bg-white-readable dark:bg-black-readable">
           <BigHi />
