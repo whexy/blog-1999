@@ -1,4 +1,5 @@
 import PostCard from "../PostCard";
+import Link from "next/link";
 
 export default function RecentPosts({ posts }) {
   return (
@@ -9,11 +10,11 @@ export default function RecentPosts({ posts }) {
             <div className="uppercase font-semibold text-sm text-red-600 dark:text-red-500">
               Recent Posts
             </div>
-            <a href="/posts">
+            <Link href="/posts">
               <div className="font-black text-lg text-black-readable dark:text-white-readable">
                 近期博客
               </div>
-            </a>
+            </Link>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">
             {posts.map((post) => (
