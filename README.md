@@ -1,5 +1,5 @@
 <p align="center">
-<img src="https://www.whexy.com/intro.svg" />
+<img src="https://i.loli.net/2021/12/02/qnNJP8vybkj3Q6f.jpg" />
 </p>
 
 <p align="center">
