@@ -2,7 +2,7 @@
 title: "Try to Sideload an App to iOS"
 date: "2021-11-29"
 tags: Tricks
-image: https://i.loli.net/2021/11/29/kNxHmjTCLG3tnAX.jpg
+image: /images/kNxHmjTCLG3tnAX.jpg
 ---
 
 So I want to sideload an App (illegally, both the behavior and the app) to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.

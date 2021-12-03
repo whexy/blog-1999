@@ -3,7 +3,7 @@ title : "Stop Forkin' Around: Faster Creating of Large Processes on Linux"
 date: "2021-11-04"
 tags:
 	- Coding
-image: https://whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com/uPic/46ktn0.jpg
+image: /images/46ktn0.jpg
 ---
 
 Forking is how a process in Linux is created. Even though the fork has been improved over the years to use the COW (copy-on-write) semantics, it still has to copy a certain amount of data from parent to child. Some students in the lab are working with a fuzzing machine, and they encounter some problems...

@@ -12,7 +12,7 @@ import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
 import Comment from "../../components/posts/Comment";
 import avatar from "../../public/img/android-chrome-192x192.png";
-import placeholder from "../../public/img/placeholder.png";
+import { getPlaceholder } from "../../lib/placeholder";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -24,6 +24,8 @@ export async function getStaticPaths() {
 
 export async function getStaticProps({ params }) {
   const postData = getPostData(params.id);
+
+  // Markdown Rehype
   const rawContent = postData.fileContent;
   const mdxSource = await serialize(rawContent, {
     mdxOptions: {
@@ -31,6 +33,12 @@ export async function getStaticProps({ params }) {
     },
   });
   postData.mdx = mdxSource;
+
+  // Get image placeholder
+  if (postData.image) {
+    const placeholder = await getPlaceholder(postData.image);
+    postData.imgPlaceholder = placeholder;
+  }
 
   return {
     props: {
@@ -88,7 +96,7 @@ export default function Post({ postData }) {
               width={1224}
               className="sm:rounded-xl"
               placeholder="blur"
-              blurDataURL={placeholder}
+              blurDataURL={postData.imgPlaceholder}
             />
           </div>
         )}

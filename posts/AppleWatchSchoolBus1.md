@@ -2,7 +2,7 @@
 title: '为 Apple Watch 写一个校巴时刻表工具'
 date: "2020-07-09"
 tags: Project
-image: https://i.loli.net/2021/11/30/IAiKNDH3ykGw4WR.jpg
+image: /images/IAiKNDH3ykGw4WR.jpg
 ---
 
 2020 年 WWDC，苹果更新了 SwiftUI 的第二版。我惊呼：Swift 终于能用了！这次我们不写 Web 和小程序！这是一篇 Native Code 的教程。
