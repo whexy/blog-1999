@@ -3,15 +3,29 @@ import "../styles/all.min.css";
 import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const ThemeContext = createContext(null);
 
 const MyApp = ({ Component, pageProps }) => {
   const [theme, setTheme] = useState("light");
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    const newTheme = theme === "light" ? "dark" : "light";
+    setTheme(newTheme);
+    localStorage.setItem("theme", newTheme);
+    console.log(`localsotrage theme: ${localStorage.theme}`);
   };
+  useEffect(() => {
+    let defaultTheme = "light";
+    if (
+      localStorage.theme === "dark" ||
+      (!("theme" in localStorage) &&
+        window.matchMedia("(prefers-color-scheme: dark)").matches)
+    ) {
+      defaultTheme = "dark";
+    }
+    setTheme(defaultTheme);
+  }, []);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <Head>
