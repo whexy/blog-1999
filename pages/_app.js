@@ -3,10 +3,17 @@ import "../styles/all.min.css";
 import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { createContext, useState } from "react";
 
-function MyApp({ Component, pageProps }) {
+export const ThemeContext = createContext(null);
+
+const MyApp = ({ Component, pageProps }) => {
+  const [theme, setTheme] = useState("light");
+  const toggleTheme = () => {
+    setTheme(theme === "light" ? "dark" : "light");
+  };
   return (
-    <>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <Head>
         <link
           rel="apple-touch-icon"
@@ -33,10 +40,7 @@ function MyApp({ Component, pageProps }) {
         />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <meta name="theme-color" content="#1D1D1F" />
-        <meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
+        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
       <style jsx global>{`
         body {
@@ -44,10 +48,12 @@ function MyApp({ Component, pageProps }) {
         }
       `}</style>
       <Header />
-      <Component {...pageProps} />
+      <div className={theme === "light" || "dark"}>
+        <Component {...pageProps} />
+      </div>
       <Footer />
-    </>
+    </ThemeContext.Provider>
   );
-}
+};
 
 export default MyApp;

@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@giscus/react": "^1.0.1",
+    "@heroicons/react": "^1.0.5",
     "@mapbox/rehype-prism": "^0.8.0",
     "child_process": "^1.0.2",
     "date-fns": "^2.27.0",
