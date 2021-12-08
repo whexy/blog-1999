@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  Rebuild <a href="https://www.whexy.com">wenxuan<sup>1999</sup></a> with <b>Next.js</b>!
+  Rebuild wenxuan<sup>1999</sup> with <b>Next.js</b>!
 </p>
 
 ## Story
