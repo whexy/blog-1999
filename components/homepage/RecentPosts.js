@@ -6,7 +6,7 @@ export default function RecentPosts({ posts }) {
     <>
       <div className="my-5 pb-5">
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-red-600 sm:dark:divide-red-500">
-          <div className="sm:flex-shrink-0 w-full sm:w-2/12 whitespace-nowrap sm:pr-2 dark:bg-black-readable">
+          <div className="sm:shrink-0 w-full sm:w-2/12 whitespace-nowrap sm:pr-2 dark:bg-black-readable">
             <div className="uppercase font-semibold text-sm text-red-600 dark:text-red-500">
               Posts
             </div>

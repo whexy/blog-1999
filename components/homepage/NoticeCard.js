@@ -3,7 +3,7 @@ export default function NoticeCard() {
     <>
       <div className="my-5">
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-yellow-600 sm:dark:divide-yellow-300">
-          <div className="sm:flex-shrink-0 w-full sm:w-2/12  whitespace-nowrap sm:pr-2  dark:bg-black-readable">
+          <div className="sm:shrink-0 w-full sm:w-2/12  whitespace-nowrap sm:pr-2  dark:bg-black-readable">
             <div className="uppercase font-semibold text-sm text-yellow-600 dark:text-yellow-300">
               Notice
             </div>

@@ -51,7 +51,7 @@ const FriendBody = () => {
                     blurDataURL="/img/smile.svg"
                   />
                 </div>
-                <div className="flex-grow">
+                <div className="grow">
                   <p className="text-xl font-mono">{friend.name}</p>
                   <p className="w-full text-jbgray-light truncate text-sm transition-all group-hover:text-blue-600 dark:group-hover:text-blue-300">
                     <a href={friend.url} target="_blank" rel="noreferrer">

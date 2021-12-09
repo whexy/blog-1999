@@ -16,7 +16,7 @@ export default function PostCard({ title, date, url, image, excerpt }) {
             {excerpt}
           </div>
           {image && (
-            <div className="flex-shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
+            <div className="shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
               <Image
                 src={image}
                 alt="Cover"
