@@ -7,7 +7,7 @@ import rehypePrism from "@mapbox/rehype-prism";
 import { MDXRemote } from "next-mdx-remote";
 import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../lib/date";
-import metadata from "../../metadata";
+import metadata from "../../data/metadata";
 import Callout from "../../components/posts/Callout";
 import Warn from "../../components/posts/Warn";
 import Comment from "../../components/posts/Comment";

@@ -9,6 +9,8 @@ module.exports = {
     domains: [
       "i.loli.net",
       "whexy-1251112473.cos.ap-shenzhen-fsi.myqcloud.com",
+      "avatars.githubusercontent.com",
+      "i.scdn.co",
     ],
   },
 };

@@ -1,4 +1,4 @@
-import metadata from "../metadata";
+import metadata from "../data/metadata";
 import Link from "next/link";
 import { useContext } from "react";
 // import Heroicon
