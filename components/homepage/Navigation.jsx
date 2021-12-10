@@ -42,11 +42,11 @@ const NavigationView = () => {
           enName="Posts"
           zhName="博客"
         />
-        <NavigationNotAvailable
-          link="/writings"
-          icon="fas fa-pen"
-          enName="Writings"
-          zhName="随笔"
+        <NavigationItem
+          link="/about"
+          icon="fas fa-user"
+          enName="About"
+          zhName="关于"
         />
         <NavigationItem
           link="/music"

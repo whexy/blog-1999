@@ -15,9 +15,6 @@ module.exports = {
         display: ['"Inter"'],
       },
       colors: {
-        lime: colors.lime,
-        violet: colors.violet,
-        rose: colors.rose,
         white: {
           DEFAULT: colors.white,
           readable: "#F5F5F7",
@@ -90,6 +87,5 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"),
-    require("@tailwindcss/aspect-ratio"),
   ],
 };
