@@ -62,10 +62,10 @@ const AboutPage = ({ mdx }) => {
       </Head>
       <div className="bg-white-readable text-black-readable dark:bg-black-readable dark:text-white-readable font-display">
         <div className="py-10 max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row space-y-5 divide-x divide-opacity-20 divide-jbgray-light">
+          <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:divide-opacity-20 sm:divide-jbgray-light">
             <InfoSection />
             {/* 内容栏 */}
-            <div className="mx-1 sm:mx-0 sm:pl-4 prose-lg">
+            <div className="mx-2 sm:mx-0 sm:pl-4 prose-lg">
               <MDXRemote {...mdx} components={{ Callout }} />
             </div>
           </div>
