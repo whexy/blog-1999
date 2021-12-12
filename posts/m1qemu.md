@@ -4,7 +4,7 @@ date: "2021-08-16"
 tags: Tricks
 ---
 
-As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the **QEMU** on **macOS** with **Apple Silicon**.
+As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon.
 
 <!-- more -->
 

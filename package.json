@@ -28,6 +28,7 @@
     "react": "17.0.2",
     "react-dom": "17.0.2",
     "react-markdown": "^7.1.1",
+    "react-spring": "^9.3.2",
     "rehype-image-placeholder": "^1.0.1",
     "rehype-image-size": "^1.0.0",
     "remark-mdx-code-meta": "^1.0.0"

@@ -12,7 +12,7 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        display: ['"Inter"'],
+        display: ['"Inter", serif'],
       },
       colors: {
         white: {
