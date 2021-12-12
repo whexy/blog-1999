@@ -36,11 +36,11 @@ const NavigationView = () => {
   return (
     <div className="my-5">
       <div className="py-2 grid grid-cols-2 sm:grid-cols-4 gap-2 text-black-readable dark:text-white-readable">
-        <NavigationNotAvailable
-          link="/posts"
-          icon="fas fa-book-open"
-          enName="Posts"
-          zhName="博客"
+        <NavigationItem
+          link="/keys"
+          icon="fas fa-key"
+          enName="Keys"
+          zhName="公钥"
         />
         <NavigationItem
           link="/about"

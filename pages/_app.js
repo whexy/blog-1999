@@ -12,14 +12,13 @@ const MyApp = ({ Component, pageProps }) => {
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
-    localStorage.setItem("theme", newTheme);
-    console.log(`localsotrage theme: ${localStorage.theme}`);
+    sessionStorage.setItem("theme", newTheme);
   };
   useEffect(() => {
     let defaultTheme = "light";
     if (
-      localStorage.theme === "dark" ||
-      (!("theme" in localStorage) &&
+      sessionStorage.theme === "dark" ||
+      (!("theme" in sessionStorage) &&
         window.matchMedia("(prefers-color-scheme: dark)").matches)
     ) {
       defaultTheme = "dark";
