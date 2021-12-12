@@ -6,6 +6,7 @@ import NavigationView from "../components/homepage/Navigation";
 import NoticeCard from "../components/homepage/NoticeCard";
 import RecentPosts from "../components/homepage/RecentPosts";
 import { getSortedPostsData } from "../lib/posts";
+import createRSS from "../lib/feed";
 
 export default function Home({ postsData }) {
   return (
@@ -29,6 +30,7 @@ export default function Home({ postsData }) {
 export async function getStaticProps() {
   const postsData = getSortedPostsData();
   const allPosts = postsData;
+  createRSS(allPosts);
   return {
     props: {
       postsData: allPosts,

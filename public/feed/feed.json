@@ -1,0 +1,216 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "Wenxuan's blog",
+    "home_page_url": "https://www.whexy.com/",
+    "feed_url": "https://www.whexy.com/feed/feed.json",
+    "description": "Wenxuan's blog",
+    "icon": "https://www.whexy.com/img/hello.png",
+    "author": {
+        "name": "Wenxuan SHI"
+    },
+    "items": [
+        {
+            "id": "https://www.whexy.com/posts/sideload",
+            "url": "https://www.whexy.com/posts/sideload",
+            "title": "Try to Sideload an App to iOS",
+            "summary": "So I want to sideload an App (illegally, both the behavior and the app) to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.",
+            "image": "https://www.whexy.com//images/kNxHmjTCLG3tnAX.jpg",
+            "date_modified": "2021-11-28T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/blog-dilemma",
+            "url": "https://www.whexy.com/posts/blog-dilemma",
+            "title": "技术博客创作的两难局面",
+            "summary": "胡，項下的垂肉。跋胡疐尾指前進就踏著垂肉，後退又被尾巴絆倒。語本《詩經．豳風．狼跋》：「狼跋其胡，載疐其尾」。作为技术博客的创作者，我现在就面临着这样两难的局面。",
+            "image": "https://www.whexy.com//images/FMYK81ojCNy6LV5.png",
+            "date_modified": "2021-11-24T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/fork",
+            "url": "https://www.whexy.com/posts/fork",
+            "title": "Stop Forkin' Around: Faster Creating of Large Processes on Linux",
+            "summary": "Forking is how a process in Linux is created. Even though the fork has been improved over the years to use the COW (copy-on-write) semantics, it still has to copy a certain amount of data from parent to child. Some students in the lab are working with a fuzzing machine, and they encounter some problems...",
+            "image": "https://www.whexy.com//images/46ktn0.jpg",
+            "date_modified": "2021-11-03T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/faas",
+            "url": "https://www.whexy.com/posts/faas",
+            "title": "FaaS：为静态博客添加点赞功能",
+            "summary": "2021 年，我的学生认证陆续过期。借此机会，我退租了国内所有的服务器。行业正在“云服务器”迈向“云服务”，我们也必须紧跟时代的步伐。这篇博客介绍如何使用利用 FaaS (Function As A Service) 为静态博客添加点赞功能。",
+            "image": "https://www.whexy.com//images/jFXNDx.jpg",
+            "date_modified": "2021-10-28T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/PMU",
+            "url": "https://www.whexy.com/posts/PMU",
+            "title": "PMU Interrupts: How to handle them",
+            "summary": "PMU interrupts act as an essential role between hardware and software. It gives the software the ability to gain insight into its execution on the hardware. In this article, I introduce you to the power of PMU and PMI and how to use them to achieve your goal.",
+            "date_modified": "2021-10-22T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/asynchronous",
+            "url": "https://www.whexy.com/posts/asynchronous",
+            "title": "Asynchronous Mutex",
+            "summary": "Asynchronous programs can also be applied on multi-thread system through \"thread pool\". However, using mutex in it might be a problem.",
+            "date_modified": "2021-09-04T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/m1qemu",
+            "url": "https://www.whexy.com/posts/m1qemu",
+            "title": "Using QEMU to run Linux images on M1 Macbook",
+            "summary": "As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon.",
+            "date_modified": "2021-08-15T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/investigator",
+            "url": "https://www.whexy.com/posts/investigator",
+            "title": "Alligator In Vest - My first research work",
+            "summary": "Now I am going to introduce our recent work. We call it \"Investigator\". Investigator uses hardware features to diagnose concurrency bugs on Arm.",
+            "date_modified": "2021-07-23T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/usingLatexAddons",
+            "url": "https://www.whexy.com/posts/usingLatexAddons",
+            "title": "复杂 LaTeX 项目中几个插件的使用心得",
+            "summary": "本文总结了一些在写论文期间遇到的较为复杂的 LaTeX 问题。其中包括 latexdiff 在多文件环境的使用技巧，以及如何解决 latexindent 的依赖冲突。",
+            "date_modified": "2021-05-05T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/Variance-in-Rust",
+            "url": "https://www.whexy.com/posts/Variance-in-Rust",
+            "title": "Variance in Rust (Rust 中的协变、逆变与不变)",
+            "summary": "I’m watching Jon Gjengset’s live coding stream. And the topic is “Subtyping and Variance”. This is my note.",
+            "date_modified": "2021-02-20T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/RUST-Generic-Trait",
+            "url": "https://www.whexy.com/posts/RUST-Generic-Trait",
+            "title": "理解 Rust 泛型特征 (Generic Trait)",
+            "summary": "在 Rust 中，特征(trait)也可以是泛型。引入泛型特征，一是希望特征不受具体类别的限制，二是希望特征具有更广泛的约束性。",
+            "date_modified": "2021-01-31T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/SUSTEAM",
+            "url": "https://www.whexy.com/posts/SUSTEAM",
+            "title": "SUSTeam: Ultimate Gaming Platform",
+            "summary": "大三时期做的游戏平台。主要语言是 Kotlin 和 TypeScript。回头看觉得做得还行，反正当时拿了满分 :)",
+            "date_modified": "2021-01-27T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/inlineAssembly",
+            "url": "https://www.whexy.com/posts/inlineAssembly",
+            "title": "Inline Assembly Language in C",
+            "summary": "Writing assembly code is hard and boring! However, if you want to set regisiters, read memories, sometimes you must do the \"dirty work\".",
+            "date_modified": "2020-11-13T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/AppleWatchSchoolBus1",
+            "url": "https://www.whexy.com/posts/AppleWatchSchoolBus1",
+            "title": "为 Apple Watch 写一个校巴时刻表工具",
+            "summary": "2020 年 WWDC，苹果更新了 SwiftUI 的第二版。我惊呼：Swift 终于能用了！这次我们不写 Web 和小程序！这是一篇 Native Code 的教程。",
+            "image": "https://www.whexy.com//images/IAiKNDH3ykGw4WR.jpg",
+            "date_modified": "2020-07-08T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/12307",
+            "url": "https://www.whexy.com/posts/12307",
+            "title": "模仿12306的全国火车票务管理系统",
+            "summary": "大二萌新时期做的数据库 Project。第一次用 Flask，第一次写前端。现在回头看满满是槽点啊……",
+            "date_modified": "2020-05-27T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/sakai",
+            "url": "https://www.whexy.com/posts/sakai",
+            "title": "Sakai 和本地文件夹同步",
+            "summary": "学校老师经常用来发布课件和作业的 Sakai 系统竟也支持使用 WebDAV 协议。通过配置本地的 WebDAV 服务，就能轻松下载课程资源，省时省力。",
+            "date_modified": "2020-02-26T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/wannaAC",
+            "url": "https://www.whexy.com/posts/wannaAC",
+            "title": "用两个晚上做超简易OpenJudge",
+            "summary": "大二刚开学，为了服务广大深受数据结构与算法课程折磨的同学。写了一个帮助 debug 的平台。代码一塌糊涂，不过产品思路还是不错的。",
+            "date_modified": "2019-09-25T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/SUSTechWifiLogin",
+            "url": "https://www.whexy.com/posts/SUSTechWifiLogin",
+            "title": "给路由器配一个自动登录南科大校园网的脚本",
+            "summary": "我校的校园网还就是与众不同，Post 发出的数据包不是轻易就能弄明白的。本文提出了一种黑魔法 bash 脚本用于类 Unix 系统登录校园网。",
+            "date_modified": "2019-08-21T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        }
+    ]
+}
