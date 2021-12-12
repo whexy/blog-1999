@@ -55,6 +55,12 @@ const MyApp = ({ Component, pageProps }) => {
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <meta name="theme-color" content="#1D1D1F" />
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Wenxuan's blog"
+          href="/feed/feed.xml"
+        />
       </Head>
       <style jsx global>{`
         body {
