@@ -220,7 +220,7 @@
   @apply !bg-gray-50 !border !border-gray-200;
 }
 
-.prose code {
+.prose :not(pre) > code {
   @apply text-gray-800 px-1 py-0.5 border border-gray-100 rounded-md bg-gray-100;
 }
 
