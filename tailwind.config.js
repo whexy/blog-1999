@@ -45,12 +45,6 @@ module.exports = {
           DEFAULT: "rgb(196, 162, 160)",
         },
       },
-      backgroundImage: {
-        "deep-blue":
-          "radial-gradient( circle farthest-corner at 83.7% 4.3%,  rgba(173,0,171,1) 0%, rgba(15,51,92,1) 90% );",
-        mojave_dark: "url('/img/mojave.webp')",
-        mojave: "url('/img/mojave_light.webp')",
-      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
@@ -85,7 +79,5 @@ module.exports = {
       },
     },
   },
-  plugins: [
-    require("@tailwindcss/typography"),
-  ],
+  plugins: [require("@tailwindcss/typography")],
 };

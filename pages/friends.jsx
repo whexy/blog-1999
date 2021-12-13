@@ -3,7 +3,7 @@ import friends from "../data/friends";
 
 const FriendPage = () => {
   return (
-    <div className="bg-white-readable dark:bg-black-readable dark:nobgimg text-black-readable dark:text-white-readable">
+    <div className="bg-white-readable dark:bg-black-readable text-black-readable dark:text-white-readable">
       <div className="px-5 sm:px-0 mx-auto max-w-3xl bg-white-readable dark:bg-black-readable py-10">
         <h1 className="text-5xl font-semibold text-center z-10">Friends</h1>
         <p className="text-lg font-light text-center tracking-wide pb-5">
