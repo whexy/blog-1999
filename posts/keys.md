@@ -24,11 +24,11 @@ Now let's get back to the keys.
 
 In RSA, the algorithm for encrypting and decrypting using keys are the same. You can encrypt with a public key and decrypt with a private key, which usually happens when your friend sends you a confidential message and does not want others to find out its contents.
 
-![](/images/keys_Public_key.png)
+![](/images/keys001.png)
 
 You can also encrypt a message with a private key and decrypt it with a public key, which is useful if you want to publish a message and prove that the message is authorized. Some tools also allow you to generate a certification instead of encryption, which is a separate used to verify the integrity of the message.
 
-![](/images/keys_Private_key.png)
+![](/images/keys002.png)
 
 As I published my public keys on the website, my friends can do the following things:
 
