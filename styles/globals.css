@@ -25,7 +25,7 @@
   }
 
   .callout {
-    @apply rounded-lg bg-gray-100 px-4 py-1 sm:w-11/12 mx-auto;
+    @apply rounded-lg bg-gray-100 dark:bg-gray-700 px-4 py-1 sm:w-11/12 mx-auto;
   }
 
   .warn {
@@ -46,37 +46,33 @@
 }
 
 .prose pre {
-  @apply !bg-gray-50 !border !border-gray-200;
+  @apply bg-gray-50 dark:bg-[#282a36] border border-gray-200 dark:border-gray-200/10;
 }
 
 .prose :not(pre) > code {
-  @apply text-gray-800 px-1 py-0.5 border border-gray-100 rounded-md bg-gray-100;
+  @apply px-1 py-0.5 border border-gray-100 dark:border-0 rounded-md bg-gray-100 dark:text-white-readable dark:bg-gray-800;
 }
 
 .callout code {
   @apply text-gray-800 px-1 py-0.5 border border-gray-200 rounded-md bg-gray-200;
 }
 
-.prose img {
-  /* Don't apply styles to next/image */
-  @apply !m-0;
-}
 .prose-lg p {
   margin-top: 8px !important;
 }
 
 .token.comment {
-  @apply !text-gray-400;
+  @apply text-gray-400 dark:text-[#6272a4];
 }
 
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  @apply !text-gray-700;
+  @apply text-gray-700 dark:text-[#f8f8f27e];
 }
 
 .token.punctuation {
-  @apply !text-gray-700;
+  @apply text-gray-700 dark:text-[#f8f8f27e];
 }
 
 .token.property,
@@ -86,7 +82,7 @@
 .token.constant,
 .token.symbol,
 .token.deleted {
-  @apply !text-green-500;
+  @apply text-green-500 dark:text-[#50fa7b];
 }
 
 .token.selector,
@@ -95,7 +91,7 @@
 .token.char,
 .token.builtin,
 .token.inserted {
-  @apply !text-violet-500;
+  @apply text-violet-500 dark:text-[#bd93f9];
 }
 
 .token.operator,
@@ -103,29 +99,29 @@
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  @apply !text-yellow-500;
+  @apply text-yellow-500 dark:text-[#ffb86c];
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  @apply !text-blue-500;
+  @apply text-blue-500 dark:text-[#8be9fd];
 }
 
 .token.function,
 .token.class-name {
-  @apply !text-pink-500;
+  @apply text-pink-500 dark:text-[#ff79c6];
 }
 
 .token.regex,
 .token.important,
 .token.variable {
-  @apply !text-yellow-500;
+  @apply text-yellow-500 dark:text-[#f1fa8c];
 }
 
 code[class*="language-"],
 pre {
-  @apply !text-gray-800 !text-sm;
+  @apply text-gray-800 dark:text-[#f8f8f2] !text-sm;
 }
 
 pre::-webkit-scrollbar {
@@ -138,7 +134,7 @@ pre {
 }
 
 .code-title {
-  @apply !text-gray-800 !px-5 !py-3 !border !border-b-0 !border-gray-200 !rounded-t !bg-gray-100 !text-xs !font-mono;
+  @apply text-gray-800 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-200/10 rounded-t bg-gray-100 dark:bg-[#383a57] dark:text-white text-xs font-mono;
 }
 
 .code-title + pre {

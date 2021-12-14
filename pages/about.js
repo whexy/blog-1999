@@ -4,6 +4,7 @@ import Image from "next/image";
 import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import portrait from "../public/img/portrait-transparent.webp";
+import AnimatedFancyCard from "../components/AnimatedFancyCard";
 
 const InfoSection = () => {
   return (
@@ -75,8 +76,8 @@ const AboutPage = ({ mdx }) => {
   );
 };
 
-const Callout = ({ title, icon, items }) => {
-  return (
+const Callout = ({ title, icon, items, fancy }) => {
+  const callout = (
     <div className="not-prose">
       <div className="rounded-xl bg-gray-200/80 dark:bg-slate-700/50 p-4 max-w-lg mx-auto">
         <h3 className="text-lg font-semibold pb-1">{title}</h3>
@@ -101,6 +102,14 @@ const Callout = ({ title, icon, items }) => {
       </div>
     </div>
   );
+  if (!fancy) {
+    return callout;
+  }
+  return (
+    <AnimatedFancyCard>
+      {callout}
+    </AnimatedFancyCard>
+  )
 };
 
 export async function getStaticProps() {

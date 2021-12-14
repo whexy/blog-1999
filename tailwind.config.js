@@ -32,18 +32,6 @@ module.exports = {
           DEFAULT: "#27282c",
           light: "rgb(138, 138, 140)",
         },
-        jbpurple: {
-          DEFAULT: "#776590",
-          dark: "#6F3DCC",
-          deep: "#39106e",
-          light: "#8A7F9A",
-        },
-        jbgreen: {
-          DEFAULT: "#547863",
-        },
-        smartisanred: {
-          DEFAULT: "rgb(196, 162, 160)",
-        },
       },
       typography: (theme) => ({
         DEFAULT: {
@@ -54,29 +42,41 @@ module.exports = {
             "code::after": {
               content: '""',
             },
-            code: {
-              color: theme("colors.red.500"),
-              fontWeight: "400",
-            },
             img: {
               marginLeft: "auto",
               marginRight: "auto",
             },
           },
         },
-      }),
-      keyframes: {
-        shake: {
-          "10%, 90%": { transform: "translate3d(-1px, 0, 0)" },
-          "20%, 80%": { transform: "translate3d(2px, 0, 0)" },
-          "30%, 50%, 70%": { transform: "translate3d(-4px, 0, 0)" },
-          "40%, 60%": { transform: "translate3d(4px, 0, 0)" },
+        dark: {
+          css: {
+            color: theme("colors.gray.300"),
+            '[class~="lead"]': { color: theme("colors.gray.400") },
+            a: { color: theme("colors.gray.100") },
+            strong: { color: theme("colors.gray.100") },
+            "ul > li::before": { backgroundColor: theme("colors.gray.700") },
+            hr: { borderColor: theme("colors.gray.800") },
+            blockquote: {
+              color: theme("colors.gray.100"),
+              borderLeftColor: theme("colors.gray.800"),
+            },
+            h1: { color: theme("colors.gray.100") },
+            h2: { color: theme("colors.gray.100") },
+            h3: { color: theme("colors.gray.100") },
+            h4: { color: theme("colors.gray.100") },
+            thead: {
+              color: theme("colors.gray.100"),
+              borderBottomColor: theme("colors.gray.700"),
+            },
+            "tbody tr": { borderBottomColor: theme("colors.gray.800") },
+          },
         },
-      },
-      animation: {
-        "pulse-fast": "pulse 0.5s linear infinite",
-        shake: "shake 0.82s cubic-bezier(.36, .07, .19, .97) both",
-      },
+      }),
+    },
+  },
+  variants: {
+    extend: {
+      typography: ["dark"],
     },
   },
   plugins: [require("@tailwindcss/typography")],

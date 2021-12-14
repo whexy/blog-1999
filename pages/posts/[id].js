@@ -88,7 +88,7 @@ export default function Post({ postData }) {
           rel="stylesheet"
         />
       </Head>
-      <main className="bg-white">
+      <main className="bg-white dark:bg-black-readable">
         {postData.image && (
           <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
             <Image
@@ -102,7 +102,7 @@ export default function Post({ postData }) {
             />
           </div>
         )}
-        <article className="font-display prose pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
+        <article className="font-display prose dark:prose-dark pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
           <h1>{postData.title}</h1>
           <div className="flex text-sm lg:text-base justify-between -mt-5 pb-5">
             <div className="inline-flex space-x-1 items-center">
