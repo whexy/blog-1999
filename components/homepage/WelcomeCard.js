@@ -1,14 +1,43 @@
 import Image from "next/image";
 import hello from "../../public/img/hello.webp";
-import AnimatedFancyCard from "../AnimatedFancyCard";
+import { useSpring, animated, config } from "react-spring";
+import { useRef } from "react";
+
+const calc = (x, y, rect) => [
+  (y - rect.top - rect.height / 2) / 20,
+  -(x - rect.left - rect.width / 2) / 40,
+  0.95,
+];
+
+const trans = (x, y, s) =>
+  `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
+
+const hiTrans = (x, y, s) =>
+  `perspective(500px) rotateX(${1.5 * x}deg) rotateY(${1.5 * y}deg) scale(${
+    1 + (1 - s) * 1.5
+  })`;
 
 const WelcomeCard = () => {
+  const ref = useRef(null);
+  const [props, set] = useSpring(() => ({
+    xys: [0, 0, 1],
+  }));
   return (
-    <AnimatedFancyCard>
+    <animated.div
+      ref={ref}
+      style={{ transform: props.xys.to(trans) }}
+      onMouseMove={({ clientX: x, clientY: y }) =>
+        set({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
+      }
+      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+    >
       <div className="max-w-sm md:max-w-3xl mx-auto bg-gradient-to-b md:bg-gradient-to-r from-red-500 to-yellow-500 md:h-[272px] rounded-xl w-full mt-10 overflow-hidden">
         <div className="grid md:grid-cols-3 mx-auto">
           <div className="md:col-span-1 grid place-items-center overflow-hidden">
-            <div className="relative md:mt-[32px] overflow-hidden">
+            <animated.div
+              style={{ transform: props.xys.to(hiTrans) }}
+              className="relative md:mt-[32px] overflow-hidden"
+            >
               <Image
                 className="rounded-b-full md:rounded-none"
                 width={194}
@@ -16,7 +45,7 @@ const WelcomeCard = () => {
                 alt="me waving"
                 src={hello}
               />
-            </div>
+            </animated.div>
           </div>
           <div className="md:col-span-2 place-self-center px-2 md:px-5 rounded-xl relative flex items-center leading-5 mx-1 my-3 md:ml-0 md:mr-3 md:pb-0 backdrop-blur-lg backdrop-brightness-50">
             <div>
@@ -72,7 +101,7 @@ const WelcomeCard = () => {
           </div>
         </div>
       </div>
-    </AnimatedFancyCard>
+    </animated.div>
   );
 };
 
