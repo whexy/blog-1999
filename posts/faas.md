@@ -16,7 +16,7 @@ image: /images/jFXNDx.jpg
 
 静态博客的评论功能有很多开箱即用的框架，例如我使用的 Utteranc。点赞功能没有类似的框架。乐观地看，点赞的实现比评论简单太多。所以，我们可以自己动手写一个。
 
-<Warn content={`引入评论区的一个月里，其实一条评论也没有。`} />
+<Dialog content={`引入评论区的一个月里，其实一条评论也没有。`} />
 
 ### Serverless Function & FaaS
 
@@ -47,14 +47,14 @@ image: /images/jFXNDx.jpg
 
 这次我使用的就是亚马逊的 AWS Lambda。AWS Lambda 可以让开发人员只需编写包含逻辑要求的代码函数，并可部署、调用代码，确保代码的可靠性高、延展性强，而无需管理其他基础架构。这里，我们使用 [AWS SAM](https://docs.aws.amazon.com/lambda/latest/dg/serverless_app.html) 定义一个无服务器代码函数。这个代码函数将被部署至 AWS Lambda，使用 Python 编写，然后处理经由传输流接收到的点赞记录。
 
-<Warn content={`鄙人不才，正好有一位即将在亚马逊供职的漂亮女友。`} />
+<Dialog content={`鄙人不才，正好有一位即将在亚马逊供职的漂亮女友。`} />
 
 
 ## 需求与 API 设计
 
 我想放在博客里的点赞功能非常简单。用户点击按钮给计数器加一。深思熟虑后我打算放弃一个用户只能点赞一次的后端校验，因为这实现起来有一些难度。当然，前端上还是做了小小的限制，相信绕过它是非常容易的事情。
 
-<Warn content={`这绝对不是为了刷赞故意为之。`} />
+<Dialog content={`这绝对不是为了刷赞故意为之。`} />
 
 对于这个需求，我打算开发两个 API：
 
@@ -71,7 +71,7 @@ image: /images/jFXNDx.jpg
 
 正如前文一直强调的一样——Lambda 的实现理应非常简单，而且也确实非常简单。这篇博客旨在强调 FaaS 在特定情形下的优势。
 
-<Warn content={`下次遇到相同的需求的时候，记得用 FaaS 去实现。人生苦短，省点时间干点别的吧。`} />
+<Dialog content={`下次遇到相同的需求的时候，记得用 FaaS 去实现。人生苦短，省点时间干点别的吧。`} />
 
 
 ### AWS 配置
@@ -82,7 +82,7 @@ image: /images/jFXNDx.jpg
 
 AWS Lambda 函数可以用各种语言书写。这里我们就用 Python 来写一遍。我在腾讯实习期间用 Python 写过很多 CRUD，一直羞于启齿。为了进一步展示 FaaS 低代码的特性，我决定 ~~放下身段~~ 当众写一遍 CRUD。请你不要笑话我，使用动态语言本身就是一种低代码行为。
 
-<Warn content={`后文会谈到，这篇文章原本的基调是 Go 语言…`} />
+<Dialog content={`后文会谈到，这篇文章原本的基调是 Go 语言…`} />
 
 首先在 GitHub 上找找有没有可以抄的案例。不出所料，serverless 框架的 example 里就有这么一项[^2]。它用 Python 实现了 AWS DynamoDB 的调用，并且配置了 HTTP API 的触发器。serverless 框架可以帮助我们自动完成 AWS 中的各种配置。
 

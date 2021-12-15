@@ -9,7 +9,7 @@ import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../lib/date";
 import metadata from "../../data/metadata";
 import Callout from "../../components/posts/Callout";
-import Warn from "../../components/posts/Warn";
+import Dialog from "../../components/posts/Dialog";
 import Comment from "../../components/posts/Comment";
 import avatar from "../../public/img/android-chrome-192x192.png";
 import { getPlaceholder } from "../../lib/placeholder";
@@ -70,7 +70,7 @@ const components = {
     </>
   ),
   Callout,
-  Warn,
+  Dialog,
 };
 
 export default function Post({ postData }) {

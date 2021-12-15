@@ -26,13 +26,13 @@ There're two steps you need to follow to sideload an App to your iOS devices.
 
 Simply put, sideloading is pulling a shrimp out of its shell and stuffing it into the new home we've prepared. Isn't that super easy? Wait, wait, wait... Noob, you don't need to do all of the things on your own! [Sideloadly](https://sideloadly.io/) says it can help you do this with just one click.
 
-<Warn content={`If it's really "one click," as they said, you won't have the luck to read the blog.`} />
+<Dialog content={`If it's really "one click," as they said, you won't have the luck to read the blog.`} />
 
 ## Dependency
 
 I've been using the Macbook Air (2020, M1, 16GB) for a while. Thanks to its <span className="text-[#3e8dba] font-black">arm</span>-based CPU, it's super fast compared to my previous Macbook Pro (2018, i5, 8GB).
 
-<Warn content={`Intel, shame on you!`} />
+<Dialog content={`Intel, shame on you!`} />
 
 The challenge to transfer products to arm-based architecture is the ecosystem. Programs aimed to run on x86/x64 cannot magically runs on arm. Apple tries to solve this problem with its Rosetta 2.
 

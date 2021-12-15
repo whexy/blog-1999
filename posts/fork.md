@@ -19,7 +19,7 @@ Forking is how a process in Linux is created. Even though the fork has been impr
 
 Some students in the lab are working with a fuzzing machine. Fuzzing launches applications thousands of times with mutated input to see if a bug is triggered.
 
-<Warn content={`It sounds like raping the application with high computing power, just like what deep learning does to user data. `} />
+<Dialog content={`It sounds like raping the application with high computing power, just like what deep learning does to user data. `} />
 
 What bothered us is that launching the target application takes more and more time as the fuzzing goes. We sampled the program and found the most time-consuming part is the `fork()` system call. It turned out that the fuzzing process, collecting running information of every launch, grows larger and larger in the memory. When the process bloats to a certain level, cloning becomes a performance impact factor that we cannot ignore.
 

@@ -37,7 +37,7 @@ If we want to be notified as soon as possible about events that happen in hardwa
 
 ## Handle PMU Interrupts in the kernel
 
-<Warn content={`The following part is based on Armv8, aarch64.`} />
+<Dialog content={`The following part is based on Armv8, aarch64.`} />
 
 Handling an interrupt may sound unfamiliar to you. After all, it should be done by a device driver. Of course, Linux is shipped with a PMU driver, which handles the interrupts correctly. But Linux gives us no chance to customize the build-in interrupt handling process. That's why we need to reimplement it.
 

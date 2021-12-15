@@ -23,14 +23,6 @@
   .tmpl-post .direct-link {
     @apply text-red-500;
   }
-
-  .callout {
-    @apply rounded-lg bg-gray-100 dark:bg-gray-700 px-4 py-1 sm:w-11/12 mx-auto;
-  }
-
-  .warn {
-    @apply text-sm font-mono text-jbgray-light text-center;
-  }
 }
 
 @layer utilities {
@@ -121,6 +113,10 @@
 
 code[class*="language-"],
 pre {
+  @apply text-gray-800 dark:text-[#f8f8f2] !text-sm;
+}
+
+.prose pre > code {
   @apply text-gray-800 dark:text-[#f8f8f2] !text-sm;
 }
 

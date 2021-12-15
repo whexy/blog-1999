@@ -116,7 +116,7 @@ $(TARGETS):
 	$(LATEX) $@
 
 debug:
-	-grep Warning *.log
+	-grep Dialoging *.log
 
 diff:
 	rm -rf ./_diff ./_env
