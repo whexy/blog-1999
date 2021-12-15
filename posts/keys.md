@@ -8,7 +8,13 @@ I published my keys on the website yesterday. It contains two kinds of keys: PGP
 
 <!-- more -->
 
-How to prove I am me? The question is actually asked by my Chinese teacher in high school, Ms. Bin (滨, alongside the water), who also taught us about philosophy. You may have heard about Descartes' basic axiom "Cogito ergo sum" (I think, therefore I am), which I believe is the best answer. Unfortunately, instead of continuing my studies in philosophy, I turned to computer science, which, unlike metaphysics, is a rigorous positivist discipline.
+How to prove I am me? The question is actually asked by my Chinese teacher in high school, Ms. Bin (滨, alongside the water), who also taught us about philosophy. 
+
+<Dialog>
+You may have heard about Descartes' basic axiom "Cogito ergo sum" (I think, therefore I am), which I believe is the best answer. 
+</Dialog>
+
+Unfortunately, instead of continuing my studies in philosophy, I turned to computer science, which, unlike metaphysics, is a rigorous positivist discipline.
 
 Here we met a totally different challenge. I want to publish a file to the Internet, ensuring the content is complete without any unauthorized modification. In other words, I want to prove that I am me, in a way that is acceptable to everyone and that no one could fake it.
 

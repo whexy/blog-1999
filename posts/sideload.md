@@ -34,6 +34,8 @@ I've been using the Macbook Air (2020, M1, 16GB) for a while. Thanks to its <spa
 
 <Dialog content={`Intel, shame on you!`} />
 
+<DialogBack content={`Come on, 12th Gen is great!`} />
+
 The challenge to transfer products to arm-based architecture is the ecosystem. Programs aimed to run on x86/x64 cannot magically runs on arm. Apple tries to solve this problem with its Rosetta 2.
 
 So here comes a messy. On our computer, there are two types of applications that run in different modes! I'll be okay if they are not interacting with each other. But in the real world, programs depend on other programs! **An arm program cannot rely on an intel library.** That is what you always meet when you're trying to use the so-called "Universal App."

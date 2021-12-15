@@ -9,9 +9,9 @@ import { getAllPostIds, getPostData } from "../../lib/posts";
 import Date from "../../lib/date";
 import metadata from "../../data/metadata";
 import Callout from "../../components/posts/Callout";
-import Dialog from "../../components/posts/Dialog";
+import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import Comment from "../../components/posts/Comment";
-import avatar from "../../public/img/android-chrome-192x192.png";
+import avatar from "../../public/img/notion-avatar.svg";
 import { getPlaceholder } from "../../lib/placeholder";
 
 export async function getStaticPaths() {
@@ -71,6 +71,7 @@ const components = {
   ),
   Callout,
   Dialog,
+  DialogBack,
 };
 
 export default function Post({ postData }) {
@@ -104,12 +105,15 @@ export default function Post({ postData }) {
         )}
         <article className="font-display prose dark:prose-dark pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
           <h1>{postData.title}</h1>
-          <div className="flex text-sm lg:text-base justify-between -mt-5 pb-5">
-            <div className="inline-flex space-x-1 items-center">
-              <div className="object-contain w-6 h-6 rounded-full border border-gray-700">
-                <Image src={avatar} alt={metadata.author.name} />
-              </div>
-              <Link href="/">{metadata.author.name}</Link>
+          <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
+            <div className="inline-flex space-x-1 items-center -ml-2">
+              <Image
+                src={avatar}
+                alt={metadata.author.name}
+                height={40}
+                width={40}
+              />
+              <span>{metadata.author.name}</span>
             </div>
             <Date dateString={postData.date} className="text-gray-600" />
           </div>
