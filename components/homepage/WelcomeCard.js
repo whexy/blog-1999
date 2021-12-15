@@ -12,10 +12,11 @@ const calc = (x, y, rect) => [
 const trans = (x, y, s) =>
   `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
 
-const hiTrans = (x, y, s) =>
-  `perspective(500px) rotateX(${1.5 * x}deg) rotateY(${1.5 * y}deg) scale(${
-    1 + (1 - s) * 1.5
-  })`;
+const hiTrans = (x, y, s) => `scale(${1 + (1 - s) * 1.5})`;
+
+const shadowTrans = (x, y, s) => {
+  return `drop-shadow(${y}px ${-x}px ${120 - 120 * s}px rgba(0, 0, 0, 0.5))`;
+};
 
 const WelcomeCard = () => {
   const ref = useRef(null);
@@ -35,7 +36,10 @@ const WelcomeCard = () => {
         <div className="grid md:grid-cols-3 mx-auto">
           <div className="md:col-span-1 grid place-items-center overflow-hidden">
             <animated.div
-              style={{ transform: props.xys.to(hiTrans) }}
+              style={{
+                transform: props.xys.to(hiTrans),
+                filter: props.xys.to(shadowTrans),
+              }}
               className="relative md:mt-[32px] overflow-hidden"
             >
               <Image
