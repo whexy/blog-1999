@@ -55,13 +55,7 @@ const InfoSection = () => {
 const AboutPage = ({ mdx }) => {
   return (
     <>
-      <Head>
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
-          rel="stylesheet"
-        />
-      </Head>
-      <div className="bg-white-readable text-black-readable dark:bg-black-readable dark:text-white-readable font-display">
+      <div className="bg-white-readable text-black-readable dark:bg-black-readable dark:text-white-readable">
         <div className="py-10 max-w-4xl mx-auto">
           <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:divide-opacity-20 sm:divide-jbgray-light">
             <InfoSection />

@@ -48,6 +48,7 @@ const WelcomeCard = () => {
                 height={240}
                 alt="me waving"
                 src={hello}
+                priority
               />
             </animated.div>
           </div>

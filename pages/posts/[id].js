@@ -82,12 +82,6 @@ export default function Post({ postData }) {
           {postData.title} | {metadata.title}
         </title>
         <description>{postData.excerpt}</description>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin />
-        <link
-          href="https://fonts.googleapis.com/css2?family=Inter&display=optional"
-          rel="stylesheet"
-        />
       </Head>
       <main className="bg-white dark:bg-black-readable">
         {postData.image && (
@@ -103,7 +97,7 @@ export default function Post({ postData }) {
             />
           </div>
         )}
-        <article className="font-display prose dark:prose-dark pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
+        <article className="prose dark:prose-dark pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
           <h1>{postData.title}</h1>
           <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
             <div className="inline-flex space-x-1 items-center -ml-2">
