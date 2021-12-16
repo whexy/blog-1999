@@ -4,10 +4,13 @@ import Head from "next/head";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import { createContext, useState, useEffect } from "react";
+import { useRouter } from "next/router";
+import * as ga from "../lib/ga";
 
 export const ThemeContext = createContext(null);
 
 const MyApp = ({ Component, pageProps }) => {
+  const router = useRouter();
   const [theme, setTheme] = useState("light");
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
@@ -25,6 +28,16 @@ const MyApp = ({ Component, pageProps }) => {
     }
     setTheme(defaultTheme);
   }, []);
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      ga.pageview(url);
+    };
+    router.events.on("routeChangeComplete", handleRouteChange);
+
+    return () => {
+      router.events.off("routeChangeComplete", handleRouteChange);
+    };
+  }, [router.events]);
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <Head>

@@ -20,7 +20,7 @@ const shadowTrans = (x, y, s) => {
 
 const WelcomeCard = () => {
   const ref = useRef(null);
-  const [props, set] = useSpring(() => ({
+  const [props, api] = useSpring(() => ({
     xys: [0, 0, 1],
   }));
   return (
@@ -28,9 +28,9 @@ const WelcomeCard = () => {
       ref={ref}
       style={{ transform: props.xys.to(trans) }}
       onMouseMove={({ clientX: x, clientY: y }) =>
-        set({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
+        api.start({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
       }
-      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
     >
       <div className="max-w-sm md:max-w-3xl mx-auto bg-gradient-to-b md:bg-gradient-to-r from-red-500 to-yellow-500 md:h-[272px] rounded-xl w-full mt-10 overflow-hidden">
         <div className="grid md:grid-cols-3 mx-auto">

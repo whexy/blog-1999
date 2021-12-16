@@ -12,7 +12,7 @@ const trans = (x, y, s) =>
 
 const AnimatedFancyCard = ({ children }) => {
   const ref = useRef(null);
-  const [props, set] = useSpring(() => ({
+  const [props, api] = useSpring(() => ({
     xys: [0, 0, 1],
   }));
 
@@ -21,9 +21,9 @@ const AnimatedFancyCard = ({ children }) => {
       ref={ref}
       style={{ transform: props.xys.to(trans) }}
       onMouseMove={({ clientX: x, clientY: y }) =>
-        set({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
+        api.start({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
       }
-      onMouseLeave={() => set({ xys: [0, 0, 1] })}
+      onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
     >
       {children}
     </animated.div>
