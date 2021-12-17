@@ -2,6 +2,11 @@ module.exports = {
   reactStrictMode: true,
   webpack5: true,
   webpack: (config) => {
+    config.module.rules.push({
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
+      use: ["@svgr/webpack"],
+    });
     config.resolve.fallback = { fs: false, path: false, child_process: false };
     return config;
   },

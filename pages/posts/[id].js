@@ -11,7 +11,7 @@ import metadata from "../../data/metadata";
 import Callout from "../../components/posts/Callout";
 import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import Comment from "../../components/posts/Comment";
-import avatar from "../../public/img/notion-avatar.svg";
+import Avatar from "../../public/img/notion-avatar.svg";
 import { getPlaceholder } from "../../lib/placeholder";
 
 export async function getStaticPaths() {
@@ -101,12 +101,9 @@ export default function Post({ postData }) {
           <h1>{postData.title}</h1>
           <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
             <div className="inline-flex space-x-1 items-center -ml-2">
-              <Image
-                src={avatar}
-                alt={metadata.author.name}
-                height={40}
-                width={40}
-              />
+              <div>
+                <Avatar className="w-10 h-10"/>
+              </div>
               <span>{metadata.author.name}</span>
             </div>
             <Date dateString={postData.date} className="text-gray-600" />

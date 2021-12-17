@@ -1,7 +1,7 @@
 import { mdrender } from "../../lib/markdown";
 import Image from "next/image";
 import metadata from "../../data/metadata";
-import avatar from "../../public/img/notion-avatar.svg";
+import Avatar from "../../public/img/notion-avatar.svg";
 
 export const Dialog = ({ content, children }) => {
   return (
@@ -12,13 +12,9 @@ export const Dialog = ({ content, children }) => {
         />
       </div>
       <div className="flex-shrink-0">
-        <Image
-          src={avatar}
-          alt={metadata.author.name}
-          width={64}
-          height={64}
-          quality={100}
-        />
+        <div>
+          <Avatar className="w-16 h-16" />
+        </div>
       </div>
     </div>
   );
