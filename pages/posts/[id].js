@@ -5,14 +5,17 @@ import { serialize } from "next-mdx-remote/serialize";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypePrism from "@mapbox/rehype-prism";
 import { MDXRemote } from "next-mdx-remote";
+import { useSpring, animated, config } from "react-spring";
+import { useState } from "react";
 import { getAllPostIds, getPostData } from "../../lib/posts";
+import { getPlaceholder } from "../../lib/placeholder";
 import Date from "../../lib/date";
 import metadata from "../../data/metadata";
+import Prose from "../../components/Prose";
 import Callout from "../../components/posts/Callout";
 import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import Comment from "../../components/posts/Comment";
 import Avatar from "../../public/img/notion-avatar.svg";
-import { getPlaceholder } from "../../lib/placeholder";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -47,20 +50,43 @@ export async function getStaticProps({ params }) {
   };
 }
 
-const components = {
-  img: ({ src, alt, width, height, blurDataURL }) => (
-    <div className="grid place-items-center">
-      <Image
-        src={src}
-        alt="blog image"
-        className={alt}
-        width={width}
-        height={height}
-        placeholder="blur"
-        blurDataURL={blurDataURL}
-      />
+const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
+  const [hover, setHover] = useState(false);
+  const props = useSpring({
+    scale: hover ? 1.05 : 1,
+  });
+  return (
+    <div>
+      <animated.div
+        className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10"
+        style={props}
+        onMouseEnter={() => {
+          setHover(true);
+        }}
+        onMouseLeave={() => {
+          setHover(false);
+        }}
+      >
+        <Image
+          src={src}
+          alt={alt}
+          width={width}
+          height={height}
+          placeholder="blur"
+          blurDataURL={blurDataURL}
+        />
+      </animated.div>
+      {alt && (
+        <div className="text-center font-light text-jbgray-light text-sm">
+          {alt}
+        </div>
+      )}
     </div>
-  ),
+  );
+};
+
+const components = {
+  img: ImgComponent,
   pre: ({ className, children }) => (
     <>
       {children.props.filename && (
@@ -84,6 +110,16 @@ export default function Post({ postData }) {
         <description>{postData.excerpt}</description>
       </Head>
       <main className="bg-white dark:bg-black-readable">
+        {postData.preview && (
+          <div className="px-2 py-4 bg-yellow-400/20 border-b dark:border-white/20 text-center">
+            <p className="text-sm dark:text-white">
+              This article is currently not finished. What you see is the
+              preview version. The article may be updated, modified or deleted
+              at any time. Arguments, data or links in the text may not be
+              available or credible.
+            </p>
+          </div>
+        )}
         {postData.image && (
           <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
             <Image
@@ -97,18 +133,20 @@ export default function Post({ postData }) {
             />
           </div>
         )}
-        <article className="prose dark:prose-dark pt-5 pb-5 mx-2 sm:mx-auto overscroll-contain">
-          <h1>{postData.title}</h1>
-          <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
-            <div className="inline-flex space-x-1 items-center -ml-2">
-              <div>
-                <Avatar className="w-10 h-10"/>
+        <article className="pt-5 pb-5">
+          <Prose>
+            <h1>{postData.title}</h1>
+            <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
+              <div className="inline-flex space-x-1 items-center -ml-2">
+                <div>
+                  <Avatar className="w-10 h-10" />
+                </div>
+                <span>{metadata.author.name}</span>
               </div>
-              <span>{metadata.author.name}</span>
+              <Date dateString={postData.date} className="text-gray-600" />
             </div>
-            <Date dateString={postData.date} className="text-gray-600" />
-          </div>
-          <MDXRemote {...postData.mdx} components={components} />
+            <MDXRemote {...postData.mdx} components={components} />
+          </Prose>
         </article>
         <div className="max-w-2xl mx-auto px-2 pb-5">
           <Comment />

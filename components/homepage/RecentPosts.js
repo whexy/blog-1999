@@ -17,16 +17,10 @@ export default function RecentPosts({ posts }) {
             </Link>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">
-            {posts.map((post) => (
-              <PostCard
-                title={post.title}
-                date={post.date}
-                image={post.image}
-                excerpt={post.excerpt}
-                url={`/posts/${post.id}`}
-                key={post.id}
-              />
-            ))}
+            {posts.map((post) => {
+              post.url = `/posts/${post.id}`;
+              return <PostCard {...post} key={post.id} />;
+            })}
           </div>
         </div>
       </div>

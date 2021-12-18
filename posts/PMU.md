@@ -9,7 +9,7 @@ PMU interrupts act as an essential role between hardware and software. It gives 
 
 <!-- more -->
 
-Before diving into handling PMU interrupts, I need to introduce you to the mind model. PMU is not only a hardware component. It is also the bridge between the physical implementation and the algorithmic model. If you are not interested in what PMU and PMI are (in my unique perspective), you can directly jump [here](#handle-pmu-interrupts-in-the-kernel).
+Before diving into handling PMU interrupts, I need to introduce you to the mind model. PMU is not only a hardware component. It is also the bridge between the physical implementation and the algorithmic model. If you are not interested in what PMU and PMI are (in my unique perspective), you can directly jump to "Handle PMU Interrupts in the kernel".
 
 ## PMU
 

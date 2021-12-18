@@ -9,8 +9,6 @@ So I want to sideload an App (illegally, both the behavior and the app) to my ne
 
 <!-- more -->
 
-The story might be boring to you. Maybe you want to read my [thundering against apple](#my-comments).
-
 ## Sideload
 
 Sideloading means installing an App that is not in the App Store. Perhaps it's the easiest way to install applications on Windows and Androids. But when it comes to Apple, especially for their "best-ever-made" iOS devices, you cannot install Apps like that! Apple seriously controls their customers' apps that they can't even install an app on their phones without the App Store. Tim Cook, CEO of Apple Inc, literally asked me to use an Android device[^1]. 

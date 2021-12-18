@@ -169,6 +169,17 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/learningReact",
+            "url": "https://www.whexy.com/posts/learningReact",
+            "title": "React 学习笔记",
+            "summary": "React 几乎利用了原生 JavaScript 的所有特质。在对 JavaScript 比较熟练的情况下，React 不会给你带来更多的惊喜。不过，相较于 Vue，写 React 也给人一种踏实的感觉。",
+            "date_modified": "2020-10-20T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/AppleWatchSchoolBus1",
             "url": "https://www.whexy.com/posts/AppleWatchSchoolBus1",
             "title": "为 Apple Watch 写一个校巴时刻表工具",
