@@ -51,22 +51,22 @@ export async function getStaticProps({ params }) {
 }
 
 const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
-  const [hover, setHover] = useState(false);
-  const props = useSpring({
-    scale: hover ? 1.05 : 1,
-  });
+  // const [hover, setHover] = useState(false);
+  // const props = useSpring({
+  //   scale: hover ? 1.05 : 1,
+  // });
   return (
-    <div>
-      <animated.div
-        className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10"
-        style={props}
-        onMouseEnter={() => {
-          setHover(true);
-        }}
-        onMouseLeave={() => {
-          setHover(false);
-        }}
-      >
+    <div
+      // className=""
+      // style={props}
+      // onMouseEnter={() => {
+      //   setHover(true);
+      // }}
+      // onMouseLeave={() => {
+      //   setHover(false);
+      // }}
+    >
+      <div className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10">
         <Image
           src={src}
           alt={alt}
@@ -75,7 +75,8 @@ const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
           placeholder="blur"
           blurDataURL={blurDataURL}
         />
-      </animated.div>
+      </div>
+
       {alt && (
         <div className="text-center font-light text-jbgray-light text-sm">
           {alt}

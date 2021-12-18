@@ -10,6 +10,18 @@
     },
     "items": [
         {
+            "id": "https://www.whexy.com/posts/malloc1",
+            "url": "https://www.whexy.com/posts/malloc1",
+            "title": "细究内存管理（一）",
+            "summary": "《细究内存管理》系列文章之首。大三下学期，我在操作系统课程的期末大作业里综合二进制插桩、动态库注入和内核缺页陷阱制作了内存检查工具。这一系列的博客文章将从原理出发探究内存泄露的本质，并且介绍如何综合常见的分析手段发掘内存泄露的根源。这篇文章里，我主要介绍了程序堆栈模式与内存管理的关系。",
+            "image": "https://www.whexy.com//images/malloc/Title1.png",
+            "date_modified": "2021-12-17T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/keys",
             "url": "https://www.whexy.com/posts/keys",
             "title": "How to prove I am me: a digital way",
@@ -28,18 +40,6 @@
             "summary": "So I want to sideload an App (illegally, both the behavior and the app) to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.",
             "image": "https://www.whexy.com//images/kNxHmjTCLG3tnAX.jpg",
             "date_modified": "2021-11-28T16:00:00.000Z",
-            "author": {
-                "name": "Wenxuan SHI",
-                "url": "https://www.whexy.com"
-            }
-        },
-        {
-            "id": "https://www.whexy.com/posts/blog-dilemma",
-            "url": "https://www.whexy.com/posts/blog-dilemma",
-            "title": "技术博客创作的两难局面",
-            "summary": "胡，項下的垂肉。跋胡疐尾指前進就踏著垂肉，後退又被尾巴絆倒。語本《詩經．豳風．狼跋》：「狼跋其胡，載疐其尾」。作为技术博客的创作者，我现在就面临着这样两难的局面。",
-            "image": "https://www.whexy.com//images/FMYK81ojCNy6LV5.png",
-            "date_modified": "2021-11-24T16:00:00.000Z",
             "author": {
                 "name": "Wenxuan SHI",
                 "url": "https://www.whexy.com"

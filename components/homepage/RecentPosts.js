@@ -17,10 +17,12 @@ export default function RecentPosts({ posts }) {
             </Link>
           </div>
           <div className="pt-2 sm:pl-3 flex-1 flex-col space-y-5">
-            {posts.map((post) => {
-              post.url = `/posts/${post.id}`;
-              return <PostCard {...post} key={post.id} />;
-            })}
+            {posts
+              .filter((post) => post.hidden !== true)
+              .map((post) => {
+                post.url = `/posts/${post.id}`;
+                return <PostCard {...post} key={post.id} />;
+              })}
           </div>
         </div>
       </div>
