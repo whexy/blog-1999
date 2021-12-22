@@ -128,11 +128,3 @@ pre {
   -ms-overflow-style: none !important; /* IE and Edge */
   scrollbar-width: none !important; /* Firefox */
 }
-
-.code-title {
-  @apply text-gray-800 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-200/10 rounded-t bg-gray-100 dark:bg-[#383a57] dark:text-white text-xs font-mono;
-}
-
-.code-title + pre {
-  @apply !mt-0 !rounded-t-none;
-}

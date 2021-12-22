@@ -10,7 +10,7 @@ export default function PostCard({
   preview,
 }) {
   return (
-    <>
+    <div>
       <div className="flex flex-col -space-y-1 autobg transition-all rounded p-4">
         <div className="text-sm tracking-wide text-red-600 dark:text-red-500 font-light pb-1">
           <time dateTime={date}>{date}</time>
@@ -27,7 +27,7 @@ export default function PostCard({
         </div>
         <div className="pt-2 flex flex-col-reverse sm:space-x-2 sm:flex-row">
           <div className="text-sm text-gray-700 dark:text-jbgray-light font-light">
-            {excerpt}
+            <p>{excerpt}</p>
           </div>
           {image && (
             <div className="shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
@@ -42,6 +42,6 @@ export default function PostCard({
           )}
         </div>
       </div>
-    </>
+    </div>
   );
 }

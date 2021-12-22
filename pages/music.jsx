@@ -4,7 +4,7 @@ import { useState } from "react";
 
 const PlayListHead = () => {
   return (
-    <>
+    <div>
       <h1 className="text-center text-black-readble dark:text-white-readable text-3xl">🎧 歌单</h1>
       <div className="text-center font-light py-5">
         <p className="text-black-readable dark:text-white-readable">
@@ -15,13 +15,13 @@ const PlayListHead = () => {
           <span className="text-[0.25em]"></span>网络连接条件。
         </p>
       </div>
-    </>
+    </div>
   );
 };
 
 const PlayListBody = () => {
   return (
-    <>
+    <div>
       {playlist.map((category) => (
         <div
           key={category.name}
@@ -33,7 +33,7 @@ const PlayListBody = () => {
           ))}
         </div>
       ))}
-    </>
+    </div>
   );
 };
 
@@ -44,7 +44,7 @@ const SongCard = ({ song }) => {
   };
 
   return (
-    <>
+    <div>
       <div className="bg-gray-200 dark:bg-spgray-secondary dark:hover:bg-spgray-bright rounded">
         <div className="pr-2 flex flex-row justify-between items-center">
           <div className={`flex-none ${expand && "blur scale-75"}`}>
@@ -79,7 +79,7 @@ const SongCard = ({ song }) => {
           </div>
         )}
       </div>
-    </>
+    </div>
   );
 };
 const PlayListView = () => {

@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function RecentPosts({ posts }) {
   return (
-    <>
+    <div>
       <div className="my-5 pb-5">
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-red-600 sm:dark:divide-red-500">
           <div className="sm:shrink-0 w-full sm:w-2/12 whitespace-nowrap sm:pr-2 dark:bg-black-readable">
@@ -26,6 +26,6 @@ export default function RecentPosts({ posts }) {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

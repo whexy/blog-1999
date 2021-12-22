@@ -12,11 +12,10 @@ export default function Footer() {
             </span>
             <span>{metadata.author.name}&apos;s Blog.</span>
           </p>
-          <p className="text-xs py-1 text-jbgray-light">
+          <p className="text-xs py-1 text-jbgray-light tracking-tight">
             Built with <a href="https://nextjs.org/">Next.js</a>,{" "}
             <a href="https://reactjs.org/">React</a>,{" "}
-            <a href="https://reactjs.org/">Node.js</a>, and many other open
-            source projects.
+            <a href="https://reactjs.org/">Node.js</a>.
           </p>
         </div>
       </div>

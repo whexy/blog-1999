@@ -13,7 +13,7 @@ const FriendPage = () => {
 
 const FriendBody = () => {
   return (
-    <>
+    <div>
       {friends.map(({ category_name, friends }) => (
         <div
           key={category_name}
@@ -61,7 +61,7 @@ const FriendBody = () => {
           </div>
         </div>
       ))}
-    </>
+    </div>
   );
 };
 

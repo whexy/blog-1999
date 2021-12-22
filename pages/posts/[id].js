@@ -37,6 +37,13 @@ export async function getStaticProps({ params }) {
   });
   postData.mdx = mdxSource;
 
+  // Get Minutes to read
+  const enMin = rawContent.split(" ").length / 200;
+  const zhChars = rawContent.match(/[\u4e00-\u9fff\uf900-\ufaff]/g);
+  const zhCharNum = !zhChars ? 0 : zhChars.length;
+  const zhMin = zhCharNum / 400;
+  postData.minutes = Math.round(Math.max(enMin, zhMin));
+
   // Get image placeholder
   if (postData.image) {
     const placeholder = await getPlaceholder(postData.image);
@@ -51,21 +58,8 @@ export async function getStaticProps({ params }) {
 }
 
 const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
-  // const [hover, setHover] = useState(false);
-  // const props = useSpring({
-  //   scale: hover ? 1.05 : 1,
-  // });
   return (
-    <div
-      // className=""
-      // style={props}
-      // onMouseEnter={() => {
-      //   setHover(true);
-      // }}
-      // onMouseLeave={() => {
-      //   setHover(false);
-      // }}
-    >
+    <div>
       <div className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10">
         <Image
           src={src}
@@ -76,7 +70,6 @@ const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
           blurDataURL={blurDataURL}
         />
       </div>
-
       {alt && (
         <div className="text-center font-light text-jbgray-light text-sm">
           {alt}
@@ -89,12 +82,14 @@ const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
 const components = {
   img: ImgComponent,
   pre: ({ className, children }) => (
-    <>
+    <div>
       {children.props.filename && (
-        <div className="code-title">{children.props.filename}</div>
+        <div className="text-gray-800 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-200/10 rounded-t bg-gray-100 dark:bg-[#383a57] dark:text-white text-xs font-mono">
+          {children.props.filename}
+        </div>
       )}
-      <pre className={className}>{children}</pre>
-    </>
+      <pre className={className + " !mt-0 !rounded-t-none"}>{children}</pre>
+    </div>
   ),
   Callout,
   Dialog,
@@ -103,7 +98,7 @@ const components = {
 
 export default function Post({ postData }) {
   return (
-    <>
+    <div>
       <Head>
         <title>
           {postData.title} | {metadata.title}
@@ -128,6 +123,7 @@ export default function Post({ postData }) {
               alt="Cover"
               height={612}
               width={1224}
+              quality={100}
               className="sm:rounded-xl"
               placeholder="blur"
               blurDataURL={postData.imgPlaceholder}
@@ -138,13 +134,13 @@ export default function Post({ postData }) {
           <Prose>
             <h1>{postData.title}</h1>
             <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
-              <div className="inline-flex space-x-1 items-center -ml-2">
-                <div>
-                  <Avatar className="w-10 h-10" />
-                </div>
-                <span>{metadata.author.name}</span>
+              <div className="inline-flex space-x-1 items-center">
+                <div>{metadata.author.name} / </div>
+                <Date dateString={postData.date} className="text-gray-600" />
               </div>
-              <Date dateString={postData.date} className="text-gray-600" />
+              <div>
+                {postData.minutes} minute{postData.minutes > 1 && "s"} to read
+              </div>
             </div>
             <MDXRemote {...postData.mdx} components={components} />
           </Prose>
@@ -153,6 +149,6 @@ export default function Post({ postData }) {
           <Comment />
         </div>
       </main>
-    </>
+    </div>
   );
 }

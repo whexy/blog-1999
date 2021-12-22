@@ -20,6 +20,10 @@ tags: Project
 
 **平台地址：http://ac.whexy.com**
 
+<Dialog>
+因平台显著降低了作业难度。按任课教师要求已经关停。
+</Dialog>
+
 ![](/images/EeTpfxjAwJXZ4tH.png)
 
 网站使用很直观，选择题目，选择语言，粘贴代码，上传测试。测试完成后，你可以得到反馈。点击可以复制数据，方便调整。

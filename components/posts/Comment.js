@@ -1,7 +1,7 @@
 import { Giscus } from "@giscus/react";
 const Comment = () => {
   return (
-    <>
+    <div>
       <div className="dark:hidden">
         <Giscus
           repo="whexy/whexy-blog-comments"
@@ -26,7 +26,7 @@ const Comment = () => {
           theme="dark"
         />
       </div>
-    </>
+    </div>
   );
 };
 

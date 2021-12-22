@@ -9,7 +9,7 @@ import { ThemeContext } from "../pages/_app";
 const Header = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
   return (
-    <>
+    <div>
       <header className="mx-auto sm:max-w-3xl text-gray-400 border-red-500 border-b bg-black-readable relative z-50">
         <div className="mx-5 flex flex-row justify-between items-center space-x-8 py-4">
           <Link href="/">
@@ -33,7 +33,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </>
+    </div>
   );
 };
 

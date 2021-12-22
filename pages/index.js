@@ -10,7 +10,7 @@ import createRSS from "../lib/feed";
 
 export default function Home({ postsData }) {
   return (
-    <>
+    <div>
       <Head>
         <title>Wenxuan SHI</title>
       </Head>
@@ -23,7 +23,7 @@ export default function Home({ postsData }) {
           <RecentPosts posts={postsData} />
         </main>
       </div>
-    </>
+    </div>
   );
 }
 

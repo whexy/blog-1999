@@ -1,33 +1,31 @@
 import key_info from "../data/key.js";
 import Link from "next/link";
+import Main from "../components/Main";
 const KeyView = () => {
   return (
-    <div className="text-black-readable bg-white-readable dark:text-white-readable dark:bg-black-readable">
-      <div className="max-w-3xl mx-auto">
-        <div className="mx-2">
-          <h1 className="py-10 text-3xl text-center">🔑 Public Keys</h1>
-          <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
-            This public key is mainly used for digital signatures. In
-            particular, it is used for signing code commits, emails, and
-            important documents.
-          </KeyItemView>
-          <KeyItemView title="SSH Keys" keys={key_info["SSH Keys"]}>
-            This public key is only used to log in to the remote server using
-            SSH (when GPG-agent is not available).
-          </KeyItemView>
-          <div className="font-light text-sm text-jbgray-light pt-5 pb-10 list-decimal">
-            <li>
-              Any other public keys that are absent from this page are not
-              representative of me.
-            </li>
-            <li>
-              Any document that is not digitally signed or for which a signature
-              file is not provided does not represent me.
-            </li>
-          </div>
+    <Main>
+      <div className="mx-2">
+        <h1 className="py-10 text-3xl text-center">🔑 Public Keys</h1>
+        <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
+          This public key is mainly used for digital signatures. In particular,
+          it is used for signing code commits, emails, and important documents.
+        </KeyItemView>
+        <KeyItemView title="SSH Keys" keys={key_info["SSH Keys"]}>
+          This public key is only used to log in to the remote server using SSH
+          (when GPG-agent is not available).
+        </KeyItemView>
+        <div className="font-light text-sm text-jbgray-light pt-5 pb-10 list-decimal">
+          <li>
+            Any other public keys that are absent from this page are not
+            representative of me.
+          </li>
+          <li>
+            Any document that is not digitally signed or for which a signature
+            file is not provided does not represent me.
+          </li>
         </div>
       </div>
-    </div>
+    </Main>
   );
 };
 

@@ -1,5 +1,5 @@
 ---
-title:  复杂 LaTeX 项目中几个插件的使用心得
+title: 复杂 LaTeX 项目中几个插件的使用心得
 date: "2021-05-06"
 tags: Tricks
 ---
@@ -17,11 +17,9 @@ brew install perl
 brew link --overwrite perl
 ```
 
+## Revision 利器 latexdiff
 
-
-## Revision利器 latexdiff
-
-在论文被打回重写的阶段，我们可以用 latexdiff 工具生成一个带批注版本的PDF，方便讨好 reviewer。
+在论文被打回重写的阶段，我们可以用 latexdiff 工具生成一个带批注版本的 PDF，方便讨好 reviewer。
 
 Latexdiff 是一个 LaTeX 编译环境自带的二进制文件。通过 brew 安装的 LaTeX 已经将它加入了 PATH 环境变量。使用也是非常的简单：
 
@@ -35,9 +33,7 @@ latexdiff a.tex b.tex > difference.tex
 
 在这篇博客[Multiple-file LaTeX diff ](http://dropbearcode.blogspot.com/2011/09/multiple-file-latex-diff.html)中，博主用 Python 写了一个压平多 LaTeX 文件的脚本 `flatten.py`。
 
-<div className="code-title">flatten.py</div>
-
-```python
+```python filename=flatten.py
 #!/usr/bin/python
 import sys
 import os
@@ -98,9 +94,7 @@ latexdiff old.tex new.tex --disable-citation-markup --exclude-textcmd="section,s
 
 使用 latexdiff 时最好保留所有版本的编译中间件。我展示一下我自用的 Makefile，自动生成比较结果 DIFF.pdf。
 
-<div className="code-title">Makefile</div>
-
-```makefile
+```makefile filename=Makefile
 TARGETS = main
 
 LATEX	= xelatex
@@ -142,12 +136,10 @@ diff:
 	# Cleanup
 	rm -rf ./_diff ./_env
 
-clean:  
+clean:
 	rm -f /images/*.aux /images/*.log *.aux *.bbl *.blg *.log *.dvi *.bak *~ $(TARGETS:%=%.pdf)
 	rm -f diff*
 ```
-
-
 
 ## 源码格式化 Latexindent
 
@@ -160,8 +152,7 @@ sudo cpan Log::Log4perl
 sudo cpan Log::Dispatch
 sudo cpan YAML::Tiny
 sudo cpan File::HomeDir
-sudo cpan Unicode::GCString  
+sudo cpan Unicode::GCString
 ```
 
 安装完毕后就可以正常使用 Latexindent 了。VSCode 的 LaTeX Workshop 插件直接调用 Latexindent，按下代码格式化快捷键即可使用。
-

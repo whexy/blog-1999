@@ -7,7 +7,7 @@ export const Dialog = ({ content, children }) => {
   return (
     <div className="ml-4 not-prose flex justify-end items-center space-x">
       <div className="p-3 rounded bg-red-200/20 border border-red-200/80 font-serif">
-        <inner
+        <div
           dangerouslySetInnerHTML={{ __html: mdrender(content || children) }}
         />
       </div>
