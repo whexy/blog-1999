@@ -106,10 +106,10 @@ By the way, you should only trust the keys that is published officially. Like th
 
 ### Encryption
 
-You still need to import my keys with `gpg --import pgp-key.asc`. After doing that, use `-se` to encrypt a file. Use `-r` to choose my keyID (which is very long). Use `-o` to decide the output path.
+You still need to import my keys with `gpg --import pgp-key.asc`. After doing that, use `-e` to encrypt a file. Use `-r` to choose my keyID (which is very long). Use `-o` to decide the output path.
 
 ```shell
-❯ gpg -se -o IMPORTANT_FILE.txt.encrypt -r 59A4998E07C1D6FB255751CCA513A02FDDFF1598 IMPORTANT_FILE.txt
+❯ gpg -r 59A4998E07C1D6FB255751CCA513A02FDDFF1598 -e IMPORTANT_FILE.txt -o IMPORTANT_FILE.txt.encrypt
 ```
 
 Feel free to send my a encrypted file with my public key. As I said, I will be the only one who can read that.
