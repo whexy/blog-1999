@@ -1,21 +1,17 @@
-import Image from "next/image";
-import Link from "next/link";
-import Head from "next/head";
-import { serialize } from "next-mdx-remote/serialize";
-import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypePrism from "@mapbox/rehype-prism";
 import { MDXRemote } from "next-mdx-remote";
-import { useSpring, animated, config } from "react-spring";
-import { useState } from "react";
-import { getAllPostIds, getPostData } from "../../lib/posts";
-import { getPlaceholder } from "../../lib/placeholder";
-import Date from "../../lib/date";
-import metadata from "../../data/metadata";
-import Prose from "../../components/Prose";
+import { serialize } from "next-mdx-remote/serialize";
+import Head from "next/head";
+import Image from "next/image";
+import rehypeImagePlaceholder from "rehype-image-placeholder";
 import Callout from "../../components/posts/Callout";
-import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import Comment from "../../components/posts/Comment";
-import Avatar from "../../public/img/notion-avatar.svg";
+import { Dialog, DialogBack } from "../../components/posts/Dialog";
+import Prose from "../../components/Prose";
+import metadata from "../../data/metadata";
+import Date from "../../lib/date";
+import { getPlaceholder } from "../../lib/placeholder";
+import { getAllPostIds, getPostData } from "../../lib/posts";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();

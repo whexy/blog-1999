@@ -10,6 +10,18 @@
     },
     "items": [
         {
+            "id": "https://www.whexy.com/posts/func-color",
+            "url": "https://www.whexy.com/posts/func-color",
+            "title": "函数颜色理论",
+            "summary": "2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。",
+            "image": "https://www.whexy.com//images/func-color-title.png",
+            "date_modified": "2021-12-24T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/xmas-security",
             "url": "https://www.whexy.com/posts/xmas-security",
             "title": "圣诞节与“供应链安全”",
