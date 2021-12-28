@@ -10,6 +10,17 @@
     },
     "items": [
         {
+            "id": "https://www.whexy.com/posts/SUSTechWifiIoT",
+            "url": "https://www.whexy.com/posts/SUSTechWifiIoT",
+            "title": "智能设备连接南科大校园网",
+            "summary": "在南科大的四年，每学期都会遇到 IoT 设备连接校园网的难题。这篇博客主要介绍如何让智能设备绕过认证直接接入校园网，以及这些操作的原理。",
+            "date_modified": "2021-12-27T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/func-color",
             "url": "https://www.whexy.com/posts/func-color",
             "title": "函数颜色理论",
