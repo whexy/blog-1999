@@ -60,7 +60,7 @@ const AboutPage = ({ mdx }) => {
           <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:divide-opacity-20 sm:divide-jbgray-light">
             <InfoSection />
             {/* 内容栏 */}
-            <div className="mx-2 sm:mx-0 sm:pl-4 prose-lg">
+            <div className="mx-2 sm:mx-0 sm:pl-4 prose-lg prose-headings:font-bold">
               <MDXRemote {...mdx} components={{ Callout }} />
             </div>
           </div>

@@ -92,6 +92,17 @@ const components = {
   DialogBack,
 };
 
+const License = () => {
+  return (
+    <div>
+      <p className="text-gray-400 dark:text-gray-600 font-light text-sm tracking-wider">
+        <i className="fas fa-closed-captioning"></i> LICENSED UNDER CC BY-NC-SA
+        4.0
+      </p>
+    </div>
+  );
+};
+
 export default function Post({ postData }) {
   return (
     <div>
@@ -141,7 +152,8 @@ export default function Post({ postData }) {
             <MDXRemote {...postData.mdx} components={components} />
           </Prose>
         </article>
-        <div className="max-w-2xl mx-auto px-2 pb-5">
+        <div className="max-w-2xl mx-auto px-2 pt-10 pb-5 flex flex-col space-y-2">
+          <License />
           <Comment />
         </div>
       </main>

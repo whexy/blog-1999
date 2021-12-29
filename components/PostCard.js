@@ -8,6 +8,7 @@ export default function PostCard({
   image,
   excerpt,
   preview,
+  vol,
 }) {
   return (
     <div>
@@ -15,7 +16,11 @@ export default function PostCard({
         <a>
           <div className="flex flex-col -space-y-1 autobg transition-all rounded p-4">
             <div className="text-sm tracking-wide text-red-600 dark:text-red-500 font-light pb-1">
-              <time dateTime={date}>{date}</time>
+              {vol ? (
+                <span>VOL.{vol}</span>
+              ) : (
+                <time dateTime={date}>{date}</time>
+              )}
             </div>
             <div className="flex space-x-2 items-center">
               <p className="text-lg hover:underline">{title}</p>

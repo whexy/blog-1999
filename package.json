@@ -17,6 +17,7 @@
     "feed": "^4.2.2",
     "fs": "^0.0.1-security",
     "gray-matter": "^4.0.3",
+    "lodash": "^4.17.21",
     "lqip-modern": "^1.2.0",
     "markdown-it": "^12.2.0",
     "markdown-it-anchor": "^8.4.1",
