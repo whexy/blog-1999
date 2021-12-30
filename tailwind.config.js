@@ -22,6 +22,7 @@ module.exports = {
         black: {
           DEFAULT: colors.black,
           readable: "#1D1D1F",
+          elegant: "#1F1F24",
         },
         spgray: {
           DEFAULT: "#121212",

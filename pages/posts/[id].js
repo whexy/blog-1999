@@ -145,12 +145,10 @@ export default function Post({ postData }) {
                 seriesPosts={postData.seriesPosts}
               />
             )}
+            <License />
           </Prose>
         </article>
-        <div className="max-w-2xl mx-auto px-2 pt-10 pb-5 flex flex-col space-y-2">
-          <License />
-          <Comment />
-        </div>
+        <Comment />
       </main>
     </div>
   );
