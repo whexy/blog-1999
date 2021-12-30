@@ -2,7 +2,7 @@
 title: 圣诞节与“供应链安全”
 date: "2021-12-24"
 tags: Other
-image: "/images/xmas/Title.png"
+image: /images/xmas/Title.png
 ---
 
 圣诞节又到了。中国的前端程序员一定不会忘记这个节日。3 年前的这一天，阿里巴巴 AntD 团队在开源项目中掩埋的圣诞彩蛋引发了开源世界信任链的崩溃。前端程序员在节日当天面对客户投诉、老板指责，甚至有人被直接开除……

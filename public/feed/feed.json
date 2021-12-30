@@ -250,6 +250,17 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/keyboard",
+            "url": "https://www.whexy.com/posts/keyboard",
+            "title": "谈谈我的键盘",
+            "summary": "键盘这玩意，的确是有门道的。但是对于我等这些连计算机行业门道都没摸清楚的人来说，傻乎乎跟风追求某种所谓“键盘”的感觉是没有必要的。同样，倘若连大鼓和军鼓的声音都无法区分，却畅谈某某耳机“低音准高音稳中音甜”，只会让人好一顿嘲笑。",
+            "date_modified": "2019-11-11T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/wannaAC",
             "url": "https://www.whexy.com/posts/wannaAC",
             "title": "用两个晚上做超简易OpenJudge",
@@ -261,11 +272,33 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/timemachine",
+            "url": "https://www.whexy.com/posts/timemachine",
+            "title": "搭建 macOS 的远程备份机",
+            "summary": "macOS 有一个神奇的功能，叫做“时间机器”。当激活这个功能的时候，你可以将系统里的任意文件回滚到之前的任意状态。换句话说，macOS 存档了你每隔一段时间的系统的整个状态。使用这个功能通常需要定期插入硬盘。这篇文章里我通过配置一些网络协议实现了 macOS 局域网内的无感知备份。",
+            "date_modified": "2019-08-24T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/SUSTechWifiLogin",
             "url": "https://www.whexy.com/posts/SUSTechWifiLogin",
             "title": "自动登录南科大校园网的 shell 脚本",
             "summary": "我校的校园网还就是与众不同，Post 发出的数据包不是轻易就能弄明白的。本文提出了一种黑魔法 bash 脚本用于类 Unix 系统登录校园网。",
             "date_modified": "2019-08-21T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
+            "id": "https://www.whexy.com/posts/movie_streaming",
+            "url": "https://www.whexy.com/posts/movie_streaming",
+            "title": "在寝室搭建一套电影播放系统",
+            "summary": "今天得空，介绍上个月的成果——一套宿舍电影放映系统的构建。寝室里有一台大屏显示器，晚上关了灯，连上蓝牙低音炮，大家围坐一起看一部电影，真是美滋滋的体验~ 床上有一个支架，用iPad连接AirPods，晚上拉上遮光帘一个人欣赏一部电影，也是美滋滋的体验…",
+            "date_modified": "2019-08-02T16:00:00.000Z",
             "author": {
                 "name": "Wenxuan SHI",
                 "url": "https://www.whexy.com"

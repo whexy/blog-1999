@@ -1,7 +1,7 @@
 ---
 title: "函数颜色理论"
 date: "2021-12-25"
-image: "/images/func-color-title.png"
+image: /images/func-color-title.png
 ---
 
 2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。

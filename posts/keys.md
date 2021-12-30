@@ -1,7 +1,7 @@
 ---
 title: "How to prove I am me: a digital way"
 date: "2021-12-13"
-image: "/images/digital-signature.png"
+image: /images/digital-signature.png
 ---
 
 I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show how to use these keys to prove I am me.
