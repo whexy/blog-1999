@@ -57,10 +57,10 @@ const AboutPage = ({ mdx }) => {
     <div>
       <div className="bg-white-readable text-black-readable dark:bg-black-readable dark:text-white-readable">
         <div className="py-10 max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:divide-opacity-20 sm:divide-jbgray-light">
+          <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:space-x-4 sm:divide-opacity-20 sm:divide-jbgray-light">
             <InfoSection />
             {/* 内容栏 */}
-            <div className="mx-2 sm:mx-0 sm:pl-4 prose-lg prose-headings:font-bold">
+            <div className="mx-2 sm:mx-0 sm:pl-8 prose-lg prose-headings:font-bold">
               <MDXRemote {...mdx} components={{ Callout }} />
             </div>
           </div>
@@ -73,7 +73,7 @@ const AboutPage = ({ mdx }) => {
 const Callout = ({ title, icon, items, fancy }) => {
   const callout = (
     <div className="not-prose">
-      <div className="rounded-xl bg-gray-200/80 dark:bg-slate-700/50 p-4 max-w-lg mx-auto">
+      <div className="rounded-lg bg-gray-100/50 dark:bg-black-elegant border border-black/10 dark:border-white/10 p-4 max-w-lg mx-auto">
         <h3 className="text-lg font-semibold pb-1">{title}</h3>
         {items.map((item) => (
           <div
