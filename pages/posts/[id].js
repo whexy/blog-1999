@@ -7,11 +7,18 @@ import rehypeImagePlaceholder from "rehype-image-placeholder";
 import Callout from "../../components/posts/Callout";
 import Comment from "../../components/posts/Comment";
 import { Dialog, DialogBack } from "../../components/posts/Dialog";
+import ImgComponent from "../../components/posts/ImgComponent";
+import PreComponent from "../../components/posts/PreComponent";
+import Series from "../../components/posts/Series";
 import Prose from "../../components/Prose";
 import metadata from "../../data/metadata";
 import Date from "../../lib/date";
 import { getPlaceholder } from "../../lib/placeholder";
-import { getAllPostIds, getPostData } from "../../lib/posts";
+import {
+  getAllPostIds,
+  getPostData,
+  getSeriesPostsData,
+} from "../../lib/posts";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -46,6 +53,11 @@ export async function getStaticProps({ params }) {
     postData.imgPlaceholder = placeholder;
   }
 
+  // Get Series Post Data
+  if (postData.series) {
+    postData.seriesPosts = getSeriesPostsData(postData.series);
+  }
+
   return {
     props: {
       postData,
@@ -53,40 +65,9 @@ export async function getStaticProps({ params }) {
   };
 }
 
-const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
-  return (
-    <div>
-      <div className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10">
-        <Image
-          src={src}
-          alt={alt}
-          width={width}
-          height={height}
-          placeholder="blur"
-          blurDataURL={blurDataURL}
-        />
-      </div>
-      {alt && (
-        <div className="text-center font-light text-jbgray-light text-sm">
-          {alt}
-        </div>
-      )}
-    </div>
-  );
-};
-
 const components = {
   img: ImgComponent,
-  pre: ({ className, children }) => (
-    <div>
-      {children.props.filename && (
-        <div className="text-gray-800 px-5 py-3 border border-b-0 border-gray-200 dark:border-gray-200/10 rounded-t bg-gray-100 dark:bg-[#383a57] dark:text-white text-xs font-mono">
-          {children.props.filename}
-        </div>
-      )}
-      <pre className={className + " !mt-0 !rounded-t-none"}>{children}</pre>
-    </div>
-  ),
+  pre: PreComponent,
   Callout,
   Dialog,
   DialogBack,
@@ -149,7 +130,21 @@ export default function Post({ postData }) {
                 {postData.minutes} minute{postData.minutes > 1 && "s"} to read
               </div>
             </div>
+            {postData.series && (
+              <Series
+                title={postData.title}
+                series={postData.series}
+                seriesPosts={postData.seriesPosts}
+              />
+            )}
             <MDXRemote {...postData.mdx} components={components} />
+            {postData.series && (
+              <Series
+                title={postData.title}
+                series={postData.series}
+                seriesPosts={postData.seriesPosts}
+              />
+            )}
           </Prose>
         </article>
         <div className="max-w-2xl mx-auto px-2 pt-10 pb-5 flex flex-col space-y-2">

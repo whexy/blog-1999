@@ -4,6 +4,7 @@ date: "2021-12-18"
 tags: Project
 preview: true
 hidden: true
+series: "细究内存管理"
 ---
 
 
