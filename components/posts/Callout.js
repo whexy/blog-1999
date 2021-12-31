@@ -26,7 +26,7 @@ const Callout = ({ title, content, canFold, children }) => {
       </div>
       {(canFold && fold) || (
         <div
-          className="px-4 pb-4 prose-sm dark:prose-invert"
+          className="px-4 pb-4 prose-sm md:prose dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: mdrender(content || children) }}
         />
       )}

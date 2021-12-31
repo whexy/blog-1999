@@ -118,7 +118,7 @@ export default function Post({ postData }) {
             />
           </div>
         )}
-        <article className="pt-5 pb-5">
+        <article className="pt-5 pb-5 font-article">
           <Prose>
             <h1>{postData.title}</h1>
             <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">

@@ -1,7 +1,7 @@
 import { Giscus } from "@giscus/react";
 const Comment = () => {
   return (
-    <div className="max-w-4xl py-5 sm:px-5 bg-gray-100/50 dark:bg-black-elegant border border-black/10 dark:border-white/10 mx-auto text-black-readable dark:text-white-readable rounded-lg">
+    <div className="max-w-4xl py-5 px-2 sm:px-5 bg-gray-100/50 dark:bg-black-elegant border border-black/10 dark:border-white/10 mx-auto text-black-readable dark:text-white-readable rounded-lg">
       <div className="dark:hidden">
         <Giscus
           repo="whexy/whexy-blog-comments"

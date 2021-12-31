@@ -12,7 +12,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
+        // sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
+        article: ['"Inter"', '"Noto Sans SC"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         white: {
