@@ -13,7 +13,7 @@ module.exports = {
     extend: {
       fontFamily: {
         // sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-        article: ['"Inter"', '"Noto Sans SC"', ...defaultTheme.fontFamily.sans],
+        article: ['"Inter"', '"Noto Serif SC"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         white: {
@@ -24,6 +24,10 @@ module.exports = {
           DEFAULT: colors.black,
           readable: "#1D1D1F",
           elegant: "#1F1F24",
+        },
+        secondary: {
+          DEFAULT: "#F4F4F6",
+          dark: "#1F1F24",
         },
         spgray: {
           DEFAULT: "#121212",

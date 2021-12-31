@@ -7,13 +7,17 @@ const Callout = ({ title, content, canFold, children }) => {
   return (
     // <AnimatedFancyCard>
     <div
-      className="rounded-lg bg-gray-100/50 dark:bg-black-elegant border border-black/10 dark:border-white/10 px-4 py-1 sm:w-11/12 mx-auto"
+      className="rounded-lg secondbg border px-4 py-1 sm:w-11/12 mx-auto"
       onClick={() => {
         setfold(!fold);
       }}
     >
-      <div className="py-4 flex justify-between items-center">
-        <div className="text-[1.1em] font-semibold">{title}</div>
+      <div
+        className={`pt-4 flex justify-${
+          canFold ? "between" : "center"
+        } items-center`}
+      >
+        <h5 className="text-[1.1em] font-semibold text-center text-red-700 dark:text-red-300">{title}</h5>
         {canFold && (
           <button>
             {fold ? (
@@ -26,7 +30,7 @@ const Callout = ({ title, content, canFold, children }) => {
       </div>
       {(canFold && fold) || (
         <div
-          className="px-4 pb-4 prose-sm md:prose dark:prose-invert"
+          className="prose-p:mt-0 px-4 pb-4 prose-sm md:prose dark:prose-invert"
           dangerouslySetInnerHTML={{ __html: mdrender(content || children) }}
         />
       )}

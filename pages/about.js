@@ -73,7 +73,7 @@ const AboutPage = ({ mdx }) => {
 const Callout = ({ title, icon, items, fancy }) => {
   const callout = (
     <div className="not-prose">
-      <div className="rounded-lg bg-gray-100/50 dark:bg-black-elegant border border-black/10 dark:border-white/10 p-4 max-w-lg mx-auto">
+      <div className="rounded-lg secondbg border p-4 max-w-lg mx-auto">
         <h3 className="text-lg font-semibold pb-1">{title}</h3>
         {items.map((item) => (
           <div
@@ -82,8 +82,8 @@ const Callout = ({ title, icon, items, fancy }) => {
           >
             <i className={icon}></i>
             <div>
-              <p className="text-sm -mb-2">{item.title}</p>
-              <p className="text-xs -mb-2 font-medium text-jbgray-light dark:text-gray-300">
+              <p className="text-sm">{item.title}</p>
+              <p className="text-xs font-medium text-jbgray-light dark:text-gray-300">
                 {item.emphasis}
               </p>
               <p

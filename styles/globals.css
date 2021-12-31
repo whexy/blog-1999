@@ -7,6 +7,10 @@
     @apply transition-all backdrop-brightness-95 hover:backdrop-brightness-90  dark:backdrop-brightness-125 dark:hover:backdrop-brightness-150;
   }
 
+  .secondbg {
+    @apply bg-secondary dark:bg-secondary-dark border-black/10 dark:border-white/10;
+  }
+
   html,
   body {
     scroll-behavior: smooth;
@@ -125,7 +129,7 @@ pre {
   scrollbar-width: none !important; /* Firefox */
 }
 
-// WebFonts
+/* WebFonts */
 
 /* inter-300 - latin */
 @font-face {
@@ -141,8 +145,7 @@ pre {
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
-  src: local(""),
-    url("./webfonts/inter-v7-latin-regular.woff2") format("woff2"),
+  src: local(""), url("./webfonts/inter-v7-latin-regular.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
       url("./webfonts/inter-v7-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
@@ -174,30 +177,21 @@ pre {
       url("./webfonts/inter-v7-latin-800.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
-/* noto-sans-sc-100 - chinese-simplified */
+/* noto-serif-sc-regular - chinese-simplified */
 @font-face {
-  font-family: 'Noto Sans SC';
-  font-style: normal;
-  font-weight: 100;
-  src: local(''),
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-100.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-100.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-/* noto-sans-sc-regular - chinese-simplified */
-@font-face {
-  font-family: 'Noto Sans SC';
+  font-family: 'Noto Serif SC';
   font-style: normal;
   font-weight: 400;
   src: local(''),
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('./webfonts/noto-serif-sc-v16-chinese-simplified-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./webfonts/noto-serif-sc-v16-chinese-simplified-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-/* noto-sans-sc-700 - chinese-simplified */
+/* noto-serif-sc-700 - chinese-simplified */
 @font-face {
-  font-family: 'Noto Sans SC';
+  font-family: 'Noto Serif SC';
   font-style: normal;
   font-weight: 700;
   src: local(''),
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
-       url('./webfonts/noto-sans-sc-v20-chinese-simplified-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+       url('./webfonts/noto-serif-sc-v16-chinese-simplified-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./webfonts/noto-serif-sc-v16-chinese-simplified-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }

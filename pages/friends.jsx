@@ -17,7 +17,7 @@ const FriendBody = () => {
       {friends.map(({ category_name, friends }) => (
         <div
           key={category_name}
-          className="mx-1 border-2 dark:border border-gray-700 dark:border-white/10 pt-10 pb-4 rounded-lg bg-white dark:bg-black-elegant dark:shadow-2xl relative mb-5 transition-all"
+          className="mx-1 border-2 dark:border border-gray-700 dark:border-white/10 pt-10 pb-4 rounded-lg bg-secondary dark:bg-secondary-dark dark:shadow-2xl relative mb-5 transition-all"
         >
           <div className="absolute top-2 inset-x-0 text-center light-bold dark:font-light">
             {category_name}
