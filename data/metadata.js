@@ -10,5 +10,5 @@ module.exports = {
     email: "gwhexy@gmail.com",
     url: "https://shiwx.org",
   },
-  year: "2021"
+  year: "2022"
 };
