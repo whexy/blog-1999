@@ -13,13 +13,15 @@ const Callout = ({ title, content, canFold, children }) => {
       }}
     >
       <div
-        className={`pt-4 flex justify-${
-          canFold ? "between" : "center"
-        } items-center`}
+        className={`pt-4 ${
+          canFold & fold && "py-4"
+        } flex justify-center items-center relative`}
       >
-        <h5 className="text-[1.1em] font-semibold text-center text-red-700 dark:text-red-300">{title}</h5>
+        <h5 className="text-[1.1em] font-semibold text-center text-red-700 dark:text-red-300">
+          {title}
+        </h5>
         {canFold && (
-          <button>
+          <button className="absolute top-4 right-0">
             {fold ? (
               <i className="fas fa-angle-down"></i>
             ) : (
