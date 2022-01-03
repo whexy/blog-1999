@@ -8,6 +8,7 @@ import Callout from "../../components/posts/Callout";
 import Comment from "../../components/posts/Comment";
 import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import ImgComponent from "../../components/posts/ImgComponent";
+import QuoteComponent from "../../components/posts/QuoteComponent";
 import PreComponent from "../../components/posts/PreComponent";
 import Series from "../../components/posts/Series";
 import Prose from "../../components/Prose";
@@ -68,6 +69,7 @@ export async function getStaticProps({ params }) {
 const components = {
   img: ImgComponent,
   pre: PreComponent,
+  Quote: QuoteComponent,
   Callout,
   Dialog,
   DialogBack,

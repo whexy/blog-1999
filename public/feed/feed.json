@@ -10,6 +10,18 @@
     },
     "items": [
         {
+            "id": "https://www.whexy.com/posts/2021-summary",
+            "url": "https://www.whexy.com/posts/2021-summary",
+            "title": "2021 年总结 · 寻找答案",
+            "summary": "在备考 GRE 的期间，我认识了 axiomatic 这个词。公理的、无疑的、不证自明的。它蕴含着巨大的通畅，一种泥沙俱下的快感。2021 年结束，我终于认识了 axiomatic 的反义词，生活。",
+            "image": "https://www.whexy.com//images/2021_summary/Title.png",
+            "date_modified": "2022-01-02T16:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/SUSTechWifiIoT",
             "url": "https://www.whexy.com/posts/SUSTechWifiIoT",
             "title": "智能设备连接南科大校园网",
