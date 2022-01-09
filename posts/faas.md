@@ -4,6 +4,7 @@ date: "2021-10-29"
 tags:
 	- Project
 image: /images/jFXNDx.jpg
+series: blog
 ---
 
 2021 年，我的学生认证陆续过期。借此机会，我退租了国内所有的服务器。行业正在“云服务器”迈向“云服务”，我们也必须紧跟时代的步伐。这篇博客介绍如何使用利用 FaaS (Function As A Service) 为静态博客添加点赞功能。

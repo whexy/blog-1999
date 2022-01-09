@@ -10,6 +10,7 @@ import { Dialog, DialogBack } from "../../components/posts/Dialog";
 import ImgComponent from "../../components/posts/ImgComponent";
 import QuoteComponent from "../../components/posts/QuoteComponent";
 import PreComponent from "../../components/posts/PreComponent";
+import AnimatedFancyCard from "../../components/AnimatedFancyCard";
 import Series from "../../components/posts/Series";
 import Prose from "../../components/Prose";
 import metadata from "../../data/metadata";
@@ -73,6 +74,7 @@ const components = {
   Callout,
   Dialog,
   DialogBack,
+  AnimatedFancyCard, // 《个人博客搭建指北》中使用
 };
 
 const License = () => {
