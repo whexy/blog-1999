@@ -4,6 +4,7 @@ import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
 import Image from "next/image";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
+import remarkUnwrapImages from "remark-unwrap-images";
 import Callout from "../../components/posts/Callout";
 import Comment from "../../components/posts/Comment";
 import { Dialog, DialogBack } from "../../components/posts/Dialog";
@@ -38,6 +39,7 @@ export async function getStaticProps({ params }) {
   const mdxSource = await serialize(rawContent, {
     mdxOptions: {
       rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism],
+      remarkPlugins: [remarkUnwrapImages],
     },
   });
   postData.mdx = mdxSource;
@@ -90,7 +92,7 @@ const License = () => {
 
 export default function Post({ postData }) {
   return (
-    <div>
+    <>
       <Head>
         <title>
           {postData.title} | {metadata.title}
@@ -154,6 +156,6 @@ export default function Post({ postData }) {
         </article>
         <Comment />
       </main>
-    </div>
+    </>
   );
 }

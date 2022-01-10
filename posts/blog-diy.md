@@ -39,7 +39,6 @@ series: blog
 <DialogBack>我觉得是。</DialogBack>
 </div>
 
-
 以及模仿 Notion `/callout` 风格的卡片，很适合用作 warning 或者 tips 。
 
 <Callout title="组件">
@@ -55,7 +54,6 @@ series: blog
 **移动端优先**。现在使用小屏幕设备（视口宽度小于 640px）阅读的人越来越多。根据 Google Analysis 的统计数据，我的博客有 70% 的流量来自移动端。后面会提到，可以用 CSS 的 media 查询方便地进行移动端适配。
 
 **深色模式**。无论是 Windows 还是 Mac，Android 还是 iOS，都会在晚上切换到深色模式。在黑色的大环境下里浏览白底黑字内容对眼睛是一种摧残，所以博客需要单独适配深色模式。深色模式不是把背景换成黑色、文本调成白色这么简单：为了不影响文本的辨别，文本与背景的颜色对比度至少需要达到 4.5:1。这里我推荐 Google Material Design 团队的深色模式设计指南 [Dark theme - Material Design](https://material.io/design/color/dark-theme.html)，里面有更加详细的设计规则。
-
 
 ## 创作
 
@@ -103,11 +101,10 @@ series: blog
 如果要实现一个 Flex 动态布局将方框居中。
 
 <div>
-  <div class="not-prose flex items-center justify-center border">
-    <div class="w-[100px] h-[100px] bg-red-100" />
+  <div className="not-prose flex items-center justify-center border">
+    <div className="w-[100px] h-[100px] bg-red-100" />
   </div>
 </div>
-
 
 你需要写很多样式：
 
@@ -128,7 +125,7 @@ series: blog
 </style>
 
 <div class="box">
-	<div></div>
+  <div></div>
 </div>
 ```
 
@@ -136,14 +133,13 @@ series: blog
 
 ```html filename=box.html
 <div class="flex items-center justify-center border">
-	<div class="w-[100px] h-[100px] bg-red-100"></div>
+  <div class="w-[100px] h-[100px] bg-red-100"></div>
 </div>
 ```
 
 可以说 Tailwind CSS 就是这个博客系统诞生的原因。没有 CSS 的知识也能轻松排版。它能够用极短的 className 处理屏幕尺寸、深浅模式、鼠标悬浮或选中状态等等复杂排版场景。而这些场景用 CSS 写往往要数十行代码。
 
-<Callout title="Tailwind CSS 实战" content={'举个例子，如果要让文字变成红色，直接用 `text-red-300` 就行了；\n\n<div class=\"text-red-300 text-center font-sans text-sm\">红色文字</div>\n\n颜色深一点，用 `text-red-700`；\n\n<div class=\"text-red-700 text-center font-sans text-sm\">深红色文字</div>\n\n在深色模式里用浅红，浅色模式里用深红： `text-red-700 dark:text-red-300`；\n\n<div class=\"text-red-700 dark:text-red-300 text-center font-sans text-sm\">根据深浅模式切换颜色的文字</div>\n\n小屏幕设备用浅红，大屏幕设备用深红： `text-red-300 sm:text-red-700`。\n\n<div class=\"text-red-300 sm:text-red-700 text-center font-sans text-sm\">根据屏幕大小切换颜色的文字</div>\n\n是不是非常方便？'} canFold></Callout>
-
+<Callout title="Tailwind CSS 实战" content={'举个例子，如果要让文字变成红色，直接用 `text-red-300` 就行了；\n\n<div class=\"text-red-300 text-center font-sans text-sm\">红色文字</div>\n\n 颜色深一点，用 `text-red-700`；\n\n<div class=\"text-red-700 text-center font-sans text-sm\">深红色文字</div>\n\n 在深色模式里用浅红，浅色模式里用深红： `text-red-700 dark:text-red-300`；\n\n<div class=\"text-red-700 dark:text-red-300 text-center font-sans text-sm\">根据深浅模式切换颜色的文字</div>\n\n 小屏幕设备用浅红，大屏幕设备用深红： `text-red-300 sm:text-red-700`。\n\n<div class=\"text-red-300 sm:text-red-700 text-center font-sans text-sm\">根据屏幕大小切换颜色的文字</div>\n\n 是不是非常方便？'} canFold></Callout>
 
 ### 11ty
 
@@ -261,7 +257,7 @@ SEO 收录表征博客文章在搜索引擎的收录情况。实话说我现在�
 
 ### CDN
 
-在国内注册域名、购买服务器、部署网站，一个逃不过的事就是繁琐的备案。如果使用海外的服务器，国内的访问又会很慢。所以我的方案是使用国外的服务器（Vercel，Next.js 的母公司），并用全球 CDN 加速（Microsoft Azure）。这里我推荐这篇文章：[个人博客CDN选型和进阶玩法指北 | NekoDaemon's Blog](https://nekodaemon.com/2021/08/12/个人博客CDN选型和进阶玩法指北/)，文章里比对了各种个人博客 CDN 方案的优劣。
+在国内注册域名、购买服务器、部署网站，一个逃不过的事就是繁琐的备案。如果使用海外的服务器，国内的访问又会很慢。所以我的方案是使用国外的服务器（Vercel，Next.js 的母公司），并用全球 CDN 加速（Microsoft Azure）。这里我推荐这篇文章：[个人博客 CDN 选型和进阶玩法指北 | NekoDaemon's Blog](https://nekodaemon.com/2021/08/12/个人博客CDN选型和进阶玩法指北/)，文章里比对了各种个人博客 CDN 方案的优劣。
 
 ### 订阅
 
