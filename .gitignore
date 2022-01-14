@@ -43,3 +43,4 @@ jspm_packages
 /public/feed/feed.json
 
 .env.local
+package-lock.json
