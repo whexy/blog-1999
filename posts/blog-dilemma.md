@@ -4,7 +4,7 @@ date: "2021-11-25"
 tags: Other
 image: /images/FMYK81ojCNy6LV5.png
 hidden: true
-series: blog
+series: 博客搭建手记
 ---
 
 胡，項下的垂肉。跋胡疐尾指前進就踏著垂肉，後退又被尾巴絆倒。語本《詩經．豳風．狼跋》：「狼跋其胡，載疐其尾」。作为技术博客的创作者，我现在就面临着这样两难的局面。

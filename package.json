@@ -2,7 +2,7 @@
   "name": "blog-1999",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next-remote-watch ./posts",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -19,6 +19,7 @@
     "markdown-it": "^12.3.2",
     "next": "^12.0.8",
     "next-mdx-remote": "^3.0.8",
+    "next-remote-watch": "^1.0.0",
     "process": "^0.11.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",
