@@ -32,7 +32,9 @@ I got the latest QEMU git in GitHub. To build the qemu, first install the requir
 brew install ninja pkgconfig glib pixman
 ```
 
+<Dialog>
 You may need to checkout my Debugging Tips first, to make your life easier.
+</Dialog>
 
 1. Clone the Git repo and checkout to the stable 6.0.0 version
 

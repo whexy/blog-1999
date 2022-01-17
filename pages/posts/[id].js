@@ -2,6 +2,7 @@ import rehypePrism from "@mapbox/rehype-prism";
 import { MDXRemote } from "next-mdx-remote";
 import { serialize } from "next-mdx-remote/serialize";
 import Head from "next/head";
+import Link from "next/link";
 import Image from "next/image";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
 import remarkUnwrapImages from "remark-unwrap-images";
@@ -22,6 +23,7 @@ import {
   getPostData,
   getSeriesPostsData,
 } from "../../lib/posts";
+import Avatar from "../../public/img/notion-avatar.svg";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -90,6 +92,40 @@ const License = () => {
   );
 };
 
+const Ending = () => {
+  return (
+    <div className="secondbg sm:rounded-full border overflow-hidden max-w-3xl mx-auto mb-10 dark:text-white">
+      <div className="grid grid-cols-3 space-x-2">
+        <div className="bg-red-100 col-span-1 grid place-items-center">
+          <Avatar className="w-20 h-20" />
+        </div>
+        <div className="col-span-2 p-4">
+          <p className="font-bold text-lg">
+            Loved this post? Consider following me.
+          </p>
+          <p className="font-light text-sm text-gray-600 dark:text-gray-400">
+            I work on topics related to system security aside with many other
+            interesting things. I would love to have friends who share the same
+            interests as me.
+          </p>
+          <div className="pt-2 flex text-2xl space-x-3">
+            <Link href="https://github.com/whexy">
+              <a>
+                <i className="fab fa-github"></i>
+              </a>
+            </Link>
+            <Link href="https://twitter.com/whexyshi">
+              <a>
+                <i className="fab fa-twitter"></i>
+              </a>
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 export default function Post({ postData }) {
   return (
     <>
@@ -154,6 +190,7 @@ export default function Post({ postData }) {
             <License />
           </Prose>
         </article>
+        <Ending />
         <Comment />
       </main>
     </>
