@@ -101,7 +101,9 @@ const WelcomeCard = () => {
               rel="noreferrer"
               className="absolute right-4 bottom-4 w-12 h-12 rounded-full grid place-content-center text-white"
             >
-              <i className="fab fa-github text-2xl p-3 rounded-full bg-white/10"></i>
+              <div className="p-3 rounded-full bg-white/10">
+                <i className="fab fa-github text-2xl"></i>
+              </div>
             </a>
           </div>
         </div>
