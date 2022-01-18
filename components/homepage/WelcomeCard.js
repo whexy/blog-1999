@@ -2,6 +2,8 @@ import Image from "next/image";
 import hello from "../../public/img/hello.webp";
 import { useSpring, animated, config } from "react-spring";
 import { useRef } from "react";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
 
 const calc = (x, y, rect) => [
   (y - rect.top - rect.height / 2) / 20,
@@ -102,7 +104,7 @@ const WelcomeCard = () => {
               className="absolute right-4 bottom-4 w-12 h-12 rounded-full grid place-content-center text-white"
             >
               <div className="p-3 rounded-full bg-white/10">
-                <i className="fab fa-github text-2xl"></i>
+                <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
               </div>
             </a>
           </div>

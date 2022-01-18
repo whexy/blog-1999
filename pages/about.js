@@ -5,6 +5,10 @@ import { serialize } from "next-mdx-remote/serialize";
 import { MDXRemote } from "next-mdx-remote";
 import portrait from "../public/img/portrait-transparent.webp";
 import AnimatedFancyCard from "../components/AnimatedFancyCard";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import { faFile } from "@fortawesome/free-regular-svg-icons";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 const InfoSection = () => {
   return (
@@ -25,26 +29,38 @@ const InfoSection = () => {
         </div>
         <div className="pt-5 flex flex-row items-center justify-center justify-items-center space-x-5 text-2xl">
           <a href="mailto://gwhexy@gmail.com" target="_blank" rel="noreferrer">
-            <i className="fas fa-envelope text-[#0c74d4]"></i>
+            <FontAwesomeIcon
+              icon={faEnvelope}
+              className="text-[#0c74d4] w-6 h-6"
+            />
           </a>
           <a href="https://github.com/whexy" target="_blank" rel="noreferrer">
-            <i className="fab fa-github text-[#24292e] dark:text-white-readable"></i>
+            <FontAwesomeIcon
+              icon={faGithub}
+              className="text-[#24292e] dark:text-white-readable w-6 h-6"
+            />
           </a>
           <a
             href="https://twitter.com/whexyshi"
             target="_blank"
             rel="noreferrer"
           >
-            <i className="fab fa-twitter text-[#4d9feb]"></i>
+            <FontAwesomeIcon
+              icon={faTwitter}
+              className="text-[#4d9feb] w-6 h-6"
+            />
           </a>
         </div>
         <div className="pt-4 mx-4 sm:mx-0">
           <a
             href="/files/WenxuanSHI_CV.pdf"
             target="_blank"
-            className="font-light underline"
+            className="font-light underline inline-flex items-center space-x-1"
           >
-            <i className="far fa-file"></i> Full CV download
+            <span>
+              <FontAwesomeIcon icon={faFile} className="w-4 h-4" />
+            </span>
+            <span>Full CV download</span>
           </a>
         </div>
       </div>
@@ -99,11 +115,7 @@ const Callout = ({ title, icon, items, fancy }) => {
   if (!fancy) {
     return callout;
   }
-  return (
-    <AnimatedFancyCard>
-      {callout}
-    </AnimatedFancyCard>
-  )
+  return <AnimatedFancyCard>{callout}</AnimatedFancyCard>;
 };
 
 export async function getStaticProps() {

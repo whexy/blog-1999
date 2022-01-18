@@ -24,6 +24,9 @@ import {
   getSeriesPostsData,
 } from "../../lib/posts";
 import Avatar from "../../public/img/notion-avatar.svg";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faClosedCaptioning } from "@fortawesome/free-solid-svg-icons";
+import { faGithub, faTwitter } from "@fortawesome/free-brands-svg-icons";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
@@ -84,10 +87,12 @@ const components = {
 const License = () => {
   return (
     <div>
-      <p className="text-gray-400 dark:text-gray-600 font-light text-sm tracking-wider">
-        <i className="fas fa-closed-captioning"></i> LICENSED UNDER CC BY-NC-SA
-        4.0
-      </p>
+      <div className="flex space-x-2 items-center">
+        <FontAwesomeIcon icon={faClosedCaptioning} className="w-10 h-10" />
+        <p className="font-light text-sm tracking-wider">
+          LICENSED UNDER CC BY-NC-SA 4.0
+        </p>
+      </div>
     </div>
   );
 };
@@ -111,12 +116,12 @@ const Ending = () => {
           <div className="pt-2 flex text-2xl space-x-3">
             <Link href="https://github.com/whexy">
               <a>
-                <i className="fab fa-github"></i>
+                <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
               </a>
             </Link>
             <Link href="https://twitter.com/whexyshi">
               <a>
-                <i className="fab fa-twitter"></i>
+                <FontAwesomeIcon icon={faTwitter} className="w-6 h-6 text-[#3b8ee9]" />
               </a>
             </Link>
           </div>
