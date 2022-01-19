@@ -2,9 +2,7 @@ import useSWR from "swr";
 import fetcher from "../lib/fetcher";
 
 const NowPlaying = () => {
-  const { data } = useSWR("/api/now-playing", fetcher, {
-    refreshInterval: 120 * 1000,
-  });
+  const { data } = useSWR("/api/now-playing", fetcher);
 
   return (
     <div className="flex space-x-2 text-white-readable">
