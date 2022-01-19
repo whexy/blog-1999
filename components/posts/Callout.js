@@ -8,7 +8,7 @@ const Callout = ({ title, content, canFold, children }) => {
   return (
     // <AnimatedFancyCard>
     <div
-      className="rounded-lg secondbg border px-4 py-1 sm:w-11/12 mx-auto"
+      className="rounded-lg secondbg border px-4 py-1 sm:w-11/12 mx-auto break-inside-avoid-page"
       onClick={() => {
         setfold(!fold);
       }}

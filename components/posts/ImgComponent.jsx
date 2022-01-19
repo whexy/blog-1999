@@ -1,7 +1,7 @@
 import Image from "next/image";
 const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
   return (
-    <div>
+    <div className="break-inside-avoid-page">
       <div className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10">
         <Image
           src={src}

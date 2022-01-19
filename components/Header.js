@@ -5,7 +5,7 @@ import NavigationView from "./Navigation";
 const Header = () => {
   return (
     <div>
-      <header className="w-full text-gray-400 bg-black-readable fixed z-50">
+      <header className="w-full text-gray-400 bg-black-readable fixed z-50 print:hidden">
         <div className="max-w-4xl px-5 mx-auto flex flex-row justify-between items-center space-x-8 py-4">
           <Link href="/">
             <a>

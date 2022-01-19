@@ -5,7 +5,7 @@ import Avatar from "../../public/img/notion-avatar.svg";
 
 export const Dialog = ({ content, children }) => {
   return (
-    <div className="ml-4 not-prose flex justify-end items-center space-x">
+    <div className="ml-4 not-prose flex justify-end items-center break-inside-avoid-page">
       <div className="p-3 rounded bg-red-200/20 border border-red-200/80 font-article text-sm">
         <div
           dangerouslySetInnerHTML={{ __html: mdrender(content || children) }}
@@ -22,7 +22,7 @@ export const Dialog = ({ content, children }) => {
 
 export const DialogBack = ({ content, children }) => {
   return (
-    <div className="mr-4 not-prose flex justify-start items-center space-x">
+    <div className="mr-4 not-prose flex justify-start items-center">
       <div style={{ transform: `scale(-1, 1)` }} className="flex-shrink-0">
         <Avatar className="w-16 h-16" />
       </div>
