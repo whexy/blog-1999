@@ -1,5 +1,5 @@
 import metadata from "../data/metadata";
-import Avatar from "../public/img/notion-avatar-red-glasses.svg";
+import Avatar from "../public/img/notion-avatar.svg";
 
 export default function Footer() {
   return (
