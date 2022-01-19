@@ -88,7 +88,7 @@ const License = () => {
   return (
     <div>
       <div className="flex space-x-2 items-center">
-        <FontAwesomeIcon icon={faClosedCaptioning} className="w-10 h-10" />
+        <FontAwesomeIcon icon={faClosedCaptioning} className="w-5 h-5" />
         <p className="font-light text-sm tracking-wider">
           LICENSED UNDER CC BY-NC-SA 4.0
         </p>

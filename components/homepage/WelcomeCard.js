@@ -8,16 +8,13 @@ import { faGithub } from "@fortawesome/free-brands-svg-icons";
 const calc = (x, y, rect) => [
   (y - rect.top - rect.height / 2) / 20,
   -(x - rect.left - rect.width / 2) / 40,
-  0.95,
+  1.05,
 ];
 
-const trans = (x, y, s) =>
-  `perspective(1000px) rotateX(${x}deg) rotateY(${y}deg) scale(${s})`;
-
-const hiTrans = (x, y, s) => `scale(${1 + (1 - s) * 1.5})`;
+const trans = (x, y, s) => `scale(${s})`;
 
 const shadowTrans = (x, y, s) => {
-  return `drop-shadow(${y}px ${-x}px ${120 - 120 * s}px rgba(0, 0, 0, 0.5))`;
+  return `drop-shadow(${y}px ${-x}px ${120 * (s - 1)}px rgba(0, 0, 0, 0.65))`;
 };
 
 const WelcomeCard = () => {
@@ -26,9 +23,8 @@ const WelcomeCard = () => {
     xys: [0, 0, 1],
   }));
   return (
-    <animated.div
+    <div
       ref={ref}
-      style={{ transform: props.xys.to(trans) }}
       onMouseMove={({ clientX: x, clientY: y }) =>
         api.start({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
       }
@@ -39,7 +35,7 @@ const WelcomeCard = () => {
           <div className="md:col-span-1 grid place-items-center overflow-hidden">
             <animated.div
               style={{
-                transform: props.xys.to(hiTrans),
+                transform: props.xys.to(trans),
                 filter: props.xys.to(shadowTrans),
               }}
               className="relative md:mt-[32px] overflow-hidden"
@@ -101,16 +97,16 @@ const WelcomeCard = () => {
               href="https://github.com/whexy"
               target="_blank"
               rel="noreferrer"
-              className="absolute right-4 bottom-4 w-12 h-12 rounded-full grid place-content-center text-white"
+              className="absolute right-4 bottom-4 rounded-full grid place-items-center"
             >
-              <div className="p-3 rounded-full bg-white/10">
-                <FontAwesomeIcon icon={faGithub} className="w-6 h-6" />
+              <div className="w-10 h-10 p-2 bg-white/10 rounded-full text-white">
+                <FontAwesomeIcon icon={faGithub} />
               </div>
             </a>
           </div>
         </div>
       </div>
-    </animated.div>
+    </div>
   );
 };
 

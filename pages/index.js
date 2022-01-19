@@ -2,7 +2,6 @@ import Head from "next/head";
 import Image from "next/image";
 import BigHi from "../components/homepage/BigHi";
 import WelcomeCard from "../components/homepage/WelcomeCard";
-import NavigationView from "../components/homepage/Navigation";
 import NoticeCard from "../components/homepage/NoticeCard";
 import RecentPosts from "../components/homepage/RecentPosts";
 import { getSortedPostsData } from "../lib/posts";
@@ -18,7 +17,6 @@ export default function Home({ postsData }) {
         <main className="px-5 sm:px-0 mx-auto max-w-3xl bg-white-readable dark:bg-black-readable">
           <BigHi />
           <WelcomeCard />
-          <NavigationView />
           <NoticeCard />
           <RecentPosts posts={postsData} />
         </main>
