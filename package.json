@@ -28,7 +28,8 @@
     "rehype-image-placeholder": "^1.0.1",
     "rehype-image-size": "^1.0.0",
     "remark-unwrap-images": "^3.0.1",
-    "styled-jsx": "^4.0.1"
+    "styled-jsx": "^4.0.1",
+    "swr": "^1.1.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.1.2",

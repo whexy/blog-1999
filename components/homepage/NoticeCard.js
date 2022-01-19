@@ -1,3 +1,4 @@
+import Link from "next/link";
 export default function NoticeCard() {
   return (
     <div>
@@ -15,12 +16,11 @@ export default function NoticeCard() {
             <div className="autobg p-4">
               I am currently seeking a PhD position outside of mainland China.
               For more information about my academic background, please check{" "}
-              <a
-                className="underline text-yellow-600 dark:text-yellow-300"
-                href="https://shiwx.org"
-              >
-                https://shiwx.org
-              </a>
+              <Link href="/about">
+                <a className="underline text-yellow-600 dark:text-yellow-300">
+                  https://shiwx.org
+                </a>
+              </Link>
               .
             </div>
           </div>

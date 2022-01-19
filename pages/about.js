@@ -9,7 +9,7 @@ import { MailIcon } from "@heroicons/react/solid";
 const InfoSection = () => {
   return (
     <div className="flex-shrink-0">
-      <div className="sm:sticky sm:top-0 flex flex-col sm:pt-5 pr-2 items-center">
+      <div className="flex flex-col sm:pt-5 pr-2 items-center">
         <Image
           src={portrait}
           alt="SHI Wenxuan"

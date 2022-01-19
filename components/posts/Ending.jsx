@@ -18,7 +18,7 @@ const Ending = () => {
             <p className="font-light text-sm text-gray-600 dark:text-gray-400">
               I work on topics related to system security aside with many other
               interesting things. I would love to have friends who share the
-              same interests as me.
+              same interests.
             </p>
 
             <div className="pt-2 flex text-2xl space-x-3">
