@@ -1,8 +1,7 @@
 import { mdrender } from "../../lib/markdown";
 // import AnimatedFancyCard from "../AnimatedFancyCard";
 import { useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/solid";
 
 const Callout = ({ title, content, canFold, children }) => {
   const [fold, setfold] = useState(true);
@@ -25,9 +24,9 @@ const Callout = ({ title, content, canFold, children }) => {
         {canFold && (
           <button className="absolute top-4 right-0">
             {fold ? (
-              <FontAwesomeIcon icon={faAngleUp} className="w-5 h-5"/>
+              <ChevronDownIcon className="w-6 h-6" />
             ) : (
-              <FontAwesomeIcon icon={faAngleDown} className="w-5 h-5"/>
+              <ChevronUpIcon className="w-6 h-6" />
             )}
           </button>
         )}

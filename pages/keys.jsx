@@ -1,8 +1,6 @@
 import key_info from "../data/key.js";
-import Link from "next/link";
 import Main from "../components/Main";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faKey, faCloudDownloadAlt } from "@fortawesome/free-solid-svg-icons";
+import { KeyIcon, DownloadIcon } from "@heroicons/react/solid";
 const KeyView = () => {
   return (
     <Main>
@@ -49,10 +47,7 @@ const KeyCardView = ({ keyItem }) => {
   return (
     <div className="p-4 rounded-xl border flex items-center border-black-readable/20 dark:border-white-readable/20 autobg">
       <div className="flex flex-col items-center">
-        <FontAwesomeIcon
-          icon={faKey}
-          className="text-emerald-700 dark:text-emerald-500 w-6 h-6 text-2xl mb-2"
-        />
+        <KeyIcon className="text-emerald-700 dark:text-emerald-500 w-6 h-6 text-2xl mb-2" />
         <div className="text-sm px-1 rounded border text-jbgray-light border-jbgray-light/20">
           {keyItem.type}
         </div>
@@ -81,7 +76,7 @@ const KeyCardView = ({ keyItem }) => {
         <div>
           <a href={keyItem.url}>
             <div className="bg-emerald-700 text-white-readable flex items-center px-2 py-1 rounded text-sm">
-              <FontAwesomeIcon icon={faCloudDownloadAlt} className="w-4 h-4" />
+              <DownloadIcon className="w-4 h-4" />
               <div className="hidden sm:pl-2 sm:block">Download</div>
             </div>
           </a>

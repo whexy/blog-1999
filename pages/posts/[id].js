@@ -24,8 +24,6 @@ import {
   getSeriesPostsData,
 } from "../../lib/posts";
 import Avatar from "../../public/img/notion-avatar.svg";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faClosedCaptioning } from "@fortawesome/free-solid-svg-icons";
 
 export async function getStaticPaths() {
   const paths = getAllPostIds();
