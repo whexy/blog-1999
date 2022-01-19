@@ -2,7 +2,7 @@ import useSWR from "swr";
 import fetcher from "../lib/fetcher";
 
 const NowPlaying = () => {
-  const { data } = useSWR("/api/now-playing", fetcher);
+  const { data } = useSWR("https://whexy.com/api/now-playing", fetcher);
 
   return (
     <div className="flex space-x-2 text-white-readable">
@@ -17,7 +17,7 @@ const NowPlaying = () => {
       </svg>
       {data && data.isPlaying ? (
         <p>
-          Now Playing {data.title}
+          Now Listening {data.title}
           <span className="text-sm text-jbgray-light"> by {data.artist}</span>
         </p>
       ) : (
