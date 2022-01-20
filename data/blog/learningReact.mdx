@@ -1,0 +1,424 @@
+---
+title: 'React 学习笔记'
+publishDate: 2020-10-21
+summary: "React 几乎利用了原生 JavaScript 的所有特质。在对 JavaScript 比较熟练的情况下，React 不会给你带来更多的惊喜。不过，相较于 Vue，写 React 也给人一种踏实的感觉。"
+---
+
+React 几乎利用了原生 JavaScript 的所有特质。在对 JavaScript 比较熟练的情况下，React 不会给你带来更多的惊喜。不过，相较于 Vue，写 React 也给人一种踏实的感觉。
+
+
+
+阅读 [React文档](https://zh-hans.reactjs.org/docs/getting-started.html) 后的笔记
+
+## JSX
+
+```javascript
+const element = <h1>Hello, world!</h1>;
+```
+
+JSX 是 一套 Javascript 拓展。它将 html元素嵌入到 JavaScript 代码里。
+
+## 元素
+
+```javascript
+const element = <h1>Hello, world</h1>;
+ReactDOM.render(element, document.getElementById('root'));
+```
+
+React DOM 元素框架维护的一个静态不可变最小单位。因此 React 声称它的开销非常小。
+由于是不可变单位，每次页面的更新实际上是新元素对旧元素的覆盖。
+
+## 组件
+
+React 将元素和底层组件组合，抽象成更高维度的可复用组件。
+
+组件的定义有两种方式：函数组件和类组件（ES6 Later）
+
+```javascript
+//函数
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+//类
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
+用户定义的组件要求首字母大写。定义完成后，可以直接在 JSX 里调用。
+
+```javascript
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const element = <Welcome name="Sara" />;
+ReactDOM.render(
+  element,
+  document.getElementById('root')
+);
+```
+
+React 在文档里举了一例，用于展示将组件提取多个小组件给程序编写带来的好处。这其中，React 建议从组件自身的角度命名 props，而不是依赖于调用组件的上下文命名。
+
+此外，组件也必须保证自己不对传入的 props 做任何修改。
+
+## 状态
+
+函数组件是一种比较简单的组件，不支持其它特性。使用类组件时，可以通过维护类的「成员变量」，达到组件存储状态的目的。
+
+下面的例子在组件装载的时候维护了自己的state。state 是一个 JS 对象。
+
+```javascript
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+
+然而，对于`this.state`的直接修改是不会被 React **捕获**从而更新到页面上的。~~也许是众多对React负面评价的原因？~~
+
+需要调用 `this.setState(object)` 函数来更新状态。这个函数有若干特点：
+
+1.  更新是异步的，因此不可以依赖 state 的值计算下一个状态。
+2.  `this.setState()` 可以接受函数作为参数。这个函数的第一个参数是上一次状态，第二个参数是组件的参数。**使用函数作为参数可以解决异步更新出错的问题。**
+
+```js
+this.setState((state, props) => ({
+  counter: state.counter + props.increment
+}));
+```
+
+3.  State 的更新是浅更新。`this.setState(small_obj)` 不会覆盖掉`small_obj`以外的其他属性。
+
+### 向下流动
+
+各类绘制 GUI 的语言都不断强调一个概念 —— **一致性**。 前端经常在不同组件中对同一数据来源做显示和修改。例如用户在设置页面中更改用户名之后，所有显示用户名的地方需要同步更新。如果让每个组件自己维护更新操作，就进入了 bug 多发地。
+
+例如，iOS 前端框架 SwiftUI 处处强调「Single Source of Truth」的概念。 React 虽然没有严谨的状态筛查的概念，但是可以将 `state` 的内容作为下一个 `props` 传入子组件。React 形象地称这种写法为「向下流动」。
+
+然而，React 禁止任何对于传入属性的修改。如果我们想在子组件里修改单一数据源，我们需要调用**唯一修改函数**，也就是调用持有 state 的祖先实现的修改函数（[《React 哲学》](https://zh-hans.reactjs.org/docs/thinking-in-react.html)中称做「反向数据流」）。~~这点非常麻烦。~~ React 声称这是为了方便追踪 BUG，因为数据的修改只有一个入口。
+
+## 生命周期
+
+在组件被放到 DOM 里去之后，会调用 `componentDidMount()` 函数。 在即将被销毁的时候，会调用 `componentWillUnmount()` 函数，释放所占用的资源。
+
+```js
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(
+      () => this.tick(),
+      1000
+    );
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date()
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+
+## 事件处理
+
+React 元素事件和 DOM 元素相似。在语法上，React 使用小驼峰（onClick），并且传入一个 JSX 包装的函数，而不是 DOM 中的字符串。
+
+```html
+<!-- 传统的 DOM 写法 -->
+<button onclick="handler()">
+    A button
+</button>
+```
+
+```jsx
+<!--  React 元素写法-->
+<button onClick={handler}>
+    A button
+</button>
+```
+
+可以给事件处理程序传递参数。
+
+```jsx
+<button onClick={(e) => this.handler(id, e)}>
+    A button
+</button>
+```
+
+其中`e`是 React 的事件对象。
+
+<Callout title="💡️TIPS">
+由于 JavaScript 设计的原因，JSX 的回调函数默认不会携带 this 引用（因为 class 的方法不会绑定 this）。 所以在定义组件的时候，需要将 this 事先绑上去。
+</Callout>
+
+参考阅读：
+[JavaScript 中至关重要的 Apply, Call 和 Bind](https://hijiangtao.github.io/2017/05/07/Full-Usage-of-Apply-Call-and-Bind-in-JavaScript/)
+
+```js
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // 为了在回调中使用 `this`，这个绑定是必不可少的
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
+```
+
+有一个实验性语法可以解决这个问题。将 `handleClick()` 函数写成这样：
+
+```js
+handleCLick() = () => {
+    console.log(this);
+}
+```
+
+这样做无需在外部显式绑定 this，就可以在函数中调用 this。
+或者也可以利用 JSX 这样写：
+
+```jsx
+<button onClick={() => this.handleClick()}>
+    A button
+</button>
+```
+
+## 条件渲染
+
+React 通过函数组件的返回值，或者类组件的`render()`函数来渲染元素。因而，只要在组件中使用条件判断，返回不同的 JSX，就能实现条件渲染。
+
+```jsx
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+ReactDOM.render(
+  // Try changing to isLoggedIn={true}:
+  <Greeting isLoggedIn={false} />,
+  document.getElementById('root')
+);
+```
+
+值得注意的是，每次调用 `setState()` 函数，React 都会自动重新执行 `rander()`。
+所以，可以创造出这种有状态的组件：
+
+```jsx
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = {isLoggedIn: false};
+  }
+
+  handleLoginClick() {
+    this.setState({isLoggedIn: true});
+  }
+
+  handleLogoutClick() {
+    this.setState({isLoggedIn: false});
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+```
+
+有状态组件可以在`render()`函数里可以先根据状态**计算**出需要显示的元素。
+
+还有一个更帅的写法：
+
+```jsx
+<div>
+  <h1>Hello!</h1>
+  {unreadMessages.length > 0 &&
+    <h2>
+      You have {unreadMessages.length} unread messages.
+    </h2>
+  }
+</div>
+```
+
+在 JavaScript 中，`true && express` 会返回 `express`。相反，`false && express`会返回 `false`。如果返回 `false`， React 会忽略这组元素的渲染。
+
+当然，三目运算符也可以用于条件渲染：
+
+```jsx
+ <div>
+  {isLoggedIn
+    ? <LogoutButton onClick={this.handleLogoutClick} />
+    : <LoginButton onClick={this.handleLoginClick} />
+  }
+</div>
+```
+
+## 列表
+
+类似于 Vue 中的 `v-for`，使用 React 也可以做到「偷懒」的重复组件渲染。
+
+```jsx
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map((number) =>
+  <li>{number}</li>
+);
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById('root')
+);
+```
+
+上段代码中，`listItems` 是一个 JSX 的数组。React 很灵活地将它插入页面中。
+
+最好给列表元素绑定 key。这样，React 可以识别哪些元素被改变了。绑定 key 的地方应该在数组的上下文中。例如，通常在 `map()` 方法中设置 key 属性。
+
+```jsx
+function ListItem(props) {
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map((number) =>
+    <ListItem key={number.toString()} value={number} />
+  );
+  return (
+    <ul>
+      {listItems}
+    </ul>
+  );
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById('root')
+);
+```
+
+## 表单
+
+前面提到，React 推荐一种「向下流动」的写法。也就是说，可以保证 React 中处理的数据来自**同一来源**。在 html 中，表单元素通常由浏览器自己维护自己的状态。例如：
+
+```html
+<form>
+    <label>
+    	<input type="text" name="name" />
+    </label>
+    <input type="submit" value="提交" />
+</form>
+```
+
+其中输入框的值是由浏览器自己维护的。事实上，我们可以让 React 接管状态，从而实现**唯一数据源**的目标。被 React 接管的表单元素称为「受控组件」。
+
+```jsx
+<form onSubmit={this.handleSubmit}>
+    <label>
+      名字:
+      <input type="text" value={this.state.value} onChange={this.handleChange} />
+    </label>
+    <input type="submit" value="提交" />
+</form>
+```
+
+input, textarea, select 等标签都可以被 React 接管。
+
+## 组合
+
+React 推荐使用 JS 的语法进行组件间的代码重用。
+
+### 包含关系
+
+组件套用的推荐写法：
+
+```jsx
+function FancyBorder(props) {
+  return (
+    <div className={'FancyBorder FancyBorder-' + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">
+        Welcome
+      </h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecraft!
+      </p>
+    </FancyBorder>
+  );
+}
+```
+
+通过 `prop.children` 将子组件传递到渲染结果里去。如果我们在 JSX 里指定标签参数的名字，可以不用 `children`。
+
+### 特例关系
+
+React 也可以设计「抽象父组件」。实现这些组件的「子组件」通过传入特定的参数实现。
