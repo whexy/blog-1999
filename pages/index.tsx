@@ -1,11 +1,13 @@
 import Head from "next/head";
-import BigHi from "../components/homepage/BigHi";
-import WelcomeCard from "../components/homepage/WelcomeCard";
-import NoticeCard from "../components/homepage/NoticeCard";
-import RecentPosts from "../components/homepage/RecentPosts";
+import BigHi from "@/components/homepage/BigHi";
+import WelcomeCard from "@/components/homepage/WelcomeCard";
+import NoticeCard from "@/components/homepage/NoticeCard";
+import RecentPosts from "@/components/homepage/RecentPosts";
 
 import { allBlogs } from '.contentlayer/data'
 import { pick } from "lodash";
+import createRSS from "@/lib/createRSS";
+import generateSiteMap from "@/lib/createSitemap";
 
 export default function Home({ posts }) {
   return (
@@ -26,6 +28,10 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
+  // generate RSS Feed
+  createRSS();
+  generateSiteMap();
+
   const posts = allBlogs.map((post) =>
     pick(post, [
       'title',

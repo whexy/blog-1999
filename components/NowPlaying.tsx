@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import fetcher from "../lib/fetcher";
+import fetcher from "@/lib/fetcher";
 
 const NowPlaying = () => {
   const { data } = useSWR("https://whexy.com/api/now-playing", fetcher);

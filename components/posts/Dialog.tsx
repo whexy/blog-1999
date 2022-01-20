@@ -1,4 +1,4 @@
-import Avatar from "../../public/img/notion-avatar.svg";
+import Avatar from "@/public/img/notion-avatar.svg";
 
 export const Dialog = ({ children }) => {
   return (

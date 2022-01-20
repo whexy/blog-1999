@@ -1,6 +1,7 @@
 {
   "name": "blog-1999",
-  "private": true,
+  "license": "MIT",
+  "author": "Wenxuan SHI <whexy@outlook.com> (https://www.whexy.com)",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -47,6 +48,7 @@
     "eslint": "8.6.0",
     "eslint-config-next": "12.0.8",
     "postcss": "^8.4.5",
+    "prettier": "^2.5.1",
     "tailwindcss": "^3.0.15",
     "typescript": "^4.5.4"
   }

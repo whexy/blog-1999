@@ -1,6 +1,6 @@
 import Image from "next/image";
-import friends from "../data/friends";
-import Main from "../components/Main";
+import friends from "@/data/friends";
+import Main from "@/components/Main";
 
 const FriendPage = () => {
   return (
