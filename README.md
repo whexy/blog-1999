@@ -15,6 +15,10 @@
 - Content: MDX
 - Styling: Tailwind CSS
 
+## Live Demo
+- [Wenxuan SHI's Blog (Vercel)](https://whexy.com)
+- [Wenxuan SHI's Blog (Azure)](https://www.whexy.com), recommand for users in mainland China.
+
 ## Learn more
 I've written a post discussing how to design a blog system.
 
