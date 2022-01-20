@@ -7,6 +7,7 @@ import Prose from "../components/Prose"
 import Ending from "../components/posts/Ending";
 import License from "../components/posts/License";
 import Comment from "../components/posts/Comment";
+import Series from "../components/posts/Series";
 import metadata from "../data/metadata";
 
 import type { PropsWithChildren } from 'react'
@@ -14,7 +15,7 @@ import type { Blog } from '.contentlayer/types';
 
 export default function BlogLayout({ children, post }: PropsWithChildren<{ post: Blog }>) {
   return (
-    <>
+    <div>
       <Head>
         <title>
           {post.title} | {metadata.title}
@@ -53,20 +54,22 @@ export default function BlogLayout({ children, post }: PropsWithChildren<{ post:
               <div className="inline-flex space-x-1 items-center">
                 <div>{metadata.author.name} / </div>
                 <span className="text-gray-600">
-                  {format(parseISO(post.createdDate), "MMMM dd, yyyy")}
+                  {format(parseISO(post.publishDate), "MMMM dd, yyyy")}
                 </span>
               </div>
               <div>
                 {post.readingTime.text}
               </div>
             </div>
+            {post.series && <Series slug={post.slug} series={post.series} />}
             {children}
+            {post.series && <Series slug={post.slug} series={post.series} />}
             <License />
           </Prose>
         </article>
         <Ending />
         <Comment />
       </div>
-    </>
+    </div>
   );
 }

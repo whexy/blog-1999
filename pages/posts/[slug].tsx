@@ -7,10 +7,10 @@ import { allBlogs } from '.contentlayer/data';
 import type { Blog } from '.contentlayer/types';
 
 export default function Post({ post }: { post: Blog }) {
-  const Component = useMDXComponent(post.body.code);
+  const Content = useMDXComponent(post.body.code);
   return (
     <BlogLayout post={post}>
-      <Component components={{ ...components } as unknown} />
+      <Content components={{ ...components } as unknown} />
     </BlogLayout>
   );
 }

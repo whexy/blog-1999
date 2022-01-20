@@ -33,7 +33,7 @@ export async function getStaticProps() {
       'image',
       'summary',
       'preview',
-      'createdDate',
+      'publishDate',
     ])
   );
   return { props: { posts } };

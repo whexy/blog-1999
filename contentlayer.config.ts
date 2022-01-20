@@ -10,12 +10,10 @@ import rehypeImagePlaceholder from "rehype-image-placeholder";
 import remarkUnwrapImages from "remark-unwrap-images";
 
 // post data plugins
-import fs from "fs";
 import readingTime from "reading-time";
 
 const computedFields: ComputedFields = {
   readingTime: { type: "json", resolve: (doc)=> readingTime(doc.body.raw) },
-  createdDate: { type: "date", resolve: (doc)=> fs.statSync(`data/${doc._raw.sourceFilePath}`).mtime },
   slug: {
     type: "string",
     resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
@@ -28,16 +26,25 @@ const Blog = defineDocumentType(() => ({
   bodyType: "mdx",
   fields: {
     title: { type: "string", required: true },
+    publishDate: { type: "date", required: true },
     summary: { type: "string", required: true },
     image: { type: "string", required: false },
     preview: { type: "boolean", required: false },
+    series: { type: "string", required: false },
   },
   computedFields,
 }));
 
+const About = defineDocumentType(() => ({
+  name: "About",
+  filePathPattern: `about.mdx`,
+  bodyType: "mdx",
+  fields: {}
+}))
+
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog],
+  documentTypes: [Blog, About],
   mdx: {
     rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism],
     remarkPlugins: [remarkUnwrapImages],

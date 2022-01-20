@@ -1,10 +1,11 @@
-import fs from "fs";
 import Image from "next/image";
-import { serialize } from "next-mdx-remote/serialize";
-import { MDXRemote } from "next-mdx-remote";
 import portrait from "../public/img/portrait-transparent.webp";
 import AnimatedFancyCard from "../components/AnimatedFancyCard";
 import { MailIcon } from "@heroicons/react/solid";
+import { allAbouts } from ".contentlayer/data";
+import { useMDXComponent } from "next-contentlayer/hooks";
+
+const AboutMDX = allAbouts[0];
 
 const InfoSection = () => {
   return (
@@ -70,7 +71,9 @@ const InfoSection = () => {
   );
 };
 
-const AboutPage = ({ mdx }) => {
+const AboutPage = () => {
+  const Content = useMDXComponent(AboutMDX.body.code);
+
   return (
     <div>
       <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
@@ -79,7 +82,7 @@ const AboutPage = ({ mdx }) => {
             <InfoSection />
             {/* 内容栏 */}
             <div className="mx-2 sm:mx-0 sm:pl-8 prose-lg prose-headings:font-bold">
-              <MDXRemote {...mdx} components={{ Callout }} />
+              <Content components={{ Callout }} />
             </div>
           </div>
         </div>
@@ -119,15 +122,5 @@ const Callout = ({ title, icon, items, fancy }) => {
   }
   return <AnimatedFancyCard>{callout}</AnimatedFancyCard>;
 };
-
-export async function getStaticProps() {
-  const rawData = fs.readFileSync("./data/about.mdx", "utf8");
-  const mdxSource = await serialize(rawData);
-  return {
-    props: {
-      mdx: mdxSource,
-    },
-  };
-}
 
 export default AboutPage;

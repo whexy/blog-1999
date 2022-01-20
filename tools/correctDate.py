@@ -310,6 +310,9 @@ if __name__ == "__main__":
         for file in files:
             if file.endswith(".mdx"):
                 flattenFileName = file.replace(".mdx", "")
-                fileCreatedTime = datetime.strptime(find_ctime(flattenFileName), "%Y-%m-%d").strftime('%m/%d/%Y')
-                path = os.path.join(root, file)
-                os.system(f"setfile -m '{fileCreatedTime}' {path}")
+                fileCreatedTime = find_ctime(flattenFileName)
+                with open(os.path.join(root, file), "r+") as f:
+                    contents = f.read().split("\n")
+                    contents.insert(2, "publishDate: " + fileCreatedTime)
+                    f.seek(0)
+                    f.write("\n".join(contents))
