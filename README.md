@@ -1,6 +1,4 @@
-<p align="center">
-<img src="https://i.loli.net/2021/12/02/qnNJP8vybkj3Q6f.jpg" />
-</p>
+# whexy.com (wenxuan<sup>1999</sup>)
 
 <p align="center">
 <img src="https://img.shields.io/github/license/whexy/blog-1999" />
@@ -9,15 +7,40 @@
 </p>
 
 <p align="center">
-  Rebuild wenxuan<sup>1999</sup> with <b>Next.js</b>!
+  Yet Another Blog system with <b>Next.js</b>
 </p>
 
-## Story
+- Framework: Next.js
+- Deployment: Vercel
+- Content: MDX
+- Styling: Tailwind CSS
 
-Many people have asked me to publish the source code of my blog `whexy-blogv2` (www.whexy.com). But that blogging system was written in a very casual way. So I decided to rewrite it with React and NextJS.
+## Learn more
+I've written a post discussing how to design a blog system.
 
-## Demo
+- [个人博客搭建指北](https://www.whexy.com/posts/blog-diy) (in Chinese)
 
-Vercel CI Build: [https://blog-1999.vercel.app/](https://blog-1999.vercel.app/)
+## Overview
 
-![demo picture](https://i.loli.net/2021/12/02/fldcHha6qI7wQvp.jpg)
+- `data/*` - MDX data that is used for blogs and the "about page". Some structed data supporting "Key" and "Friend" pages.
+- `layouts/*` - The page layout used to render data (blog posts).
+- `lib/*` - Short for "library", a collection of helpful utilities or code for external services.
+- `pages/api/*` - API routes of Next Server Function.
+- `pages/blog/*` - Static pre-rendered blog pages using MDX.
+- `pages/*` - All other static pages.
+- `public/*` - Static assets including images, files, etc.
+- `styles/*` - Fonts and Tailwind CSS config.
+
+## Running Locally
+```shell
+$ git clone https://github.com/whexy/blog-1999.git
+$ cd blog-1999
+$ yarn
+$ yarn dev
+```
+
+## Cloning / Fork
+Please follow the MIT license and remove all of my personal information (resume, blog posts, images, etc.).
+
+## Special Thanks
+The blog system is inspired by Leerob, the Director of Developer Relations at Vercel. His Next.js blog repo: [https://github.com/leerob/leerob.io](github.com/leerob/leerob.io)
