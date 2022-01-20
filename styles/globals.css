@@ -3,10 +3,6 @@
 @tailwind utilities;
 
 @layer base {
-  .autobg {
-    @apply transition-all backdrop-brightness-95 hover:backdrop-brightness-90  dark:backdrop-brightness-125 dark:hover:backdrop-brightness-150;
-  }
-
   .secondbg {
     @apply bg-secondary dark:bg-secondary-dark border-black/10 dark:border-white/10;
   }

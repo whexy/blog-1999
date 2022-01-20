@@ -1,0 +1,157 @@
+---
+title: 复杂 LaTeX 项目中几个插件的使用心得
+summary: "本文总结了一些在写论文期间遇到的较为复杂的 LaTeX 问题。其中包括 latexdiff 在多文件环境的使用技巧，以及如何解决 latexindent 的依赖冲突。"
+---
+
+本文总结了一些在写论文期间遇到的较为复杂的 LaTeX 问题。其中包括 latexdiff 在多文件环境的使用技巧，以及如何解决 latexindent 的依赖冲突。
+
+
+
+## 准备工作
+
+由于 macOS 11 自带的 perl 环境缺少重要头文件(macOS 12 已经完全移除 perl 环境了)，很多 LaTeX 相关的依赖无法安装。在进行环境配置的时候，需要安装一个完整的 perl 环境。
+
+```shell
+brew install perl
+brew link --overwrite perl
+```
+
+## Revision 利器 latexdiff
+
+在论文被打回重写的阶段，我们可以用 latexdiff 工具生成一个带批注版本的 PDF，方便讨好 reviewer。
+
+Latexdiff 是一个 LaTeX 编译环境自带的二进制文件。通过 brew 安装的 LaTeX 已经将它加入了 PATH 环境变量。使用也是非常的简单：
+
+```bash
+latexdiff a.tex b.tex > difference.tex
+```
+
+### 多文件处理
+
+论文通常不止一个文件。在多文件项目里使用 latexdiff 是一个比较麻烦的事情。latexdiff 自带的 `--flatten` 参数可以用于压平多文件，但如果项目用 BibTeX 管理引用，则会在压平后报错。
+
+在这篇博客[Multiple-file LaTeX diff ](http://dropbearcode.blogspot.com/2011/09/multiple-file-latex-diff.html)中，博主用 Python 写了一个压平多 LaTeX 文件的脚本 `flatten.py`。
+
+```python filename=flatten.py
+#!/usr/bin/python
+import sys
+import os
+import re
+
+inputPattern = re.compile('\\input{(.*)}')
+
+def flattenLatex( rootFilename ):
+    dirpath, filename = os.path.split(rootFilename)
+    with open(rootFilename,'r') as fh:
+        for line in fh:
+            match = inputPattern.search( line )
+            if match:
+                newFile = match.group(1)
+                if not newFile.endswith('tex'):
+                    newFile += '.tex'
+                flattenLatex( os.path.join(dirpath,newFile) )
+            else:
+                sys.stdout.write(line)
+
+if __name__ == "__main__":
+    flattenLatex( sys.argv[1] )
+```
+
+比如如下的文件目录：
+
+```
+$ tree | grep -e "\.tex"
+
+├── main.tex
+│   ├── abstract.tex
+│   ├── appendix.tex
+│   ├── background.tex
+│   ├── conclusion.tex
+│   ├── design.tex
+│   ├── discuss.tex
+│   ├── evaluation.tex
+│   ├── implementation.tex
+│   ├── introduction.tex
+│   └── relatedwork.tex
+```
+
+只需要用`flatten.py main.tex > flatten_main.tex`就可以生成一个压平过的文件。最好检查一下以保证这个文件可编译通过。
+
+### 忽略嵌套上下文
+
+latexdiff 命令生成的代码通常无法直接通过编译。这是因为很多 LaTeX 环境不支持嵌套它声明的格式。例如`section`, `subsection`, `subsubsection`, `table`, `cite`等。需要在 latexdiff 中加入参数跳过它们。
+
+我用的参数是：
+
+```bash
+latexdiff old.tex new.tex --disable-citation-markup --exclude-textcmd="section,subsection,subsubsection" --config="PICTUREENV=(?:picture|DIFnomarkup|table)[\w\d*@]*"
+```
+
+这套参数跳过 citation markup，忽略段落名称，并且不保留旧版本表格。经过测试，这是我论文库中可编译的**最小参数集**。
+
+### 自动化
+
+使用 latexdiff 时最好保留所有版本的编译中间件。我展示一下我自用的 Makefile，自动生成比较结果 DIFF.pdf。
+
+```makefile filename=Makefile
+TARGETS = main
+
+LATEX	= xelatex
+BIBTEX	= bibtex
+
+all:    $(TARGETS) debug
+
+$(TARGETS):
+	$(LATEX) $@
+	-$(BIBTEX) $@ > $(BIBTEX)_out.log
+	$(LATEX) $@
+	$(LATEX) $@
+	$(LATEX) $@
+
+debug:
+	-grep Dialoging *.log
+
+diff:
+	rm -rf ./_diff ./_env
+	# Checkout Old version
+	mkdir _diff
+	git archive 5dc07a9 | tar x -C ./_diff
+	# Checkout Current version
+	mkdir _env
+	git archive master | tar x -C ./_env
+	# Flatten Old version
+	cp ./_diff/main.tex ./_diff/main.tex.bak
+	./utils/flatten.py ./_diff/main.tex.bak > ./_diff/main.tex
+	cd ./_diff && make
+	# Flatten Current version
+	cp ./_env/main.tex ./_env/main.tex.bak
+	./utils/flatten.py ./_env/main.tex.bak > ./_env/main.tex
+	cd ./_env && make
+	# LaTeX Diff
+	latexdiff _diff/main.tex _env/main.tex --disable-citation-markup --exclude-textcmd="section,subsection,subsubsection" --config="PICTUREENV=(?:picture|DIFnomarkup|table)[\w\d*@]*" > _env/diff.tex
+	cp _env/diff.tex _env/main.tex
+	cd ./_env && make
+	cp ./_env/main.pdf ./DIFF.pdf
+	# Cleanup
+	rm -rf ./_diff ./_env
+
+clean:
+	rm -f /images/*.aux /images/*.log *.aux *.bbl *.blg *.log *.dvi *.bak *~ $(TARGETS:%=%.pdf)
+	rm -f diff*
+```
+
+## 源码格式化 Latexindent
+
+LaTeX 源码总是杂乱的，其中充斥着各种注释、宏、表格、图片与代码。在多人协作时，会出现巨大的代码风格差异。Latexindent 是一个格式化 LaTeX 源码的工具。还你一篇干净整洁的源码。心情变好，工作效率也会增加。
+
+利用 perl 包管理器 CPAN 安装 Latexindent 的依赖。
+
+```shell
+sudo cpan Log::Log4perl
+sudo cpan Log::Dispatch
+sudo cpan YAML::Tiny
+sudo cpan File::HomeDir
+sudo cpan Unicode::GCString
+```
+
+安装完毕后就可以正常使用 Latexindent 了。VSCode 的 LaTeX Workshop 插件直接调用 Latexindent，按下代码格式化快捷键即可使用。
