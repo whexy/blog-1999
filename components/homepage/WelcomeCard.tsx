@@ -1,5 +1,5 @@
 import Image from "next/image";
-import hello from "../../public/img/hello.webp";
+import hello from "@/public/img/hello.webp";
 import { useSpring, animated } from "react-spring";
 import { useRef } from "react";
 

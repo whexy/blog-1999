@@ -1,6 +1,6 @@
-import metadata from "../data/metadata";
+import metadata from "@/data/metadata";
 import Link from "next/link";
-import NavigationView from "./Navigation";
+import NavigationView from "@/components/Navigation";
 
 const Header = () => {
   return (

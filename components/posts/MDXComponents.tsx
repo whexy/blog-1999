@@ -1,9 +1,9 @@
-import Callout from "./Callout";
-import { Dialog, DialogBack } from "./Dialog";
-import ImgComponent from "./ImgComponent";
-import QuoteComponent from "./QuoteComponent";
-import PreComponent from "./PreComponent";
-import AnimatedFancyCard from "../AnimatedFancyCard";
+import Callout from "@/components/posts/Callout";
+import { Dialog, DialogBack } from "@/components/posts/Dialog";
+import ImgComponent from "@/components/posts/ImgComponent";
+import QuoteComponent from "@/components/posts/QuoteComponent";
+import PreComponent from "@/components/posts/PreComponent";
+import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 
 const MDXComponents = {
   img: ImgComponent,

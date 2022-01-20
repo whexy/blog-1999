@@ -1,6 +1,6 @@
 import Image from "next/image";
-import portrait from "../public/img/portrait-transparent.webp";
-import AnimatedFancyCard from "../components/AnimatedFancyCard";
+import portrait from "@/public/img/portrait-transparent.webp";
+import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 import { MailIcon } from "@heroicons/react/solid";
 import { allAbouts } from ".contentlayer/data";
 import { useMDXComponent } from "next-contentlayer/hooks";

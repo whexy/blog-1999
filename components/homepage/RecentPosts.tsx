@@ -1,4 +1,4 @@
-import PostCard from "../PostCard";
+import PostCard from "@/components/PostCard";
 import Link from "next/link";
 import _ from "lodash";
 import { parseISO } from "date-fns";

@@ -1,10 +1,10 @@
 import "../styles/globals.css";
 import Head from "next/head";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
-import * as ga from "../lib/ga";
+import * as ga from "@/lib/ga";
 
 export const ThemeContext = createContext(null);
 

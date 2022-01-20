@@ -1,8 +1,8 @@
 import Head from "next/head";
-import BigHi from "../components/homepage/BigHi";
-import WelcomeCard from "../components/homepage/WelcomeCard";
-import NoticeCard from "../components/homepage/NoticeCard";
-import RecentPosts from "../components/homepage/RecentPosts";
+import BigHi from "@/components/homepage/BigHi";
+import WelcomeCard from "@/components/homepage/WelcomeCard";
+import NoticeCard from "@/components/homepage/NoticeCard";
+import RecentPosts from "@/components/homepage/RecentPosts";
 
 import { allBlogs } from '.contentlayer/data'
 import { pick } from "lodash";

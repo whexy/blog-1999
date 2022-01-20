@@ -1,5 +1,5 @@
 import Link from "next/link";
-import SubscribePic from "../../public/img/subscribe.svg";
+import SubscribePic from "@/public/img/subscribe.svg";
 
 const Ending = () => {
   return (

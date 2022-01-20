@@ -1,5 +1,5 @@
-import key_info from "../data/key";
-import Main from "../components/Main";
+import key_info from "@/data/key";
+import Main from "@/components/Main";
 import { KeyIcon, DownloadIcon } from "@heroicons/react/solid";
 const KeyView = () => {
   return (

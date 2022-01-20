@@ -3,12 +3,12 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 
 // intra-blog components
-import Prose from "../components/Prose"
-import Ending from "../components/posts/Ending";
-import License from "../components/posts/License";
-import Comment from "../components/posts/Comment";
-import Series from "../components/posts/Series";
-import metadata from "../data/metadata";
+import Prose from "@/components/Prose"
+import Ending from "@/components/posts/Ending";
+import License from "@/components/posts/License";
+import Comment from "@/components/posts/Comment";
+import Series from "@/components/posts/Series";
+import metadata from "@/data/metadata";
 
 import type { PropsWithChildren } from 'react'
 import type { Blog } from '.contentlayer/types';

@@ -1,4 +1,4 @@
-import metadata from "../../data/metadata";
+import metadata from "@/data/metadata";
 
 const BigHi = () => {
   return (

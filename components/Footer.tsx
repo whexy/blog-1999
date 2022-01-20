@@ -1,7 +1,7 @@
-import metadata from "../data/metadata";
-import Avatar from "../public/img/notion-avatar.svg";
+import metadata from "@/data/metadata";
+import Avatar from "@/public/img/notion-avatar.svg";
 import Link from "next/link";
-import NowPlaying from "../components/NowPlaying";
+import NowPlaying from "@/components/NowPlaying";
 
 export default function Footer() {
   return (
