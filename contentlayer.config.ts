@@ -7,6 +7,7 @@ import {
 // rehype and remark plugins
 import rehypePrism from "@mapbox/rehype-prism";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
+import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from "remark-unwrap-images";
 
 // post data plugins
@@ -47,7 +48,7 @@ const contentLayerConfig = makeSource({
   documentTypes: [Blog, About],
   mdx: {
     rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism],
-    remarkPlugins: [remarkUnwrapImages],
+    remarkPlugins: [remarkGfm, remarkUnwrapImages],
   },
 });
 
