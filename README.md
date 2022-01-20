@@ -1,8 +1,8 @@
 # whexy.com (wenxuan<sup>1999</sup>)
 
 <p align="center">
-<img src="https://img.shields.io/github/license/whexy/blog-1999" />
-<img src="https://img.shields.io/github/deployments/whexy/blog-1999/production?label=vercel&logo=vercel&logoColor=vercel" />
+<img src="https://img.shields.io/github/license/whexy/blog-1999?" />
+<img src="https://img.shields.io/github/deployments/whexy/blog-1999/production?label=vercel&logo=vercel&logoColor=vercel?" />
 <img src="https://img.shields.io/badge/Powered%20by-React-blue" />
 </p>
 
