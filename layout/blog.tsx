@@ -13,7 +13,7 @@ import metadata from "@/data/metadata";
 import type { PropsWithChildren } from 'react'
 import type { Blog } from '.contentlayer/types';
 
-export default function BlogLayout({ children, post }: PropsWithChildren<{ post: Blog }>) {
+export default function BlogLayout({ children, post, bannerURI }: PropsWithChildren<{ post: Blog, bannerURI: string }>) {
   return (
     <div>
       <Head>
@@ -42,8 +42,8 @@ export default function BlogLayout({ children, post }: PropsWithChildren<{ post:
               width={1224}
               quality={100}
               className="sm:rounded-xl"
-            // placeholder="blur"
-            // blurDataURL={post.imgPlaceholder}
+              placeholder="blur"
+              blurDataURL={bannerURI}
             />
           </div>
         )}
