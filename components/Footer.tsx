@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="mx-auto sm:max-w-2xl bg-black-readable">
       <div className="py-5 select-none">
-        <div className="flex justify-center items-center divide-x divide-white/20">
+        <div className="w-60 mx-auto bg-white/10 rounded-xl flex justify-center items-center divide-x divide-white/20">
           <Avatar className="w-16 h-16" />
           <div className="px-2">
             <p className="text-white pb-2">
