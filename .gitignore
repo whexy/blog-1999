@@ -47,3 +47,5 @@ jspm_packages
 # Contentlayer
 .contentlayer
 /package-lock.json
+
+/tools
