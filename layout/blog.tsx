@@ -13,7 +13,7 @@ import metadata from "@/data/metadata";
 import type { PropsWithChildren } from 'react'
 import type { Blog } from '.contentlayer/types';
 
-export default function BlogLayout({ children, post, bannerURI }: PropsWithChildren<{ post: Blog, bannerURI: string }>) {
+export default function BlogLayout({ children, post, bannerURI }: PropsWithChildren<{ post: Blog, bannerURI: string | null }>) {
   return (
     <div>
       <Head>

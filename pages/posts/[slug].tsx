@@ -7,7 +7,7 @@ import { allBlogs } from '.contentlayer/data';
 import type { Blog } from '.contentlayer/types';
 import { blurImgURI } from '@/lib/blurImgURI';
 
-export default function Post({ post, bannerURI }: { post: Blog, bannerURI: string }) {
+export default function Post({ post, bannerURI }: { post: Blog, bannerURI: string | null }) {
   const Content = useMDXComponent(post.body.code);
   return (
     <BlogLayout post={post} bannerURI={bannerURI}>
@@ -28,12 +28,19 @@ export async function getStaticProps({ params }) {
 
   // Get BlurImgURI of banner
   // TODO: After React 18, this prop should be replaced with Server Components
-  const bannerURI = await blurImgURI(post.image);
-
-  return {
+  if (post.image) {
+    const bannerURI = await blurImgURI(post.image);
+    return {
+      props: {
+        post,
+        bannerURI
+      }
+    };
+  }
+  else return {
     props: {
       post,
-      bannerURI
     }
   };
+
 }
