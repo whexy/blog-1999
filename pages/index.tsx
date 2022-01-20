@@ -6,6 +6,7 @@ import RecentPosts from "@/components/homepage/RecentPosts";
 
 import { allBlogs } from '.contentlayer/data'
 import { pick } from "lodash";
+import createRSS from "@/lib/createRSS";
 
 export default function Home({ posts }) {
   return (
@@ -26,6 +27,9 @@ export default function Home({ posts }) {
 }
 
 export async function getStaticProps() {
+  // generate RSS Feed
+  createRSS();
+
   const posts = allBlogs.map((post) =>
     pick(post, [
       'title',

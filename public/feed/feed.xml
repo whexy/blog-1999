@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <channel>
+        <title>Wenxuan's blog</title>
+        <link>https://www.whexy.com/</link>
+        <description>Wenxuan's blog</description>
+        <lastBuildDate>Thu, 20 Jan 2022 17:31:50 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>Whexy Feed Generator</generator>
+        <language>zh</language>
+        <image>
+            <title>Wenxuan's blog</title>
+            <url>https://www.whexy.com/img/hello.png</url>
+            <link>https://www.whexy.com/</link>
+        </image>
+        <copyright>All rights reserved, Wenxuan SHI</copyright>
+        <item>
+            <title><![CDATA[12307 火车票购买平台]]></title>
+            <link>https://www.whexy.com/posts/12307</link>
+            <guid>https://www.whexy.com/posts/12307</guid>
+            <pubDate>Thu, 28 May 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[大二课程数据库原理的期末项目。有查票、中转、订票、余票查询、线路管理等等功能。后端使用了 Flask 框架，前端使用了 Vue。项目最终获得了满分。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/12307_Title.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[2021 年总结 · 寻找答案]]></title>
+            <link>https://www.whexy.com/posts/2021-summary</link>
+            <guid>https://www.whexy.com/posts/2021-summary</guid>
+            <pubDate>Mon, 03 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[在备考 GRE 的期间，我认识了 axiomatic 这个词。公理的、无疑的、不证自明的。它蕴含着巨大的通畅，一种泥沙俱下的快感。2021 年结束，我终于认识了 axiomatic 的反义词，生活。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/2021_summary/Title.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[为 Apple Watch 写一个校巴时刻表工具]]></title>
+            <link>https://www.whexy.com/posts/AppleWatchSchoolBus1</link>
+            <guid>https://www.whexy.com/posts/AppleWatchSchoolBus1</guid>
+            <pubDate>Thu, 09 Jul 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[2020 年 WWDC，苹果更新了 SwiftUI 的第二版。我惊呼：Swift 终于能用了！这次我们不写 Web 和小程序！这是一篇 Native Code 的教程。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/IAiKNDH3ykGw4WR.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Asynchronous Mutex]]></title>
+            <link>https://www.whexy.com/posts/asynchronous</link>
+            <guid>https://www.whexy.com/posts/asynchronous</guid>
+            <pubDate>Sun, 05 Sep 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Asynchronous programs can also be applied on multi-thread system through thread pool. However, using mutex in it might be a problem.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[技术博客创作的两难局面]]></title>
+            <link>https://www.whexy.com/posts/blog-dilemma</link>
+            <guid>https://www.whexy.com/posts/blog-dilemma</guid>
+            <pubDate>Thu, 25 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[胡，項下的垂肉。跋胡疐尾指前進就踏著垂肉，後退又被尾巴絆倒。語本《詩經．豳風．狼跋》：「狼跋其胡，載疐其尾」。作为技术博客的创作者，我现在就面临着这样两难的局面。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/FMYK81ojCNy6LV5.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[个人博客搭建指北]]></title>
+            <link>https://www.whexy.com/posts/blog-diy</link>
+            <guid>https://www.whexy.com/posts/blog-diy</guid>
+            <pubDate>Sun, 09 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[2014 年，我注册了这个域名用来自建博客发表文章，相继用过了 WordPress，Hexo，Hugo 等等博客系统。去年突发奇想，想要 DIY 一个。迭代更新了半年时间，收到了不少朋友们的好评。本文主要介绍一下这个博客系统开发过程中总结的经验。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[FaaS：为静态博客添加点赞功能]]></title>
+            <link>https://www.whexy.com/posts/faas</link>
+            <guid>https://www.whexy.com/posts/faas</guid>
+            <pubDate>Fri, 29 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[2021 年，我的学生认证陆续过期。借此机会，我退租了国内所有的服务器。行业正在“云服务器”迈向“云服务”，我们也必须紧跟时代的步伐。这篇博客介绍如何使用利用 FaaS (Function As A Service) 为静态博客添加点赞功能。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/jFXNDx.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[Stop Forkin' Around: Faster Creating of Large Processes on Linux]]></title>
+            <link>https://www.whexy.com/posts/fork</link>
+            <guid>https://www.whexy.com/posts/fork</guid>
+            <pubDate>Thu, 04 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Forking is how a process in Linux is created. Even though the fork has been improved over the years to use the COW (copy-on-write) semantics, it still has to copy a certain amount of data from parent to child. Some students in the lab are working with a fuzzing machine, and they encounter some problems...]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/46ktn0.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[函数颜色理论]]></title>
+            <link>https://www.whexy.com/posts/func-color</link>
+            <guid>https://www.whexy.com/posts/func-color</guid>
+            <pubDate>Sat, 25 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/func-color-title.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[Inline Assembly Language in C]]></title>
+            <link>https://www.whexy.com/posts/inlineAssembly</link>
+            <guid>https://www.whexy.com/posts/inlineAssembly</guid>
+            <pubDate>Sat, 14 Nov 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Writing assembly code is hard and boring! However, if you want to set regisiters, read memories, sometimes you must do the dirty work.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Alligator In Vest - My first research work]]></title>
+            <link>https://www.whexy.com/posts/investigator</link>
+            <guid>https://www.whexy.com/posts/investigator</guid>
+            <pubDate>Sat, 24 Jul 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[Now I am going to introduce our recent work. We call it Investigator. Investigator uses hardware features to diagnose concurrency bugs on Arm.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[谈谈我的键盘]]></title>
+            <link>https://www.whexy.com/posts/keyboard</link>
+            <guid>https://www.whexy.com/posts/keyboard</guid>
+            <pubDate>Tue, 12 Nov 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[键盘这玩意，的确是有门道的。但是对于我等这些连计算机行业门道都没摸清楚的人来说，傻乎乎跟风追求某种所谓“键盘”的感觉是没有必要的。同样，倘若连大鼓和军鼓的声音都无法区分，却畅谈某某耳机“低音准高音稳中音甜”，只会让人好一顿嘲笑。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[How to prove I am me: a digital way]]></title>
+            <link>https://www.whexy.com/posts/keys</link>
+            <guid>https://www.whexy.com/posts/keys</guid>
+            <pubDate>Mon, 13 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show how to use these keys to prove I am me.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/digital-signature.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[React 学习笔记]]></title>
+            <link>https://www.whexy.com/posts/learningReact</link>
+            <guid>https://www.whexy.com/posts/learningReact</guid>
+            <pubDate>Wed, 21 Oct 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[React 几乎利用了原生 JavaScript 的所有特质。在对 JavaScript 比较熟练的情况下，React 不会给你带来更多的惊喜。不过，相较于 Vue，写 React 也给人一种踏实的感觉。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Using QEMU to run Linux images on M1 Macbook]]></title>
+            <link>https://www.whexy.com/posts/m1qemu</link>
+            <guid>https://www.whexy.com/posts/m1qemu</guid>
+            <pubDate>Mon, 16 Aug 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[细究内存管理（一）]]></title>
+            <link>https://www.whexy.com/posts/malloc1</link>
+            <guid>https://www.whexy.com/posts/malloc1</guid>
+            <pubDate>Sat, 18 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[《细究内存管理》系列文章之首。这一系列的博客文章将从原理出发探究内存管理的本质，并且介绍如何综合常见的手段分析与预防内存安全性漏洞。这篇文章里，我主要介绍了堆、栈模式与内存管理的关系。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/malloc/Title1.png" length="0" type="image/png"/>
+        </item>
+        <item>
+            <title><![CDATA[在寝室搭建一套电影播放系统]]></title>
+            <link>https://www.whexy.com/posts/movie_streaming</link>
+            <guid>https://www.whexy.com/posts/movie_streaming</guid>
+            <pubDate>Sat, 03 Aug 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[今天得空，介绍上个月的成果——一套宿舍电影放映系统的构建。寝室里有一台大屏显示器，晚上关了灯，连上蓝牙低音炮，大家围坐一起看一部电影，真是美滋滋的体验~ 床上有一个支架，用iPad连接AirPods，晚上拉上遮光帘一个人欣赏一部电影，也是美滋滋的体验…]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[PMU Interrupts: How to handle them]]></title>
+            <link>https://www.whexy.com/posts/PMU</link>
+            <guid>https://www.whexy.com/posts/PMU</guid>
+            <pubDate>Sat, 23 Oct 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[PMU interrupts act as an essential role between hardware and software. It gives the software the ability to gain insight into its execution on the hardware. In this article, I introduce you to the power of PMU and PMI and how to use them to achieve your goal.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[理解 Rust 泛型特征 (Generic Trait)]]></title>
+            <link>https://www.whexy.com/posts/RUST-Generic-Trait</link>
+            <guid>https://www.whexy.com/posts/RUST-Generic-Trait</guid>
+            <pubDate>Mon, 01 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[在 Rust 中，特征(trait)也可以是泛型。引入泛型特征，一是希望特征不受具体类别的限制，二是希望特征具有更广泛的约束性。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Sakai 和本地文件夹同步]]></title>
+            <link>https://www.whexy.com/posts/sakai</link>
+            <guid>https://www.whexy.com/posts/sakai</guid>
+            <pubDate>Thu, 27 Feb 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[学校老师经常用来发布课件和作业的 Sakai 系统竟也支持使用 WebDAV 协议。通过配置本地的 WebDAV 服务，就能轻松下载课程资源，省时省力。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Try to Sideload an App to iOS]]></title>
+            <link>https://www.whexy.com/posts/sideload</link>
+            <guid>https://www.whexy.com/posts/sideload</guid>
+            <pubDate>Mon, 29 Nov 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[So I want to sideload an App (illegally, both the behavior and the app) to my new iPhone 13 Pro. I found a tool called Sideloadly, which I cannot even open in the first place... Here's the whole story about me fixing a cracking tool.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/kNxHmjTCLG3tnAX.jpg" length="0" type="image/jpg"/>
+        </item>
+        <item>
+            <title><![CDATA[SUSTeam: Ultimate Gaming Platform]]></title>
+            <link>https://www.whexy.com/posts/SUSTEAM</link>
+            <guid>https://www.whexy.com/posts/SUSTEAM</guid>
+            <pubDate>Thu, 28 Jan 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[大三时期做的游戏平台。主要语言是 Kotlin 和 TypeScript。回头看觉得做得还行，反正当时拿了满分 :)]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[智能设备连接南科大校园网]]></title>
+            <link>https://www.whexy.com/posts/SUSTechWifiIoT</link>
+            <guid>https://www.whexy.com/posts/SUSTechWifiIoT</guid>
+            <pubDate>Tue, 28 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[在南科大的四年，每学期都会遇到 IoT 设备连接校园网的难题。这篇博客主要介绍如何让智能设备绕过认证直接接入校园网，以及这些操作的原理。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[自动登录南科大校园网的 shell 脚本]]></title>
+            <link>https://www.whexy.com/posts/SUSTechWifiLogin</link>
+            <guid>https://www.whexy.com/posts/SUSTechWifiLogin</guid>
+            <pubDate>Thu, 22 Aug 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[我校的校园网还就是与众不同，Post 发出的数据包不是轻易就能弄明白的。本文提出了一种黑魔法 bash 脚本用于类 Unix 系统登录校园网。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[搭建 macOS 的远程备份机]]></title>
+            <link>https://www.whexy.com/posts/timemachine</link>
+            <guid>https://www.whexy.com/posts/timemachine</guid>
+            <pubDate>Sun, 25 Aug 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[macOS 有一个神奇的功能，叫做“时间机器”。当激活这个功能的时候，你可以将系统里的任意文件回滚到之前的任意状态。换句话说，macOS 存档了你每隔一段时间的系统的整个状态。使用这个功能通常需要定期插入硬盘。这篇文章里我通过配置一些网络协议实现了 macOS 局域网内的无感知备份。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[复杂 LaTeX 项目中几个插件的使用心得]]></title>
+            <link>https://www.whexy.com/posts/usingLatexAddons</link>
+            <guid>https://www.whexy.com/posts/usingLatexAddons</guid>
+            <pubDate>Thu, 06 May 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[本文总结了一些在写论文期间遇到的较为复杂的 LaTeX 问题。其中包括 latexdiff 在多文件环境的使用技巧，以及如何解决 latexindent 的依赖冲突。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Variance in Rust (Rust 中的协变、逆变与不变)]]></title>
+            <link>https://www.whexy.com/posts/Variance-in-Rust</link>
+            <guid>https://www.whexy.com/posts/Variance-in-Rust</guid>
+            <pubDate>Sun, 21 Feb 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[I’m watching Jon Gjengset’s live coding stream. And the topic is “Subtyping and Variance”. This is my note.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[用两个晚上做超简易OpenJudge]]></title>
+            <link>https://www.whexy.com/posts/wannaAC</link>
+            <guid>https://www.whexy.com/posts/wannaAC</guid>
+            <pubDate>Thu, 26 Sep 2019 00:00:00 GMT</pubDate>
+            <description><![CDATA[大二刚开学，为了服务广大深受数据结构与算法课程折磨的同学。写了一个帮助 debug 的平台。代码一塌糊涂，不过产品思路还是不错的。]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[圣诞节与“供应链安全”]]></title>
+            <link>https://www.whexy.com/posts/xmas-security</link>
+            <guid>https://www.whexy.com/posts/xmas-security</guid>
+            <pubDate>Fri, 24 Dec 2021 00:00:00 GMT</pubDate>
+            <description><![CDATA[圣诞节又到了。中国的前端程序员一定不会忘记这个节日。3 年前的这一天，阿里巴巴 AntD 团队在开源项目中掩埋的圣诞彩蛋引发了开源世界信任链的崩溃。前端程序员在节日当天面对客户投诉、老板指责，甚至有人被直接开除……]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/xmas/Title.png" length="0" type="image/png"/>
+        </item>
+    </channel>
+</rss>

@@ -1,7 +1,12 @@
 import { Feed } from "feed";
 import { parseISO } from "date-fns";
 import fs from "fs";
-const createRSS = (posts) => {
+
+import { allBlogs } from ".contentlayer/data";
+
+import type { Blog } from ".contentlayer/types"
+
+const createRSS = () => {
   const feed = new Feed({
     title: "Wenxuan's blog",
     description: "Wenxuan's blog",
@@ -23,14 +28,13 @@ const createRSS = (posts) => {
     },
   });
 
-  posts
-    .filter((post) => post.preview !== true && post.hidden !== true)
-    .forEach((post) => {
+  allBlogs
+    .forEach((post: Blog) => {
       const item = {
         title: post.title,
-        id: `https://www.whexy.com/posts/${post.id}`,
-        link: `https://www.whexy.com/posts/${post.id}`,
-        description: post.excerpt,
+        id: `https://www.whexy.com/posts/${post.slug}`,
+        link: `https://www.whexy.com/posts/${post.slug}`,
+        description: post.summary,
         author: [
           {
             name: "Wenxuan SHI",
@@ -38,8 +42,8 @@ const createRSS = (posts) => {
             link: "https://www.whexy.com",
           },
         ],
-        contributor: [],
-        date: parseISO(post.date),
+        date: parseISO(post.publishDate),
+        image: null,
       };
       if (post.image) {
         item.image = `https://www.whexy.com/${post.image}`;
@@ -47,11 +51,11 @@ const createRSS = (posts) => {
       feed.addItem(item);
     });
 
-  fs.writeFileSync("public/feed/feed.xml", feed.rss2());
   // Output: RSS 2.0
+  fs.writeFileSync("public/feed/feed.xml", feed.rss2());
 
-  fs.writeFileSync("public/feed/feed.json", feed.json1());
   // Output: JSON Feed 1.0
+  fs.writeFileSync("public/feed/feed.json", feed.json1());
 };
 
 export default createRSS;

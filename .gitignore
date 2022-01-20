@@ -42,14 +42,9 @@ yarn.lock
 .next
 
 .DS_Store
-
-/public/feed/feed.xml
-/public/feed/feed.json
-
 .env.local
 
 # Contentlayer
 .contentlayer
-
 
 /tools
