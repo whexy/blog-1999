@@ -10,23 +10,31 @@ export const ThemeContext = createContext(null);
 
 const MyApp = ({ Component, pageProps }) => {
   const router = useRouter();
+
+  /**  Light and Dark Theme */
+
+  // Use sessionStorage to persist theme between page refreshes.
   const [theme, setTheme] = useState("light");
   const toggleTheme = () => {
     const newTheme = theme === "light" ? "dark" : "light";
     setTheme(newTheme);
     sessionStorage.setItem("theme", newTheme);
   };
+
+  // Set default theme.
   useEffect(() => {
-    let defaultTheme = "light";
-    if (
-      sessionStorage.theme === "dark" ||
-      (!("theme" in sessionStorage) &&
-        window.matchMedia("(prefers-color-scheme: dark)").matches)
-    ) {
-      defaultTheme = "dark";
+    const storedTheme = sessionStorage.getItem("theme");
+    if (storedTheme) {
+      setTheme(storedTheme);
+      console.log({ storedTheme });
+    } else {
+      const WindowPreferenceDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(WindowPreferenceDark ? "dark" : "light");
+      console.log({ storedTheme, WindowPreferenceDark });
     }
-    setTheme(defaultTheme);
   }, []);
+
+  /* Google Analytics */
   useEffect(() => {
     const handleRouteChange = (url) => {
       ga.pageview(url);
@@ -37,6 +45,8 @@ const MyApp = ({ Component, pageProps }) => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
+
+
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
       <Head>
@@ -79,7 +89,7 @@ const MyApp = ({ Component, pageProps }) => {
         }
       `}</style>
       <Header />
-      <div className={theme === "light" ? "dark": ""}>
+      <div className={theme === "light" ? "" : "dark"}>
         <Component {...pageProps} />
       </div>
       <Footer />
