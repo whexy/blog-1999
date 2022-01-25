@@ -3,7 +3,8 @@ import SubscribePic from "@/public/img/subscribe.svg";
 
 const Ending = () => {
   return (
-    <div className="max-w-3xl mx-auto mb-10">
+    <div>
+    <div className="max-w-xl mx-auto mb-10">
       <div className="mx-1 secondbg rounded-xl sm:rounded-full border overflow-hidden dark:text-white">
         <div className="grid grid-cols-3 space-x-2">
           <div className="bg-red-500 col-span-1 grid place-items-center overflow-hidden">
@@ -15,8 +16,8 @@ const Ending = () => {
               <span className="whitespace-nowrap">Consider following me</span>.
             </p>
             <p className="font-light text-sm text-gray-600 dark:text-gray-400">
-              I work on topics related to system security aside with many other
-              interesting things. I would love to have friends who share the
+              Working on topics related to system security aside with many other
+              interesting things, I would love to have friends who share the
               same interests.
             </p>
 
@@ -47,6 +48,8 @@ const Ending = () => {
           </div>
         </div>
       </div>
+    </div>
+    <div className="opacity-0">{"Good Day~"}</div>
     </div>
   );
 };
