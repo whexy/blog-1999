@@ -5,7 +5,7 @@ const Callout = ({ title, canFold, children }) => {
   const [fold, setfold] = useState(true);
   return (
     <div
-      className="rounded-lg secondbg border px-4 py-1 sm:w-11/12 mx-auto break-inside-avoid-page"
+      className="callout rounded-lg secondbg border px-4 py-1 sm:w-11/12 mx-auto break-inside-avoid-page"
       onClick={() => {
         setfold(!fold);
       }}
