@@ -6,7 +6,6 @@ import { format, parseISO } from "date-fns";
 import Prose from "@/components/Prose"
 import Ending from "@/components/posts/Ending";
 import License from "@/components/posts/License";
-import Comment from "@/components/posts/Comment";
 import Series from "@/components/posts/Series";
 import metadata from "@/data/metadata";
 
@@ -69,7 +68,6 @@ export default function BlogLayout({ children, post, bannerURI }: PropsWithChild
           </Prose>
         </article>
         <Ending />
-        <Comment />
       </div>
     </div>
   );
