@@ -21,7 +21,9 @@ const AnimatedFancyCard = ({ children }) => {
       ref={ref}
       style={{ transform: props.xys.to(trans) }}
       onMouseMove={({ clientX: x, clientY: y }) =>
-        api.start({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
+        api.start({
+          xys: calc(x, y, ref.current.getBoundingClientRect()),
+        })
       }
       onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
     >

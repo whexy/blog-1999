@@ -41,7 +41,10 @@ const NavigationView = () => {
           <Menu.Items className="absolute rounded-lg right-0 top-10 p-4 flex-col space-y-3 text-white bg-black/50 backdrop-blur">
             <Menu.Item>
               {() => (
-                <MyLink href="/" className="flex items-center space-x-2">
+                <MyLink
+                  href="/"
+                  className="flex items-center space-x-2"
+                >
                   <HomeIcon className="w-5 h-5" />
                   <div>Home</div>
                 </MyLink>
@@ -49,7 +52,10 @@ const NavigationView = () => {
             </Menu.Item>
             <Menu.Item>
               {() => (
-                <MyLink href="/keys" className="flex items-center space-x-2">
+                <MyLink
+                  href="/keys"
+                  className="flex items-center space-x-2"
+                >
                   <KeyIcon className="w-5 h-5" />
                   <div>Keys</div>
                 </MyLink>
@@ -57,7 +63,10 @@ const NavigationView = () => {
             </Menu.Item>
             <Menu.Item>
               {() => (
-                <MyLink href="/about" className="flex items-center space-x-2">
+                <MyLink
+                  href="/about"
+                  className="flex items-center space-x-2"
+                >
                   <UserIcon className="w-5 h-5" />
                   <div>About</div>
                 </MyLink>
@@ -65,7 +74,10 @@ const NavigationView = () => {
             </Menu.Item>
             <Menu.Item>
               {() => (
-                <MyLink href="/friends" className="flex items-center space-x-2">
+                <MyLink
+                  href="/friends"
+                  className="flex items-center space-x-2"
+                >
                   <UserGroupIcon className="w-5 h-5" />
                   <div>Friends</div>
                 </MyLink>

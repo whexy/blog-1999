@@ -12,7 +12,9 @@ const calc = (x, y, rect) => [
 const trans = (x, y, s) => `scale(${s})`;
 
 const shadowTrans = (x, y, s) => {
-  return `drop-shadow(${y}px ${-x}px ${120 * (s - 1)}px rgba(0, 0, 0, 0.65))`;
+  return `drop-shadow(${y}px ${-x}px ${
+    120 * (s - 1)
+  }px rgba(0, 0, 0, 0.65))`;
 };
 
 const WelcomeCard = () => {
@@ -24,7 +26,9 @@ const WelcomeCard = () => {
     <div
       ref={ref}
       onMouseMove={({ clientX: x, clientY: y }) =>
-        api.start({ xys: calc(x, y, ref.current.getBoundingClientRect()) })
+        api.start({
+          xys: calc(x, y, ref.current.getBoundingClientRect()),
+        })
       }
       onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
     >
@@ -56,8 +60,8 @@ const WelcomeCard = () => {
                   <b className="text-yellow-300">system</b>.
                   <br />
                   <span className="text-md text-white-readable/50 font-serif">
-                    I fight with the compiler, linker, OS, firmware, bootloader,
-                    etc.
+                    I fight with the compiler, linker, OS, firmware,
+                    bootloader, etc.
                   </span>
                 </p>
                 <p>
@@ -65,8 +69,8 @@ const WelcomeCard = () => {
                   <b className="text-yellow-300">security</b>.
                   <br />
                   <span className="text-md text-white-readable/50 font-serif">
-                    I keep eyes on the CVEs, vulnerabilities, malicious codes,
-                    etc.
+                    I keep eyes on the CVEs, vulnerabilities,
+                    malicious codes, etc.
                   </span>
                 </p>
                 <p>

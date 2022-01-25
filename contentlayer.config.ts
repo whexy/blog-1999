@@ -8,18 +8,21 @@ import {
 import rehypePrism from "@mapbox/rehype-prism";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypeKatex from "rehype-katex";
-import remarkGfm from 'remark-gfm'
+import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
-import remarkMath from 'remark-math';
+import remarkMath from "remark-math";
 
 // post data plugins
 import readingTime from "reading-time";
 
 const computedFields: ComputedFields = {
-  readingTime: { type: "json", resolve: (doc)=> readingTime(doc.body.raw) },
+  readingTime: {
+    type: "json",
+    resolve: doc => readingTime(doc.body.raw),
+  },
   slug: {
     type: "string",
-    resolve: (doc) => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+    resolve: doc => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
   },
 };
 
@@ -42,14 +45,18 @@ const About = defineDocumentType(() => ({
   name: "About",
   filePathPattern: `about.mdx`,
   bodyType: "mdx",
-  fields: {}
-}))
+  fields: {},
+}));
 
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
   documentTypes: [Blog, About],
   mdx: {
-    rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism, rehypeKatex],
+    rehypePlugins: [
+      [rehypeImagePlaceholder, { dir: "public" }],
+      rehypePrism,
+      rehypeKatex,
+    ],
     remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages],
   },
 });

@@ -3,16 +3,20 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 
 // intra-blog components
-import Prose from "@/components/Prose"
+import Prose from "@/components/Prose";
 import Ending from "@/components/posts/Ending";
 import License from "@/components/posts/License";
 import Series from "@/components/posts/Series";
 import metadata from "@/data/metadata";
 
-import type { PropsWithChildren } from 'react'
-import type { Blog } from '.contentlayer/types';
+import type { PropsWithChildren } from "react";
+import type { Blog } from ".contentlayer/types";
 
-export default function BlogLayout({ children, post, bannerURI }: PropsWithChildren<{ post: Blog, bannerURI: string | null }>) {
+export default function BlogLayout({
+  children,
+  post,
+  bannerURI,
+}: PropsWithChildren<{ post: Blog; bannerURI: string | null }>) {
   return (
     <div>
       <Head>
@@ -20,16 +24,19 @@ export default function BlogLayout({ children, post, bannerURI }: PropsWithChild
           {post.title} | {metadata.title}
         </title>
         <meta name="description" content={post.summary} />
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"></link>
+        <link
+          rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
+        ></link>
       </Head>
       <div className="bg-white dark:bg-black-readable">
         {post.preview && (
           <div className="px-2 py-4 bg-yellow-400/20 border-b dark:border-white/20 text-center">
             <p className="text-sm dark:text-white">
-              This article is currently not finished. What you see is the
-              preview version. The article may be updated, modified or deleted
-              at any time. Arguments, data or links in the text may not be
-              available or credible.
+              This article is currently not finished. What you see is
+              the preview version. The article may be updated,
+              modified or deleted at any time. Arguments, data or
+              links in the text may not be available or credible.
             </p>
           </div>
         )}
@@ -54,16 +61,21 @@ export default function BlogLayout({ children, post, bannerURI }: PropsWithChild
               <div className="inline-flex space-x-1 items-center">
                 <div>{metadata.author.name} / </div>
                 <span className="text-gray-600">
-                  {format(parseISO(post.publishDate), "MMMM dd, yyyy")}
+                  {format(
+                    parseISO(post.publishDate),
+                    "MMMM dd, yyyy",
+                  )}
                 </span>
               </div>
-              <div>
-                {post.readingTime.text}
-              </div>
+              <div>{post.readingTime.text}</div>
             </div>
-            {post.series && <Series slug={post.slug} series={post.series} />}
+            {post.series && (
+              <Series slug={post.slug} series={post.series} />
+            )}
             {children}
-            {post.series && <Series slug={post.slug} series={post.series} />}
+            {post.series && (
+              <Series slug={post.slug} series={post.series} />
+            )}
             <License />
           </Prose>
         </article>

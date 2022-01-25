@@ -6,7 +6,8 @@ import { parseISO } from "date-fns";
 import type { Blog } from ".contentlayer/types";
 
 const RecentPosts = ({ posts }: { posts: Blog[] }) => {
-  const getYear = (post: Blog) => parseISO(post.publishDate).getFullYear();
+  const getYear = (post: Blog) =>
+    parseISO(post.publishDate).getFullYear();
   const PostByYear = _.groupBy(posts, getYear);
 
   return (
@@ -37,18 +38,20 @@ const PostCards = ({ PostByYear }) => {
     <div className="flex flex-col space-y-10">
       {Object.keys(PostByYear)
         .reverse()
-        .map((year) => {
+        .map(year => {
           const postList = PostByYear[year].sort((a, b) => {
-            return parseISO(b.publishDate).getTime() - parseISO(a.publishDate).getTime();
+            return (
+              parseISO(b.publishDate).getTime() -
+              parseISO(a.publishDate).getTime()
+            );
           });
           postList.map((post, idx) => {
             post.vol = postList.length - idx;
           });
-          const postCardView = postList
-            .map((post) => {
-              post.url = `/posts/${post.slug}`;
-              return <PostCard {...post} key={post.slug} />;
-            });
+          const postCardView = postList.map(post => {
+            post.url = `/posts/${post.slug}`;
+            return <PostCard {...post} key={post.slug} />;
+          });
           return (
             <div key={year}>
               <div className="font-mono font-bold text-2xl pb-3">

@@ -2,16 +2,20 @@ import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/solid";
 import { parseISO } from "date-fns";
 
-import { allBlogs } from ".contentlayer/data"
+import { allBlogs } from ".contentlayer/data";
 
 const Series = ({ slug, series }) => {
   const seriesPosts = allBlogs
-    .filter((p) => p.series === series)
-    .sort((a, b) => parseISO(a.publishDate).getTime() - parseISO(b.publishDate).getTime())
-    .map((p) => ({
+    .filter(p => p.series === series)
+    .sort(
+      (a, b) =>
+        parseISO(a.publishDate).getTime() -
+        parseISO(b.publishDate).getTime(),
+    )
+    .map(p => ({
       title: p.title,
-      slug: p.slug
-    }))
+      slug: p.slug,
+    }));
   const thisSlug = slug;
   return (
     <div className="not-prose font-sans relative bg-violet-200/10 rounded-lg border-2 border-violet-200/80 p-4 m-4 break-inside-avoid-page">
@@ -26,8 +30,9 @@ const Series = ({ slug, series }) => {
         {seriesPosts.map(({ slug, title }) => (
           <li
             key={slug}
-            className={`hover:underline ${slug === thisSlug && "font-bold underline"
-              }`}
+            className={`hover:underline ${
+              slug === thisSlug && "font-bold underline"
+            }`}
           >
             <Link href={`/posts/${slug}`}>
               <a>{title}</a>

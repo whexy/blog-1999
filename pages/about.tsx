@@ -25,10 +25,18 @@ const InfoSection = () => {
           </p>
         </div>
         <div className="pt-5 flex flex-row items-center justify-center justify-items-center space-x-5 text-2xl">
-          <a href="mailto://gwhexy@gmail.com" target="_blank" rel="noreferrer">
+          <a
+            href="mailto://gwhexy@gmail.com"
+            target="_blank"
+            rel="noreferrer"
+          >
             <MailIcon className="text-[#0c74d4] w-6 h-6" />
           </a>
-          <a href="https://github.com/whexy" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/whexy"
+            target="_blank"
+            rel="noreferrer"
+          >
             <div className="fill-[#24292e] dark:fill-white-readable w-6 h-6">
               <svg
                 role="img"
@@ -96,7 +104,7 @@ const Callout = ({ title, icon, items, fancy }) => {
     <div className="not-prose">
       <div className="rounded-lg secondbg border p-4 max-w-lg mx-auto">
         <h3 className="text-lg font-semibold pb-1">{title}</h3>
-        {items.map((item) => (
+        {items.map(item => (
           <div
             key={item.title}
             className="pl-2 py-1 flex flex-row items-center gap-2"

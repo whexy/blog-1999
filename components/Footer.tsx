@@ -29,18 +29,26 @@ export default function Footer() {
             <a className="text-jbgray-light hover:opacity-50">Home</a>
           </Link>
           <Link href="/about">
-            <a className="text-jbgray-light hover:opacity-50">About</a>
+            <a className="text-jbgray-light hover:opacity-50">
+              About
+            </a>
           </Link>
           <Link href="/posts">
-            <a className="text-jbgray-light hover:opacity-50">Posts</a>
+            <a className="text-jbgray-light hover:opacity-50">
+              Posts
+            </a>
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
           <Link href="https://github.com/whexy">
-            <a className="text-jbgray-light hover:opacity-50">GitHub</a>
+            <a className="text-jbgray-light hover:opacity-50">
+              GitHub
+            </a>
           </Link>
           <Link href="https://twitter.com/whexyshi">
-            <a className="text-jbgray-light hover:opacity-50">Twitter</a>
+            <a className="text-jbgray-light hover:opacity-50">
+              Twitter
+            </a>
           </Link>
         </div>
         <div className="flex flex-col space-y-4">
@@ -48,7 +56,9 @@ export default function Footer() {
             <a className="text-jbgray-light hover:opacity-50">Keys</a>
           </Link>
           <Link href="/friends">
-            <a className="text-jbgray-light hover:opacity-50">Friends</a>
+            <a className="text-jbgray-light hover:opacity-50">
+              Friends
+            </a>
           </Link>
           <Link href="/feed/feed.xml">
             <a className="text-jbgray-light hover:opacity-50">RSS</a>

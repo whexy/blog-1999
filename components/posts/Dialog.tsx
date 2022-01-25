@@ -18,7 +18,10 @@ export const Dialog = ({ children }) => {
 export const DialogBack = ({ children }) => {
   return (
     <div className="mr-4 not-prose flex justify-start items-center">
-      <div style={{ transform: `scale(-1, 1)` }} className="flex-shrink-0">
+      <div
+        style={{ transform: `scale(-1, 1)` }}
+        className="flex-shrink-0"
+      >
         <Avatar className="w-16 h-16" />
       </div>
       <div className="p-3 rounded bg-blue-200/20 border border-blue-200/80 font-article text-sm">
