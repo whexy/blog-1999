@@ -6,22 +6,9 @@
   .secondbg {
     @apply bg-secondary dark:bg-secondary-dark border-black/10 dark:border-white/10;
   }
-
   html,
   body {
     scroll-behavior: smooth;
-  }
-
-  .toc ol {
-    @apply pl-4;
-  }
-
-  .toc a {
-    @apply hover:underline text-gray-900 hover:text-black text-sm;
-  }
-
-  .tmpl-post .direct-link {
-    @apply text-red-500;
   }
 }
 
@@ -35,6 +22,14 @@
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
+}
+
+.footnotes {
+  @apply text-sm pb-4;
+}
+
+.footnotes a {
+  @apply text-slate-500 dark:text-slate-300 font-normal;
 }
 
 .prose pre {
