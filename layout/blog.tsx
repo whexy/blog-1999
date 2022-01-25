@@ -21,6 +21,7 @@ export default function BlogLayout({ children, post, bannerURI }: PropsWithChild
           {post.title} | {metadata.title}
         </title>
         <meta name="description" content={post.summary} />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"></link>
       </Head>
       <div className="bg-white dark:bg-black-readable">
         {post.preview && (

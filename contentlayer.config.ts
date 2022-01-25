@@ -7,8 +7,10 @@ import {
 // rehype and remark plugins
 import rehypePrism from "@mapbox/rehype-prism";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
+import rehypeKatex from "rehype-katex";
 import remarkGfm from 'remark-gfm'
 import remarkUnwrapImages from "remark-unwrap-images";
+import remarkMath from 'remark-math';
 
 // post data plugins
 import readingTime from "reading-time";
@@ -47,8 +49,8 @@ const contentLayerConfig = makeSource({
   contentDirPath: "data",
   documentTypes: [Blog, About],
   mdx: {
-    rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism],
-    remarkPlugins: [remarkGfm, remarkUnwrapImages],
+    rehypePlugins: [[rehypeImagePlaceholder, { dir: "public" }], rehypePrism, rehypeKatex],
+    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages],
   },
 });
 
