@@ -111,7 +111,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 你需要写很多样式：
 
-```html filename=box.html
+```html
 <style type="text/css">
   .box {
     display: flex;
@@ -134,7 +134,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 如果用 Tailwind CSS，连 CSS 文件都不需要，只用写一个 HTML 页面：
 
-```html filename=box.html
+```html
 <div class="flex items-center justify-center border">
   <div class="w-[100px] h-[100px] bg-red-100"></div>
 </div>
@@ -231,35 +231,43 @@ Headless 指“无头的”，一般来说就是“无界面的”“无系统�
 大致目录结构是：
 
 ```
-├── components
-│  ├── AnimatedFancyCard.js
-│  ├── Footer.js
-│  ├── Header.js
-│  └── ...
-├── data
-│  ├── about.mdx
-│  ├── friends.js
-│  └── ...
-├── lib
-│  ├── date.js
-│  ├── feed.js
-│  └── ...
-├── pages
-│  ├── _app.js
-│  ├── _document.js
-│  ├── about.js
-│  ├── friends.jsx
-│  └── ...
-├── posts
-│  ├── 2021-summary.md
-│  ├── asynchronous.md
-│  ├── fork.md
-│  ├── func-color.md
-│  └── ...
-├── styles
-│  ├── all.min.css
-│  ├── globals.css
-└──└── webfonts
+blog-1999
+├── LICENSE
+├── README.md
+├── components/
+├── contentlayer.config.ts
+├── data/
+│   ├── about.mdx
+│   ├── blog/
+│   ├── friends.ts
+│   ├── key.ts
+│   └── metadata.ts
+├── layout/
+│   └── blog.tsx
+├── lib/
+├── next-env.d.ts
+├── next.config.js
+├── package.json
+├── pages/
+│   ├── _app.tsx
+│   ├── _document.tsx
+│   ├── about.tsx
+│   ├── api/
+│   │   └── now-playing.ts
+│   ├── friends.tsx
+│   ├── index.tsx
+│   ├── keys.tsx
+│   └── posts/
+│       └── [slug].tsx
+├── postcss.config.js
+├── projects/
+├── public/
+├── styles/
+│   ├── globals.css
+│   └── webfonts/
+├── tailwind.config.js
+├── tsconfig.json
+└── yarn.lock
 ```
 
 ## 分发
