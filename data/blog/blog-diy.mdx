@@ -8,6 +8,10 @@ series: 博客搭建手记
 2014 年，我注册了这个域名用来自建博客发表文章，相继用过了 WordPress，Hexo，Hugo 等等博客系统。去年突发奇想，想要 DIY 一个。迭代更新了半年时间，收到了不少朋友们的好评。本文主要介绍一下这个博客系统开发过程中总结的经验。
 
 
+我的博客系统已经开源到 Github，点个 Star 支持一下吧~
+
+<object type="image/svg+xml" data="https://gh-card.dev/repos/whexy/blog-1999.svg?fullname=&link_target=_blank"></object>
+
 文章分为四个部分。
 
 1. **设计**：文章排版、组件定义、页面设计，构思一个兼具观赏性和实用性的的阅读页面。
@@ -145,16 +149,16 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 <Callout title="Tailwind CSS 实战" canFold>
    举个例子，如果要让文字变成红色，直接用 `text-red-300` 就行了；
    <div className="text-red-300 text-center font-sans text-sm">红色文字</div>
-   
+
    颜色深一点，用 `text-red-700`；
    <div className="text-red-700 text-center font-sans text-sm">深红色文字</div>
-   
+
    在深色模式里用浅红，浅色模式里用深红： `text-red-700 dark:text-red-300`；
    <div className="text-red-700 dark:text-red-300 text-center font-sans text-sm">根据深浅模式切换颜色的文字</div>
-   
+
    小屏幕设备用浅红，大屏幕设备用深红： `text-red-300 sm:text-red-700`。
    <div className="text-red-300 sm:text-red-700 text-center font-sans text-sm">根据屏幕大小切换颜色的文字</div>
-   
+
    是不是非常方便？
 </Callout>
 
