@@ -48,3 +48,4 @@ yarn.lock
 .contentlayer
 
 /tools
+.vscode

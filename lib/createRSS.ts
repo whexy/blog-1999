@@ -4,7 +4,7 @@ import fs from "fs";
 
 import { allBlogs } from ".contentlayer/data";
 
-import type { Blog } from ".contentlayer/types"
+import type { Blog } from ".contentlayer/types";
 
 const createRSS = () => {
   const feed = new Feed({
@@ -28,28 +28,27 @@ const createRSS = () => {
     },
   });
 
-  allBlogs
-    .forEach((post: Blog) => {
-      const item = {
-        title: post.title,
-        id: `https://www.whexy.com/posts/${post.slug}`,
-        link: `https://www.whexy.com/posts/${post.slug}`,
-        description: post.summary,
-        author: [
-          {
-            name: "Wenxuan SHI",
-            email: "whexy@outlook.com",
-            link: "https://www.whexy.com",
-          },
-        ],
-        date: parseISO(post.publishDate),
-        image: null,
-      };
-      if (post.image) {
-        item.image = `https://www.whexy.com/${post.image}`;
-      }
-      feed.addItem(item);
-    });
+  allBlogs.forEach((post: Blog) => {
+    const item = {
+      title: post.title,
+      id: `https://www.whexy.com/posts/${post.slug}`,
+      link: `https://www.whexy.com/posts/${post.slug}`,
+      description: post.summary,
+      author: [
+        {
+          name: "Wenxuan SHI",
+          email: "whexy@outlook.com",
+          link: "https://www.whexy.com",
+        },
+      ],
+      date: parseISO(post.publishDate),
+      image: null,
+    };
+    if (post.image) {
+      item.image = `https://www.whexy.com/${post.image}`;
+    }
+    feed.addItem(item);
+  });
 
   // Output: RSS 2.0
   fs.writeFileSync("public/feed/feed.xml", feed.rss2());

@@ -7,21 +7,22 @@ const KeyView = () => {
       <div className="mx-2">
         <h1 className="py-10 text-3xl text-center">🔑 Public Keys</h1>
         <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
-          This public key is mainly used for digital signatures. In particular,
-          it is used for signing code commits, emails, and important documents.
+          This public key is mainly used for digital signatures. In
+          particular, it is used for signing code commits, emails, and
+          important documents.
         </KeyItemView>
         <KeyItemView title="SSH Keys" keys={key_info["SSH Keys"]}>
-          This public key is only used to log in to the remote server using SSH
-          (when GPG-agent is not available).
+          This public key is only used to log in to the remote server
+          using SSH (when GPG-agent is not available).
         </KeyItemView>
         <div className="font-light text-sm text-jbgray-light pt-5 pb-10 list-decimal">
           <li>
-            Any other public keys that are absent from this page are not
-            representative of me.
+            Any other public keys that are absent from this page are
+            not representative of me.
           </li>
           <li>
-            Any document that is not digitally signed or for which a signature
-            file is not provided does not represent me.
+            Any document that is not digitally signed or for which a
+            signature file is not provided does not represent me.
           </li>
         </div>
       </div>
@@ -36,7 +37,7 @@ const KeyItemView = ({ title, keys, children }) => {
         <div className="text-2xl">{title}</div>
       </div>
       <p className="py-4">{children}</p>
-      {keys.map((key) => (
+      {keys.map(key => (
         <KeyCardView key={key.name} keyItem={key}></KeyCardView>
       ))}
     </div>
@@ -55,7 +56,9 @@ const KeyCardView = ({ keyItem }) => {
       <div className="flex-grow flex flex-col items-start ml-4">
         <div className="text-lg">{keyItem.name}</div>
         <div className="text-sm">
-          <code className="hidden md:block">{keyItem.fingerprint}</code>
+          <code className="hidden md:block">
+            {keyItem.fingerprint}
+          </code>
           <p className="pt-2 text-sm">
             <span className="text-emerald-700 dark:text-emerald-500">
               Valid since{" "}

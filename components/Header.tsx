@@ -10,8 +10,12 @@ const Header = () => {
           <Link href="/">
             <a>
               <h1 className="text-xl sm:text-2xl font-mono text-center text-white-readable">
-                <span className="text-white">{metadata.header.logo}</span>
-                <sup className="text-red-500">{metadata.header.sublogo}</sup>
+                <span className="text-white">
+                  {metadata.header.logo}
+                </span>
+                <sup className="text-red-500">
+                  {metadata.header.sublogo}
+                </sup>
               </h1>
             </a>
           </Link>

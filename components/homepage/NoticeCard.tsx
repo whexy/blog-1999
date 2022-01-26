@@ -14,8 +14,9 @@ export default function NoticeCard() {
           </div>
           <div className="sm:pl-3 flex-1 font-light">
             <div className="secondbg p-4 border rounded-xl">
-              I am currently seeking a PhD position outside of mainland China.
-              For more information about my academic background, please check{" "}
+              I am currently seeking a PhD position outside of
+              mainland China. For more information about my academic
+              background, please check{" "}
               <Link href="/about">
                 <a className="underline text-yellow-600 dark:text-yellow-300">
                   https://shiwx.org

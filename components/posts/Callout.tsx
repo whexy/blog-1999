@@ -1,5 +1,8 @@
 import { useState } from "react";
-import { ChevronUpIcon, ChevronDownIcon } from "@heroicons/react/solid";
+import {
+  ChevronUpIcon,
+  ChevronDownIcon,
+} from "@heroicons/react/solid";
 
 const Callout = ({ title, canFold, children }) => {
   const [fold, setfold] = useState(true);
@@ -11,8 +14,9 @@ const Callout = ({ title, canFold, children }) => {
       }}
     >
       <div
-        className={`pt-4 ${(canFold && fold) && "py-4"
-          } flex justify-center items-center relative`}
+        className={`pt-4 ${
+          canFold && fold && "py-4"
+        } flex justify-center items-center relative`}
       >
         <h5 className="text-[1.1em] font-semibold text-center text-red-700 dark:text-red-300">
           {title}
@@ -27,8 +31,11 @@ const Callout = ({ title, canFold, children }) => {
           </button>
         )}
       </div>
-      {(canFold && fold) ||
-        <div className="prose-p:mt-0 px-4 pb-4 prose-sm md:prose dark:prose-invert">{children}</div>}
+      {(canFold && fold) || (
+        <div className="prose-p:mt-0 px-4 pb-4 prose-sm md:prose dark:prose-invert">
+          {children}
+        </div>
+      )}
     </div>
   );
 };

@@ -10,8 +10,7 @@ const metadata = {
     email: "gwhexy@gmail.com",
     url: "https://shiwx.org",
   },
-  year: "2022"
+  year: "2022",
 };
-
 
 export default metadata;

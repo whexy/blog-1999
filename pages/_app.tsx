@@ -28,7 +28,9 @@ const MyApp = ({ Component, pageProps }) => {
       setTheme(storedTheme);
       console.log({ storedTheme });
     } else {
-      const WindowPreferenceDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      const WindowPreferenceDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
       setTheme(WindowPreferenceDark ? "dark" : "light");
       console.log({ storedTheme, WindowPreferenceDark });
     }
@@ -36,7 +38,7 @@ const MyApp = ({ Component, pageProps }) => {
 
   /* Google Analytics */
   useEffect(() => {
-    const handleRouteChange = (url) => {
+    const handleRouteChange = url => {
       ga.pageview(url);
     };
     router.events.on("routeChangeComplete", handleRouteChange);
@@ -45,7 +47,6 @@ const MyApp = ({ Component, pageProps }) => {
       router.events.off("routeChangeComplete", handleRouteChange);
     };
   }, [router.events]);
-
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
@@ -75,7 +76,10 @@ const MyApp = ({ Component, pageProps }) => {
         />
         <meta name="msapplication-TileColor" content="#ffc40d" />
         <meta name="theme-color" content="#1D1D1F" />
-        <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+        <meta
+          name="viewport"
+          content="initial-scale=1.0, width=device-width"
+        />
         <link
           rel="alternate"
           type="application/rss+xml"
