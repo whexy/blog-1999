@@ -17,7 +17,7 @@ export const Dialog = ({ children }) => {
 
 export const DialogBack = ({ children }) => {
   return (
-    <div className="mr-4 not-prose flex justify-start items-center">
+    <div className="mt-2 mr-4 not-prose flex justify-start items-center">
       <div
         style={{ transform: `scale(-1, 1)` }}
         className="flex-shrink-0"
