@@ -9,13 +9,32 @@ const GithubRepo = ({ repo }: { repo: string }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const RepoEndpoint = `https://api.github.com/repos/` + repo;
-    fetch(RepoEndpoint)
-      .then(res => res.json())
-      .then(data => {
+    async function getRepoData(repo: string) {
+      const RepoEndpoint = `https://api.github.com/repos/` + repo;
+      const res = await fetch(RepoEndpoint);
+      const data = await res.json();
+
+      // API hit
+      if ("name" in data) {
         setData(data);
-        if ("name" in data) setIsLoading(false);
-      });
+        setIsLoading(false);
+        return;
+      }
+
+      // Fallback
+      const FallbackRepoEndpoint =
+        `https://whexy.com/api/github-repo/` + repo;
+      const FallbackRes = await fetch(FallbackRepoEndpoint);
+      const FallbackData = await FallbackRes.json();
+
+      // Fallback hit
+      if ("name" in FallbackData) {
+        setData(FallbackData);
+        setIsLoading(false);
+        return;
+      }
+    }
+    getRepoData(repo);
   }, [repo]);
 
   return (
@@ -27,19 +46,19 @@ const GithubRepo = ({ repo }: { repo: string }) => {
       ) : (
         <div className="not-prose max-w-xl mx-auto">
           <Link href={data.html_url}>
-            <a>
-              <div className="p-4 secondbg border rounded-xl flex">
-                <div className="grid place-items-center">
+            <a className="group">
+              <div className="p-4 secondbg border rounded-xl flex space-x-4">
+                <div className="flex-none grid place-items-center">
                   <Image
                     src={data.owner.avatar_url}
                     alt={data.owner.login}
-                    height={100}
-                    width={100}
+                    height={60}
+                    width={60}
                   />
                 </div>
-                <div className="flex flex-col justify-between">
+                <div className="flex flex-col justify-between space-y-1">
                   <div>
-                    <p className="font-semibold text-lg">
+                    <p className="font-semibold text-lg group-hover:underline">
                       {data.name}
                     </p>
                     <p className="font-light text-sm">
