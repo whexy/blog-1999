@@ -17,6 +17,9 @@
       "@/data/*": [
         "data/*"
       ],
+      "@/projects/*": [
+        "projects/*"
+      ],
     },
     "target": "es5",
     "lib": [
