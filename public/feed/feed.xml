@@ -4,7 +4,7 @@
         <title>Wenxuan's blog</title>
         <link>https://www.whexy.com/</link>
         <description>Wenxuan's blog</description>
-        <lastBuildDate>Thu, 20 Jan 2022 17:44:15 GMT</lastBuildDate>
+        <lastBuildDate>Wed, 26 Jan 2022 13:25:53 GMT</lastBuildDate>
         <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
         <generator>Whexy Feed Generator</generator>
         <language>zh</language>
@@ -65,6 +65,7 @@
             <pubDate>Sun, 09 Jan 2022 00:00:00 GMT</pubDate>
             <description><![CDATA[2014 年，我注册了这个域名用来自建博客发表文章，相继用过了 WordPress，Hexo，Hugo 等等博客系统。去年突发奇想，想要 DIY 一个。迭代更新了半年时间，收到了不少朋友们的好评。本文主要介绍一下这个博客系统开发过程中总结的经验。]]></description>
             <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/blog-diy/title.png" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[FaaS：为静态博客添加点赞功能]]></title>
@@ -247,6 +248,15 @@
             <pubDate>Thu, 26 Sep 2019 00:00:00 GMT</pubDate>
             <description><![CDATA[大二刚开学，为了服务广大深受数据结构与算法课程折磨的同学。写了一个帮助 debug 的平台。代码一塌糊涂，不过产品思路还是不错的。]]></description>
             <author>whexy@outlook.com (Wenxuan SHI)</author>
+        </item>
+        <item>
+            <title><![CDATA[Simple RISC-V Emulator in WebAssembly]]></title>
+            <link>https://www.whexy.com/posts/wasm-rv-emu</link>
+            <guid>https://www.whexy.com/posts/wasm-rv-emu</guid>
+            <pubDate>Sat, 22 Jan 2022 00:00:00 GMT</pubDate>
+            <description><![CDATA[We wrote an emulator of RISC-V architecture in Rust, and turn it into a WebAssembly package. In this way, everyone can explore RISC-V without leaving the brower.]]></description>
+            <author>whexy@outlook.com (Wenxuan SHI)</author>
+            <enclosure url="https://www.whexy.com//images/wasm-rv-emu-title.png" length="0" type="image/png"/>
         </item>
         <item>
             <title><![CDATA[圣诞节与“供应链安全”]]></title>

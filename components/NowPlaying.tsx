@@ -3,7 +3,7 @@ import fetcher from "@/lib/fetcher";
 
 const NowPlaying = () => {
   const { data } = useSWR(
-    "https://whexy.com/api/now-playing",
+    "/api/now-playing",
     fetcher,
   );
 

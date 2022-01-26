@@ -23,7 +23,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
 
       // Fallback
       const FallbackRepoEndpoint =
-        `https://whexy.com/api/github-repo/` + repo;
+        `/api/github-repo/` + repo;
       const FallbackRes = await fetch(FallbackRepoEndpoint);
       const FallbackData = await FallbackRes.json();
 
