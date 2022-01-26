@@ -7,9 +7,11 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const data = await getRepoData(repo);
 
   if ("name" in data) {
+    // Backend server refresh status every 10 minutes,
+    // while the cache is valid for 20 minutes.
     res.setHeader(
       "Cache-Control",
-      "public, s-maxage=600, stale-while-revalidate=60",
+      "public, s-maxage=1200, stale-while-revalidate=600",
     );
     return res.status(200).json(data);
   } else {

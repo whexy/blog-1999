@@ -1,0 +1,13 @@
+{
+  "name": "rv_emu_rs",
+  "description": "A RISC-V 32-bit emulator written in Rust",
+  "version": "0.1.0",
+  "files": [
+    "rv_emu_rs_bg.wasm",
+    "rv_emu_rs.js",
+    "rv_emu_rs.d.ts"
+  ],
+  "module": "rv_emu_rs.js",
+  "types": "rv_emu_rs.d.ts",
+  "sideEffects": false
+}

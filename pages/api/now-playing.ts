@@ -23,6 +23,9 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const albumImageUrl = song.item.album.images[0].url;
   const songUrl = song.item.external_urls.spotify;
 
+  // Backend server refresh status every 30 seconds,
+  // while the cache is valid for 60 seconds.
+  // So the refresh process can run for at most 60 - 30 = 30 seconds.
   res.setHeader(
     "Cache-Control",
     "public, s-maxage=60, stale-while-revalidate=30",
