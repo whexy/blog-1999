@@ -6,7 +6,7 @@ const handle = async (req: NextApiRequest, res: NextApiResponse) => {
   const repo = query.repo as string;
   const data = await getRepoData(repo);
 
-  if ("name" in data) {
+  if (data && "name" in data) {
     // Backend server refresh status every 10 minutes,
     // while the cache is valid for 20 minutes.
     res.setHeader(
