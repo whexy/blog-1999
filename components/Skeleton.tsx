@@ -7,7 +7,6 @@ import "react-loading-skeleton/dist/skeleton.css";
 const MySkeleton = (props: SkeletonProps) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "dark";
-  console.log(theme);
 
   if (!isDark)
     return (
