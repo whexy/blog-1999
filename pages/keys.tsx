@@ -46,7 +46,7 @@ const KeyItemView = ({ title, keys, children }) => {
 
 const KeyCardView = ({ keyItem }) => {
   return (
-    <div className="p-4 rounded-xl border flex items-center border-black-readable/20 dark:border-white-readable/20 secondbg">
+    <div className="p-4 rounded-xl border flex items-center secondbg">
       <div className="flex flex-col items-center">
         <KeyIcon className="text-emerald-700 dark:text-emerald-500 w-6 h-6 text-2xl mb-2" />
         <div className="text-sm px-1 rounded border text-jbgray-light border-jbgray-light/20">
