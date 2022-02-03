@@ -71,10 +71,10 @@
         {
             "id": "https://www.whexy.com/posts/blog-diy",
             "url": "https://www.whexy.com/posts/blog-diy",
-            "title": "个人博客搭建指北",
+            "title": "构建自己的博客系统",
             "summary": "2014 年，我注册了这个域名用来自建博客发表文章，相继用过了 WordPress，Hexo，Hugo 等等博客系统。去年突发奇想，想要 DIY 一个。迭代更新了半年时间，收到了不少朋友们的好评。本文主要介绍一下这个博客系统开发过程中总结的经验。",
             "image": "https://www.whexy.com//images/blog-diy/title.png",
-            "date_modified": "2022-01-09T00:00:00.000Z",
+            "date_modified": "2022-02-03T00:00:00.000Z",
             "author": {
                 "name": "Wenxuan SHI",
                 "url": "https://www.whexy.com"
