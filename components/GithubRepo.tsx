@@ -11,8 +11,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
   const username = repo.split("/")[0];
   const repo_name = repo.split("/")[1];
 
-  // use www.whexy.com to forcibly use CDN
-  const { data, error } = useSWR(`https://www.whexy.com/api/github-repo?repo=${repo}`, fetcher);
+  const { data, error } = useSWR(`/api/github-repo?repo=${repo}`, fetcher);
 
   // we need `data.owner.avatar_url`, `data.description`,
   // and `data.stargazers_count`
