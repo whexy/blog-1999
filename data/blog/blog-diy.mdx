@@ -41,9 +41,9 @@ series: 博客搭建手记
 
 由于人脑的局限性，我们无法直接用思想对话。思想观点经过统筹、提炼、加工形成文字，被书写、阐述、表达。这个过程称为“写作与交流”。
 
-由于技术的局限性，我的文字只能通过这块有限大小的屏幕送达到你的眼前。文字再经过统筹、提炼、加工形成博客网页，被观察、触摸、交互。这个过程在我心中和写作交流同等重要，一样属于意识的传递、思想的对话。字体、图表、排印、边界，和我的文本一起同时抵达你。这个过程就由我的博客系统完成。
+由于技术的局限性，我的文字只能通过这块有限大小的屏幕送达到你的眼前。文字再经过统筹、提炼、加工形成博客网页，被观察、触摸、交互。这个过程在我心中和写作交流同等重要，一样属于意识的传递、思想的对话。字体、图表、排印、边界，和我的文本一起同时抵达。这个过程就由我的博客系统完成。
 
-曾经我不关心形式，我鄙视用形式达成目的。但是经过实践我逐渐明白：低级形式是纯粹的目的。中级形式是手段而不是目的。高级形式既是手段又是目的。形式不仅是传递思想的手段——形式即思想。
+曾经我不关心形式，鄙视用形式达成目的。但是经过实践我逐渐明白：低级形式是纯粹的目的。中级形式是手段而不是目的。高级形式既是手段又是目的。形式不仅是传递思想的手段——形式即思想。
 
 ---
 
@@ -61,7 +61,7 @@ series: 博客搭建手记
 自建博客系统最大的好处就是：博主可以完全掌握站点的设计，而不是在主题商店里面矮个子选将军。你的设计甚至可以细化到一个组件在鼠标悬浮时的动画效果。举一个例子：下面的卡片是我的博客系统里一个叫做 AnimatedFancyCard 的组件，使用 react-spring 动画框架制作。鼠标悬浮并缓慢移动时会有 3D 特效。
 
 <AnimatedFancyCard>
-<Callout title="缓慢移动鼠标到四个顶点处">
+<Callout title="🖱 缓慢移动鼠标到四个顶点处">
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 滚滚长江东逝水，浪花淘尽英雄，是非成败转头空。青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风，一壶浊酒喜相逢。古今多少事，都付笑谈中。
@@ -85,7 +85,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 以及模仿 Notion （一款笔记应用）里面 `/callout` 风格的卡片，很适合用作 warning 或者 tips 。
 
-<Callout title="加入组件">
+<Callout title="💡 加入组件">
 在博客文章中加入组件有两种方式。一种是我现在使用的 [MDX](https://mdxjs.com/)，一种 Markdown 的拓展格式，可以在其中添加 React Components。另一种是我之前使用的小 trick：修改 Markdown 渲染器，加入一些自定义语法，使之渲染出特殊的 HTML 标签，再利用标签选择器在 CSS 里定义对应的卡片样式。
 </Callout>
 

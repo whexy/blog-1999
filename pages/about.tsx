@@ -102,7 +102,7 @@ const AboutPage = () => {
 const Callout = ({ title, icon, items, fancy }) => {
   const callout = (
     <div className="not-prose">
-      <div className="rounded-lg secondbg border p-4 max-w-lg mx-auto">
+      <div className="rounded-lg secondbg p-4 max-w-lg mx-auto">
         <h3 className="text-lg font-semibold pb-1">{title}</h3>
         {items.map(item => (
           <div

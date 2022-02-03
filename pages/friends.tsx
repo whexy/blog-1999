@@ -11,7 +11,7 @@ const FriendPage = () => {
           .map(friend => (
             <div
               key={friend.name}
-              className="flex flex-row gap-5 justify-center secondbg items-center py-8 rounded-lg border dark:border border-gray-700 dark:border-white/10 group relative"
+              className="flex flex-row gap-5 justify-center secondbg items-center py-8 rounded-lg group relative"
             >
               <div className="absolute right-4 top-4 h-1 w-1 bg-{{friend.status}}-600 dark:bg-{{friend.status}}-300 rounded-full"></div>
               <div className="transition-all w-16 h-16 ml-8 border-2 dark:border border-gray-700 dark:border-white/10 rounded-full group-hover:scale-105 overflow-hidden">

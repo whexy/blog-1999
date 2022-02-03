@@ -53,7 +53,7 @@ You can see the PMU interrupt handler named "arm-pmu" among them. And do notice 
 
 For example, on my device, the logical interrupt ID of PMU in the first CPU is 36, while the hardware interrupt ID is 36. Logical interrupt ID 36~41 on my machine is left for PMU.
 
-<Callout title={`Think Further`}>
+<Callout title={`💡 Think Further`}>
     Have you ever wondered why Linux maps "hardware interrupt ID" to "logical interrupt ID"? That is because there are various IRQ (interrupt request) domains in the system. Among them, different IRQ handlers take effect on the same hardware interrupt. By interrupt mapping, you can ignore the interrupt you care about when it's not your business.
     
     There are different kinds of interrupt mapping in Linux. For example, our Arm64 Linux uses a linear mapping strategy. Linux running on MIPS architecture uses radix tree mapping.

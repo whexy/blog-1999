@@ -5,7 +5,7 @@ const Ending = () => {
   return (
     <div>
       <div className="max-w-xl mx-auto mb-10">
-        <div className="mx-1 secondbg rounded-xl sm:rounded-full border overflow-hidden dark:text-white">
+        <div className="mx-1 secondbg rounded-xl sm:rounded-full overflow-hidden dark:text-white">
           <div className="grid grid-cols-3 space-x-2">
             <div className="bg-red-500 col-span-1 grid place-items-center overflow-hidden">
               <SubscribePic className="w-full scale-[1.2] sm:scale-100" />

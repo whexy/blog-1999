@@ -1,7 +1,7 @@
 import React from "react";
 
 const QuoteComponent = ({ cite, subcite, children }) => (
-  <div className="relative mx-2 px-2 py-4 rounded-lg secondbg border break-inside-avoid-page">
+  <div className="relative mx-2 px-2 py-4 rounded-lg secondbg break-inside-avoid-page">
     <div
       className="mr-2 text-slate-500/20 absolute top-1 leading-none text-3xl"
       aria-hidden="true"

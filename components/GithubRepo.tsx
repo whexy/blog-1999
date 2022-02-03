@@ -22,7 +22,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
       <div className="not-prose max-w-xl mx-auto">
         <Link href={html_url}>
           <a>
-            <div className="p-4 secondbg border rounded-xl flex space-x-4">
+            <div className="p-4 secondbg rounded-xl flex space-x-4">
               <div className="flex-none grid place-items-center">
                 {data && data.owner ? (
                   <Image

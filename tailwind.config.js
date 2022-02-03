@@ -27,7 +27,7 @@ module.exports = {
           elegant: "#1F1F24",
         },
         secondary: {
-          DEFAULT: "#F4F4F6",
+          DEFAULT: "#F6F6F6",
           dark: "#1F1F24",
         },
         spgray: {
