@@ -6,27 +6,19 @@ export default function PostCard({
   url,
   image,
   summary,
-  preview,
   vol,
 }) {
   return (
     <div>
       <Link href={url ? url : "/"}>
         <a>
-          <div className="flex flex-col -space-y-1 secondbg border transition-all rounded-xl p-4">
+          <div className="flex flex-col -space-y-1 secondbg transition-all rounded-xl p-4">
             <div className="text-sm tracking-wide text-red-600 dark:text-red-500 font-light pb-1">
               <span>VOL.{vol}</span>
             </div>
-            <div className="flex space-x-2 items-center">
-              <p className="text-lg hover:underline">{title}</p>
-              {preview && (
-                <div className="bg-yellow-600 text-white-readable px-2 rounded text-sm">
-                  PREVIEW
-                </div>
-              )}
-            </div>
+            <p className="text-lg hover:underline">{title}</p>
             <div className="pt-2 flex flex-col-reverse sm:space-x-2 sm:flex-row">
-              <div className="text-sm text-gray-700 dark:text-jbgray-light font-light">
+              <div className="text-sm opacity-80 font-light">
                 <p>{summary}</p>
               </div>
               {image && (

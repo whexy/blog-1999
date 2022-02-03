@@ -26,13 +26,11 @@ const MyApp = ({ Component, pageProps }) => {
     const storedTheme = sessionStorage.getItem("theme");
     if (storedTheme) {
       setTheme(storedTheme);
-      console.log({ storedTheme });
     } else {
       const WindowPreferenceDark = window.matchMedia(
         "(prefers-color-scheme: dark)",
       ).matches;
       setTheme(WindowPreferenceDark ? "dark" : "light");
-      console.log({ storedTheme, WindowPreferenceDark });
     }
   }, []);
 

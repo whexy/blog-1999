@@ -22,7 +22,7 @@
 ## Learn more
 I've written a post discussing how to design a blog system.
 
-- [个人博客搭建指北](https://www.whexy.com/posts/blog-diy) (in Chinese)
+- [构建自己的博客系统](https://www.whexy.com/posts/blog-diy) (in Chinese)
 
 ## Overview
 

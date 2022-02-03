@@ -4,7 +4,7 @@
 
 @layer base {
   .secondbg {
-    @apply bg-secondary dark:bg-secondary-dark border-black/10 dark:border-white/10;
+    @apply bg-secondary dark:bg-secondary-dark/50 border-black/10 dark:border-white/10 dark:border shadow-sm dark:shadow-none;
   }
   html,
   body {
