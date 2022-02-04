@@ -2,6 +2,7 @@
   "name": "blog-1999",
   "license": "MIT",
   "author": "Wenxuan SHI <whexy@outlook.com> (https://www.whexy.com)",
+  "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",

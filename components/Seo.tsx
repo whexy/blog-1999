@@ -29,7 +29,7 @@ const Seo: VFC<SeoProps> = props => {
         <meta property="og:description" content={description} />
 
         {/* Twitter Card */}
-        <meta name="twitter:card" content={description} />
+        <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@whexyshi" />
         <meta name="twitter:url" content={url} />
         <meta name="twitter:title" content={title} />
