@@ -11,7 +11,7 @@
     "contentlayer": "contentlayer build"
   },
   "dependencies": {
-    "@giscus/react": "^1.0.1",
+    "@giscus/react": "^1.1.1",
     "@headlessui/react": "^1.4.3",
     "@heroicons/react": "^1.0.5",
     "@mapbox/rehype-prism": "^0.8.0",
@@ -27,6 +27,7 @@
     "next-contentlayer": "^0.0.34",
     "next-mdx-remote": "^3.0.8",
     "next-remote-watch": "^1.0.0",
+    "nextjs-progressbar": "^0.0.13",
     "process": "^0.11.10",
     "react": "17.0.2",
     "react-dom": "17.0.2",

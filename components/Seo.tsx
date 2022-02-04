@@ -9,14 +9,12 @@ export interface SeoProps {
   image: string;
 }
 
+const ROOTPATH = "https://www.whexy.com";
+
 const Seo: VFC<SeoProps> = props => {
   const { title, path, description, image } = props;
-  const rootPath = process.env.NEXT_PUBLIC_VERCEL_URL
-    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
-    : "http://localhost:3000";
-
-  const url = rootPath + path;
-  const imgUrl = rootPath + image;
+  const url = ROOTPATH + path;
+  const imgUrl = ROOTPATH + image;
 
   return (
     <>
