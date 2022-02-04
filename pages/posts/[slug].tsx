@@ -6,8 +6,6 @@ import { allBlogs } from ".contentlayer/data";
 import type { Blog } from ".contentlayer/types";
 import { blurImgURI } from "@/lib/blurImgURI";
 
-import Seo from "@/components/Seo";
-
 export default function Post({
   post,
   bannerURI,
@@ -17,17 +15,9 @@ export default function Post({
 }) {
   const Content = useMDXComponent(post.body.code);
   return (
-    <>
-      <Seo
-        title={post.title}
-        path={`/posts/${post.slug}`}
-        description={post.summary}
-        image={post.image || ""}
-      />
-      <BlogLayout post={post} bannerURI={bannerURI}>
-        <Content components={{ ...components } as unknown} />
-      </BlogLayout>
-    </>
+    <BlogLayout post={post} bannerURI={bannerURI}>
+      <Content components={{ ...components } as unknown} />
+    </BlogLayout>
   );
 }
 

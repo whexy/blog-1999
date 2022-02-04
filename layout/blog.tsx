@@ -3,8 +3,9 @@ import Image from "next/image";
 import { format, parseISO } from "date-fns";
 
 // intra-blog components
+import Seo from "@/components/Seo";
 import Prose from "@/components/Prose";
-import Ending from "@/components/posts/Ending";
+import Comment from "@/components/posts/Comment";
 import License from "@/components/posts/License";
 import Series from "@/components/posts/Series";
 import metadata from "@/data/metadata";
@@ -19,6 +20,12 @@ export default function BlogLayout({
 }: PropsWithChildren<{ post: Blog; bannerURI: string | null }>) {
   return (
     <div>
+      <Seo
+        title={post.title}
+        path={`/posts/${post.slug}`}
+        description={post.summary}
+        image={post.image || ""}
+      />
       <Head>
         <title>
           {post.title} | {metadata.title}
@@ -79,7 +86,10 @@ export default function BlogLayout({
             <License />
           </Prose>
         </article>
-        <Ending />
+        <div>
+          <Comment slug={post.slug} />
+          <div className="pt-5 opacity-0">Good Day</div>
+        </div>
       </div>
     </div>
   );
