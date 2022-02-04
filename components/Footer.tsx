@@ -4,7 +4,7 @@ import Link from "next/link";
 import NowPlaying from "@/components/NowPlaying";
 
 export default function Footer() {
-  const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER;
+  const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const commitURL = `https://github.com/whexy/blog-1999/commit/${commit}`;
   return (
     <footer className="mx-auto sm:max-w-2xl bg-black-readable">
