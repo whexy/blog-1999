@@ -11,8 +11,8 @@ export interface SeoProps {
 
 const Seo: VFC<SeoProps> = props => {
   const { title, path, description, image } = props;
-  const rootPath = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}`
+  const rootPath = process.env.NEXT_PUBLIC_VERCEL_URL
+    ? `https://${process.env.NEXT_PUBLIC_VERCEL_URL}`
     : "http://localhost:3000";
 
   const url = rootPath + path;
