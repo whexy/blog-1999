@@ -4,9 +4,11 @@ import Link from "next/link";
 import NowPlaying from "@/components/NowPlaying";
 
 export default function Footer() {
+  const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_PROVIDER;
+  const commitURL = `https://github.com/whexy/blog-1999/commit/${commit}`;
   return (
     <footer className="mx-auto sm:max-w-2xl bg-black-readable">
-      <div className="py-5 select-none">
+      <div className="pt-5 pb-2 select-none">
         <div className="w-60 mx-auto bg-white/10 rounded-xl flex justify-center items-center divide-x divide-white/20">
           <Avatar className="w-16 h-16" />
           <div className="px-2">
@@ -18,6 +20,13 @@ export default function Footer() {
             </p>
           </div>
         </div>
+      </div>
+      <div className="flex justify-center pb-5">
+        <Link href={commitURL}>
+          <a className="text-white/20 hover:text-white/40 text-xs font-mono">
+            wenxuan-1999 blog system ({commit.substring(0, 8)})
+          </a>
+        </Link>
       </div>
       <hr className="mx-10 border-white/20" />
       <div className="px-10 py-5">
