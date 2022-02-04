@@ -22,6 +22,7 @@ const Seo: VFC<SeoProps> = props => {
     <>
       <Head>
         {/* Facebook Open Graph */}
+        <meta property="og:type" content="website" />
         <meta property="og:site_name" content={title} />
         <meta property="og:url" content={url} />
         <meta property="og:title" content={title} />
