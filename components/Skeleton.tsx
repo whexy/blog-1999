@@ -8,17 +8,14 @@ const MySkeleton = (props: SkeletonProps) => {
   const { theme } = useContext(ThemeContext);
   const isDark = theme === "dark";
 
-  if (!isDark)
-    return (
-      <div>
-        <Skeleton {...props} />
-      </div>
-    );
+  if (!isDark) return <Skeleton {...props} />;
   else
     return (
-      <div>
-        <Skeleton baseColor="#3f3f46" highlightColor="#52525b" {...props} />
-      </div>
+      <Skeleton
+        baseColor="#3f3f46"
+        highlightColor="#52525b"
+        {...props}
+      />
     );
 };
 
