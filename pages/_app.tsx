@@ -4,6 +4,7 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { createContext, useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import NextNProgress from "nextjs-progressbar";
 import * as ga from "@/lib/ga";
 
 export const ThemeContext = createContext(null);
@@ -92,6 +93,12 @@ const MyApp = ({ Component, pageProps }) => {
       `}</style>
       <Header />
       <div className={theme === "light" ? "" : "dark"}>
+        <NextNProgress
+          color="#dc4a41"
+          options={{
+            showSpinner: false,
+          }}
+        />
         <Component {...pageProps} />
       </div>
       <Footer />
