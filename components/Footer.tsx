@@ -1,6 +1,5 @@
 import metadata from "@/data/metadata";
 import Avatar from "@/public/img/notion-avatar.svg";
-import Link from "next/link";
 import AnimatedFancyCard from "./AnimatedFancyCard";
 import NowPlaying from "@/components/NowPlaying";
 
