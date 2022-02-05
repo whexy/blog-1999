@@ -18,15 +18,15 @@ const Series = ({ slug, series }) => {
     }));
   const thisSlug = slug;
   return (
-    <div className="not-prose font-sans relative bg-violet-200/10 rounded-lg border-2 border-violet-200/80 p-4 m-4 break-inside-avoid-page">
-      <div className="absolute left-0 top-0 px-2 bg-violet-300/10 border-b border-r border-violet-300/80 font-bold flex space-x-2 justify-center items-center">
-        <BookOpenIcon className="w-6 h-6" />
+    <div className="not-prose relative m-4 break-inside-avoid-page rounded-lg border-2 border-violet-200/80 bg-violet-200/10 p-4 font-sans">
+      <div className="absolute left-0 top-0 flex items-center justify-center space-x-2 border-b border-r border-violet-300/80 bg-violet-300/10 px-2 font-bold">
+        <BookOpenIcon className="h-6 w-6" />
         <div>{series}</div>
       </div>
-      <div className="text-sm font-light pt-6 pb-4">
+      <div className="pt-6 pb-4 text-sm font-light">
         This article is part of a series.
       </div>
-      <ul className="list-decimal list-inside">
+      <ul className="list-inside list-decimal">
         {seriesPosts.map(({ slug, title }) => (
           <li
             key={slug}

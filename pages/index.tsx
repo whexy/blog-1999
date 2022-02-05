@@ -15,8 +15,8 @@ export default function Home({ posts }) {
       <Head>
         <title>Wenxuan SHI</title>
       </Head>
-      <div className="bg-white dark:bg-black-readable text-black-readable dark:text-white-readable">
-        <main className="px-5 sm:px-0 mx-auto max-w-3xl bg-white dark:bg-black-readable">
+      <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
+        <main className="mx-auto max-w-3xl bg-white px-5 dark:bg-black-readable sm:px-0">
           <BigHi />
           <WelcomeCard />
           <NoticeCard />

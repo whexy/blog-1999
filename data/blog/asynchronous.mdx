@@ -29,7 +29,7 @@ async fn main() {
 }
 ```
 
-Two spawned asynchronous functions are going to change the value in `x`. 
+Two spawned asynchronous functions are going to change the value in `x`.
 
 Using `spawn` allows us to execute the asynchronous functions simultaneously (creating two event loops). Thus we must use Mutex to protect the value of `x`. But `spawn` may not give us another thread to run the program since it is "smart". It will decide whether to create another thread to do that or still using the existing one.
 

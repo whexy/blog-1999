@@ -26,26 +26,26 @@ const NavigationView = () => {
   return (
     <div>
       {/* Mobile View */}
-      <div className="sm:hidden flex items-center justify-center space-x-4">
+      <div className="flex items-center justify-center space-x-4 sm:hidden">
         <button onClick={toggleTheme}>
           {theme === "light" ? (
-            <SunIcon className="w-7 h-7" />
+            <SunIcon className="h-7 w-7" />
           ) : (
-            <MoonIcon className="w-7 h-7" />
+            <MoonIcon className="h-7 w-7" />
           )}
         </button>
         <Menu as="div" className="relative grid place-items-center">
           <Menu.Button>
-            <MenuIcon className="w-7 h-7" />
+            <MenuIcon className="h-7 w-7" />
           </Menu.Button>
-          <Menu.Items className="absolute rounded-lg right-0 top-10 p-4 flex-col space-y-3 text-white bg-black/50 backdrop-blur">
+          <Menu.Items className="absolute right-0 top-10 flex-col space-y-3 rounded-lg bg-black/50 p-4 text-white backdrop-blur">
             <Menu.Item>
               {() => (
                 <MyLink
                   href="/"
                   className="flex items-center space-x-2"
                 >
-                  <HomeIcon className="w-5 h-5" />
+                  <HomeIcon className="h-5 w-5" />
                   <div>Home</div>
                 </MyLink>
               )}
@@ -56,7 +56,7 @@ const NavigationView = () => {
                   href="/keys"
                   className="flex items-center space-x-2"
                 >
-                  <KeyIcon className="w-5 h-5" />
+                  <KeyIcon className="h-5 w-5" />
                   <div>Keys</div>
                 </MyLink>
               )}
@@ -67,7 +67,7 @@ const NavigationView = () => {
                   href="/about"
                   className="flex items-center space-x-2"
                 >
-                  <UserIcon className="w-5 h-5" />
+                  <UserIcon className="h-5 w-5" />
                   <div>About</div>
                 </MyLink>
               )}
@@ -78,7 +78,7 @@ const NavigationView = () => {
                   href="/friends"
                   className="flex items-center space-x-2"
                 >
-                  <UserGroupIcon className="w-5 h-5" />
+                  <UserGroupIcon className="h-5 w-5" />
                   <div>Friends</div>
                 </MyLink>
               )}
@@ -88,41 +88,41 @@ const NavigationView = () => {
       </div>
 
       {/* Desktop View */}
-      <div className="hidden sm:flex space-x-4 items-center">
+      <div className="hidden items-center space-x-4 sm:flex">
         <Link href="/">
           <a className="flex space-x-2">
-            <HomeIcon className="w-5 h-5" />
+            <HomeIcon className="h-5 w-5" />
             <div className="text-sm">Home</div>
           </a>
         </Link>
         <Link href="/keys">
           <a className="flex space-x-2">
-            <KeyIcon className="w-5 h-5" />
+            <KeyIcon className="h-5 w-5" />
             <div className="text-sm">Keys</div>
           </a>
         </Link>
         <Link href="/about">
           <a className="flex space-x-2">
-            <UserIcon className="w-5 h-5" />
+            <UserIcon className="h-5 w-5" />
             <div className="text-sm">About</div>
           </a>
         </Link>
         <Link href="/friends">
           <a className="flex space-x-2">
-            <UserGroupIcon className="w-5 h-5" />
+            <UserGroupIcon className="h-5 w-5" />
             <div className="text-sm">Friends</div>
           </a>
         </Link>
         <button onClick={toggleTheme}>
           {theme === "light" ? (
             <div className="flex space-x-2">
-              <SunIcon className="w-5 h-5" />
-              <div className="text-sm hidden sm:block">Light</div>
+              <SunIcon className="h-5 w-5" />
+              <div className="hidden text-sm sm:block">Light</div>
             </div>
           ) : (
             <div className="flex space-x-2">
-              <MoonIcon className="w-5 h-5" />
-              <div className="text-sm hidden sm:block">Dark</div>
+              <MoonIcon className="h-5 w-5" />
+              <div className="hidden text-sm sm:block">Dark</div>
             </div>
           )}
         </button>

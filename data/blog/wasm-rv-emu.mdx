@@ -9,18 +9,19 @@ This is an exciting project I've been thinking about. A RISC-V Emulator in WASM 
 
 My friend [@MstMoonshine](https://mstmoonshine.github.io/) wrote an emulator of RISC-V architecture in Rust inspired by the video from the "Low Level Javascript" channel on YouTube[^1], where they made a RISC-V CPU on an FPGA in TypeScript. The live coding thing is great there.
 
-[^1]: YouTube video: [Building The Worlds First CPU in TypeScript? (No Really!)](https://www.youtube.com/watch?v=ER7h4ZTe19A) 
+[^1]: YouTube video: [Building The Worlds First CPU in TypeScript? (No Really!)](https://www.youtube.com/watch?v=ER7h4ZTe19A)
 
 <Dialog>
   Wait wait wait, how can you possibly do this with JavaScript?
 </Dialog>
 
 <DialogBack>
-Well, first it's TypeScript rather than JavaScript. And second, there are tools translating TS/JS into HDL(hardware description language). So they can run and test it on FPGA.
+  Well, first it's TypeScript rather than JavaScript. And second,
+  there are tools translating TS/JS into HDL(hardware description
+  language). So they can run and test it on FPGA.
 </DialogBack>
 
 I have a soft spot for TypeScript (basically with which I wrote this entire website), but I love Rust even more. When Mr.Moonshine told me his idea, I was very excited. After fighting the Rust compiler with some whining and cursing, we got a simple prototype that has registers, memories, ALU, with a five level pipeline.
-
 
 Last week I got the idea to turn this babe into a runnable package on browser so everyone can try RISC-V without leaving the blog or downloading any file. The best option would be to turn it into a WebAssembly package. This means we can run a performance-oriented program at a near-native binary speed in a website.
 
@@ -36,7 +37,7 @@ At this stage, we don't have to worry about running out of memory. But this thin
 
 It's too early to show off this project. We still don't support calling convention (e.g. stack memory), error handling, interrupts, device I/O, privilege mode, etc. We don't even have branch instructions. Some of them are easy to implement, but some of them need further discussion.
 
-The final step is to make this emulator a minimal virtual machine on which we can run Operating Systems. Think of running an Linux virtual machine in your browser tab (or maybe in your *mobile* browser tab)!
+The final step is to make this emulator a minimal virtual machine on which we can run Operating Systems. Think of running an Linux virtual machine in your browser tab (or maybe in your _mobile_ browser tab)!
 
 ## Related Work
 
@@ -56,9 +57,7 @@ And on RISC-V:
 
 ## Live Demo
 
-<Dialog>
-  But, isn't it too early to present the project?
-</Dialog>
+<Dialog>But, isn't it too early to present the project?</Dialog>
 
 How can I make you read the entire blog without giving you anything fun? I made this little toy that actually runs a little piece of RISC-V assembly with WebAssembly. Just click the "Run" button and see how the machine works! If you don't believe me, feel free to press F12 and check the `rv_emu_rs.wasm` file (it won't load until you click the button)!
 

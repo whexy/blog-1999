@@ -7,12 +7,12 @@ image: /images/func-color-title.png
 
 2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。
 
-
-
 原文地址: [What Color is Your Function?](https://journal.stuffwithstuff.com/2015/02/01/what-color-is-your-function/) 我得提醒你原文很长，对编程基础要求很高，而且充满了*英文梗*。我强烈建议你读完我的这篇“文言文解析”，再去品析原文的奥妙。
 
 <Callout title="😁 声明">
-这篇文章不是对原文的翻译。我补充了非常多的代码样例，用于论证作者的想法。在文章的后半部分，针对 2021 年的语言现状增加了一些内容。最有趣的是，这篇文章和我的系列文章《细究内存管理》产生了奇妙的交集。在最后“调用栈与时间循环”一节，我脱离作者文稿加入了一些自己的思考。
+  这篇文章不是对原文的翻译。我补充了非常多的代码样例，用于论证作者的想法。在文章的后半部分，针对
+  2021
+  年的语言现状增加了一些内容。最有趣的是，这篇文章和我的系列文章《细究内存管理》产生了奇妙的交集。在最后“调用栈与时间循环”一节，我脱离作者文稿加入了一些自己的思考。
 </Callout>
 
 ## 一门新语言
@@ -38,7 +38,7 @@ function filter(arr, predicate) {
 }
 
 // 例如，我们用 positive 函数判断一个值是否为正数。
-let positive = (x) => x > 0;
+let positive = x => x > 0;
 // 接着我们将 positive 传到 filter 中
 filter([-1, 0, 1], positive);
 // 最终的结果就是 [1, ]
@@ -67,9 +67,7 @@ tokens.match(TOKEN.LEFT_BRACKET, function (token) {
 
 刚才只是新手村。这门新语言看起来和 JavaScript/Python 没什么区别。我们即将遇到第一个 Boss。现在规定：**每个函数都有一个颜色，要么是红色，要么是蓝色。**不管是具名函数还是匿名函数都必须遵守这个规则。
 
-<Dialog>
-匿名函数……听说你们更喜欢叫“闭包”，或者“lambda”。
-</Dialog>
+<Dialog>匿名函数……听说你们更喜欢叫“闭包”，或者“lambda”。</Dialog>
 
 现在我们不能用 `function` 定义函数了，只能用 <code className="!text-red-500">red function</code> 和 <code className="!text-blue-500">blue function</code> 两个关键词，显式的指明函数的颜色。
 
@@ -135,14 +133,16 @@ red function doSomethingRed() {
 
 好啦，我们还是不打谜语了。颜色在这里只是一种比喻，下面揭晓谜底：
 
-<p className="text-center font-bold text-lg">红色函数就是异步函数。</p>
+<p className="text-center text-lg font-bold">
+  红色函数就是异步函数。
+</p>
 
 如果你熟悉 JavaScript 编程就能意识到：每当你通过一个“回调函数”传递返回值时，你就创建了一个红色函数。
 
 ```js
 // 觉得熟悉吗？
 function SendMsg(url, params, cb) {
-  http.post(url, params, (response) => {
+  http.post(url, params, response => {
     // 👈 回调地狱
     let reply = response.data.msg;
     cb(reply);
@@ -213,9 +213,7 @@ function getUserInfo(users) {
 
 所以，像 JavaScript，Dart，C#，Python 等等大多数语言都面临函数颜色的问题。
 
-<Dialog>
-从这里开始，之后的讨论和原文产生了差异。
-</Dialog>
+<Dialog>从这里开始，之后的讨论和原文产生了差异。</Dialog>
 
 那么哪些语言没有颜色问题？Java 对不对？Java 曾经确实是没有颜色问题的语言。真可惜，Java 正在积极引入 Futures 和 Async I/O。不久的将来，Java 程序员也会面临颜色的抉择。
 
@@ -268,7 +266,7 @@ fn main() {
 想象我们要读取若干文件。主函数调用若干次操作系统的异步读取 API，并把对应的回调事件添加到 Loop 中。事件循环会不断在事件列表中寻找可以执行的任务，例如处理用户的点击事件、页面滚动。当某个文件加载完毕，它对应的回调事件在队列中被激活。在下一轮循环中，这个回调事件就能被及时执行。
 
 <Dialog>
-哇，读到这里真是买一赠一。我一不小心介绍了**协程**的原理：其实就是事件循环模型。
+  哇，读到这里真是买一赠一。我一不小心介绍了**协程**的原理：其实就是事件循环模型。
 </Dialog>
 
 你也许会好奇：这里所谓的“事件”，在操作系统看起来是什么？在内存中如何存在？与闭包的处理原则一致，这些“事件”就是存储在**堆**上的数据结构。这是一种特殊的内存管理模型，如果你感兴趣，可以关注我的《细究内存管理》系列文章。

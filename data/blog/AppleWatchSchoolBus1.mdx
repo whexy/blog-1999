@@ -15,7 +15,6 @@ summary: "2020 年 WWDC，苹果更新了 SwiftUI 的第二版。我惊呼：Swi
 
 <GithubRepo repo="whexy/SUSTechBus" />
 
-
 目前南科大的校巴一共有两条线：上山线（终点欣园）和下山线（终点科研楼）。在这个手表 APP 中，要分别显示这两个线路校巴运行的情况。南科大的校巴运行时刻表也有两个版本：工作日版和节假日版。在 APP 中我们要能灵活切换时刻表。
 
 ## 开始做之前
@@ -88,7 +87,7 @@ class Time: Comparable {
     var hour: Int
     var minute: Int
 
-    init(_ 
+    init(_
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: date)
         self.hour = components.hour!

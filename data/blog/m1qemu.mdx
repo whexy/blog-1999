@@ -4,9 +4,7 @@ publishDate: 2021-08-16
 summary: "As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon."
 ---
 
-As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon.
-
-
+As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a Linux kernel in the QEMU on macOS with Apple Silicon.
 
 ~~The M1 is great and blah, blah, blah… but can it run Crisis? Eh.. I mean, QEMU?~~
 
@@ -20,7 +18,7 @@ In this Coding, we are going to build the native version of QEMU running on macO
 
 ### Patch
 
-My solution is to build QEMU by my own. Some blogs early this year [^1] put that the QEMU doesn't support hypervisor framework (**hvf**) in M1, thus it should be patched with Hypervisor framework written by [@_AlexGraf](https://twitter.com/_AlexGraf). 
+My solution is to build QEMU by my own. Some blogs early this year [^1] put that the QEMU doesn't support hypervisor framework (**hvf**) in M1, thus it should be patched with Hypervisor framework written by [@\_AlexGraf](https://twitter.com/_AlexGraf).
 
 Things are changing everyday. Now the main branch has merged some hvf patches, while still not fully support Apple Silicon. Here we use QEMU 6.0 (which is the newest stable version in 24-Aug-2021), and use Alexander Graf's patch v8.
 
@@ -35,7 +33,8 @@ brew install ninja pkgconfig glib pixman
 ```
 
 <Dialog>
-You may need to checkout my Debugging Tips first, to make your life easier.
+  You may need to checkout my Debugging Tips first, to make your life
+  easier.
 </Dialog>
 
 1. Clone the Git repo and checkout to the stable 6.0.0 version
@@ -63,7 +62,6 @@ make -j8
 Unlike the blogs written earlier this year, the only argument is just `--target-list=aarch64-softmmu`. Don't put `--enbale-hvf` or `--disable-gnutls` to it.
 
 4. Install QEMU
-
 
 ```bash
 sudo make install
@@ -110,7 +108,4 @@ I actually encounter many problems when installing QEMU. Here is what you might 
 - Pay attension to the auto config. It will display the infomation whether a feature is enabled or disabled.
 - Use `qemu-system-aarch64 -accel help` to check if your QEMU supports hvf. If not, there are some problems when patching.
 
-
-
 [^1]: [Linux Desktop on Apple Silicon/M1 in Practice](https://gist.github.com/akihikodaki/87df4149e7ca87f18dc56807ec5a1bc5); [在 M1 上用 QEMU 运行 Debian 虚拟机](https://jia.je/software/2021/01/02/aarch64-debian-in-qemu-m1/); etc.
-

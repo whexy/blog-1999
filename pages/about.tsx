@@ -10,7 +10,7 @@ const AboutMDX = allAbouts[0];
 const InfoSection = () => {
   return (
     <div className="flex-shrink-0">
-      <div className="flex flex-col sm:pt-5 pr-2 items-center">
+      <div className="flex flex-col items-center pr-2 sm:pt-5">
         <Image
           src={portrait}
           alt="SHI Wenxuan"
@@ -18,26 +18,26 @@ const InfoSection = () => {
           height={208}
           className=" rounded-full bg-gradient-to-b from-white-readable via-white-readable to-gray-200/80"
         />
-        <div className="text-center mt-4">
+        <div className="mt-4 text-center">
           <h1 className="text-3xl">SHI Wenxuan</h1>
           <p className="font-light text-jbgray-light">
             Senior Undergraduate Student
           </p>
         </div>
-        <div className="pt-5 flex flex-row items-center justify-center justify-items-center space-x-5 text-2xl">
+        <div className="flex flex-row items-center justify-center justify-items-center space-x-5 pt-5 text-2xl">
           <a
             href="mailto://gwhexy@gmail.com"
             target="_blank"
             rel="noreferrer"
           >
-            <MailIcon className="text-[#0c74d4] w-6 h-6" />
+            <MailIcon className="h-6 w-6 text-[#0c74d4]" />
           </a>
           <a
             href="https://github.com/whexy"
             target="_blank"
             rel="noreferrer"
           >
-            <div className="fill-[#24292e] dark:fill-white-readable w-6 h-6">
+            <div className="h-6 w-6 fill-[#24292e] dark:fill-white-readable">
               <svg
                 role="img"
                 viewBox="0 0 24 24"
@@ -53,7 +53,7 @@ const InfoSection = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <div className="fill-[#4d9feb] w-6 h-6">
+            <div className="h-6 w-6 fill-[#4d9feb]">
               <svg
                 role="img"
                 viewBox="0 0 24 24"
@@ -65,11 +65,11 @@ const InfoSection = () => {
             </div>
           </a>
         </div>
-        <div className="pt-4 mx-4 sm:mx-0">
+        <div className="mx-4 pt-4 sm:mx-0">
           <a
             href="/files/WenxuanSHI_CV.pdf"
             target="_blank"
-            className="font-light underline inline-flex items-center space-x-1"
+            className="inline-flex items-center space-x-1 font-light underline"
           >
             <span>Full CV download</span>
           </a>
@@ -85,11 +85,11 @@ const AboutPage = () => {
   return (
     <div>
       <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
-        <div className="py-10 max-w-4xl mx-auto">
-          <div className="flex flex-col sm:flex-row space-y-5 sm:divide-x sm:space-x-4 sm:divide-opacity-20 sm:divide-jbgray-light">
+        <div className="mx-auto max-w-4xl py-10">
+          <div className="flex flex-col space-y-5 sm:flex-row sm:space-x-4 sm:divide-x sm:divide-jbgray-light sm:divide-opacity-20">
             <InfoSection />
             {/* 内容栏 */}
-            <div className="mx-2 sm:mx-0 sm:pl-8 prose-lg prose-headings:font-bold">
+            <div className="prose-lg mx-2 prose-headings:font-bold sm:mx-0 sm:pl-8">
               <Content components={{ Callout }} />
             </div>
           </div>
@@ -102,12 +102,12 @@ const AboutPage = () => {
 const Callout = ({ title, icon, items, fancy }) => {
   const callout = (
     <div className="not-prose">
-      <div className="rounded-lg secondbg p-4 max-w-lg mx-auto">
-        <h3 className="text-lg font-semibold pb-1">{title}</h3>
+      <div className="secondbg mx-auto max-w-lg rounded-lg p-4">
+        <h3 className="pb-1 text-lg font-semibold">{title}</h3>
         {items.map(item => (
           <div
             key={item.title}
-            className="pl-2 py-1 flex flex-row items-center gap-2"
+            className="flex flex-row items-center gap-2 py-1 pl-2"
           >
             <i className={icon}></i>
             <div>

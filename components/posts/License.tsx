@@ -1,7 +1,7 @@
 const License = () => {
   return (
     <div>
-      <p className="font-light text-sm tracking-wider">
+      <p className="text-sm font-light tracking-wider">
         © LICENSED UNDER CC BY-NC-SA 4.0
       </p>
     </div>
