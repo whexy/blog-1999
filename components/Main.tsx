@@ -1,8 +1,8 @@
 const Main = ({ children }) => {
   return (
     <div>
-      <div className="text-black-readable bg-white dark:text-white-readable dark:bg-black-readable">
-        <div className="max-w-3xl mx-auto">{children}</div>
+      <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
+        <div className="mx-auto max-w-3xl">{children}</div>
       </div>
     </div>
   );

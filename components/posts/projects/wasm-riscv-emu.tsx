@@ -48,13 +48,13 @@ const WasmRiscvEmu = () => {
       <div className="flex flex-col space-y-2">
         <div>
           <textarea
-            className="font-mono resize-y h-[450px] p-4 w-full border rounded-xl bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100"
+            className="h-[450px] w-full resize-y rounded-xl border bg-gray-100 p-4 font-mono text-gray-900 dark:bg-gray-900 dark:text-gray-100"
             value={rom}
             onChange={handleChange}
             disabled={true}
           />
         </div>
-        <div className="flex space-x-2 justify-end">
+        <div className="flex justify-end space-x-2">
           {/* <button
             className="rounded-xl bg-blue-100 dark:bg-blue-100/10 border border-blue-200"
             onClick={fillInExample}
@@ -62,11 +62,11 @@ const WasmRiscvEmu = () => {
             <div className="px-4 py-1">Fill in Example</div>
           </button> */}
           <button
-            className="rounded-xl bg-yellow-100 dark:bg-yellow-100/10 border border-yellow-200"
+            className="rounded-xl border border-yellow-200 bg-yellow-100 dark:bg-yellow-100/10"
             onClick={run}
           >
-            <div className="inline-flex px-4 py-1 items-center space-x-1">
-              <PlayIcon className="w-6 h-6" />
+            <div className="inline-flex items-center space-x-1 px-4 py-1">
+              <PlayIcon className="h-6 w-6" />
               <p>Run</p>
             </div>
           </button>
@@ -82,7 +82,7 @@ const WasmRiscvEmu = () => {
         </div>
         {result && (
           <div>
-            <div className="font-mono p-4 w-full border rounded-xl text-sm columns-2 sm:columns-3 bg-gray-100 dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+            <div className="w-full columns-2 rounded-xl border bg-gray-100 p-4 font-mono text-sm text-gray-900 dark:bg-gray-900 dark:text-gray-100 sm:columns-3">
               {result.split("\n").map((line, i) => (
                 <p key={i}>{line}</p>
               ))}

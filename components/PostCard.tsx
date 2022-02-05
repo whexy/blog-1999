@@ -12,23 +12,23 @@ export default function PostCard({
     <div>
       <Link href={url ? url : "/"}>
         <a>
-          <div className="flex flex-col -space-y-1 secondbg transition-all rounded-xl p-4">
-            <div className="text-sm tracking-wide text-red-600 dark:text-red-500 font-light pb-1">
+          <div className="secondbg flex flex-col -space-y-1 rounded-xl p-4 transition-all">
+            <div className="pb-1 text-sm font-light tracking-wide text-red-600 dark:text-red-500">
               <span>VOL.{vol}</span>
             </div>
             <p className="text-lg hover:underline">{title}</p>
-            <div className="pt-2 flex flex-col-reverse sm:space-x-2 sm:flex-row">
-              <div className="text-sm opacity-80 font-light">
+            <div className="flex flex-col-reverse pt-2 sm:flex-row sm:space-x-2">
+              <div className="text-sm font-light opacity-80">
                 <p>{summary}</p>
               </div>
               {image && (
-                <div className="shrink-0 w-full sm:w-1/3 grid place-content-center object-cover pb-2">
+                <div className="grid w-full shrink-0 place-content-center object-cover pb-2 sm:w-1/3">
                   <Image
                     src={image}
                     alt="Cover"
                     height={200}
                     width={400}
-                    className="rounded-xl w-full h-auto"
+                    className="h-auto w-full rounded-xl"
                   />
                 </div>
               )}

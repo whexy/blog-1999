@@ -1,13 +1,11 @@
 ---
-title : "Stop Forkin' Around: Faster Creating of Large Processes on Linux"
+title: "Stop Forkin' Around: Faster Creating of Large Processes on Linux"
 publishDate: 2021-11-04
 summary: "Forking is how a process in Linux is created. Even though the fork has been improved over the years to use the COW (copy-on-write) semantics, it still has to copy a certain amount of data from parent to child. Some students in the lab are working with a fuzzing machine, and they encounter some problems..."
 image: /images/46ktn0.jpg
 ---
 
 Forking is how a process in Linux is created. Even though the fork has been improved over the years to use the COW (copy-on-write) semantics, it still has to copy a certain amount of data from parent to child. Some students in the lab are working with a fuzzing machine, and they encounter some problems...
-
-
 
 **TL;DR**
 
@@ -19,7 +17,8 @@ Forking is how a process in Linux is created. Even though the fork has been impr
 Some students in the lab are working with a fuzzing machine. Fuzzing launches applications thousands of times with mutated input to see if a bug is triggered.
 
 <Dialog>
-  It sounds like raping the application with high computing power, just like what deep learning does to user data.
+  It sounds like raping the application with high computing power,
+  just like what deep learning does to user data.
 </Dialog>
 
 What bothered us is that launching the target application takes more and more time as the fuzzing goes. We sampled the program and found the most time-consuming part is the `fork()` system call. It turned out that the fuzzing process, collecting running information of every launch, grows larger and larger in the memory. When the process bloats to a certain level, cloning becomes a performance impact factor that we cannot ignore.
@@ -56,8 +55,21 @@ The Berkeley version of Unix (BSD) introduced the`vfork()` system call in the ea
 ![](/images/FwRw4r.jpg)
 
 <Callout title={`🤔 Deadlock`}>
-It was discovered that `vfork()` might introduce a new problem when the application has multiple threads running: deadlock. The deadlock can happen due to the dynamic linker `ld.so.1` involvement in resolving the necessary symbols. Particularly, suppose the child process calls an external function (such as `exec()`). In that case, the dynamic linker may be invoked to resolve the Procedure Linkage Table (PLT) entry, for which the dynamic linker will acquire a mutex lock. This lock may already be held by a different thread in the parent process. If this happens, it will create a deadlock between the parent and child processes because the parent is suspended until the child has called `exec()` or `exit()`. As a result, both the parent and the child processes will hang.
-I found it quite interesting because I just met the same problem when writing asynchronized programs in Rust. See my post [Asynchronous Mutex](http://whexy.com/posts/asynchronous/).
+  It was discovered that `vfork()` might introduce a new problem when
+  the application has multiple threads running: deadlock. The deadlock
+  can happen due to the dynamic linker `ld.so.1` involvement in
+  resolving the necessary symbols. Particularly, suppose the child
+  process calls an external function (such as `exec()`). In that case,
+  the dynamic linker may be invoked to resolve the Procedure Linkage
+  Table (PLT) entry, for which the dynamic linker will acquire a mutex
+  lock. This lock may already be held by a different thread in the
+  parent process. If this happens, it will create a deadlock between
+  the parent and child processes because the parent is suspended until
+  the child has called `exec()` or `exit()`. As a result, both the
+  parent and the child processes will hang. I found it quite
+  interesting because I just met the same problem when writing
+  asynchronized programs in Rust. See my post [Asynchronous
+  Mutex](http://whexy.com/posts/asynchronous/).
 </Callout>
 
 #### posix_spawn()

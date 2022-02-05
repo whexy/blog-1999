@@ -16,10 +16,12 @@
 - Styling: Tailwind CSS
 
 ## Live Demo
+
 - [Wenxuan SHI's Blog (Vercel)](https://whexy.com)
 - [Wenxuan SHI's Blog (Azure)](https://www.whexy.com), recommand for users in mainland China.
 
 ## Learn more
+
 I've written a post discussing how to design a blog system.
 
 - [构建自己的博客系统](https://www.whexy.com/posts/blog-diy) (in Chinese)
@@ -36,6 +38,7 @@ I've written a post discussing how to design a blog system.
 - `styles/*` - Fonts and Tailwind CSS config.
 
 ## Running Locally
+
 ```shell
 $ git clone https://github.com/whexy/blog-1999.git
 $ cd blog-1999
@@ -44,7 +47,9 @@ $ yarn dev
 ```
 
 ## Cloning / Fork
+
 Please follow the MIT license and remove all of my personal information (resume, blog posts, images, etc.).
 
 ## Special Thanks
+
 The blog system is inspired by Leerob, the Director of Developer Relations at Vercel. His Next.js blog repo: [https://github.com/leerob/leerob.io](github.com/leerob/leerob.io)

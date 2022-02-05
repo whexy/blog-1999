@@ -1,6 +1,6 @@
 const Prose = ({ children }) => {
   return (
-    <div className="prose md:prose-lg dark:prose-invert prose-slate mx-2 sm:mx-auto overscroll-contain prose-headings:font-sans prose-a:text-red-700 dark:prose-a:text-red-300 prose-a:no-underline hover:prose-a:underline">
+    <div className="prose prose-slate mx-2 overscroll-contain prose-headings:font-sans prose-a:text-red-700 prose-a:no-underline hover:prose-a:underline dark:prose-invert dark:prose-a:text-red-300 sm:mx-auto md:prose-lg">
       {children}
     </div>
   );

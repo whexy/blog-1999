@@ -32,15 +32,15 @@ const WelcomeCard = () => {
       }
       onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
     >
-      <div className="max-w-sm md:max-w-3xl mx-auto bg-gradient-to-b md:bg-gradient-to-r from-red-500 to-yellow-500 md:h-[272px] rounded-xl w-full overflow-hidden">
-        <div className="grid md:grid-cols-3 mx-auto">
-          <div className="md:col-span-1 grid place-items-center overflow-hidden">
+      <div className="mx-auto w-full max-w-sm overflow-hidden rounded-xl bg-gradient-to-b from-red-500 to-yellow-500 md:h-[272px] md:max-w-3xl md:bg-gradient-to-r">
+        <div className="mx-auto grid md:grid-cols-3">
+          <div className="grid place-items-center overflow-hidden md:col-span-1">
             <animated.div
               style={{
                 transform: props.xys.to(trans),
                 filter: props.xys.to(shadowTrans),
               }}
-              className="relative md:mt-[32px] overflow-hidden"
+              className="relative overflow-hidden md:mt-[32px]"
             >
               <Image
                 className="rounded-b-full md:rounded-none"
@@ -52,14 +52,14 @@ const WelcomeCard = () => {
               />
             </animated.div>
           </div>
-          <div className="md:col-span-2 place-self-center px-2 md:px-5 rounded-xl relative flex items-center leading-5 mx-1 my-3 md:ml-0 md:mr-3 md:pb-0 backdrop-blur-lg backdrop-brightness-50">
+          <div className="relative mx-1 my-3 flex items-center place-self-center rounded-xl px-2 leading-5 backdrop-blur-lg backdrop-brightness-50 md:col-span-2 md:ml-0 md:mr-3 md:px-5 md:pb-0">
             <div>
-              <div className="py-4 text-white-readable flex flex-col space-y-2 overflow-ellipsis">
+              <div className="flex flex-col space-y-2 overflow-ellipsis py-4 text-white-readable">
                 <p>
                   I work on topics related to{" "}
                   <b className="text-yellow-300">system</b>.
                   <br />
-                  <span className="text-md text-white-readable/50 font-serif">
+                  <span className="text-md font-serif text-white-readable/50">
                     I fight with the compiler, linker, OS, firmware,
                     bootloader, etc.
                   </span>
@@ -68,7 +68,7 @@ const WelcomeCard = () => {
                   I work on topics related to{" "}
                   <b className="text-yellow-300">security</b>.
                   <br />
-                  <span className="text-md text-white-readable/50 font-serif">
+                  <span className="text-md font-serif text-white-readable/50">
                     I keep eyes on the CVEs, vulnerabilities,
                     malicious codes, etc.
                   </span>
@@ -76,19 +76,19 @@ const WelcomeCard = () => {
                 <p>
                   I know nothing about artificial intelligence.
                   <br />
-                  <span className="text-md text-white-readable/50 font-serif">
+                  <span className="text-md font-serif text-white-readable/50">
                     I do know something about embedded devices.
                   </span>
                 </p>
                 <p>
                   I use Vim. I love Rust.
                   <br />
-                  <span className="text-md text-white-readable/50 font-serif">
+                  <span className="text-md font-serif text-white-readable/50">
                     I design this website myself.
                   </span>
                 </p>
 
-                <div className="flex space-x-2 flex-wrap text-yellow-300 text-sm tracking-tighter font-mono">
+                <div className="flex flex-wrap space-x-2 font-mono text-sm tracking-tighter text-yellow-300">
                   <span>#Rustacean</span>
                   <span>#AppleFan</span>
                   <span>#Blogger</span>
@@ -99,9 +99,9 @@ const WelcomeCard = () => {
               href="https://github.com/whexy"
               target="_blank"
               rel="noreferrer"
-              className="absolute right-4 bottom-4 rounded-full grid place-items-center"
+              className="absolute right-4 bottom-4 grid place-items-center rounded-full"
             >
-              <div className="w-10 h-10 p-2 bg-white/10 rounded-full">
+              <div className="h-10 w-10 rounded-full bg-white/10 p-2">
                 <svg
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"

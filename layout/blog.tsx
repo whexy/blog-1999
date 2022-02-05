@@ -38,7 +38,7 @@ export default function BlogLayout({
       </Head>
       <div className="bg-white dark:bg-black-readable">
         {post.preview && (
-          <div className="px-2 py-4 bg-yellow-400/20 border-b dark:border-white/20 text-center">
+          <div className="border-b bg-yellow-400/20 px-2 py-4 text-center dark:border-white/20">
             <p className="text-sm dark:text-white">
               This article is currently not finished. What you see is
               the preview version. The article may be updated,
@@ -64,8 +64,8 @@ export default function BlogLayout({
         <article className="pt-5 pb-5 font-article">
           <Prose>
             <h1>{post.title}</h1>
-            <div className="flex text-sm font-light lg:text-base justify-between items-center -mt-5 pb-5">
-              <div className="inline-flex space-x-1 items-center">
+            <div className="-mt-5 flex items-center justify-between pb-5 text-sm font-light lg:text-base">
+              <div className="inline-flex items-center space-x-1">
                 <div>{metadata.author.name} / </div>
                 <span className="text-gray-600">
                   {format(

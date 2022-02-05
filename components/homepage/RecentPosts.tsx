@@ -14,17 +14,17 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
     <div>
       <div className="pb-5">
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-red-600 sm:dark:divide-red-500">
-          <div className="sm:shrink-0 w-full sm:w-2/12 whitespace-nowrap sm:pr-2 dark:bg-black-readable">
-            <div className="uppercase font-semibold text-sm text-red-600 dark:text-red-500">
+          <div className="w-full whitespace-nowrap dark:bg-black-readable sm:w-2/12 sm:shrink-0 sm:pr-2">
+            <div className="text-sm font-semibold uppercase text-red-600 dark:text-red-500">
               Posts
             </div>
             <Link href="/posts">
-              <a className="font-black text-lg text-black-readable dark:text-white-readable">
+              <a className="text-lg font-black text-black-readable dark:text-white-readable">
                 博客内容
               </a>
             </Link>
           </div>
-          <div className="pt-2 sm:pl-3 flex-1">
+          <div className="flex-1 pt-2 sm:pl-3">
             <PostCards PostByYear={PostByYear} />
           </div>
         </div>
@@ -54,7 +54,7 @@ const PostCards = ({ PostByYear }) => {
           });
           return (
             <div key={year}>
-              <div className="font-mono font-bold text-2xl pb-3">
+              <div className="pb-3 font-mono text-2xl font-bold">
                 {`${year}`}
               </div>
               <div className="flex-col space-y-5">{postCardView}</div>

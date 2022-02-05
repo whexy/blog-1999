@@ -8,7 +8,6 @@ series: 博客搭建手记
 
 2014 年，我注册了这个域名用来自建博客发表文章，相继用过了 WordPress，Hexo，Hugo 等等博客系统。去年突发奇想，想要 DIY 一个。迭代更新了半年时间，收到了不少朋友们的好评。
 
-
 我的博客系统已经开源到 Github，点个 Star 支持一下吧~
 
 <GithubRepo repo="whexy/blog-1999" />
@@ -27,9 +26,7 @@ series: 博客搭建手记
 
 举个例子，我偶尔写一些系列文章，标题类似于“电锯杀人魔（四）”。现在想要给网站加上系列跳转的功能，可以在正文前后直接跳转到同一系列的其他博客文章。
 
-<Dialog>
-  注意是直接跳转，而不是利用标签（tags）进行索引。
-</Dialog>
+<Dialog>注意是直接跳转，而不是利用标签（tags）进行索引。</Dialog>
 
 如果使用 Hexo 作为博客系统，就不可避免地需要写插件；写插件就不可避免地需要读 Hexo 那一塌糊涂的开发者文档；读懂文档就不可避免地需要了解 Hexo 的底层知识……也许你最终写出了插件，但是 it doesn't work，因为 Hexo 本身有 Bug。那这个时候你还需要去开源社区提 Issue，等修复；如果你足够顽强，也可以提交 PR，和 CI 搏斗，和 Maintainer argue……想象给系统“做手术”：找到合适的位置，切开它的代码，取出旧的器官（部件），填充新的，防止系统由于新部件的引入而崩坏。全程都是在不适感的包围中完成。
 
@@ -65,6 +62,7 @@ series: 博客搭建手记
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
 
 滚滚长江东逝水，浪花淘尽英雄，是非成败转头空。青山依旧在，几度夕阳红。白发渔樵江渚上，惯看秋月春风，一壶浊酒喜相逢。古今多少事，都付笑谈中。
+
 </Callout>
 </AnimatedFancyCard>
 
@@ -86,7 +84,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 以及模仿 Notion （一款笔记应用）里面 `/callout` 风格的卡片，很适合用作 warning 或者 tips 。
 
 <Callout title="💡 加入组件">
-在博客文章中加入组件有两种方式。一种是我现在使用的 [MDX](https://mdxjs.com/)，一种 Markdown 的拓展格式，可以在其中添加 React Components。另一种是我之前使用的小 trick：修改 Markdown 渲染器，加入一些自定义语法，使之渲染出特殊的 HTML 标签，再利用标签选择器在 CSS 里定义对应的卡片样式。
+  在博客文章中加入组件有两种方式。一种是我现在使用的
+  [MDX](https://mdxjs.com/)，一种 Markdown 的拓展格式，可以在其中添加
+  React Components。另一种是我之前使用的小 trick：修改 Markdown
+  渲染器，加入一些自定义语法，使之渲染出特殊的 HTML
+  标签，再利用标签选择器在 CSS 里定义对应的卡片样式。
 </Callout>
 
 ### 页面设计
@@ -170,7 +172,7 @@ Next.js 的思路是，先在服务端渲染好一个 HTML 传递给用户，然
 
 <div>
   <div className="not-prose flex items-center justify-center border">
-    <div className="w-[100px] h-[100px] bg-red-100" />
+    <div className="h-[100px] w-[100px] bg-red-100" />
   </div>
 </div>
 
@@ -201,7 +203,7 @@ Next.js 的思路是，先在服务端渲染好一个 HTML 传递给用户，然
 
 ```html
 <div class="flex items-center justify-center border">
-  <div class="w-[100px] h-[100px] bg-red-100"></div>
+  <div class="h-[100px] w-[100px] bg-red-100"></div>
 </div>
 ```
 
@@ -261,7 +263,9 @@ SEO 收录表征博客文章在搜索引擎的收录情况。实话说我现在�
 各种算法推荐看起来不错，但是久而久之会陷入“信息茧房”，得到一个只为了讨你开心的信息流。如果遇到了你喜欢的博客，应该用 RSS 订阅它的更新。本博客提供两种 RSS 非全文源。[RSS2.0](https://www.whexy.com/feed/feed.xml) 和 [JSON](https://www.whexy.com/feed/feed.json) 版本。
 
 <Dialog>为什么不是全文源？</Dialog>
-<DialogBack>RSS 分发不支持 CSS，如果是全文源，我们的自定义组件就无法正常显示了。</DialogBack>
+<DialogBack>
+  RSS 分发不支持 CSS，如果是全文源，我们的自定义组件就无法正常显示了。
+</DialogBack>
 
 关于 RSS 阅读器，我推荐 iOS/macOS 平台的 Reeder。你也可以自架一个 RSS 订阅中心用于同步各设备之间的阅读数据，例如开源的 [FreshRSS](https://freshrss.org/)。
 

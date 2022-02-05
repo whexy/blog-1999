@@ -14,7 +14,11 @@ module.exports = {
     extend: {
       fontFamily: {
         // sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
-        article: ['"Inter"', '"Noto Serif SC"', ...defaultTheme.fontFamily.sans],
+        article: [
+          '"Inter"',
+          '"Noto Serif SC"',
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       colors: {
         white: {
@@ -40,7 +44,7 @@ module.exports = {
           light: "rgb(138, 138, 140)",
         },
       },
-      typography: (theme) => ({
+      typography: theme => ({
         DEFAULT: {
           css: {
             "code::before": {

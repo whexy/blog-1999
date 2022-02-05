@@ -5,11 +5,11 @@ import NavigationView from "@/components/Navigation";
 const Header = () => {
   return (
     <div>
-      <header className="w-full text-gray-400 bg-black-readable fixed z-50 print:hidden">
-        <div className="max-w-4xl px-5 mx-auto flex flex-row justify-between items-center space-x-8 py-4">
+      <header className="fixed z-50 w-full bg-black-readable text-gray-400 print:hidden">
+        <div className="mx-auto flex max-w-4xl flex-row items-center justify-between space-x-8 px-5 py-4">
           <Link href="/">
             <a>
-              <h1 className="text-xl sm:text-2xl font-mono text-center text-white-readable">
+              <h1 className="text-center font-mono text-xl text-white-readable sm:text-2xl">
                 <span className="text-white">
                   {metadata.header.logo}
                 </span>
@@ -20,7 +20,7 @@ const Header = () => {
             </a>
           </Link>
           <div>
-            <div className="flex flex-row flex-nowrap justify-center items-center space-x-4">
+            <div className="flex flex-row flex-nowrap items-center justify-center space-x-4">
               <NavigationView />
             </div>
           </div>

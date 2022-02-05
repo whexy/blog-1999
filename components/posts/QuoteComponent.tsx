@@ -1,15 +1,15 @@
 import React from "react";
 
 const QuoteComponent = ({ cite, subcite, children }) => (
-  <div className="relative mx-2 px-2 py-4 rounded-lg secondbg break-inside-avoid-page">
+  <div className="secondbg relative mx-2 break-inside-avoid-page rounded-lg px-2 py-4">
     <div
-      className="mr-2 text-slate-500/20 absolute top-1 leading-none text-3xl"
+      className="absolute top-1 mr-2 text-3xl leading-none text-slate-500/20"
       aria-hidden="true"
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
         viewBox="0 0 24 24"
-        className="w-14 h-14 fill-slate-500/20"
+        className="h-14 w-14 fill-slate-500/20"
         style={{ transform: "scale(-1, -1)" }}
       >
         <path d="M0 0h24v24H0V0z" fill="none" />
@@ -18,7 +18,7 @@ const QuoteComponent = ({ cite, subcite, children }) => (
     </div>
     <div className="pl-8 pr-2 text-sm">{children}</div>
     {cite && (
-      <div className="not-prose opacity-70 pr-2 text-right">
+      <div className="not-prose pr-2 text-right opacity-70">
         <p className="text-sm font-bold">{cite}</p>
         {subcite && <p className="text-base">{subcite}</p>}
       </div>

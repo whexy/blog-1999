@@ -13,7 +13,7 @@ const ImgComponent = ({ src, alt, width, height, blurDataURL }) => {
         />
       </div>
       {alt && (
-        <div className="text-center font-light text-jbgray-light text-sm">
+        <div className="text-center text-sm font-light text-jbgray-light">
           {alt}
         </div>
       )}
