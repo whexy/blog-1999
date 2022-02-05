@@ -73,7 +73,7 @@ const Comment = ({ slug }: { slug: string }) => {
   });
 
   return (
-    <div className="mx-auto max-w-3xl px-2 py-2">
+    <div className="mx-auto max-w-3xl px-2">
       <MemoGiscus
         slug={slug}
         repo="whexy/whexy-blog-comments"

@@ -37,16 +37,6 @@ export default function BlogLayout({
         ></link>
       </Head>
       <div className="bg-white dark:bg-black-readable">
-        {post.preview && (
-          <div className="border-b bg-yellow-400/20 px-2 py-4 text-center dark:border-white/20">
-            <p className="text-sm dark:text-white">
-              This article is currently not finished. What you see is
-              the preview version. The article may be updated,
-              modified or deleted at any time. Arguments, data or
-              links in the text may not be available or credible.
-            </p>
-          </div>
-        )}
         {post.image && (
           <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
             <Image
@@ -67,7 +57,7 @@ export default function BlogLayout({
             <div className="-mt-5 flex items-center justify-between pb-5 text-sm font-light lg:text-base">
               <div className="inline-flex items-center space-x-1">
                 <div>{metadata.author.name} / </div>
-                <span className="text-gray-600">
+                <span>
                   {format(
                     parseISO(post.publishDate),
                     "MMMM dd, yyyy",
@@ -86,9 +76,8 @@ export default function BlogLayout({
             <License />
           </Prose>
         </article>
-        <div>
+        <div className="pb-10">
           <Comment slug={post.slug} />
-          <div className="pt-5 opacity-0">Good Day</div>
         </div>
       </div>
     </div>
