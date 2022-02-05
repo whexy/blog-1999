@@ -24,6 +24,14 @@
   }
 }
 
+.rehype-code-title {
+  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-200/10 dark:bg-[#24252f] dark:text-gray-200;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
 .footnotes {
   @apply pb-4 text-sm;
 }

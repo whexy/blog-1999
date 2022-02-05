@@ -6,6 +6,7 @@ import {
 
 // rehype and remark plugins
 import rehypePrism from "@mapbox/rehype-prism";
+import rehypeCodeTitles from "rehype-code-titles";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
@@ -54,6 +55,7 @@ const contentLayerConfig = makeSource({
   mdx: {
     rehypePlugins: [
       [rehypeImagePlaceholder, { dir: "public" }],
+      rehypeCodeTitles,
       rehypePrism,
       rehypeKatex,
     ],
