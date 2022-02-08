@@ -32,17 +32,19 @@ const NowPlaying = () => {
     <div className="flex items-center justify-between text-white-readable">
       {data && data.isPlaying ? (
         <div className="flex flex-shrink-0 items-center space-x-4">
-          <div className="relative h-[50px] w-[50px] overflow-hidden rounded-full border border-white/10">
+          <div className="relative grid h-[50px] w-[50px] place-items-center overflow-hidden rounded-full border border-white/20">
             <div className="absolute z-20 grid h-[50px] w-[50px] place-items-center">
               <div className="h-[10px] w-[10px] rounded-full border border-white/10 bg-black-readable"></div>
             </div>
             <animated.div style={props}>
-              <Image
-                src={data.albumImageUrl}
-                alt="Album"
-                height={50}
-                width={50}
-              />
+              <div className="relative h-[50px] w-[50px]">
+                <Image
+                  src={data.albumImageUrl}
+                  alt="Album"
+                  layout="fill"
+                  objectFit="cover"
+                />
+              </div>
             </animated.div>
           </div>
           <a
