@@ -88,11 +88,16 @@ const WelcomeCard = () => {
                   </span>
                 </p>
 
-                <div className="flex flex-wrap space-x-2 font-mono text-sm tracking-tighter text-yellow-300">
-                  <span>#Rustacean</span>
-                  <span>#AppleFan</span>
-                  <span>#Blogger</span>
-                </div>
+                <p className="font-mono text-sm tracking-tighter text-yellow-300">
+                  <a
+                    href="https://matrix.to/#/@whexy:matrix.org"
+                    target="_blank"
+                    rel="noreferrer"
+                    title="Matrix is an open, lightweight protocol for decentralized, real-time communication."
+                  >
+                    @whexy:matrix.org
+                  </a>
+                </p>
               </div>
             </div>
             <a
