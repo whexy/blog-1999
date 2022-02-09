@@ -12,6 +12,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
+import pangu from "remark-pangu";
 
 // post data plugins
 import readingTime from "reading-time";
@@ -59,7 +60,7 @@ const contentLayerConfig = makeSource({
       rehypePrism,
       rehypeKatex,
     ],
-    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages],
+    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages, pangu],
   },
 });
 

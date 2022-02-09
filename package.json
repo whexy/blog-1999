@@ -40,6 +40,7 @@
     "rehype-katex": "^6.0.2",
     "remark-gfm": "^3.0.1",
     "remark-math": "^5.1.1",
+    "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
     "sharp": "^0.30.0",
     "styled-jsx": "^4.0.1",
