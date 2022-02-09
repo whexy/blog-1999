@@ -39,7 +39,7 @@ series: 博客搭建手记
 
 云服务厂商进一步提出了 FaaS (Function as a Service)，把**计算**和**存储**抽象成一组函数 API。FaaS 是各种 XaaS 的终极形态，是达到“人人可编程”目标的起点。以后的计算机应用技术职业教育可以把重点从体系架构转移到 FaaS 上，FaaS 是真正能促进产业发展的概念。
 
-<Callout title={`Serverless vs Server`}>
+<Callout title="Serverless vs Server">
   拥有云服务器相当于买一辆车，使用 Serverless Function
   相当于租一辆车。买车你需要上牌照、交保险、关心油费和年检，而租来的车可以直接放心开。当然，我们只能完全支配属于自己的车，所以租车和买车之间需要权衡。
 </Callout>
@@ -61,7 +61,7 @@ series: 博客搭建手记
 
 前端实现上，将每篇博客的 URL 经过编码后作为 page_id。后端实现上，用 DynamoDB 做点赞数记录。DynamoDB 是一个 NoSQL 数据库，可以理解成一个拥有超能力的 HashMap。
 
-<Callout title={`🤔 如何实现点赞限制`}>
+<Callout icon="🤔" title="如何实现点赞限制">
   如果没有用户注册与登录的功能，用户指纹也可以用来判断身份。指纹算法有非常丰富的实现，因为这是广告联盟做追踪器
   (Tracker)
   常见的伎俩。用户指纹不是真的指纹，而是通过各种设备信息，如浏览器版本、操作系统、IP
