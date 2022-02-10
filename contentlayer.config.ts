@@ -16,6 +16,7 @@ import pangu from "remark-pangu";
 
 // post data plugins
 import readingTime from "reading-time";
+import { getChineseCharNum } from "./lib/chinese";
 
 const computedFields: ComputedFields = {
   readingTime: {
@@ -25,6 +26,10 @@ const computedFields: ComputedFields = {
   slug: {
     type: "string",
     resolve: doc => doc._raw.sourceFileName.replace(/\.mdx$/, ""),
+  },
+  chineseCharNum: {
+    type: "number",
+    resolve: doc => getChineseCharNum(doc.body.raw),
   },
 };
 
