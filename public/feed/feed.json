@@ -81,6 +81,18 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/dbos",
+            "url": "https://www.whexy.com/posts/dbos",
+            "title": "未来的操作系统基于数据库？",
+            "summary": "通过在 VoltDB 上构建一个 PoC，研究者们证明了可以用分布式数据库提供诸如IPC、任务调度、文件系统的服务。这些服务甚至获得了媲美单机服务的性能。使用数据表实现的 MQ/IPC 服务，某些场景下性能超过了 gRPC。基于数据表的文件系统写入速度超过了 EXT4。",
+            "image": "https://www.whexy.com//images/dbos/Title.png",
+            "date_modified": "2022-02-10T00:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/faas",
             "url": "https://www.whexy.com/posts/faas",
             "title": "FaaS：为静态博客添加点赞功能",

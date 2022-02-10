@@ -18,6 +18,8 @@ export default function BlogLayout({
   post,
   bannerURI,
 }: PropsWithChildren<{ post: Blog; bannerURI: string | null }>) {
+  // If a post contains more than 200 chinese characters, it is considered to be a chinese blog.
+  // const isChineseBlog = post.chineseCharNum >= 200;
   return (
     <div>
       <Seo
