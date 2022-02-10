@@ -2,6 +2,7 @@ import Callout from "@/components/posts/Callout";
 import { Dialog, DialogBack } from "@/components/posts/Dialog";
 import ImgComponent from "@/components/posts/ImgComponent";
 import QuoteComponent from "@/components/posts/QuoteComponent";
+import Small from "@/components/posts/Small";
 import GithubRepo from "@/components/GithubRepo";
 
 // Special Components
@@ -11,6 +12,7 @@ import WasmRiscvEmu from "@/components/posts/projects/wasm-riscv-emu";
 const MDXComponents = {
   img: ImgComponent,
   Quote: QuoteComponent,
+  Small,
   Callout,
   Dialog,
   DialogBack,
