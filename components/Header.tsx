@@ -9,14 +9,14 @@ const Header = () => {
         <div className="mx-auto flex max-w-4xl flex-row items-center justify-between space-x-8 px-5 py-4">
           <Link href="/">
             <a>
-              <h1 className="text-center font-mono text-xl text-white-readable sm:text-2xl">
+              <div className="text-center font-mono text-xl text-white-readable sm:text-2xl">
                 <span className="text-white">
                   {metadata.header.logo}
                 </span>
                 <sup className="text-red-500">
                   {metadata.header.sublogo}
                 </sup>
-              </h1>
+              </div>
             </a>
           </Link>
           <div>

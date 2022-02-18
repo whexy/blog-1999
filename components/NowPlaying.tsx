@@ -29,7 +29,7 @@ const NowPlaying = () => {
   });
 
   return (
-    <div className="flex items-center justify-between text-white-readable">
+    <div className="mx-auto flex scroll-m-0 items-center justify-between overflow-x-hidden text-white-readable">
       {data && data.isPlaying ? (
         <div className="flex flex-shrink-0 items-center space-x-4">
           <div className="relative grid h-[50px] w-[50px] place-items-center overflow-hidden rounded-full border border-white/20">

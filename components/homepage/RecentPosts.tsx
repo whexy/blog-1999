@@ -11,7 +11,7 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
   const PostByYear = _.groupBy(posts, getYear);
 
   return (
-    <div>
+    <div className="my-5">
       <div className="pb-5">
         <div className="p-1 sm:flex sm:justify-between sm:divide-x sm:divide-red-600 sm:dark:divide-red-500">
           <div className="w-full whitespace-nowrap dark:bg-black-readable sm:w-2/12 sm:shrink-0 sm:pr-2">
