@@ -1,5 +1,4 @@
 import PostCard from "@/components/PostCard";
-import Link from "next/link";
 import _ from "lodash";
 import { parseISO } from "date-fns";
 
@@ -18,11 +17,9 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
             <div className="text-sm font-semibold uppercase text-red-600 dark:text-red-500">
               Posts
             </div>
-            <Link href="/posts">
-              <a className="text-lg font-black text-black-readable dark:text-white-readable">
-                博客内容
-              </a>
-            </Link>
+            <div className="text-lg font-black text-black-readable dark:text-white-readable">
+              博客内容
+            </div>
           </div>
           <div className="flex-1 pt-2 sm:pl-3">
             <PostCards PostByYear={PostByYear} />
