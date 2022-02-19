@@ -14,7 +14,9 @@ const ROOTPATH = "https://www.whexy.com";
 const Seo: VFC<SeoProps> = props => {
   const { title, path, description, image } = props;
   const url = ROOTPATH + path;
-  const imgUrl = ROOTPATH + image;
+  const imgUrl = image
+    ? ROOTPATH + image
+    : "https://www.whexy.com/img/ogTitle.png";
 
   return (
     <>
