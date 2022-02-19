@@ -36,6 +36,24 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, []);
 
+  // Monitor system theme change events.
+  useEffect(() => {
+    const handleThemeChange = () => {
+      const WindowPreferenceDark = window.matchMedia(
+        "(prefers-color-scheme: dark)",
+      ).matches;
+      setTheme(WindowPreferenceDark ? "dark" : "light");
+    };
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", handleThemeChange);
+    return () => {
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .removeEventListener("change", handleThemeChange);
+    };
+  }, []);
+
   /* Google Analytics */
   useEffect(() => {
     const handleRouteChange = url => {
