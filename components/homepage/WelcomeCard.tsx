@@ -4,10 +4,10 @@ import BigHi from "@/components/homepage/BigHi";
 
 const WelcomeCard = () => {
   return (
-    <div className="pt-2 sm:pt-0">
-      <div className="secondbg mx-auto w-full overflow-hidden rounded-xl sm:max-w-3xl">
+    <div className="pt-5 sm:pt-0">
+      <div className="secondbg mx-auto w-full overflow-hidden rounded-xl border sm:max-w-3xl">
         <div className="mx-auto grid sm:grid-cols-3 ">
-          <div className="flex space-x-2 bg-[#dddddd] px-4 dark:bg-[#1a1a1a] sm:justify-center sm:px-0">
+          <div className="flex space-x-2 bg-[#ebebeb] px-4 dark:bg-[#1a1a1a] sm:justify-center sm:px-0">
             <ImageCircle />
             <div className="sm:hidden">
               <BigHi />
@@ -24,8 +24,8 @@ const WelcomeCard = () => {
 
 const ImageCircle = () => {
   return (
-    <div className="grid place-items-center py-2  sm:col-span-1">
-      <div className="h-[100px] w-[100px] overflow-hidden rounded-full bg-[#e7e7e7] dark:border dark:border-white/10 dark:bg-[#1d1d20] sm:h-[200px] sm:w-[200px]">
+    <div className="grid place-items-center py-2 sm:col-span-1">
+      <div className="h-[100px] w-[100px] overflow-hidden rounded-full bg-[#e4e4e4] transition-transform duration-500 hover:rotate-6 hover:scale-105 dark:border dark:border-white/10 dark:bg-[#1d1d20] sm:h-[200px] sm:w-[200px]">
         <Image
           alt="me waving"
           src={helloPic}
@@ -42,44 +42,48 @@ const ContentCard = () => {
     <>
       <div>
         <div className="flex flex-col space-y-2 overflow-ellipsis py-4 text-black dark:text-white">
-          <p>
-            I work on topics related to{" "}
-            <b className="text-yellow-600 dark:text-yellow-300">
-              system
-            </b>
-            .
-            <br />
-            <span className="text-sm font-light opacity-70">
+          <div>
+            <p className="text-lg sm:text-base">
+              I work on topics related to{" "}
+              <b className="text-yellow-600 dark:text-yellow-300">
+                system
+              </b>
+              .
+            </p>
+            <p className="text-sm font-light opacity-70">
               I fight with the compiler, linker, OS, firmware,
               bootloader, etc.
-            </span>
-          </p>
-          <p>
-            I work on topics related to{" "}
-            <b className="text-yellow-600 dark:text-yellow-300">
-              security
-            </b>
-            .
-            <br />
-            <span className="text-sm font-light opacity-70">
+            </p>
+          </div>
+          <div>
+            <p className="text-lg sm:text-base">
+              I work on topics related to{" "}
+              <b className="text-yellow-600 dark:text-yellow-300">
+                security
+              </b>
+              .
+            </p>
+            <p className="text-sm font-light opacity-70">
               I keep eyes on the CVEs, vulnerabilities, malicious
               codes, etc.
-            </span>
-          </p>
-          <p>
-            I know nothing about artificial intelligence.
-            <br />
-            <span className="text-sm font-light opacity-70">
+            </p>
+          </div>
+          <div>
+            <p className="text-lg sm:text-base">
+              I know nothing about artificial intelligence.
+            </p>
+            <p className="text-sm font-light opacity-70">
               I do know something about embedded devices.
-            </span>
-          </p>
-          <p>
-            I use Vim. I love Rust.
-            <br />
-            <span className="text-sm font-light opacity-70">
+            </p>
+          </div>
+          <div>
+            <p className="text-lg sm:text-base">
+              I use Vim. I love Rust.
+            </p>
+            <p className="text-sm font-light opacity-70">
               I design this website myself.
-            </span>
-          </p>
+            </p>
+          </div>
 
           <p className="font-mono text-sm tracking-tighter text-yellow-600 dark:text-yellow-300">
             <a
