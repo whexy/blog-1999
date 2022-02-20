@@ -26,4 +26,5 @@ module.exports = withContentlayer()({
     };
     return config;
   },
+  optimizeFonts: false,
 });

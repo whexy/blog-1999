@@ -13,11 +13,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        // sans: ['"Inter"', ...defaultTheme.fontFamily.sans],
         article: [
-          '"Inter"',
+          '"Roboto Serif"',
           '"Noto Serif SC"',
-          ...defaultTheme.fontFamily.sans,
+          ...defaultTheme.fontFamily.serif,
         ],
       },
       colors: {

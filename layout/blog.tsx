@@ -56,7 +56,7 @@ export default function BlogLayout({
         <article className="pt-5 pb-5 font-article">
           <Prose>
             <h1>{post.title}</h1>
-            <div className="-mt-5 flex items-center justify-between pb-5 text-sm font-light lg:text-base">
+            <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm font-light lg:text-base">
               <div className="inline-flex items-center space-x-1">
                 <div>{metadata.author.name} / </div>
                 <span>

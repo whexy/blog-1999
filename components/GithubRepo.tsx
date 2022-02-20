@@ -21,7 +21,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
 
   return (
     <SkeletonTheme enableAnimation={!error}>
-      <div className="not-prose mx-auto max-w-xl">
+      <div className="not-prose mx-auto max-w-xl font-sans">
         <Link href={html_url}>
           <a>
             <div className="secondbg flex space-x-4 rounded-xl p-4">
