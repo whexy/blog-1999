@@ -353,6 +353,18 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/webfont",
+            "url": "https://www.whexy.com/posts/webfont",
+            "title": "博客字体的解决方案",
+            "summary": "关于我非得用衬线字体排印博客文章的那些事：字体的选择、优化、托管与妥协。思源宋体好在哪里？大陆地区能否使用 Google Fonts？怎样在用户体验与服务成本之间找到平衡？",
+            "image": "https://www.whexy.com//images/webfont/Title.png",
+            "date_modified": "2022-02-21T00:00:00.000Z",
+            "author": {
+                "name": "Wenxuan SHI",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/xmas-security",
             "url": "https://www.whexy.com/posts/xmas-security",
             "title": "圣诞节与“供应链安全”",
