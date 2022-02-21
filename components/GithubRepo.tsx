@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { StarIcon, UserIcon } from "@heroicons/react/outline";
-import useSWR from "swr";
+import useSWRImmutable from "swr/immutable";
 import fetcher from "@/lib/fetcher";
 import Skeleton from "@/components/Skeleton";
 import { SkeletonTheme } from "react-loading-skeleton";
@@ -11,7 +11,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
   const username = repo.split("/")[0];
   const repo_name = repo.split("/")[1];
 
-  const { data, error } = useSWR(
+  const { data, error } = useSWRImmutable(
     `/api/github-repo?repo=${repo}`,
     fetcher,
   );
