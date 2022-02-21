@@ -123,6 +123,12 @@ const MyApp = ({ Component, pageProps }) => {
           `,
         }}
       />
+      <Script
+        async
+        defer
+        data-website-id={process.env.NEXT_PUBLIC_UMAMI_TRACKID}
+        src="https://umami-whexy.vercel.app/umami.js"
+      ></Script>
       <style jsx global>{`
         body {
           background-color: #1d1d1f;

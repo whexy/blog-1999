@@ -23,6 +23,15 @@ function MyLink(props) {
 
 const NavigationView = () => {
   const { theme, toggleTheme } = useContext(ThemeContext);
+  const handleThemeToggle = () => {
+    const newTheme = theme === "light" ? "dark" : "light";
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).umami.trackEvent(
+      `${theme} to ${newTheme}`,
+      "theme",
+    );
+    toggleTheme();
+  };
   return (
     <div>
       {/* Mobile View */}
@@ -113,7 +122,7 @@ const NavigationView = () => {
             <div className="text-sm">Friends</div>
           </a>
         </Link>
-        <button onClick={toggleTheme}>
+        <button onClick={handleThemeToggle}>
           {theme === "light" ? (
             <div className="flex space-x-2">
               <SunIcon className="h-5 w-5" />

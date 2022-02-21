@@ -17,6 +17,12 @@ const Series = ({ slug, series }) => {
       slug: p.slug,
     }));
   const thisSlug = slug;
+
+  const trackSeriesRoute = (from: string, to: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (window as any).umami.trackEvent(`${from} - ${to}`, "series");
+  };
+
   return (
     <div className="not-prose relative m-4 break-inside-avoid-page rounded-lg border-2 border-violet-200/80 bg-violet-200/10 p-4 font-sans">
       <div className="absolute left-0 top-0 flex items-center justify-center space-x-2 border-b border-r border-violet-300/80 bg-violet-300/10 px-2 font-bold">
@@ -35,7 +41,9 @@ const Series = ({ slug, series }) => {
             }`}
           >
             <Link href={`/posts/${slug}`}>
-              <a>{title}</a>
+              <a onClick={() => trackSeriesRoute(thisSlug, slug)}>
+                {title}
+              </a>
             </Link>
           </li>
         ))}
