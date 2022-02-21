@@ -11,7 +11,7 @@
     "contentlayer": "contentlayer build"
   },
   "dependencies": {
-    "@giscus/react": "^1.1.1",
+    "@giscus/react": "^1.1.2",
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@mapbox/rehype-prism": "^0.8.0",
