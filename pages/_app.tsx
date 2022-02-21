@@ -127,7 +127,7 @@ const MyApp = ({ Component, pageProps }) => {
         async
         defer
         data-website-id={process.env.NEXT_PUBLIC_UMAMI_TRACKID}
-        src="https://umami-whexy.vercel.app/umami.js"
+        src="https://tc.shiwx.org/tc.js"
       ></Script>
       <style jsx global>{`
         body {
