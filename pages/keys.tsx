@@ -4,27 +4,25 @@ import { KeyIcon, DownloadIcon } from "@heroicons/react/solid";
 const KeyView = () => {
   return (
     <Main>
-      <div className="mx-2">
-        <h1 className="py-10 text-center text-3xl">🔑 Public Keys</h1>
-        <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
-          This public key is mainly used for digital signatures. In
-          particular, it is used for signing code commits, emails, and
-          important documents.
-        </KeyItemView>
-        <KeyItemView title="SSH Keys" keys={key_info["SSH Keys"]}>
-          This public key is only used to log in to the remote server
-          using SSH (when GPG-agent is not available).
-        </KeyItemView>
-        <div className="list-decimal pt-5 pb-10 text-sm font-light text-jbgray-light">
-          <li>
-            Any other public keys that are absent from this page are
-            not representative of me.
-          </li>
-          <li>
-            Any document that is not digitally signed or for which a
-            signature file is not provided does not represent me.
-          </li>
-        </div>
+      <h1 className="py-10 text-center text-3xl">🔑 Public Keys</h1>
+      <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
+        This public key is mainly used for digital signatures. In
+        particular, it is used for signing code commits, emails, and
+        important documents.
+      </KeyItemView>
+      <KeyItemView title="SSH Keys" keys={key_info["SSH Keys"]}>
+        This public key is only used to log in to the remote server
+        using SSH (when GPG-agent is not available).
+      </KeyItemView>
+      <div className="list-decimal pt-5 pb-10 text-sm font-light text-jbgray-light">
+        <li>
+          Any other public keys that are absent from this page are not
+          representative of me.
+        </li>
+        <li>
+          Any document that is not digitally signed or for which a
+          signature file is not provided does not represent me.
+        </li>
       </div>
     </Main>
   );
