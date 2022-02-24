@@ -2,7 +2,7 @@ import PostCard from "@/components/PostCard";
 import _ from "lodash";
 import { parseISO } from "date-fns";
 
-import type { Blog } from ".contentlayer/types";
+import type { Blog } from "contentlayer/generated";
 
 const RecentPosts = ({ posts }: { posts: Blog[] }) => {
   const getYear = (post: Blog) =>

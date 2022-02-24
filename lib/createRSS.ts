@@ -2,9 +2,9 @@ import { Feed } from "feed";
 import { parseISO } from "date-fns";
 import fs from "fs";
 
-import { allBlogs } from ".contentlayer/data";
+import { allBlogs } from "contentlayer/generated";
 
-import type { Blog } from ".contentlayer/types";
+import type { Blog } from "contentlayer/generated";
 
 const createRSS = () => {
   const feed = new Feed({
