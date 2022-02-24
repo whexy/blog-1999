@@ -2,8 +2,8 @@ import { useMDXComponent } from "next-contentlayer/hooks";
 import components from "@/components/posts/MDXComponents";
 import BlogLayout from "@/layout/blog";
 
-import { allBlogs } from ".contentlayer/data";
-import type { Blog } from ".contentlayer/types";
+import { allBlogs } from "contentlayer/generated";
+import type { Blog } from "contentlayer/generated";
 import { blurImgURI } from "@/lib/blurImgURI";
 
 export default function Post({

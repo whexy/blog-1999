@@ -4,7 +4,7 @@ import WelcomeCard from "@/components/homepage/WelcomeCard";
 // import NoticeCard from "@/components/homepage/NoticeCard";
 import RecentPosts from "@/components/homepage/RecentPosts";
 
-import { allBlogs } from ".contentlayer/data";
+import { allBlogs } from "contentlayer/generated";
 import { pick } from "lodash";
 import createRSS from "@/lib/createRSS";
 import generateSiteMap from "@/lib/createSitemap";
