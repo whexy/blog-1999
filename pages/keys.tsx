@@ -1,10 +1,11 @@
 import key_info from "@/data/key";
 import Main from "@/components/Main";
 import { KeyIcon, DownloadIcon } from "@heroicons/react/solid";
+import PageTitle from "@/components/tiny/PageTitle";
 const KeyView = () => {
   return (
     <Main>
-      <h1 className="py-10 text-center text-3xl">🔑 Public Keys</h1>
+      <PageTitle title="Public Keys" emoji="🔑" />
       <KeyItemView title="PGP Keys" keys={key_info["PGP Keys"]}>
         This public key is mainly used for digital signatures. In
         particular, it is used for signing code commits, emails, and
@@ -44,7 +45,7 @@ const KeyItemView = ({ title, keys, children }) => {
 
 const KeyCardView = ({ keyItem }) => {
   return (
-    <div className="secondbg flex items-center rounded-xl p-4">
+    <div className="secondbg mx-auto flex max-w-2xl items-center rounded-xl p-4">
       <div className="flex flex-col items-center">
         <KeyIcon className="mb-2 h-6 w-6 text-2xl text-emerald-700 dark:text-emerald-500" />
         <div className="rounded border border-jbgray-light/20 px-1 text-sm text-jbgray-light">

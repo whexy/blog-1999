@@ -5,6 +5,11 @@ import { MailIcon } from "@heroicons/react/solid";
 import { allAbouts } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
+// tiny
+import PageTitle from "@/components/tiny/PageTitle";
+import Main from "@/components/Main";
+import Twemoji from "@/components/Twemoji";
+
 const AboutMDX = allAbouts[0];
 
 const InfoSection = () => {
@@ -83,26 +88,34 @@ const AboutPage = () => {
   const Content = useMDXComponent(AboutMDX.body.code);
 
   return (
-    <div>
-      <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
-        <div className="mx-auto max-w-4xl py-10">
-          <div className="flex flex-col space-y-5 sm:flex-row sm:space-x-4 sm:divide-x sm:divide-jbgray-light sm:divide-opacity-20">
-            <InfoSection />
-            {/* 内容栏 */}
-            <div className="prose-lg mx-2 prose-headings:font-bold sm:mx-0 sm:pl-8">
-              <Content components={{ Callout }} />
-            </div>
-          </div>
+    <Main>
+      <PageTitle title="About" emoji="👨‍💻" />
+      <div className="mx-auto flex max-w-4xl flex-col space-y-5 pb-10 sm:flex-row sm:space-x-4 sm:divide-x sm:divide-jbgray-light sm:divide-opacity-20">
+        <InfoSection />
+        {/* 内容栏 */}
+        <div className="prose-lg mx-2 prose-headings:font-title prose-headings:font-bold sm:mx-0 sm:pl-8">
+          <Content components={{ Callout, HeadWithIcon }} />
         </div>
       </div>
-    </div>
+    </Main>
+  );
+};
+
+const HeadWithIcon = ({ title, icon }) => {
+  return (
+    <p className="flex items-baseline space-x-2">
+      <p className="h-8 w-8">
+        <Twemoji emoji={icon} />
+      </p>
+      <h3>{title}</h3>
+    </p>
   );
 };
 
 const Callout = ({ title, icon, items, fancy }) => {
   const callout = (
     <div className="not-prose">
-      <div className="secondbg mx-auto max-w-lg rounded-lg p-4">
+      <div className="secondbg mx-auto max-w-lg rounded-lg p-4 font-sans">
         <h3 className="pb-1 text-lg font-semibold">{title}</h3>
         {items.map(item => (
           <div

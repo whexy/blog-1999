@@ -1,9 +1,11 @@
+import Twemoji from "@/components/Twemoji";
+
 const Callout = ({ icon, title, children }) => {
   return (
     <div className="callout secondbg relative mx-auto break-inside-avoid-page rounded-lg px-4 py-1 md:w-11/12">
       {icon && (
-        <span className="absolute top-0 right-2 text-[80px] opacity-20">
-          {icon}
+        <span className="absolute top-4 right-4 h-24 w-24 opacity-20">
+          <Twemoji emoji={icon} />
         </span>
       )}
       <div className="relative z-20 px-4 py-1">

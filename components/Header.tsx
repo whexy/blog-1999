@@ -6,7 +6,7 @@ const Header = () => {
   return (
     <div>
       <header className="fixed z-50 w-full bg-black-readable text-gray-400 print:hidden">
-        <div className="mx-auto flex max-w-4xl flex-row items-center justify-between space-x-8 px-5 py-4">
+        <div className="mx-auto flex max-w-6xl flex-row items-center justify-between space-x-8 px-5 py-4">
           <Link href="/">
             <a>
               <div className="text-center font-mono text-xl text-white-readable sm:text-2xl">
