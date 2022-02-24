@@ -11,7 +11,7 @@ import Series from "@/components/posts/Series";
 import metadata from "@/data/metadata";
 
 import type { PropsWithChildren } from "react";
-import type { Blog } from ".contentlayer/types";
+import type { Blog } from "contentlayer/generated";
 
 export default function BlogLayout({
   children,
@@ -33,10 +33,6 @@ export default function BlogLayout({
           {post.title} | {metadata.title}
         </title>
         <meta name="description" content={post.summary} />
-        <link
-          rel="stylesheet"
-          href="https://cdn.jsdelivr.net/npm/katex@0.15.0/dist/katex.min.css"
-        ></link>
       </Head>
       <div className="bg-white dark:bg-black-readable">
         {post.image && (

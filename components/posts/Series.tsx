@@ -2,7 +2,7 @@ import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/solid";
 import { parseISO } from "date-fns";
 
-import { allBlogs } from ".contentlayer/data";
+import { allBlogs } from "contentlayer/generated";
 
 const Series = ({ slug, series }) => {
   const seriesPosts = allBlogs

@@ -29,6 +29,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
                 {data && data.owner ? (
                   <Image
                     src={data.owner.avatar_url}
+                    className="overflow-hidden rounded-full"
                     alt={username}
                     height={60}
                     width={60}

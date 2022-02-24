@@ -3,6 +3,7 @@ import fetcher from "@/lib/fetcher";
 import { useEffect, useState, VFC } from "react";
 import useSWR from "swr";
 import Skeleton from "@/components/Skeleton";
+import PageTitle from "@/components/tiny/PageTitle";
 
 const numThousands = (num: number): string => {
   return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
@@ -11,9 +12,7 @@ const numThousands = (num: number): string => {
 const KeyView = () => {
   return (
     <Main>
-      <h1 className="py-10 text-3xl font-bold tracking-tight text-black dark:text-white md:text-5xl">
-        Dashboard
-      </h1>
+      <PageTitle title="Dashboard" emoji="📇" />
       <div className="grid grid-cols-1 pb-10 sm:grid-cols-2">
         <AlltimeViewItem />
         <Last24ViewItem />

@@ -7,7 +7,8 @@
       "@/layout/*": ["layout/*"],
       "@/public/*": ["public/*"],
       "@/data/*": ["data/*"],
-      "@/projects/*": ["projects/*"]
+      "@/projects/*": ["projects/*"],
+      "contentlayer/generated": ["./.contentlayer/generated"]
     },
     "target": "es5",
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -24,6 +25,11 @@
     "isolatedModules": true,
     "jsx": "preserve"
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".contentlayer/generated"
+  ],
   "exclude": ["node_modules"]
 }
