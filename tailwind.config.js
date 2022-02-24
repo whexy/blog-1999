@@ -18,6 +18,7 @@ module.exports = {
           '"Noto Serif SC"',
           ...defaultTheme.fontFamily.serif,
         ],
+        title: ['"Lato"', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         white: {

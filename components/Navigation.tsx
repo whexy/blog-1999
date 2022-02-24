@@ -29,8 +29,8 @@ const NavigationView = () => {
       {/* Desktop View */}
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
-        <DesktopNavItem url="/keys" name="Keys" />
         <DesktopNavItem url="/about" name="About" />
+        <DesktopNavItem url="/keys" name="Keys" />
         <DesktopNavItem url="/friends" name="Friends" />
       </div>
       <div className="px-4">

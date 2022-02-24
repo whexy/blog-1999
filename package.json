@@ -43,7 +43,8 @@
     "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
     "styled-jsx": "^5.0.0",
-    "swr": "^1.2.2"
+    "swr": "^1.2.2",
+    "twemoji": "^13.1.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
