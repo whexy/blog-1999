@@ -55,9 +55,20 @@ const About = defineDocumentType(() => ({
   fields: {},
 }));
 
+const Snippet = defineDocumentType(() => ({
+  name: "Snippet",
+  filePathPattern: "snippets/*.mdx",
+  contentType: "mdx",
+  fields: {
+    title: { type: "string", required: true },
+    description: { type: "string", required: true },
+  },
+  computedFields,
+}));
+
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog, About],
+  documentTypes: [Blog, About, Snippet],
   mdx: {
     rehypePlugins: [
       [rehypeImagePlaceholder, { dir: "public" }],
