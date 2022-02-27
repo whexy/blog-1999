@@ -4,6 +4,7 @@ import ImgComponent from "@/components/posts/ImgComponent";
 import QuoteComponent from "@/components/posts/QuoteComponent";
 import Small from "@/components/posts/Small";
 import GithubRepo from "@/components/GithubRepo";
+import Step from "@/components/snippets/Step";
 
 // Special Components
 import AnimatedFancyCard from "@/components/AnimatedFancyCard";
@@ -16,6 +17,7 @@ const MDXComponents = {
   Callout,
   Dialog,
   DialogBack,
+  Step,
   GithubRepo,
   AnimatedFancyCard, // 《个人博客搭建指北》中使用
   WasmRiscvEmu, // 《WASM RISC-V 模拟器》中使用

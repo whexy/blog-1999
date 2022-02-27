@@ -1,10 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  HomeIcon,
-  KeyIcon,
-  UserIcon,
-  UserGroupIcon,
   MenuIcon,
   SunIcon,
   MoonIcon,
@@ -32,6 +28,7 @@ const NavigationView = () => {
         <DesktopNavItem url="/about" name="About" />
         <DesktopNavItem url="/keys" name="Keys" />
         <DesktopNavItem url="/friends" name="Friends" />
+        <DesktopNavItem url="/snippets" name="Snippets" />
       </div>
       <div className="px-4">
         <button
@@ -57,59 +54,12 @@ const MobileMenu = () => {
         <Menu.Button className="umami--click--mobile-menu-button">
           <MenuIcon className="h-7 w-7" />
         </Menu.Button>
-        <Menu.Items className="absolute right-0 top-10 w-[50vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
-          <div className="px-4 py-4">
-            <Menu.Item>
-              {() => (
-                <MyLink
-                  href="/"
-                  className="flex items-center space-x-2"
-                >
-                  <HomeIcon className="h-5 w-5" />
-                  <div>Home</div>
-                </MyLink>
-              )}
-            </Menu.Item>
-          </div>
-          <div className="px-4 py-4">
-            <Menu.Item>
-              {() => (
-                <MyLink
-                  href="/keys"
-                  className="flex items-center space-x-2"
-                >
-                  <KeyIcon className="h-5 w-5" />
-                  <div>Keys</div>
-                </MyLink>
-              )}
-            </Menu.Item>
-          </div>
-          <div className="px-4 py-4">
-            <Menu.Item>
-              {() => (
-                <MyLink
-                  href="/about"
-                  className="flex items-center space-x-2"
-                >
-                  <UserIcon className="h-5 w-5" />
-                  <div>About</div>
-                </MyLink>
-              )}
-            </Menu.Item>
-          </div>
-          <div className="px-4 py-4">
-            <Menu.Item>
-              {() => (
-                <MyLink
-                  href="/friends"
-                  className="flex items-center space-x-2"
-                >
-                  <UserGroupIcon className="h-5 w-5" />
-                  <div>Friends</div>
-                </MyLink>
-              )}
-            </Menu.Item>
-          </div>
+        <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
+          <MobileNavItem url="/" name="Home" />
+          <MobileNavItem url="/about" name="About" />
+          <MobileNavItem url="/keys" name="Keys" />
+          <MobileNavItem url="/friends" name="Friends" />
+          <MobileNavItem url="/snippets" name="Snippets" />
         </Menu.Items>
       </Menu>
     </div>
@@ -136,6 +86,23 @@ const DesktopNavItem: VFC<{ url: string; name: string }> = ({
         </div>
       </a>
     </Link>
+  );
+};
+
+const MobileNavItem: VFC<{ url: string; name: string }> = ({
+  url,
+  name,
+}) => {
+  return (
+    <div className="px-4 py-4">
+      <Menu.Item>
+        {() => (
+          <MyLink href={url} className="flex items-center space-x-2">
+            <div>{name}</div>
+          </MyLink>
+        )}
+      </Menu.Item>
+    </div>
   );
 };
 
