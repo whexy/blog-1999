@@ -10,6 +10,7 @@ module.exports = withContentlayer()({
     domains: [
       "avatars.githubusercontent.com", // Github Avatars
       "i.scdn.co", // Spotify Album Art
+      "img.foreverblog.cn", // Forever Blog
     ],
   },
   webpack: config => {

@@ -56,6 +56,29 @@ const FriendPage = () => {
           <GithubRepo repo="tuna/blogroll" />
         </div>
       </div>
+      <h2 className="py-6 font-title text-2xl">Convention</h2>
+      <div className="pb-10">
+        <div className="secondbg max-w-lg rounded-lg p-4">
+          <div className="flex items-center justify-between">
+            <h2 className="py-2 text-xl">十年之约</h2>
+            <a
+              href="https://www.foreverblog.cn/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Image
+                src="https://img.foreverblog.cn/logo_en_default.png"
+                alt=""
+                width={192}
+                height={27}
+              />
+            </a>
+          </div>
+          <p className="text-sm font-light opacity-80">
+            本网站于2022年2月加入「十年之约」，会持续运维长达十年或更久。
+          </p>
+        </div>
+      </div>
     </Main>
   );
 };
