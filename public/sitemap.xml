@@ -21,6 +21,10 @@
   </url>
 
   <url>
+    <loc>https://www.whexy.com/snippets/angr_dockerfile</loc>
+  </url>
+
+  <url>
     <loc>https://www.whexy.com/blog/12307</loc>
   </url>
 
@@ -146,9 +150,5 @@
 
   <url>
     <loc>https://www.whexy.com/blog/xmas-security</loc>
-  </url>
-
-  <url>
-    <loc>https://www.whexy.com/snippets/angr_dockerfile</loc>
   </url>
 </urlset>
