@@ -103,12 +103,12 @@ const AboutPage = () => {
 
 const HeadWithIcon = ({ title, icon }) => {
   return (
-    <p className="flex items-baseline space-x-2">
+    <div className="flex items-baseline space-x-2">
       <p className="h-8 w-8">
         <Twemoji emoji={icon} />
       </p>
       <h3>{title}</h3>
-    </p>
+    </div>
   );
 };
 
