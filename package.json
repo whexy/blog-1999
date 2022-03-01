@@ -15,7 +15,7 @@
     "@headlessui/react": "^1.5.0",
     "@heroicons/react": "^1.0.5",
     "@mapbox/rehype-prism": "^0.8.0",
-    "@types/lodash": "^4.14.178",
+    "@types/lodash": "^4.14.179",
     "contentlayer": "^0.1.1",
     "date-fns": "^2.28.0",
     "feed": "^4.2.2",
