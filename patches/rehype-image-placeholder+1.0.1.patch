@@ -1,8 +1,8 @@
 diff --git a/node_modules/rehype-image-placeholder/index.js b/node_modules/rehype-image-placeholder/index.js
-index 6dcd625..dc962fe 100644
+index 6dcd625..a58f254 100644
 --- a/node_modules/rehype-image-placeholder/index.js
 +++ b/node_modules/rehype-image-placeholder/index.js
-@@ -21,7 +21,11 @@ export default function setImageSizeAndPlaceholder(options = {}) {
+@@ -21,7 +21,10 @@ export default function setImageSizeAndPlaceholder(options = {}) {
  
            // if you pass a directory such as `public` combine it
            // otherwise use the relative path for the image
