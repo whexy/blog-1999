@@ -4,11 +4,12 @@ import ImgComponent from "@/components/posts/ImgComponent";
 import QuoteComponent from "@/components/posts/QuoteComponent";
 import Small from "@/components/posts/Small";
 import GithubRepo from "@/components/GithubRepo";
-import Step from "@/components/snippets/Step";
+import UITitle from "@/components/posts/UITitle";
 
 // Special Components
 import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 import WasmRiscvEmu from "@/components/posts/projects/wasm-riscv-emu";
+import Step from "@/components/snippets/Step";
 
 const MDXComponents = {
   img: ImgComponent,
@@ -19,6 +20,7 @@ const MDXComponents = {
   DialogBack,
   Step,
   GithubRepo,
+  UITitle,
   AnimatedFancyCard, // 《个人博客搭建指北》中使用
   WasmRiscvEmu, // 《WASM RISC-V 模拟器》中使用
 };
