@@ -1,0 +1,35 @@
+---
+title: "Inspect Element of macOS system App"
+description: "I bet you know serveral native Apps on macOS is written in HTML."
+---
+
+Use these commands:
+
+```shell
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+defaults write -g WebKitDeveloperExtras -bool YES
+```
+
+<Step step="1">Open WebKitDeveloperExtras</Step>
+
+Open your terminal and execute the two shell commands above.
+
+<Step step="2">Check element of macOS "native" Apps</Step>
+
+Run a docker container, forwarding jupyter notebook server to the host with the following command:
+
+```shell
+docker run --platform=linux/amd64 -p 8888:8888 -d whexy/angr_notebook
+```
+
+<Step step="3">Login Jupyter notebook</Step>
+
+Visit `http://localhost:8888` in your browser. You should see the Jupyter notebook server. You should provide a token to login in.
+
+The token can be checked with the following command (replace the `<container_id>` with the real container id):
+
+```shell
+docker inspect <container_id>
+```
+
+<Step step="4">Enjoy!</Step>
