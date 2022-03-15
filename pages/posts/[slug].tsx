@@ -34,7 +34,7 @@ export async function getStaticProps({ params }) {
   // Get BlurImgURI of banner
   // TODO: After React 18, this prop should be replaced with Server Components
   if (post.image) {
-    const bannerURI = await blurImgURI(post.image);
+    const bannerURI = await blurImgURI(`/${post.image}`);
     return {
       props: {
         post,

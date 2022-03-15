@@ -2,7 +2,7 @@
 title: "FaaS：为静态博客添加点赞功能"
 publishDate: 2021-10-29
 summary: "2021 年，我的学生认证陆续过期。借此机会，我退租了国内所有的服务器。行业正在“云服务器”迈向“云服务”，我们也必须紧跟时代的步伐。这篇博客介绍如何使用利用 FaaS (Function As A Service) 为静态博客添加点赞功能。"
-image: /images/jFXNDx.jpg
+image: images/jFXNDx.jpg
 series: 博客搭建手记
 ---
 
@@ -130,7 +130,7 @@ def view(event, context):
 
 在 Gateway 里绑定域名。添加证书，配置好 DNS——💥boom，一个点赞 API 就诞生了。这个 API 不依赖任何私有服务器，完完全全托管在云上。
 
-![](/images/0CtP59.png)
+![](images/0CtP59.png)
 
 你也可以直接试试页面下方的点赞功能。点击 +1 图标，就可以为这篇博客增加一个 <span className="text-pink-500"><i className="fas fa-heart"></i></span>。
 

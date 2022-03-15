@@ -24,7 +24,7 @@ export default function PostCard({
               {image && (
                 <div className="grid w-full shrink-0 place-content-center object-cover pb-2 sm:w-1/3">
                   <Image
-                    src={image}
+                    src={`/${image}`}
                     alt="Cover"
                     height={200}
                     width={400}
