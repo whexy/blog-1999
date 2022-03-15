@@ -2,7 +2,7 @@
 title: "函数颜色理论"
 publishDate: 2021-12-25
 summary: "2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。"
-image: /images/func-color-title.png
+image: images/func-color-title.png
 ---
 
 2015 年，著名程序员 Bob Nystrom 在博客上发表文章 What Color is Your Function，振聋发聩，发人深省，引发了行业内的激烈讨论。6 年过去了，它在各大编程语言的论坛上历久弥新。
@@ -259,7 +259,7 @@ fn main() {
 
 捕获上下文…捕获…上下文……这不就是记录离开位置的另一种方式吗？不少运行时会生成结构体存储闭包的环境信息。将闭包添加到事件循环中，就是另一种“恢复现场”的方式。
 
-![Node.js 的事件循环模型](/images/Node.js-Event-Loop-1.png)
+![Node.js 的事件循环模型](images/Node.js-Event-Loop-1.png)
 
 事件循环（EventLoop），本质上就是一个巨大的 while true 循环，一种不断轮训任务的机制。程序被抽象成“事件”（又叫做任务）的集合，添加到队列中，被一件件完成。事件的执行可以附带前置条件（例如执行事件 C 之前必须保证完成事件 A），这样就形成了事件的依赖关系——等价于函数调用链。记得我们前面写过的 call back 闭包吗？它就是执行过程中被添加到队列中的新事件。
 

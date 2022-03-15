@@ -26,7 +26,7 @@ export default function BlogLayout({
         title={post.title}
         path={`/posts/${post.slug}`}
         description={post.summary}
-        image={post.image || ""}
+        image={`/${post.image}` || ""}
       />
       <Head>
         <title>
@@ -38,7 +38,7 @@ export default function BlogLayout({
         {post.image && (
           <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
             <Image
-              src={post.image}
+              src={`/${post.image}`}
               alt="Cover"
               height={612}
               width={1224}

@@ -2,7 +2,7 @@
 title: "博客字体的解决方案"
 publishDate: 2022-02-21
 summary: "关于我非得用衬线字体排印博客文章的那些事：字体的选择、优化、托管与妥协。思源宋体好在哪里？大陆地区能否使用 Google Fonts？怎样在用户体验与服务成本之间找到平衡？"
-image: "/images/webfont/Title.png"
+image: "images/webfont/Title.png"
 series: 博客搭建手记
 ---
 
@@ -20,13 +20,13 @@ series: 博客搭建手记
 
 系统和应用程序最喜欢使用黑体<Small>（你可以检查一下手边设备的菜单栏、控制中心、APP 抽屉）</Small>，因为它方便在屏幕上快速阅读。随着智能设备对人的“驯化”，我们的大脑已经足够适应黑体，并且能排除掉用它显示的冗余信息。阅读黑体显示的文本时，你很容易走神，或者飞快的滑走——这是因为我们平时就是这样使用手机和电脑的。
 
-![黑体示例：iOS 设置界面](/images/webfont/apple-settings.jpg)
+![黑体示例：iOS 设置界面](images/webfont/apple-settings.jpg)
 
 仿宋适合打印文稿、公共文书，适合大段废话。最鲜活的例子是：标准红头文件的正文部分使用仿宋[^1]。自从红头文件改用仿宋之后，我对仿宋就提不起兴趣。
 
 [^1]: [宋体和仿宋到底有什么区别？- 知乎](https://zhuanlan.zhihu.com/p/66725620)
 
-![仿宋示例：红头文件](/images/webfont/red-head-file.png)
+![仿宋示例：红头文件](images/webfont/red-head-file.png)
 
 我的博客通常写得很长，而且信息熵较高，比较适合用宋体阅读 😊。
 
@@ -34,11 +34,11 @@ series: 博客搭建手记
 
 多数人对于宋体的不适感主要来自于 Windows 自带的丑陋宋体。下图是几种常见字体的比较，相信你看完后应该能理解为什么苹果（使用苹方及 macOS 宋体）比微软（使用雅黑及 Windows 宋体）更受欢迎。
 
-![字体比对](/images/webfont/font-diff.png)
+![字体比对](images/webfont/font-diff.png)
 
 思源宋体是所有宋体之间最丰富的。它能完美显示同一个汉字在不同语言中的变种（简体中文、繁体中文、日语、汉语），还支持七种字重。
 
-![思源宋体的七种字重](/images/webfont/notoserif-weight.png)
+![思源宋体的七种字重](images/webfont/notoserif-weight.png)
 
 自从 2017 年思源宋体推出，它就广受好评。下面引用专业设计师的评论。
 
@@ -104,7 +104,7 @@ series: 博客搭建手记
 
 光字体就 4.28 秒，加上 React+NextJS 离谱的首次加载时间，我会损失超过一半的阅读量。加载时间过长会影响搜索引擎的收录，进一步损失阅读量。
 
-![可访问性：Vercel 曾经给我打出 48 分的低分](/images/webfont/vercel_rate.png)
+![可访问性：Vercel 曾经给我打出 48 分的低分](images/webfont/vercel_rate.png)
 
 此外，巨大的首次加载数据量也会影响网站成本。按照一个用户访问两篇博客计算：如果日均访问量是 1000，服务器一个月需要缴纳将近 1TB 的流量费用。我做博客一没有广告，二没有捐赠通道，纯粹用爱发电。钱包在滴血！
 
@@ -203,7 +203,7 @@ Nel: {"success_fraction":0,"report_to":"cf-nel","max_age":604800}
 
 使用 [Google Webfonts Helper](https://google-webfonts-helper.herokuapp.com/fonts)，可以提取出字体不同字重的文件。它还能生成对应的 CSS 样式表代码，方便添加到项目中。
 
-![Google Webfonts Helper 使用界面](/images/webfont/helper.png)
+![Google Webfonts Helper 使用界面](images/webfont/helper.png)
 
 ### 使用对象存储（COS）
 
