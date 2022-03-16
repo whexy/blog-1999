@@ -8,7 +8,7 @@ const Twemoji = ({ emoji }) => (
       __html: twemoji.parse(emoji, {
         folder: "svg",
         ext: ".svg",
-      }),
+      }) as unknown as string,
     }}
   />
 );

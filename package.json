@@ -46,7 +46,7 @@
     "remark-unwrap-images": "^3.0.1",
     "styled-jsx": "^5.0.1",
     "swr": "^1.2.2",
-    "twemoji": "^13.1.0"
+    "twemoji": "^14.0.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.2.1",
