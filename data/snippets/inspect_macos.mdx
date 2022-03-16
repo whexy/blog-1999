@@ -16,20 +16,6 @@ Open your terminal and execute the two shell commands above.
 
 <Step step="2">Check element of macOS "native" Apps</Step>
 
-Run a docker container, forwarding jupyter notebook server to the host with the following command:
+Right click on a "native" App and select "Inspect Element".
 
-```shell
-docker run --platform=linux/amd64 -p 8888:8888 -d whexy/angr_notebook
-```
-
-<Step step="3">Login Jupyter notebook</Step>
-
-Visit `http://localhost:8888` in your browser. You should see the Jupyter notebook server. You should provide a token to login in.
-
-The token can be checked with the following command (replace the `<container_id>` with the real container id):
-
-```shell
-docker inspect <container_id>
-```
-
-<Step step="4">Enjoy!</Step>
+![](images/inspect_element.png)
