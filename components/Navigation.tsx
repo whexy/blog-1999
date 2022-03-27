@@ -25,10 +25,10 @@ const NavigationView = () => {
       {/* Desktop View */}
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
-        <DesktopNavItem url="/about" name="About" />
-        <DesktopNavItem url="/keys" name="Keys" />
-        <DesktopNavItem url="/friends" name="Friends" />
+        <DesktopNavItem url="/posts" name="Posts" />
         <DesktopNavItem url="/snippets" name="Snippets" />
+        <DesktopNavItem url="/friends" name="Friends" />
+        <DesktopNavItem url="/about" name="About" />
       </div>
       <div className="px-4">
         <button
@@ -56,10 +56,10 @@ const MobileMenu = () => {
         </Menu.Button>
         <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
           <MobileNavItem url="/" name="Home" />
-          <MobileNavItem url="/about" name="About" />
-          <MobileNavItem url="/keys" name="Keys" />
-          <MobileNavItem url="/friends" name="Friends" />
+          <MobileNavItem url="/posts" name="Posts" />
           <MobileNavItem url="/snippets" name="Snippets" />
+          <MobileNavItem url="/friends" name="Friends" />
+          <MobileNavItem url="/about" name="About" />
         </Menu.Items>
       </Menu>
     </div>

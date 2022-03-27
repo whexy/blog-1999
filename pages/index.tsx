@@ -1,5 +1,4 @@
 import Head from "next/head";
-import BigHi from "@/components/homepage/BigHi";
 import WelcomeCard from "@/components/homepage/WelcomeCard";
 // import NoticeCard from "@/components/homepage/NoticeCard";
 import RecentPosts from "@/components/homepage/RecentPosts";
@@ -16,12 +15,8 @@ export default function Home({ posts }) {
         <title>Wenxuan SHI</title>
       </Head>
       <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
-        <main className="mx-auto max-w-3xl bg-white px-5 dark:bg-black-readable sm:px-0">
-          <div className="hidden sm:block">
-            <BigHi />
-          </div>
+        <main className="mx-auto max-w-4xl bg-white px-5 dark:bg-black-readable sm:px-2">
           <WelcomeCard />
-          {/* <NoticeCard /> */}
           <RecentPosts posts={posts} />
         </main>
       </div>
