@@ -3,6 +3,7 @@ import Main from "@/components/Main";
 import PageTitle from "@/components/tiny/PageTitle";
 import { allBlogs } from "contentlayer/generated";
 import { pick } from "lodash";
+import { parseISO, compareDesc } from "date-fns";
 
 const PostsView = ({ posts }) => {
   return (
@@ -16,15 +17,19 @@ const PostsView = ({ posts }) => {
 export default PostsView;
 
 export async function getStaticProps() {
-  const posts = allBlogs.map(post =>
-    pick(post, [
-      "title",
-      "slug",
-      "image",
-      "summary",
-      "preview",
-      "publishDate",
-    ]),
-  );
+  const posts = allBlogs
+    .map(post =>
+      pick(post, [
+        "title",
+        "slug",
+        "image",
+        "summary",
+        "preview",
+        "publishDate",
+      ]),
+    )
+    .sort((p1, p2) =>
+      compareDesc(parseISO(p1.publishDate), parseISO(p2.publishDate)),
+    );
   return { props: { posts } };
 }
