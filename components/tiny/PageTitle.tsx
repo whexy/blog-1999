@@ -9,7 +9,7 @@ const PageTitle: VFC<{ title: string; emoji?: string }> = ({
   return (
     <>
       <Head>
-        <title>{title} | Wenxuan SHI</title>
+        <title>{title} | Wenxuan Shi</title>
       </Head>
       <div className="flex items-center space-x-2">
         {emoji && (

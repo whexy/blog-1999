@@ -6,7 +6,7 @@
     "description": "Wenxuan's blog",
     "icon": "https://www.whexy.com/img/hello.png",
     "author": {
-        "name": "Wenxuan SHI"
+        "name": "Wenxuan Shi"
     },
     "items": [
         {
@@ -17,7 +17,7 @@
             "image": "https://www.whexy.com/images/12307_Title.png",
             "date_modified": "2020-05-28T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -29,7 +29,7 @@
             "image": "https://www.whexy.com/images/2021_summary/Title.png",
             "date_modified": "2022-01-03T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -41,7 +41,7 @@
             "image": "https://www.whexy.com/images/IAiKNDH3ykGw4WR.jpg",
             "date_modified": "2020-07-09T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -52,7 +52,7 @@
             "summary": "Asynchronous programs can also be applied on multi-thread system through thread pool. However, using mutex in it might be a problem.",
             "date_modified": "2021-09-05T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -64,7 +64,7 @@
             "image": "https://www.whexy.com/images/FMYK81ojCNy6LV5.png",
             "date_modified": "2021-11-25T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -76,7 +76,7 @@
             "image": "https://www.whexy.com/images/blog-diy/title.png",
             "date_modified": "2022-02-03T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -88,7 +88,7 @@
             "image": "https://www.whexy.com/images/dbos/Title.png",
             "date_modified": "2022-02-10T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -100,7 +100,7 @@
             "image": "https://www.whexy.com/images/jFXNDx.jpg",
             "date_modified": "2021-10-29T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -112,7 +112,7 @@
             "image": "https://www.whexy.com/images/46ktn0.jpg",
             "date_modified": "2021-11-04T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -124,7 +124,7 @@
             "image": "https://www.whexy.com/images/func-color-title.png",
             "date_modified": "2021-12-25T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -135,7 +135,7 @@
             "summary": "Writing assembly code is hard and boring! However, if you want to set regisiters, read memories, sometimes you must do the dirty work.",
             "date_modified": "2020-11-14T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -146,7 +146,7 @@
             "summary": "Now I am going to introduce our recent work. We call it Investigator. Investigator uses hardware features to diagnose concurrency bugs on Arm.",
             "date_modified": "2021-07-24T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -157,7 +157,7 @@
             "summary": "键盘这玩意，的确是有门道的。但是对于我等这些连计算机行业门道都没摸清楚的人来说，傻乎乎跟风追求某种所谓“键盘”的感觉是没有必要的。同样，倘若连大鼓和军鼓的声音都无法区分，却畅谈某某耳机“低音准高音稳中音甜”，只会让人好一顿嘲笑。",
             "date_modified": "2019-11-12T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -169,7 +169,7 @@
             "image": "https://www.whexy.com/images/digital-signature.png",
             "date_modified": "2021-12-13T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -180,7 +180,7 @@
             "summary": "React 几乎利用了原生 JavaScript 的所有特质。在对 JavaScript 比较熟练的情况下，React 不会给你带来更多的惊喜。不过，相较于 Vue，写 React 也给人一种踏实的感觉。",
             "date_modified": "2020-10-21T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -191,7 +191,7 @@
             "summary": "As a student who is fond of system programming, I always want to develop Linux kernel directly on the M1 Macbook without nested VMs. This blog is a set-up Coding of the developing environment. The target is to run a  Linux kernel in the QEMU on macOS with Apple Silicon.",
             "date_modified": "2021-08-16T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -203,7 +203,7 @@
             "image": "https://www.whexy.com/images/malloc/Title1.png",
             "date_modified": "2021-12-18T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -215,7 +215,7 @@
             "image": "https://www.whexy.com/images/mesh/title.png",
             "date_modified": "2022-03-15T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -226,7 +226,7 @@
             "summary": "今天得空，介绍上个月的成果——一套宿舍电影放映系统的构建。寝室里有一台大屏显示器，晚上关了灯，连上蓝牙低音炮，大家围坐一起看一部电影，真是美滋滋的体验~ 床上有一个支架，用iPad连接AirPods，晚上拉上遮光帘一个人欣赏一部电影，也是美滋滋的体验…",
             "date_modified": "2019-08-03T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -237,7 +237,7 @@
             "summary": "PMU interrupts act as an essential role between hardware and software. It gives the software the ability to gain insight into its execution on the hardware. In this article, I introduce you to the power of PMU and PMI and how to use them to achieve your goal.",
             "date_modified": "2021-10-23T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -248,7 +248,7 @@
             "summary": "在 Rust 中，特征(trait)也可以是泛型。引入泛型特征，一是希望特征不受具体类别的限制，二是希望特征具有更广泛的约束性。",
             "date_modified": "2021-02-01T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -259,7 +259,7 @@
             "summary": "学校老师经常用来发布课件和作业的 Sakai 系统竟也支持使用 WebDAV 协议。通过配置本地的 WebDAV 服务，就能轻松下载课程资源，省时省力。",
             "date_modified": "2020-02-27T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -271,7 +271,7 @@
             "image": "https://www.whexy.com/images/kNxHmjTCLG3tnAX.jpg",
             "date_modified": "2021-11-29T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -282,7 +282,7 @@
             "summary": "大三时期做的游戏平台。主要语言是 Kotlin 和 TypeScript。回头看觉得做得还行，反正当时拿了满分 :)",
             "date_modified": "2021-01-28T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -293,7 +293,7 @@
             "summary": "在南科大的四年，每学期都会遇到 IoT 设备连接校园网的难题。这篇博客主要介绍如何让智能设备绕过认证直接接入校园网，以及这些操作的原理。",
             "date_modified": "2021-12-28T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -304,7 +304,7 @@
             "summary": "我校的校园网还就是与众不同，Post 发出的数据包不是轻易就能弄明白的。本文提出了一种黑魔法 bash 脚本用于类 Unix 系统登录校园网。",
             "date_modified": "2019-08-22T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -315,7 +315,7 @@
             "summary": "macOS 有一个神奇的功能，叫做“时间机器”。当激活这个功能的时候，你可以将系统里的任意文件回滚到之前的任意状态。换句话说，macOS 存档了你每隔一段时间的系统的整个状态。使用这个功能通常需要定期插入硬盘。这篇文章里我通过配置一些网络协议实现了 macOS 局域网内的无感知备份。",
             "date_modified": "2019-08-25T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -326,7 +326,7 @@
             "summary": "本文总结了一些在写论文期间遇到的较为复杂的 LaTeX 问题。其中包括 latexdiff 在多文件环境的使用技巧，以及如何解决 latexindent 的依赖冲突。",
             "date_modified": "2021-05-06T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -337,7 +337,7 @@
             "summary": "I’m watching Jon Gjengset’s live coding stream. And the topic is “Subtyping and Variance”. This is my note.",
             "date_modified": "2021-02-21T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -348,7 +348,7 @@
             "summary": "大二刚开学，为了服务广大深受数据结构与算法课程折磨的同学。写了一个帮助 debug 的平台。代码一塌糊涂，不过产品思路还是不错的。",
             "date_modified": "2019-09-26T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -360,7 +360,7 @@
             "image": "https://www.whexy.com/images/wasm-rv-emu-title.png",
             "date_modified": "2022-01-22T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -372,7 +372,7 @@
             "image": "https://www.whexy.com/images/webfont/Title.png",
             "date_modified": "2022-02-21T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         },
@@ -384,7 +384,7 @@
             "image": "https://www.whexy.com/images/xmas/Title.png",
             "date_modified": "2021-12-24T00:00:00.000Z",
             "author": {
-                "name": "Wenxuan SHI",
+                "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
         }

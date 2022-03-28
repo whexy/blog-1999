@@ -25,11 +25,11 @@
 }
 
 .rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200 bg-gray-200 px-5 py-3 font-mono text-sm font-bold text-gray-800 dark:border-gray-200/10 dark:bg-[#24252f] dark:text-gray-200;
+  @apply rounded-t-lg border border-b-0 border-gray-200/10 bg-[#24252f] px-5 py-3 font-mono text-sm font-bold text-gray-200;
 }
 
 .rehype-code-title + pre {
-  @apply mt-0 rounded-t-none;
+  @apply !mt-0 rounded-t-none;
 }
 
 .footnotes {
@@ -40,10 +40,6 @@
   @apply font-normal text-slate-500 dark:text-slate-300;
 }
 
-.prose pre {
-  @apply border border-gray-200 bg-gray-50 dark:border-gray-200/10 dark:bg-[#282a36];
-}
-
 .prose :not(pre) > code {
   @apply rounded-md border border-gray-100 bg-gray-100 px-1 py-0.5 dark:border-0 dark:bg-gray-800 dark:text-white-readable;
 }
@@ -52,80 +48,68 @@
   @apply rounded-md border border-gray-200 bg-gray-200 px-1 py-0.5 text-gray-800;
 }
 
-.token.comment {
-  @apply text-gray-400 dark:text-[#6272a4];
-}
-
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  @apply text-gray-700 dark:text-[#f8f8f27e];
-}
-
-.token.punctuation {
-  @apply text-gray-700 dark:text-[#f8f8f27e];
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  @apply text-green-500 dark:text-[#50fa7b];
-}
-
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  @apply text-violet-500 dark:text-[#bd93f9];
-}
-
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  @apply text-yellow-500 dark:text-[#ffb86c];
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  @apply text-blue-500 dark:text-[#8be9fd];
-}
-
-.token.function,
-.token.class-name {
-  @apply text-pink-500 dark:text-[#ff79c6];
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  @apply text-yellow-500 dark:text-[#f1fa8c];
-}
-
-code[class*="language-"],
 pre {
-  @apply !text-sm text-gray-800 dark:text-[#f8f8f2];
+  overflow-x: auto;
 }
 
-.prose pre > code {
-  @apply !text-sm text-gray-800 dark:text-[#f8f8f2];
+.code-highlight {
+  float: left; /* 1 */
+  min-width: 100%; /* 2 */
 }
 
-pre::-webkit-scrollbar {
-  display: none !important;
+.code-line {
+  display: block;
+  padding-left: 16px;
+  padding-right: 16px;
+  margin-left: -16px;
+  margin-right: -16px;
+  border-left-width: 4px;
+  border-left-color: rgba(31, 41, 55, 0); /* Set code block color */
 }
 
-pre {
-  -ms-overflow-style: none !important; /* IE and Edge */
-  scrollbar-width: none !important; /* Firefox */
+.code-line.inserted {
+  background-color: rgba(
+    16,
+    185,
+    129,
+    0.2
+  ); /* Set inserted line (+) color */
+}
+
+.code-line.deleted {
+  background-color: rgba(
+    239,
+    68,
+    68,
+    0.2
+  ); /* Set deleted line (-) color */
+}
+
+.highlight-line {
+  margin-left: -16px;
+  margin-right: -16px;
+  background-color: rgba(
+    55,
+    65,
+    81,
+    0.5
+  ); /* Set highlight bg color */
+  border-left-width: 4px;
+  border-left-color: rgb(
+    59,
+    130,
+    246
+  ); /* Set highlight accent border color */
+}
+
+.line-number::before {
+  display: inline-block;
+  width: 1rem;
+  text-align: right;
+  margin-right: 16px;
+  margin-left: -8px;
+  color: rgb(156, 163, 175); /* Line number color */
+  content: attr(line);
 }
 
 /* roboto-serif-100 - latin */

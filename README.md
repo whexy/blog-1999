@@ -17,8 +17,8 @@
 
 ## Live Demo
 
-- [Wenxuan SHI's Blog (Vercel)](https://whexy.com)
-- [Wenxuan SHI's Blog (Azure)](https://www.whexy.com), recommand for users in mainland China.
+- [Wenxuan Shi's Blog (Vercel)](https://whexy.com)
+- [Wenxuan Shi's Blog (Azure)](https://www.whexy.com), recommand for users in mainland China.
 
 ## Learn more
 

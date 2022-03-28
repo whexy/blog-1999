@@ -15,14 +15,14 @@ const createRSS = () => {
     language: "zh",
     image: "https://www.whexy.com/img/hello.png",
     favicon: "https://www.whexy.com/favicon.ico",
-    copyright: "All rights reserved, Wenxuan SHI",
+    copyright: "All rights reserved, Wenxuan Shi",
     generator: "Whexy Feed Generator",
     feedLinks: {
       json: "https://www.whexy.com/feed/feed.json",
       atom: "https://example.com/feed/feed.xml",
     },
     author: {
-      name: "Wenxuan SHI",
+      name: "Wenxuan Shi",
       email: "whexy@outlook.com",
       //   link: "https://www.whexy.com",
     },
@@ -36,7 +36,7 @@ const createRSS = () => {
       description: post.summary,
       author: [
         {
-          name: "Wenxuan SHI",
+          name: "Wenxuan Shi",
           email: "whexy@outlook.com",
           link: "https://www.whexy.com",
         },

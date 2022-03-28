@@ -1,4 +1,5 @@
 import "../styles/globals.css";
+import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
 import Head from "next/head";
 import Script from "next/script";

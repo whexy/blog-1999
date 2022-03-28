@@ -18,13 +18,13 @@ const InfoSection = () => {
       <div className="flex flex-col items-center pr-2 sm:pt-5">
         <Image
           src={portrait}
-          alt="SHI Wenxuan"
+          alt="Shi Wenxuan"
           width={208}
           height={208}
           className=" rounded-full bg-gradient-to-b from-white-readable via-white-readable to-gray-200/80"
         />
         <div className="mt-4 text-center">
-          <h1 className="text-3xl">SHI Wenxuan</h1>
+          <h1 className="text-3xl">Shi Wenxuan</h1>
           <p className="font-light text-jbgray-light">
             Senior Undergraduate Student
           </p>

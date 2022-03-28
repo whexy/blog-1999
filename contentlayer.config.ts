@@ -5,7 +5,7 @@ import {
 } from "contentlayer/source-files";
 
 // rehype and remark plugins
-import rehypePrism from "@mapbox/rehype-prism";
+import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypeKatex from "rehype-katex";

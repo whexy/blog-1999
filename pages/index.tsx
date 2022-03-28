@@ -13,7 +13,7 @@ export default function Home({ posts }) {
   return (
     <>
       <Head>
-        <title>Wenxuan SHI</title>
+        <title>Wenxuan Shi</title>
       </Head>
       <div className="bg-white text-black-readable dark:bg-black-readable dark:text-white-readable">
         <main className="mx-auto max-w-4xl bg-white px-5 dark:bg-black-readable sm:px-2">
