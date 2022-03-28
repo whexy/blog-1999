@@ -28,7 +28,6 @@ const NavigationView = () => {
         <DesktopNavItem url="/posts" name="Posts" />
         <DesktopNavItem url="/snippets" name="Snippets" />
         <DesktopNavItem url="/friends" name="Friends" />
-        <DesktopNavItem url="/about" name="About" />
       </div>
       <div className="px-4">
         <button
@@ -59,7 +58,6 @@ const MobileMenu = () => {
           <MobileNavItem url="/posts" name="Posts" />
           <MobileNavItem url="/snippets" name="Snippets" />
           <MobileNavItem url="/friends" name="Friends" />
-          <MobileNavItem url="/about" name="About" />
         </Menu.Items>
       </Menu>
     </div>

@@ -10,7 +10,7 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
   return (
     <div className="py-5">
       <div className="flex items-center justify-between">
-        <h2 className="pb-2 font-title text-3xl font-bold">
+        <h2 className="pb-2 font-title text-xl font-bold">
           Recent Posts
         </h2>
         <Link href="/posts">

@@ -7,6 +7,7 @@ import { allBlogs } from "contentlayer/generated";
 import { pick } from "lodash";
 import createRSS from "@/lib/createRSS";
 import generateSiteMap from "@/lib/createSitemap";
+import Rss from "@/components/homepage/Rss";
 
 export default function Home({ posts }) {
   return (
@@ -18,6 +19,7 @@ export default function Home({ posts }) {
         <main className="mx-auto max-w-4xl bg-white px-5 dark:bg-black-readable sm:px-2">
           <WelcomeCard />
           <RecentPosts posts={posts} />
+          <Rss />
         </main>
       </div>
     </>
