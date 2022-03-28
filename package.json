@@ -27,7 +27,7 @@
     "markdown-it": "^12.3.2",
     "next": "^12.1.0",
     "next-contentlayer": "^0.1.2",
-    "next-mdx-remote": "^4.0.0",
+    "next-mdx-remote": "^4.0.2",
     "next-remote-watch": "^1.0.0",
     "nextjs-progressbar": "^0.0.14",
     "patch-package": "^6.4.7",
