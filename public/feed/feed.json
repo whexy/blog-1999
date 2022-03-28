@@ -129,6 +129,18 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/harry-potter-and-utf8",
+            "url": "https://www.whexy.com/posts/harry-potter-and-utf8",
+            "title": "怎么打出死亡圣器的标志",
+            "summary": "在B站看哈利波特电影，弹幕里竟然能发死亡圣器的符号。这篇文章分析了背后的原理，并且教你如何利用编码规则拼出你想要的标志。",
+            "image": "https://www.whexy.com/images/utf8/title.png",
+            "date_modified": "2022-03-29T00:00:00.000Z",
+            "author": {
+                "name": "Wenxuan Shi",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/inlineAssembly",
             "url": "https://www.whexy.com/posts/inlineAssembly",
             "title": "Inline Assembly Language in C",
