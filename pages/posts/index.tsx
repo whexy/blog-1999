@@ -26,6 +26,7 @@ export async function getStaticProps() {
         "summary",
         "preview",
         "publishDate",
+        "cat",
       ]),
     )
     .sort((p1, p2) =>
