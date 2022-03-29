@@ -2,6 +2,7 @@ import Head from "next/head";
 import WelcomeCard from "@/components/homepage/WelcomeCard";
 // import NoticeCard from "@/components/homepage/NoticeCard";
 import RecentPosts from "@/components/homepage/RecentPosts";
+import FeaturedPosts from "@/components/homepage/FeaturedPosts";
 
 import { allBlogs } from "contentlayer/generated";
 import { pick } from "lodash";
@@ -19,6 +20,7 @@ export default function Home({ posts }) {
         <main className="mx-auto max-w-4xl bg-white px-5 dark:bg-black-readable sm:px-2">
           <WelcomeCard />
           <RecentPosts posts={posts} />
+          <FeaturedPosts posts={posts} />
           <Rss />
         </main>
       </div>
@@ -39,6 +41,7 @@ export async function getStaticProps() {
       "summary",
       "preview",
       "publishDate",
+      "featured",
     ]),
   );
   return { props: { posts } };

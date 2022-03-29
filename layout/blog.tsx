@@ -12,6 +12,7 @@ import metadata from "@/data/metadata";
 
 import type { PropsWithChildren } from "react";
 import type { Blog } from "contentlayer/generated";
+import Rss from "@/components/homepage/Rss";
 
 export default function BlogLayout({
   children,
@@ -74,6 +75,9 @@ export default function BlogLayout({
             <License />
           </Prose>
         </article>
+        <div className="mx-auto max-w-2xl">
+          <Rss />
+        </div>
         <div className="pb-10">
           <Comment slug={post.slug} />
         </div>
