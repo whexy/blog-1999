@@ -1,9 +1,10 @@
 import Link from "next/link";
-import Image from "next/image";
+// import Image from "next/image";
 
 export default function PostCard({
   title,
   url,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   image,
   summary,
   date,
@@ -16,12 +17,14 @@ export default function PostCard({
             <div className="pb-1 text-sm font-light tracking-wide text-red-600 dark:text-red-500">
               <span>{date}</span>
             </div>
-            <p className="text-lg hover:underline">{title}</p>
+            <p className="font-title text-lg hover:underline">
+              {title}
+            </p>
             <div className="flex flex-col-reverse pt-2">
               <div className="text-sm font-light opacity-80">
                 <p>{summary}</p>
               </div>
-              {image && (
+              {/* {image && (
                 <div className="grid w-full shrink-0 place-content-center object-cover pb-2">
                   <Image
                     src={`/${image}`}
@@ -31,7 +34,7 @@ export default function PostCard({
                     className="h-auto w-full rounded-xl"
                   />
                 </div>
-              )}
+              )} */}
             </div>
           </div>
         </a>
