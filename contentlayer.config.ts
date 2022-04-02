@@ -7,8 +7,8 @@ import {
 // rehype and remark plugins
 import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
-import rehypeImagePlaceholder from "rehype-image-placeholder";
 import rehypeKatex from "rehype-katex";
+import rehypeImgSize from "rehype-img-size";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
@@ -73,7 +73,7 @@ const contentLayerConfig = makeSource({
   documentTypes: [Blog, About, Snippet],
   mdx: {
     rehypePlugins: [
-      [rehypeImagePlaceholder, { dir: "public" }],
+      [rehypeImgSize, { dir: "public" }],
       rehypeCodeTitles,
       rehypePrism,
       rehypeKatex,
