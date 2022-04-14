@@ -52,4 +52,4 @@ Please follow the MIT license and remove all of my personal information (resume,
 
 ## Special Thanks
 
-The blog system is inspired by Leerob, the Director of Developer Relations at Vercel. His Next.js blog repo: [https://github.com/leerob/leerob.io](github.com/leerob/leerob.io)
+The blog system is inspired by Leerob, the Director of Developer Relations at Vercel. His Next.js blog repo: [https://github.com/leerob/leerob.io](https://github.com/leerob/leerob.io)
