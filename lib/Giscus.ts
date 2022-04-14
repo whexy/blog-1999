@@ -1,4 +1,8 @@
-import type { Theme, InputPosition, Lang } from "@giscus/react";
+import type {
+  Theme,
+  InputPosition,
+  AvailableLanguage,
+} from "@giscus/react";
 
 interface ISetConfigMessage {
   setConfig: {
@@ -10,7 +14,7 @@ interface ISetConfigMessage {
     reactionsEnabled?: boolean;
     emitMetadata?: boolean;
     inputPosition?: InputPosition;
-    lang?: Lang;
+    lang?: AvailableLanguage;
   };
 }
 
