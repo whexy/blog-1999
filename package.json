@@ -18,7 +18,7 @@
     "@heroicons/react": "^1.0.6",
     "@mapbox/rehype-prism": "^0.8.0",
     "@types/lodash": "^4.14.181",
-    "contentlayer": "^0.2.2",
+    "contentlayer": "^0.2.4",
     "date-fns": "^2.28.0",
     "feed": "^4.2.2",
     "gray-matter": "^4.0.3",

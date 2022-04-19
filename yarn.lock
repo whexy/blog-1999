@@ -979,22 +979,22 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
-"@contentlayer/cli@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@contentlayer/cli/-/cli-0.2.2.tgz#9c4ae620ed13ffa5515eaf95d6ab614e5cb06256"
-  integrity sha512-CUlnC0BOYitEOdCXuCXX3ysIGLrwMC9n1/DvV6YBCFhz/M/3bU/q9hH+Kv93Meph6MvcxI2VCBLPQw8Zgv7DQA==
+"@contentlayer/cli@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@contentlayer/cli/-/cli-0.2.4.tgz#e47d331b8de1ce97a8ca8fec1081c31c99a9f889"
+  integrity sha512-s89/NJibB4A7hkaJeVVik/Rgl/Z0VkOUXPlXj6X/xQG5SwkJfn9S3IKURrw7p5UhLDMctk9Sb4KAdDTQBGOfDg==
   dependencies:
-    "@contentlayer/core" "0.2.2"
-    "@contentlayer/utils" "0.2.2"
+    "@contentlayer/core" "0.2.4"
+    "@contentlayer/utils" "0.2.4"
     clipanion "^3.2.0-rc.10"
     typanion "^3.7.1"
 
-"@contentlayer/client@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@contentlayer/client/-/client-0.2.2.tgz#62c1840614f4100e4874a738b4d709b0deea7de1"
-  integrity sha512-Snk9uQ2vMRXn20FoRNR/71Y4GpubbiNVBYM0OeOdXWFDdX3RNzHW1PGeyAD6//kYvMGHfYFTjECkeqKBQElEQw==
+"@contentlayer/client@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@contentlayer/client/-/client-0.2.4.tgz#0bc6eb9fc717953ab5c2b1f57d92bc14e2cf1336"
+  integrity sha512-TQnByGWjYTboHbf6bzu7V3AZiwq2NUXLTtGI6jnNV/2WmVW77dQgx5R8JUo3nCMFRgz8yzVxEMJDpExYv40hAg==
   dependencies:
-    "@contentlayer/core" "0.2.2"
+    "@contentlayer/core" "0.2.4"
 
 "@contentlayer/core@0.2.2":
   version "0.2.2"
@@ -1016,13 +1016,33 @@
     type-fest "^2.12.1"
     unified "^10.1.2"
 
-"@contentlayer/source-files@0.2.2":
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/@contentlayer/source-files/-/source-files-0.2.2.tgz#7a85c0a2316a844f56cc5fa44ba9d431640ed898"
-  integrity sha512-GbOyTgoJ9zz/QB6Bu8DWKC+ZXZhfqnACV+JaFiq9DJ6t4VO4Vz9068f2ujw/pJawJ4ry21WFc+vmqWFvB0vH2w==
+"@contentlayer/core@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@contentlayer/core/-/core-0.2.4.tgz#d5d703011a98f914205ad74ade06a1a216463485"
+  integrity sha512-to5timE8OdZffWuVl2Ra2dSZ5dj1S8QIzqJ714s1wZqtUOhG2mlM8SSMvAGggWjOEa5h0aJ6GYh0TeucCmUY3Q==
   dependencies:
-    "@contentlayer/core" "0.2.2"
-    "@contentlayer/utils" "0.2.2"
+    "@contentlayer/utils" "0.2.4"
+    camel-case "^4.1.2"
+    comment-json "^4.2.2"
+    date-fns "2.x"
+    esbuild "0.11.x || 0.12.x || 0.13.x || 0.14.x"
+    gray-matter "^4.0.3"
+    mdx-bundler "^9.0.0"
+    rehype-stringify "^9.0.3"
+    remark-frontmatter "^4.0.1"
+    remark-parse "^10.0.1"
+    remark-rehype "^10.1.0"
+    source-map-support "^0.5.21"
+    type-fest "^2.12.1"
+    unified "^10.1.2"
+
+"@contentlayer/source-files@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@contentlayer/source-files/-/source-files-0.2.4.tgz#a5f5d7489c78038940d53676f4a3c8b1126f19b5"
+  integrity sha512-LSA67Gan40y+ISbhzvBLIQdVfgrJtaQFRAJwjvI0LD5+wsD3Ba0hSAao20If5DdKapXT/JyLpUb6vT7bUEMGsw==
+  dependencies:
+    "@contentlayer/core" "0.2.4"
+    "@contentlayer/utils" "0.2.4"
     chokidar "^3.5.3"
     date-fns-tz "^1.3.1"
     glob "^7.2.0"
@@ -1053,6 +1073,29 @@
     hash-wasm "^4.9.0"
     inflection "^1.13.2"
     oo-ascii-tree "^1.55.1"
+    ts-pattern "^4.0.1"
+    type-fest "^2.12.1"
+
+"@contentlayer/utils@0.2.4":
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/@contentlayer/utils/-/utils-0.2.4.tgz#b2b93a1876861494441fdd81c86e19504e604a98"
+  integrity sha512-Sff9k7C3eMMwOPLT42m5XM/oRAT7jPas76pqp2rm6OQxjV3FpInGeNT+ryZm2lKwa0krL67fjzYj+OkkFZAOGw==
+  dependencies:
+    "@effect-ts/core" "^0.58.0"
+    "@effect-ts/otel" "^0.13.0"
+    "@effect-ts/otel-exporter-trace-otlp-grpc" "^0.13.0"
+    "@effect-ts/otel-sdk-trace-node" "^0.13.0"
+    "@opentelemetry/api" "^1.0.3"
+    "@opentelemetry/core" "^1.0.0"
+    "@opentelemetry/exporter-trace-otlp-grpc" "^0.27.0"
+    "@opentelemetry/resources" "^1.0.0"
+    "@opentelemetry/sdk-trace-base" "^1.0.0"
+    "@opentelemetry/sdk-trace-node" "^1.0.0"
+    "@opentelemetry/semantic-conventions" "^1.0.0"
+    chokidar "^3.5.3"
+    hash-wasm "^4.9.0"
+    inflection "^1.13.2"
+    oo-ascii-tree "^1.56.0"
     ts-pattern "^4.0.1"
     type-fest "^2.12.1"
 
@@ -1199,6 +1242,15 @@
     mrm "^3.0.9"
     refractor "^3.4.0"
     unist-util-visit "^2.0.3"
+
+"@mdx-js/esbuild@^2.0.0":
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/@mdx-js/esbuild/-/esbuild-2.1.1.tgz#1e7102fabf1f5f64c2aa5f42147533ff4bb76af0"
+  integrity sha512-iwcbh7eZZh55r1/lqyrPpkIsuczmlUclulfrtc983mJncdhhhqv0g01loK2r3L0LeIzORhb8h1xUsAWneG0c6w==
+  dependencies:
+    "@mdx-js/mdx" "^2.0.0"
+    node-fetch "^3.0.0"
+    vfile "^5.0.0"
 
 "@mdx-js/mdx@^2.0.0":
   version "2.1.1"
@@ -2835,16 +2887,16 @@ content-type@~1.0.4:
   resolved "https://registry.yarnpkg.com/content-type/-/content-type-1.0.4.tgz#e138cc75e040c727b1966fe5e5f8c9aee256fe3b"
   integrity sha512-hIP3EEPs8tB9AT1L+NUqtwOAps4mk2Zob89MWXMHjHWg9milF/j4osnnQLXBCBFBk/tvIG/tUc9mOUJiPBhPXA==
 
-contentlayer@^0.2.2:
-  version "0.2.2"
-  resolved "https://registry.yarnpkg.com/contentlayer/-/contentlayer-0.2.2.tgz#48a324261764d8aeb699b00f4c5ba5635077af0d"
-  integrity sha512-rBAVH5PLnbiFeWgI3eX/6W2hRO+RJx9LRDbGRvl5+pOR44vETsR/yYldQ6dzdDeaBJOI5wcQWQgPO6wgUg3oMA==
+contentlayer@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/contentlayer/-/contentlayer-0.2.4.tgz#ef815e5a62435f473718ccb1d40297432a49ef99"
+  integrity sha512-3Qd2rU64wcZ3qXvNkP18mqU5Gq4VTSvJkfMqbTWRG4fx1bjXqihmcErCa9RXIQWc7e/7EgAAIBihcQqSFYWyrg==
   dependencies:
-    "@contentlayer/cli" "0.2.2"
-    "@contentlayer/client" "0.2.2"
-    "@contentlayer/core" "0.2.2"
-    "@contentlayer/source-files" "0.2.2"
-    "@contentlayer/utils" "0.2.2"
+    "@contentlayer/cli" "0.2.4"
+    "@contentlayer/client" "0.2.4"
+    "@contentlayer/core" "0.2.4"
+    "@contentlayer/source-files" "0.2.4"
+    "@contentlayer/utils" "0.2.4"
 
 convert-source-map@^1.7.0:
   version "1.8.0"
@@ -5673,6 +5725,20 @@ mdx-bundler@^8.0.1:
     uuid "^8.3.2"
     xdm "^3.3.0"
 
+mdx-bundler@^9.0.0:
+  version "9.0.0"
+  resolved "https://registry.yarnpkg.com/mdx-bundler/-/mdx-bundler-9.0.0.tgz#07e6d98d7f6d9d0fd9965c59281eb41263400bea"
+  integrity sha512-ZkP3xU6wPgGaEUNRaiRlwxQdIQyFyoa1q5eMJEAgFmCPSj3LRI0uR6ZvqiNb9794WBiGCafdFmWjQFN6JpBQAQ==
+  dependencies:
+    "@babel/runtime" "^7.16.3"
+    "@esbuild-plugins/node-resolve" "^0.1.4"
+    "@fal-works/esbuild-plugin-global-externals" "^2.1.2"
+    "@mdx-js/esbuild" "^2.0.0"
+    gray-matter "^4.0.3"
+    remark-frontmatter "^4.0.1"
+    remark-mdx-frontmatter "^1.1.1"
+    uuid "^8.3.2"
+
 media-typer@0.3.0:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
@@ -6333,7 +6399,7 @@ node-domexception@^1.0.0:
   resolved "https://registry.yarnpkg.com/node-domexception/-/node-domexception-1.0.0.tgz#6888db46a1f71c0b76b3f7555016b63fe64766e5"
   integrity sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==
 
-node-fetch@^3.2.0:
+node-fetch@^3.0.0, node-fetch@^3.2.0:
   version "3.2.3"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-3.2.3.tgz#a03c9cc2044d21d1a021566bd52f080f333719a6"
   integrity sha512-AXP18u4pidSZ1xYXRDPY/8jdv3RAozIt/WLNR/MBGZAz+xjtlr90RvCnsvHQRiXyWliZF/CpytExp32UU67/SA==
@@ -6504,7 +6570,7 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-oo-ascii-tree@^1.55.1:
+oo-ascii-tree@^1.55.1, oo-ascii-tree@^1.56.0:
   version "1.56.0"
   resolved "https://registry.yarnpkg.com/oo-ascii-tree/-/oo-ascii-tree-1.56.0.tgz#be7313106598e33b6159a48547eba70140286ae5"
   integrity sha512-tPOSOEjN1uq2NktoBU2KExOU9lVghkpg+tDLWMtnqSSmX+lnDJIYIFpa/HqXwyiAXoHpcKh+bcmTPMZagLNIZA==
