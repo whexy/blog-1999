@@ -112,7 +112,7 @@ const HeadWithIcon = ({ title, icon }) => {
   );
 };
 
-const Callout = ({ title, icon, items, fancy }) => {
+const Callout = ({ title, items, fancy }) => {
   const callout = (
     <div className="not-prose">
       <div className="secondbg mx-auto max-w-lg rounded-lg p-4 font-sans">
@@ -122,7 +122,6 @@ const Callout = ({ title, icon, items, fancy }) => {
             key={item.title}
             className="flex flex-row items-center gap-2 py-1 pl-2"
           >
-            <i className={icon}></i>
             <div>
               <p className="text-sm">{item.title}</p>
               <p className="text-xs font-medium text-jbgray-light dark:text-gray-300">

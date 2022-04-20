@@ -1,7 +1,7 @@
 import metadata from "@/data/metadata";
 import Avatar from "@/public/img/notion-avatar.svg";
 import AnimatedFancyCard from "./AnimatedFancyCard";
-import NowPlaying from "@/components/NowPlaying";
+// import NowPlaying from "@/components/NowPlaying";
 
 const FootCard = () => {
   return (
@@ -28,10 +28,10 @@ export default function Footer() {
   const commitURL = `https://github.com/whexy/blog-1999/commit/${commit}`;
   return (
     <footer className="mx-auto bg-black-readable sm:max-w-2xl">
-      <div className="px-10 py-5">
+      {/* <div className="px-10 py-5">
         <NowPlaying />
       </div>
-      <hr className="mx-10 border-white/20" />
+      <hr className="mx-10 border-white/20" /> */}
       <FootCard />
       <div className="flex justify-center pb-5">
         <a
