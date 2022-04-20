@@ -39,12 +39,6 @@ const friends: Friend[] = [
     description: "",
   },
   {
-    name: "gdjs2",
-    icon: "https://avatars.githubusercontent.com/u/17545585?v=4",
-    url: "https://gdjs2.cn/",
-    description: "",
-  },
-  {
     name: "Arpels",
     icon: "https://avatars.githubusercontent.com/u/35730935?v=4",
     url: "http://blog.arpe1s.xyz/",
@@ -63,12 +57,6 @@ const friends: Friend[] = [
     description: "",
   },
   {
-    name: "Frankss",
-    icon: "https://avatars.githubusercontent.com/u/56958034?v=4",
-    url: "https://sust.icu/",
-    description: "",
-  },
-  {
     name: "lethal",
     icon: "https://avatars.githubusercontent.com/u/47763046?v=4",
     url: "https://lethal233.github.io/",
@@ -78,12 +66,6 @@ const friends: Friend[] = [
     name: "jwnhy",
     icon: "https://avatars.githubusercontent.com/u/18240025?v=4",
     url: "https://jwnhy.github.io/",
-    description: "",
-  },
-  {
-    name: "Luyu",
-    icon: "https://avatars.githubusercontent.com/u/2239547?v=4",
-    url: "https://luyu.blog/",
     description: "",
   },
 ];

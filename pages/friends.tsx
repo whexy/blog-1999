@@ -1,6 +1,5 @@
 import Image from "next/image";
 import friends from "@/data/friends";
-import GithubRepo from "@/components/GithubRepo";
 
 // tiny
 import PageTitle from "@/components/tiny/PageTitle";
@@ -46,38 +45,6 @@ const FriendPage = () => {
               </div>
             </div>
           ))}
-      </div>
-      <h2 className="py-2 font-title text-2xl">Blog Collections</h2>
-      <div className="space-y-2 py-5 sm:flex sm:space-y-0 sm:space-x-2">
-        <div className="sm:w-1/2">
-          <GithubRepo repo="timqian/chinese-independent-blogs" />
-        </div>
-        <div className="sm:w-1/2">
-          <GithubRepo repo="tuna/blogroll" />
-        </div>
-      </div>
-      <h2 className="py-6 font-title text-2xl">Convention</h2>
-      <div className="pb-10">
-        <div className="secondbg max-w-lg rounded-lg p-4">
-          <div className="flex items-center justify-between">
-            <h2 className="py-2 text-xl">十年之约</h2>
-            <a
-              href="https://www.foreverblog.cn/"
-              target="_blank"
-              rel="noreferrer"
-            >
-              <Image
-                src="https://img.foreverblog.cn/logo_en_default.png"
-                alt=""
-                width={192}
-                height={27}
-              />
-            </a>
-          </div>
-          <p className="text-sm font-light opacity-80">
-            本网站于2022年2月加入「十年之约」，会持续运维长达十年或更久。
-          </p>
-        </div>
       </div>
     </Main>
   );
