@@ -1,18 +1,20 @@
 import Head from "next/head";
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import { format, parseISO } from "date-fns";
 
 // intra-blog components
-import Seo from "@/components/Seo";
+const Seo = dynamic(() => import("@/components/Seo"));
 import Prose from "@/components/Prose";
-import Comment from "@/components/posts/Comment";
-import License from "@/components/posts/License";
-import Series from "@/components/posts/Series";
+const Comment = dynamic(() => import("@/components/posts/Comment"));
+const License = dynamic(() => import("@/components/posts/License"));
+const Series = dynamic(() => import("@/components/posts/Series"));
+const Rss = dynamic(() => import("@/components/homepage/Rss"));
+
 import metadata from "@/data/metadata";
 
 import type { PropsWithChildren } from "react";
 import type { Blog } from "contentlayer/generated";
-import Rss from "@/components/homepage/Rss";
 
 export default function BlogLayout({
   children,

@@ -1,9 +1,12 @@
 import Image from "next/image";
+import dynamic from "next/dynamic";
 import portrait from "@/public/img/portrait-transparent.webp";
-import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 import { MailIcon } from "@heroicons/react/solid";
 import { allAbouts } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
+const AnimatedFancyCard = dynamic(
+  () => import("@/components/AnimatedFancyCard"),
+);
 
 // tiny
 import PageTitle from "@/components/tiny/PageTitle";

@@ -16,34 +16,17 @@ const WelcomeCard = () => {
         <p className="text-lg tracking-tight opacity-80 sm:tracking-normal">
           Working on topics related to system security.
         </p>
-        <p className="pt-3 font-mono text-sm opacity-90">
-          Email:{" "}
-          <a
-            className="text-red-500 underline"
-            href="mailto:whexy@outlook.com"
-          >
-            whexy@outlook.com
-          </a>
-        </p>
-        <p className="font-mono text-sm opacity-90">
-          <Link href="/about">
-            <a className="text-red-500 underline opacity-90">About</a>
-          </Link>{" "}
-          <Link href="/keys">
-            <a className="text-red-500 underline opacity-90">
-              PGP Key
-            </a>
-          </Link>
-        </p>
       </div>
-      <div className="mb-6 h-[80px] w-[80px] sm:mb-0 sm:h-[120px] sm:w-[120px]">
-        <Image
-          src={helloPic}
-          alt="Wenxuan Shi"
-          objectFit="cover"
-          className="secondbg overflow-hidden rounded-full"
-        />
-      </div>
+      <Link href="/about">
+        <a className="mb-6 h-[80px] w-[80px] sm:mb-0 sm:h-[120px] sm:w-[120px]">
+          <Image
+            src={helloPic}
+            alt="Wenxuan Shi"
+            objectFit="cover"
+            className="secondbg overflow-hidden rounded-full"
+          />
+        </a>
+      </Link>
     </div>
   );
 };

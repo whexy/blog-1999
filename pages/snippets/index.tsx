@@ -1,4 +1,4 @@
-import { pick } from "lodash";
+import pick from "lodash/pick";
 import { allSnippets } from "contentlayer/generated";
 import PageTitle from "@/components/tiny/PageTitle";
 import Main from "@/components/Main";

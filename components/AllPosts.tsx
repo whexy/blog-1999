@@ -1,6 +1,6 @@
 import type { Blog } from "contentlayer/generated";
 import { format, parseISO } from "date-fns";
-import { groupBy } from "lodash";
+import groupBy from "lodash/groupBy";
 import Link from "next/link";
 
 const AllPosts = ({ posts }: { posts: Blog[] }) => {

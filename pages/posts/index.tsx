@@ -2,7 +2,7 @@ import AllPosts from "@/components/AllPosts";
 import Main from "@/components/Main";
 import PageTitle from "@/components/tiny/PageTitle";
 import { allBlogs } from "contentlayer/generated";
-import { pick } from "lodash";
+import pick from "lodash/pick";
 import { parseISO, compareDesc } from "date-fns";
 
 const PostsView = ({ posts }) => {

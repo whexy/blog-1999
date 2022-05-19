@@ -32,12 +32,14 @@ const NavigationView = () => {
       <div className="px-4">
         <button
           onClick={toggleTheme}
-          className="umami--click--theme-button grid h-9 w-9 place-items-center rounded-lg bg-neutral-600 ring-gray-300 transition-all hover:ring-2"
+          className={`umami--click--theme-button grid h-9 w-9 place-items-center rounded-lg bg-neutral-600 transition-all hover:ring-2 ${
+            theme !== "light" ? "ring-[#f8c547]" : "ring-[#7a3a92]"
+          }`}
         >
           {theme === "light" ? (
-            <SunIcon className="h-5 w-5 stroke-gray-200" />
-          ) : (
             <MoonIcon className="h-5 w-5 stroke-gray-200" />
+          ) : (
+            <SunIcon className="h-5 w-5 stroke-gray-200" />
           )}
         </button>
       </div>

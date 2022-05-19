@@ -10,6 +10,7 @@ import UITitle from "@/components/posts/UITitle";
 import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 import WasmRiscvEmu from "@/components/posts/projects/wasm-riscv-emu";
 import Step from "@/components/snippets/Step";
+import Statistics from "@/components/posts/Statistics";
 
 const MDXComponents = {
   img: ImgComponent,
@@ -23,6 +24,7 @@ const MDXComponents = {
   UITitle,
   AnimatedFancyCard, // 《个人博客搭建指北》中使用
   WasmRiscvEmu, // 《WASM RISC-V 模拟器》中使用
+  Statistics,
 };
 
 export default MDXComponents;
