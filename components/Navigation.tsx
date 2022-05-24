@@ -6,7 +6,7 @@ import {
   MoonIcon,
 } from "@heroicons/react/outline";
 import { Menu } from "@headlessui/react";
-import { useContext, VFC } from "react";
+import { useContext, FC } from "react";
 import { ThemeContext } from "../pages/_app";
 
 function MyLink(props) {
@@ -26,7 +26,7 @@ const NavigationView = () => {
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
         <DesktopNavItem url="/posts" name="Posts" />
-        <DesktopNavItem url="/snippets" name="Snippets" />
+        {/* <DesktopNavItem url="/snippets" name="Snippets" /> */}
         <DesktopNavItem url="/friends" name="Friends" />
       </div>
       <div className="px-4">
@@ -58,7 +58,7 @@ const MobileMenu = () => {
         <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
           <MobileNavItem url="/" name="Home" />
           <MobileNavItem url="/posts" name="Posts" />
-          <MobileNavItem url="/snippets" name="Snippets" />
+          {/* <MobileNavItem url="/snippets" name="Snippets" /> */}
           <MobileNavItem url="/friends" name="Friends" />
         </Menu.Items>
       </Menu>
@@ -66,7 +66,7 @@ const MobileMenu = () => {
   );
 };
 
-const DesktopNavItem: VFC<{ url: string; name: string }> = ({
+const DesktopNavItem: FC<{ url: string; name: string }> = ({
   url,
   name,
 }) => {
@@ -89,7 +89,7 @@ const DesktopNavItem: VFC<{ url: string; name: string }> = ({
   );
 };
 
-const MobileNavItem: VFC<{ url: string; name: string }> = ({
+const MobileNavItem: FC<{ url: string; name: string }> = ({
   url,
   name,
 }) => {

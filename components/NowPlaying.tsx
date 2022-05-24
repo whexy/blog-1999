@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import fetcher from "@/lib/fetcher";
-import { useSpring, animated } from "@react-spring/web";
+import { useSpring, animated } from "react-spring";
 import Image from "next/image";
 
 const SpotifyIcon = () => (

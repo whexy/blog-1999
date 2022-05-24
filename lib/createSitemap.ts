@@ -1,5 +1,5 @@
 import { writeFileSync } from "fs";
-import globby from "globby";
+import { globby } from "globby";
 import prettier from "prettier";
 
 async function generateSiteMap() {
