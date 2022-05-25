@@ -1,14 +1,14 @@
 import Link from "next/link";
-// import Image from "next/image";
+import Image from "next/image";
 
-export default function PostCard({
+const PostCard = ({
   title,
   url,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   image,
   summary,
   date,
-}) {
+  showImage = false,
+}) => {
   return (
     <div>
       <Link href={url ? url : "/"}>
@@ -24,7 +24,7 @@ export default function PostCard({
               <div className="text-sm font-light opacity-80">
                 <p>{summary}</p>
               </div>
-              {/* {image && (
+              {showImage && image && (
                 <div className="grid w-full shrink-0 place-content-center object-cover pb-2">
                   <Image
                     src={`/${image}`}
@@ -34,11 +34,13 @@ export default function PostCard({
                     className="h-auto w-full rounded-xl"
                   />
                 </div>
-              )} */}
+              )}
             </div>
           </div>
         </a>
       </Link>
     </div>
   );
-}
+};
+
+export default PostCard;
