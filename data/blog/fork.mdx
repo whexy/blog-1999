@@ -34,7 +34,7 @@ We immediately thought that dynamic language interpreters face the same problem 
 
 The process pooling technique is a straightforward solution. It creates several empty processes at program initialization before the process grows too large and then assigns tasks to the processes for execution when needed. After the execution is finished, the processes are recycled to the pool to be used. [^1]
 
-![](images/HzXTFG.jpg)
+<Diagram src="images/fork/pool.svg" alt="Thread Pool" />
 
 **Limitation**
 
@@ -47,13 +47,13 @@ The process pooling technique is a straightforward solution. It creates several 
 
 When launching other processes with `exec()`, we know that the copying in the `fork()` is unnecessary since the child process is immediately replaced with a new one. So what exactly does it copy? Well, the most prominent part is **the page table**. The page table is the part that Linux must copy to implement COW. It records whether the data in a particular memory address has been modified or not.
 
-![](images/So9GLk.jpg)
+<Diagram src="images/fork/fork.svg" alt="Thread Pool" />
 
 #### vfock()
 
 The Berkeley version of Unix (BSD) introduced the`vfork()` system call in the early 1980s. `vfork(2)` does not copy the parent process to the child. Both processes share the parent's virtual address space; the parent is suspended until the child exits or calls `exec()` [^2]
 
-![](images/FwRw4r.jpg)
+<Diagram src="images/fork/vfork.svg" alt="Thread Pool" />
 
 <Callout icon="🤔" title="Deadlock">
   It was discovered that `vfork()` might introduce a new problem when

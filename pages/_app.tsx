@@ -28,14 +28,16 @@ const MyApp = ({ Component, pageProps }) => {
   // Set default theme.
   useEffect(() => {
     const storedTheme = sessionStorage.getItem("theme");
+    let targetTheme = null; // unknown
     if (storedTheme) {
-      setTheme(storedTheme);
+      targetTheme = storedTheme;
     } else {
       const WindowPreferenceDark = window.matchMedia(
         "(prefers-color-scheme: dark)",
       ).matches;
-      setTheme(WindowPreferenceDark ? "dark" : "light");
+      targetTheme = WindowPreferenceDark ? "dark" : "light";
     }
+    setTheme(targetTheme);
   }, []);
 
   // Monitor system theme change events.
