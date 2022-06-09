@@ -1,12 +1,14 @@
-const Diagram = ({ src, alt }) => {
+const Diagram = ({ src, alt, width = "100%" }) => {
   return (
     <div>
       <div className="dark:hue-rotate-180 dark:invert">
         <object
-          width="100%"
+          width={width}
           data={`/${src}`}
           type="image/svg+xml"
           title={alt}
+          className="mx-auto"
+          style={{ maxWidth: "100%" }}
         ></object>
       </div>
       {alt && (

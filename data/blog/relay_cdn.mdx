@@ -1,0 +1,199 @@
+---
+title: Self-host Relay Service with CDN
+publishDate: 2022-06-08
+summary: "Build a relay service that benefits from CDN's fast delivery and has other advantages."
+cat: Internet
+---
+
+Nowadays, many relay services exist, but they can't ensure your data security. Around 10% of websites still use HTTP, and traffic to those websites is transparent to relay providers. I don't trust any public relay services. Self-host relay service is a good alternative.
+
+## Architectures
+
+**Single server.** You can choose any relay protocol you like and deploy it on a trusted server. However, depending on a single source is dangerous. For example, your ISP might block heavy traffic toward an unauthorized server. In addition, your experience may vary when traveling to different areas.
+
+**Multi-server.** Deploying your relay service to several servers in different locations may be a solution. As a reference, many public relay services have many servers in other regions. However, such a solution is more costly.
+
+**Single server with CDN.** Fortunately, CDNs can provide a large number of servers that we can utilize. I have found a way to build a self-host relay service with the help of CDN. In the end, we will have a relay service that benefits from CDN's fast delivery and has other advantages:
+
+- Block-free
+- Cost savings
+- Increased reliability
+
+## How does CDN work for us
+
+<Callout title="Content Delivery Network (CDN)" icon="🌐">
+A content delivery network (CDN) refers to a geographically distributed group of servers that work together to provide fast delivery of Internet content.
+
+CDN caches assets of websites on neighboring servers (nodes) to provide a better web experience in different regions. If the CDN node does not cache the response asset or the cache has expired, it will return to the origin site to obtain it.
+
+</Callout>
+
+**As a Wormhole.** CDN plays the role of wormhole in our relay service, which means it works as a shortcut between devices and our server. For some reason, the traffic to our server might be congested or even blocked. We want CDN to forward the traffic as an end-to-end channel with better quality and security.
+
+## Protocol that fits
+
+CDN won't forward every package it receives. Many cloud service providers only allow their CDN to go with HTTP and HTTPS protocols. In addition, they may also support WS ([WebSocket](https://en.wikipedia.org/wiki/WebSocket)) and WSS (WebSockets over SSL/TLS) since many sites use them as standard communication protocols.
+
+We should choose a relay protocol wisely for maximal CDN compatibility and security. The protocol must depend on HTTP(S)/WS(S). [Trojan](https://trojan-gfw.github.io/trojan/) and [Vmess](https://www.v2ray.com/developer/protocols/vmess.html) are two popular WS-based protocols. In this article, I will use them to demonstrate how our service works.
+
+<Callout title="No Cache policy" icon="⚠️">
+
+We do not want CDN to cache anything since we relay our private traffic. In other words, we want every asset to **expire immediately**, which is not how CDNs are supposed to work. In fact, we are _intentionally misusing_ CDNs to help our relay service.
+
+Since WebSocket is a stateful protocol, Trojan and Vmess won't be affected by caching policy. But if you choose a protocol based on stateless HTTP/HTTPS, remember to configure the caching policy properly.
+
+</Callout>
+
+As a result, relay applications on devices will wrap the traffic into Trojan/Vmess packets and then pack them with WebSocket and send them to CDN. CDN will forward the packets to our server using the back-to-origin policy.
+
+<Diagram
+  src="images/relay_cdn/payload.svg"
+  alt="Packet sent to CDN"
+  width="400px"
+/>
+
+## Network Quality
+
+Many relay services suffer from congested lines. Some "PRO" service uses better public lines to solve congestion. You may have heard of CN2 GIA, IPLC, or similar public lines. But there're more lines like AWS (Amazon) and Azure (Microsoft), which are not accessible to the public. Our relay services with CDN can leverage those private lines to gain better network quality.
+
+Traffic can use the ad-hoc CDN channel instead of public lines between two regions. Furthermore, we can obtain an ad-hoc back-to-origin line for
+free if we choose a server and CDN provided by the same cloud
+service.
+
+<Diagram src="images/relay_cdn/CDN.svg" />
+
+**Anti-blocking.** ISP is unlikely to block the traffic to neighbor CDN nodes since they are standard services to all users. Pattern recognition blocking algorithms won't work since they look just like regular WebSocket traffic with TLS encryption. ISP won't supervise the traffic after neighbor CDN nodes.
+
+## Security
+
+We don't trust any public relay services since they are black-box to us. In our self-host relay service, security is a first-class target.
+
+<Diagram src="images/relay_cdn/security.svg" />
+
+**TLS.** To ensure ISP not be able to monitor the traffic, we use TLS encryption to guarantee WebSocket packets travel to neighbor CDN nodes securely. CDN will decrypt the TLS traffic and get the WebSocket packets.
+
+**AEAD.** CDN might be able to scan information from our packets. That's why we encrypt the traffic with AEAD. AEAD is a symmetric encryption algorithm used to encrypt the original TCP/UDP packets supported by VMess/Trojan protocol.
+
+<Dialog>
+  Why not use AEAD instead of TLS when sending packets from devices to
+  CDN?
+</Dialog>
+
+<DialogBack>
+  If so, we will have an unencrypted WebSocket packet containing
+  VMess/Trojan payload, which is recognizable. So an obfuscation over
+  the whole WebSocket packet is necessary.
+</DialogBack>
+
+If we trust the cloud service provider, AEAD is unnecessary. For example, I'm using [AWS](https://aws.amazon.com/), which provides a [CloudFront](https://aws.amazon.com/cloudfront/) service and EC2 instances. I trust Amazon won't scan my traffic, and the private link between CloudFront and EC2 is not vulnerable to attacks. So AEAD is disabled on the link. Also, I won't need TLS on the private link either.
+
+## Get our hands dirty
+
+Building a self-host relay service with CDN is simple if we understand its principle. Before we start, let's do a final check.
+
+<Callout title="Prepare List" icon="📝">
+
+To build our self-host relay service, we need the following:
+
+- A remote server (like EC2 or free Oracle Cloud)
+- A CDN service (like CloudFront or Cloudflare)
+- A domain to obtain an SSL certificate (like whexy.com)
+- A client APP that supports Vmess/Trojan over WSS (like [Clash](https://github.com/Dreamacro/clash))
+- A server APP that supports Vmess/Trojan over WS (like [trojan-go](https://hub.docker.com/r/p4gefau1t/trojan-go) or [xray](https://hub.docker.com/r/teddysun/xray))
+
+</Callout>
+
+In the following steps, I will use:
+
+- AWS EC2 as the remote server
+- AWS CloudFront as the CDN service
+- Vmess as the relay protocol
+- Xray as the server APP
+- Clash as the client APP
+
+### Server configuation
+
+First, we need to configure our server to open a relay service based on Vmess-over-WebSocket. I prefer a docker image provided by [xray](https://hub.docker.com/r/teddysun/xray).
+
+```shell
+mkdir ~/xray
+vim ~/xray/config.json
+docker run -d -v ~/xray:/etc/xray --network=host --restart=always teddysun/xray
+```
+
+The config JSON file should look like this:
+
+```json:config.json
+{
+  "inbounds": [
+    {
+      "port": 10090,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "49dd2152-17af-436b-8539-fe6adff56529",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/api/v1"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+```
+
+You should use a [UUID generator](https://www.uuidgenerator.net/version4) to generate your unique ID and replace the `49dd2152-17af-436b-8539-fe6adff56529` with it. You can also change the WS path `/api/v1` and the port number `10090` to anything you like.
+
+### CDN configuration
+
+**Obtain an SSL certificate.** Since the communication between devices and CDN use TLS, we need to obtain an SSL certificate. I used AWS Certificate Manager to obtain the certificate. It's straightforward, and you can get certification to a set of domains (e.g., `*.cdn.whexy.com`) than one particular domain.
+
+**CDN Settings.** After that, we can configure our CDN. Use a proper domain name like `gobear.cdn.whexy.com` as an alternative CNAME with the corresponding certificate we got before. Change the HTTP port to 10090 as the port number of our services. You will get a CDN-specific domain afterward (e.g., `tkn.cloudfront.net`).
+
+**DNS Settings.** Go to the DNS settings of your domain. Add a CNAME record of `gobear.cdn.whexy.com` pointing to the CDN-specific domain.
+
+### Device configuration
+
+I'm using Clash as a client. Use the following config as an example to connect to our server:
+
+```yaml
+- {
+    name: CDN-relay,
+    server: gobear.cdn.whexy.com,
+    port: 443,
+    type: vmess,
+    uuid: 49dd2152-17af-436b-8539-fe6adff56529,
+    alterId: 0,
+    tls: true,
+    skip-cert-verify: true,
+    network: ws,
+    ws-opts:
+      { path: /api/v1, headers: { Host: gobear.cdn.whexy.com } },
+    udp: true,
+  }
+```
+
+<Dialog>
+  Of course, this is just an example. Don't try to use it as a real
+  one.
+</Dialog>
+
+## One more thing: IP pool
+
+Now we have a self-host relay service with CDN. The client will automatically connect to the **nearest** CDN node with the help of a geographical domain resolve service (DNS).
+
+However, we shouldn't depend on geographical DNS since it won't always reply with the address of the **fastest** node. If we know the IP list of CDN nodes, we can use the client APP to perform a speed test.
+
+To do so, replace the `server` field in the client configuration file with the IP addresses of CDN nodes. I'm not going to explain how to get the address list in this post. So I'll leave that part up to you to complete.
