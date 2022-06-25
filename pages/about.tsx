@@ -1,23 +1,17 @@
 import Image from "next/image";
-import dynamic from "next/dynamic";
-import portrait from "@/public/img/portrait-transparent.webp";
+import portrait from "@/public/img/face.png";
 import { MailIcon } from "@heroicons/react/solid";
 import { allAbouts } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
-const AnimatedFancyCard = dynamic(
-  () => import("@/components/AnimatedFancyCard"),
-);
 
 // tiny
-import PageTitle from "@/components/tiny/PageTitle";
 import Main from "@/components/Main";
-import Twemoji from "@/components/Twemoji";
 
 const AboutMDX = allAbouts[0];
 
 const InfoSection = () => {
   return (
-    <div className="flex-shrink-0">
+    <div className="flex-shrink-0 font-title">
       <div className="flex flex-col items-center pr-2 sm:pt-5">
         <Image
           src={portrait}
@@ -27,18 +21,21 @@ const InfoSection = () => {
           className=" rounded-full bg-gradient-to-b from-white-readable via-white-readable to-gray-200/80"
         />
         <div className="mt-4 text-center">
-          <h1 className="text-3xl">Shi Wenxuan</h1>
-          <p className="font-light text-jbgray-light">
-            Senior Undergraduate Student
-          </p>
+          <h1 className="text-3xl">Wenxuan Shi</h1>
+          <p className="opacity-50">Ph.D. Student</p>
+        </div>
+        <div className="mt-4 text-center">
+          <p>Department of Computer Science</p>
+          <p>Northwestern University</p>
+          <p>Evanston, IL 60208</p>
         </div>
         <div className="flex flex-row items-center justify-center justify-items-center space-x-5 pt-5 text-2xl">
           <a
-            href="mailto://gwhexy@gmail.com"
+            href="mailto://wenxuan.shi@northwestern.edu"
             target="_blank"
             rel="noreferrer"
           >
-            <MailIcon className="h-6 w-6 text-[#0c74d4]" />
+            <MailIcon className="h-6 w-6 text-red-500" />
           </a>
           <a
             href="https://github.com/whexy"
@@ -73,15 +70,6 @@ const InfoSection = () => {
             </div>
           </a>
         </div>
-        <div className="mx-4 pt-4 sm:mx-0">
-          <a
-            href="/files/WenxuanSHI_CV.pdf"
-            target="_blank"
-            className="inline-flex items-center space-x-1 font-light underline"
-          >
-            <span>Full CV download</span>
-          </a>
-        </div>
       </div>
     </div>
   );
@@ -92,58 +80,14 @@ const AboutPage = () => {
 
   return (
     <Main>
-      <PageTitle title="About" emoji="👨‍💻" />
-      <div className="mx-auto flex max-w-4xl flex-col space-y-5 pb-10 sm:flex-row sm:space-x-4 sm:divide-x sm:divide-jbgray-light sm:divide-opacity-20">
+      <div className="mx-auto flex max-w-4xl flex-col space-y-5 py-10 sm:flex-row sm:space-x-4 sm:divide-x sm:divide-jbgray-light sm:divide-opacity-20">
         <InfoSection />
-        {/* 内容栏 */}
-        <div className="prose-lg mx-2 prose-headings:font-title prose-headings:font-bold sm:mx-0 sm:pl-8">
-          <Content components={{ Callout, HeadWithIcon }} />
+        <div className="prose-lg mx-2 prose-headings:font-title prose-headings:font-bold prose-a:text-red-700 prose-a:dark:text-red-300 sm:mx-0 sm:pl-8">
+          <Content components={{}} />
         </div>
       </div>
     </Main>
   );
-};
-
-const HeadWithIcon = ({ title, icon }) => {
-  return (
-    <div className="flex items-baseline space-x-2">
-      <p className="h-8 w-8">
-        <Twemoji emoji={icon} />
-      </p>
-      <h3>{title}</h3>
-    </div>
-  );
-};
-
-const Callout = ({ title, items, fancy }) => {
-  const callout = (
-    <div className="not-prose">
-      <div className="secondbg mx-auto max-w-lg rounded-lg p-4 font-sans">
-        <h3 className="pb-1 text-lg font-semibold">{title}</h3>
-        {items.map(item => (
-          <div
-            key={item.title}
-            className="flex flex-row items-center gap-2 py-1 pl-2"
-          >
-            <div>
-              <p className="text-sm">{item.title}</p>
-              <p className="text-xs font-medium text-jbgray-light dark:text-gray-300">
-                {item.emphasis}
-              </p>
-              <p
-                className="text-xs font-light text-jbgray-light dark:text-gray-300"
-                dangerouslySetInnerHTML={{ __html: item.description }}
-              ></p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-  if (!fancy) {
-    return callout;
-  }
-  return <AnimatedFancyCard>{callout}</AnimatedFancyCard>;
 };
 
 export default AboutPage;

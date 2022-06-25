@@ -10,8 +10,8 @@ const WelcomeCard = () => {
           Wenxuan Shi
         </h1>
         <p className="text-lg">
-          <span className="opacity-80">Senior student at </span>
-          SUSTech
+          <span className="opacity-80">PhD student at </span>
+          Northwestern
         </p>
         <p className="text-lg tracking-tight opacity-80 sm:tracking-normal">
           Working on topics related to system security.

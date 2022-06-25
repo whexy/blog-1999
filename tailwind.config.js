@@ -43,6 +43,10 @@ module.exports = {
           DEFAULT: "#27282c",
           light: "rgb(138, 138, 140)",
         },
+        nwpurple: {
+          DEFAULT: "rgb(65, 39, 118)",
+          light: "rgb(152, 78, 187)",
+        },
       },
       typography: theme => ({
         DEFAULT: {
