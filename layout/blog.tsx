@@ -32,9 +32,7 @@ export default function BlogLayout({
         image={`/${post.image}` || ""}
       />
       <Head>
-        <title>
-          {post.title} | {metadata.title}
-        </title>
+        <title>{post.title}</title>
         <meta name="description" content={post.summary} />
       </Head>
       <div className="bg-white dark:bg-black-readable">

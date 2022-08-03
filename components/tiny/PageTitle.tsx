@@ -1,15 +1,17 @@
 import Head from "next/head";
-import type { VFC } from "react";
 import Twemoji from "@/components/Twemoji";
 
-const PageTitle: VFC<{ title: string; emoji?: string }> = ({
+const PageTitle = ({
   title,
   emoji,
+}: {
+  title: string;
+  emoji: string | null;
 }) => {
   return (
     <>
       <Head>
-        <title>{title} | Wenxuan Shi</title>
+        <title>{`${title} | Wenxuan Shi`}</title>
       </Head>
       <div className="flex items-center space-x-2">
         {emoji && (
