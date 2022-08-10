@@ -11,7 +11,7 @@ module.exports = withContentlayer({
       "avatars.githubusercontent.com", // Github Avatars
       "i.scdn.co", // Spotify Album Art
       "img.foreverblog.cn", // Forever Blog
-      "d38fl5uoh5xrlf.cloudfront.net", // gallery
+      "img.cdn.whexy.com", // gallery
     ],
   },
   webpack: config => {

@@ -3,25 +3,35 @@ import Main from "@/components/Main";
 import Image from "next/image";
 
 // content
-import Gallery from "@/data/gallery";
 import { useEffect, useState } from "react";
 
-const galleryLoader = ({ src, width, quality }) => {
-  return `https://d38fl5uoh5xrlf.cloudfront.net/${src}?imageView2/1/w/${width}/h/${width}/format/webp/interlace/1/q/${quality}`;
+type Gallery = {
+  theme: string;
+  description: string;
+  images: GalleryImage[];
 };
 
-const GalleryPage = () => {
+type GalleryImage = {
+  name: string;
+  url: string;
+};
+
+const galleryLoader = ({ src, width, quality }) => {
+  return `https://img.cdn.whexy.com/${src}?imageView2/1/w/${width}/h/${width}/format/webp/interlace/1/q/${quality}`;
+};
+
+const GalleryPage = ({ galleries }: { galleries: Gallery[] }) => {
   return (
     <Main>
       <PageTitle title="Gallery" emoji="📷" />
-      {Gallery.map(g => (
+      {galleries.map(g => (
         <div key={g.theme} className="pb-10">
           <div className="mx-1">
             <div className="secondbg mx-auto grid h-32 w-full place-items-center rounded-lg text-center font-article">
               <div>
                 <h2 className="text-3xl font-bold">{g.theme}</h2>
                 <p className="text-lg font-thin opacity-80">
-                  {g.desciption}
+                  {g.description}
                 </p>
               </div>
             </div>
@@ -72,7 +82,7 @@ function GalleryImage({ image }: { image: Image }) {
   const [exif, setExif] = useState<EXIFInfo>(null);
 
   useEffect(() => {
-    fetch(`https://d38fl5uoh5xrlf.cloudfront.net/${image.href}?exif`)
+    fetch(`https://img.cdn.whexy.com/${image.href}?exif`)
       .then(res => res.json())
       .then(data => {
         const info: EXIFInfo = {
@@ -99,7 +109,10 @@ function GalleryImage({ image }: { image: Image }) {
   }, [image.href]);
 
   return (
-    <a href={image.href} className="group">
+    <a
+      href={`https://img.cdn.whexy.com/${image.href}`}
+      className="group"
+    >
       <div className="aspect-w-4 aspect-h-3 w-full overflow-hidden rounded-lg bg-gray-200 sm:aspect-w-1 sm:aspect-h-1">
         <Image
           loader={galleryLoader}
@@ -223,5 +236,11 @@ const CameraIcon = () => (
     />
   </svg>
 );
+
+export async function getStaticProps() {
+  const resp = await fetch("https://sub.shiwx.org/galleries.json?");
+  const data = await resp.json();
+  return { props: { galleries: data } };
+}
 
 export default GalleryPage;
