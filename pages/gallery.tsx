@@ -6,6 +6,10 @@ import Image from "next/image";
 import Gallery from "@/data/gallery";
 import { useEffect, useState } from "react";
 
+const galleryLoader = ({ src, width, quality }) => {
+  return `https://d38fl5uoh5xrlf.cloudfront.net/${src}?imageView2/1/w/${width}/h/${width}/format/webp/interlace/1/q/${quality}`;
+};
+
 const GalleryPage = () => {
   return (
     <Main>
@@ -68,10 +72,9 @@ function GalleryImage({ image }: { image: Image }) {
   const [exif, setExif] = useState<EXIFInfo>(null);
 
   useEffect(() => {
-    fetch(`${image.href}?exif`)
+    fetch(`https://d38fl5uoh5xrlf.cloudfront.net/${image.href}?exif`)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
         const info: EXIFInfo = {
           make: null,
           model: null,
@@ -93,14 +96,16 @@ function GalleryImage({ image }: { image: Image }) {
         info.iso = data["ISOSpeedRatings"]?.val;
         setExif(info);
       });
-  }, []);
+  }, [image.href]);
 
   return (
     <a href={image.href} className="group">
       <div className="aspect-w-4 aspect-h-3 w-full overflow-hidden rounded-lg bg-gray-200 sm:aspect-w-1 sm:aspect-h-1">
         <Image
+          loader={galleryLoader}
           alt={image.name}
-          src={`${image.href}?imageView2/1/w/600/h/600/format/webp/interlace/1/q/100`}
+          src={image.href}
+          quality={100}
           layout="fill"
           objectFit="cover"
           className={cn(
