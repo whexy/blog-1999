@@ -6,6 +6,7 @@ specifiers:
   '@heroicons/react': ^1.0.6
   '@mapbox/rehype-prism': ^0.8.0
   '@svgr/webpack': ^6.3.0
+  '@tailwindcss/aspect-ratio': ^0.4.0
   '@tailwindcss/typography': ^0.5.4
   '@types/jsdom': ^16.2.15
   '@types/lodash': ^4.14.182
@@ -103,6 +104,7 @@ dependencies:
 
 devDependencies:
   '@svgr/webpack': 6.3.0
+  '@tailwindcss/aspect-ratio': 0.4.0_tailwindcss@3.1.6
   '@tailwindcss/typography': 0.5.4_tailwindcss@3.1.6
   '@types/jsdom': 16.2.15
   '@types/node': 18.0.6
@@ -2459,6 +2461,14 @@ packages:
     dependencies:
       defer-to-connect: 1.1.3
     dev: false
+
+  /@tailwindcss/aspect-ratio/0.4.0_tailwindcss@3.1.6:
+    resolution: {integrity: sha512-WJu0I4PpqNPuutpaA9zDUq2JXR+lorZ7PbLcKNLmb6GL9/HLfC7w3CRsMhJF4BbYd/lkY6CfXOvkYpuGnZfkpQ==}
+    peerDependencies:
+      tailwindcss: '>=2.0.0 || >=3.0.0 || >=3.0.0-alpha.1'
+    dependencies:
+      tailwindcss: 3.1.6
+    dev: true
 
   /@tailwindcss/typography/0.5.4_tailwindcss@3.1.6:
     resolution: {integrity: sha512-QEdg40EmGvE7kKoDei8zr5sf4D1pIayHj4R31bH3lX8x2BtTiR+jNejYPOkhbmy3DXgkMF9jC8xqNiGFAuL9Sg==}
