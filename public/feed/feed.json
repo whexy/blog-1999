@@ -410,6 +410,17 @@
                 "name": "Wenxuan Shi",
                 "url": "https://www.whexy.com"
             }
+        },
+        {
+            "id": "https://www.whexy.com/posts/relay_cdn_2",
+            "url": "https://www.whexy.com/posts/relay_cdn_2",
+            "title": "科学的 CDN 流量中继",
+            "summary": "接着聊聊围绕边缘网络进行的封禁与反封禁博弈。",
+            "date_modified": "2022-08-17T00:00:00.000Z",
+            "author": {
+                "name": "Wenxuan Shi",
+                "url": "https://www.whexy.com"
+            }
         }
     ]
 }
