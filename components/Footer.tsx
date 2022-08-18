@@ -30,7 +30,7 @@ export default function Footer() {
   const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const commitURL = `https://github.com/whexy/blog-1999`;
   return (
-    <footer className="mx-auto bg-black-readable sm:max-w-2xl">
+    <footer className="mx-auto bg-stone-900 sm:max-w-2xl">
       {/* <div className="px-10 py-5">
         <NowPlaying />
       </div>

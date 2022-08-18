@@ -1,42 +1,32 @@
 import Link from "next/link";
-import Image from "next/image";
-
 const PostCard = ({
   title,
   url,
-  image,
-  summary,
   date,
-  showImage = false,
+  summary,
+  showSummary = false,
 }) => {
   return (
-    <div>
+    <div
+      className={`bg-white px-3 py-3 transition-all hover:bg-gray-50 dark:bg-black-readable dark:hover:bg-black ${
+        showSummary && "rounded-lg"
+      }`}
+    >
       <Link href={url ? url : "/"}>
         <a>
-          <div className="secondbg flex h-full flex-col -space-y-1 rounded-xl p-4 transition-all">
-            <div className="pb-1 text-sm font-light tracking-wide text-red-600 dark:text-red-500">
-              <span>{date}</span>
-            </div>
-            <p className="font-title text-lg hover:underline">
+          <div className="flex items-baseline justify-between rounded-xl transition-all">
+            <p className={`${showSummary && `text-lg font-bold`}`}>
               {title}
             </p>
-            <div className="flex flex-col-reverse pt-2">
-              <div className="text-sm font-light opacity-80">
-                <p>{summary}</p>
-              </div>
-              {showImage && image && (
-                <div className="grid w-full shrink-0 place-content-center object-cover pb-2">
-                  <Image
-                    src={`/${image}`}
-                    alt="Cover"
-                    height={200}
-                    width={400}
-                    className="h-auto w-full rounded-xl"
-                  />
-                </div>
-              )}
+            <div
+              className={`flex-shrink-0 pl-2 font-mono tracking-wide ${
+                showSummary ? "opacity-80" : "opacity-60"
+              }`}
+            >
+              {date}
             </div>
           </div>
+          {showSummary && <p className="opacity-60">{summary}</p>}
         </a>
       </Link>
     </div>

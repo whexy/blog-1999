@@ -7,7 +7,7 @@ import React from "react";
 const Comment = ({ slug }: { slug: string }) => {
   const { theme } = useContext(ThemeContext);
   return (
-    <div className="mx-auto max-w-3xl px-2">
+    <div className="mx-auto max-w-4xl px-2">
       <Giscus
         repo="whexy/whexy-blog-comments"
         repoId="R_kgDOGOIOyA"

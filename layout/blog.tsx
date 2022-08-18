@@ -1,5 +1,4 @@
 import Head from "next/head";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import { format, parseISO } from "date-fns";
 
@@ -9,7 +8,6 @@ import Prose from "@/components/Prose";
 const Comment = dynamic(() => import("@/components/posts/Comment"));
 const License = dynamic(() => import("@/components/posts/License"));
 const Series = dynamic(() => import("@/components/posts/Series"));
-const Rss = dynamic(() => import("@/components/homepage/Rss"));
 
 import metadata from "@/data/metadata";
 
@@ -19,10 +17,7 @@ import type { Blog } from "contentlayer/generated";
 export default function BlogLayout({
   children,
   post,
-  bannerURI,
-}: PropsWithChildren<{ post: Blog; bannerURI: string | null }>) {
-  // If a post contains more than 200 chinese characters, it is considered to be a chinese blog.
-  // const isChineseBlog = post.chineseCharNum >= 200;
+}: PropsWithChildren<{ post: Blog }>) {
   return (
     <div>
       <Seo
@@ -35,22 +30,8 @@ export default function BlogLayout({
         <title>{post.title}</title>
         <meta name="description" content={post.summary} />
       </Head>
-      <div className="bg-white dark:bg-black-readable">
-        {post.image && (
-          <div className="mx-auto max-w-3xl overflow-hidden sm:py-5">
-            <Image
-              src={`/${post.image}`}
-              alt="Cover"
-              height={612}
-              width={1224}
-              quality={100}
-              className="sm:rounded-xl"
-              placeholder="blur"
-              blurDataURL={bannerURI}
-            />
-          </div>
-        )}
-        <article className="pt-5 pb-5 font-article">
+      <div className="bg-gray-100 dark:bg-stone-900">
+        <article className="pb-5 font-article sm:pt-10">
           <Prose>
             <h1>{post.title}</h1>
             <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm font-light lg:text-base">
@@ -75,9 +56,6 @@ export default function BlogLayout({
             <License />
           </Prose>
         </article>
-        <div className="mx-auto max-w-2xl">
-          <Rss />
-        </div>
         <div className="pb-10">
           <Comment slug={post.slug} />
         </div>
