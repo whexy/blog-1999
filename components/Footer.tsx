@@ -42,6 +42,24 @@ export default function Footer() {
           powered by blog-1999 system ({commit.substring(0, 8)})
         </a>
       </div>
+      <div className="flex justify-center space-x-2 pb-2 font-mono text-xs">
+        <a href="whexy.ssh.pub">
+          <abbr
+            title="SHA256:pFZ1bs/uRKhUn5oP2bgZQH6lmGG0BQWti7JYZMDTeI0"
+            className="text-white/20 hover:text-white/40"
+          >
+            pFZ1bs...(SSH)
+          </abbr>
+        </a>
+        <a href="whexy.pgp.asc">
+          <abbr
+            title="59A4 998E 07C1 D6FB 2557  51CC A513 A02F DDFF 1598"
+            className="text-white/20 hover:text-white/40"
+          >
+            0xDDFF1598(PGP)
+          </abbr>
+        </a>
+      </div>
     </footer>
   );
 }

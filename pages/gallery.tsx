@@ -1,6 +1,6 @@
 import PageTitle from "@/components/tiny/PageTitle";
 import Main from "@/components/Main";
-import Image from "next/image";
+import Image from "@/components/Image99";
 
 // content
 import { useEffect, useState } from "react";
@@ -28,7 +28,7 @@ const GalleryPage = ({ galleries }: { galleries: Gallery[] }) => {
         {galleries.map(g => (
           <div key={g.theme} className="primary my-5 py-8 sm:px-10">
             <div className="mx-1">
-              <div className="mx-auto grid h-24 w-full place-items-center rounded-lg text-center font-article">
+              <div className="mx-auto grid h-24 w-full place-items-center rounded-lg text-center">
                 <div>
                   <h2 className="text-3xl font-bold">{g.theme}</h2>
                   <p className="text-lg font-thin opacity-80">
@@ -56,10 +56,6 @@ const GalleryPage = ({ galleries }: { galleries: Gallery[] }) => {
   );
 };
 
-function cn(...classes: string[]) {
-  return classes.filter(Boolean).join(" ");
-}
-
 type Image = {
   href: string;
   name: string;
@@ -80,7 +76,6 @@ const ModelMap = {
 };
 
 function GalleryImage({ image }: { image: Image }) {
-  const [isLoading, setLoading] = useState(true);
   const [exif, setExif] = useState<EXIFInfo>(null);
 
   useEffect(() => {
@@ -115,7 +110,7 @@ function GalleryImage({ image }: { image: Image }) {
       href={`https://img.cdn.whexy.com/${image.href}`}
       className="group"
     >
-      <div className="aspect-w-4 aspect-h-3 w-full overflow-hidden rounded-lg bg-gray-200 sm:aspect-w-1 sm:aspect-h-1">
+      <div className="aspect-w-4 aspect-h-3 w-full overflow-hidden rounded-lg sm:aspect-w-1 sm:aspect-h-1">
         <Image
           loader={galleryLoader}
           alt={image.name}
@@ -123,18 +118,11 @@ function GalleryImage({ image }: { image: Image }) {
           quality={100}
           layout="fill"
           objectFit="cover"
-          className={cn(
-            "duration-700 ease-in-out sm:group-hover:opacity-75",
-            isLoading
-              ? "scale-110 blur-2xl grayscale"
-              : "scale-100 blur-0 grayscale-0",
-          )}
-          onLoadingComplete={() => setLoading(false)}
         />
       </div>
       <div className="mt-2">
         <div className="flex justify-between">
-          <h3 className="font-article text-lg">{`《${image.name}》`}</h3>
+          <h3 className="text-lg">{`${image.name}`}</h3>
         </div>
         <div className="secondbg rounded-lg">
           <p className="text-xs font-light opacity-90">

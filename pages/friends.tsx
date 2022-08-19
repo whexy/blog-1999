@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image99";
 import { friends, Friend } from "@/data/friends";
 
 // tiny
@@ -45,11 +45,8 @@ const FriendPage = () => {
                           <Image
                             src={friend.icon}
                             alt={friend.name}
-                            className=""
                             width={64}
                             height={64}
-                            placeholder="blur"
-                            blurDataURL="/img/smile.svg"
                           />
                         </div>
                         <p>{friend.name}</p>
@@ -74,27 +71,27 @@ const FriendPage = () => {
               ))}
           </div>
         </div>
-        <div className="primary relative hidden min-w-[24rem] space-x-8 p-8 sm:flex">
+        <div className="primary relative hidden min-w-[24rem] sm:block">
           <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-green-500" />
-          <Image
-            src={chosen.icon}
-            alt={chosen.name}
-            className="rounded-lg"
-            width={100}
-            height={100}
-            placeholder="blur"
-            blurDataURL="/img/smile.svg"
-          />
-          <div>
-            <h3 className="text-2xl">{chosen.name}</h3>
-            <a
-              href={chosen.url}
-              target="_blank"
-              rel="noreferrer"
-              className="opacity-60"
-            >
-              {chosen.url.split("//")[1]}
-            </a>
+          <div className="flex space-x-8 p-8">
+            <Image
+              src={chosen.icon}
+              alt={chosen.name}
+              className="rounded-lg"
+              width={100}
+              height={100}
+            />
+            <div>
+              <h3 className="text-2xl">{chosen.name}</h3>
+              <a
+                href={chosen.url}
+                target="_blank"
+                rel="noreferrer"
+                className="opacity-60"
+              >
+                {chosen.url.split("//")[1]}
+              </a>
+            </div>
           </div>
         </div>
       </div>

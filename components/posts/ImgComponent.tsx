@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image99";
 
 const ImgComponent = ({ src, alt, width, height }) => {
   return (
@@ -12,7 +12,7 @@ const ImgComponent = ({ src, alt, width, height }) => {
         />
       </div>
       {alt && (
-        <div className="text-center font-sans text-sm font-light opacity-80 mt-2">
+        <div className="mt-2 text-center font-sans text-sm font-light opacity-80">
           {alt}
         </div>
       )}

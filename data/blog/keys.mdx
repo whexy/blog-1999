@@ -1,14 +1,14 @@
 ---
 title: "How to prove I am me: a digital way"
 publishDate: 2021-12-13
-summary: "I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show how to use these keys to prove I am me."
+summary: "I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show you how to use these keys to prove I am me."
 image: images/digital-signature.png
 cat: Crypto
 ---
 
-I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show how to use these keys to prove I am me.
+I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show you how to use these keys to prove I am me.
 
-How to prove I am me? The question is actually asked by my Chinese teacher in high school, Ms. Bin (滨, alongside the water), who also taught us about philosophy.
+How to prove I am me? The question is asked by my Chinese teacher in high school, Ms. Bin (滨, alongside the water), who also taught us about philosophy.
 
 <Dialog>
   You may have heard about Descartes' basic axiom "Cogito ergo sum" (I
@@ -17,9 +17,9 @@ How to prove I am me? The question is actually asked by my Chinese teacher in hi
 
 Unfortunately, instead of continuing my studies in philosophy, I turned to computer science, which, unlike metaphysics, is a rigorous positivist discipline.
 
-Here we met a totally different challenge. I want to publish a file to the Internet, ensuring the content is complete without any unauthorized modification. In other words, I want to prove that I am me, in a way that is acceptable to everyone and that no one could fake it.
+Here we met a different challenge. I want to publish a file to the Internet, ensuring the content is complete without any unauthorized modification. In other words, I want to prove that I am me, in a way that is acceptable to everyone and that no one could fake.
 
-That's why I published my keys on the website yesterday. [The webpage](https://www.whexy.com/keys) contains two kinds of keys: PGP keys and SSH keys. Both of them are public keys in the asymmetric encryption algorithm RSA. I keep the private keys privately using encryption hardware and trusted cloud services.
+That's why I published my keys on the website yesterday. It contains two kinds of keys: PGP keys and SSH keys. I keep the private keys privately using encryption hardware and trusted cloud services.
 
 I assume my readers are familiar with the concept of RSA as it was explained in an undergraduate course called Discrete Mathematics. The magic is that we are safely shielded by the lack of computing. Our RSA algorithm is secure as long as a general-purpose quantum computer has not been successfully implemented.
 
@@ -28,17 +28,17 @@ I assume my readers are familiar with the concept of RSA as it was explained in 
   opportunity to introduce who I am. I work on **System Security**. I
   don't know math, and I don't create new encryption algorithms.
   However, as many self-righteous mathematicians overlook, algorithms
-  need to run on physical machines that actually exist. The invincible
-  security of an algorithm does not guarantee that the system running
-  it is secure. After all, the encryption program itself can be
-  tampered with, the operating system can be listened to, and even the
-  hardware can be a factor in compromising confidentiality. My peers
-  and I do our best to ensure system-level security. We create trusted
+  need to run on physical machines that exist. The invincible security
+  of an algorithm does not guarantee that the system running it is
+  secure. After all, the encryption program itself can be tampered
+  with, the operating system can be listened to, and even the hardware
+  can be a factor in compromising confidentiality. My peers and I do
+  our best to ensure system-level security. We create trusted
   execution environments, we develop hardware encryption programs, and
   we verify the integrity of programs during execution.
 </Callout>
 
-## Degital Signing
+## Digital Signing
 
 Now let's get back to the keys.
 
@@ -87,7 +87,7 @@ VohovVRSpPJ6hQujr72XSssAXLL/3Z1oJ3Rz1LKme8/I+lhqzoI=
 
 ```
 
-To use the certification, you need to install a famous tool called GnuPG (also known as GPG), by whatever `apt install gpg` or `brew install gpg` or `choco install gnupg`. And then, with a few lines of intructions can you do this.
+To use the certification, you need to install a famous tool called GnuPG (also known as GPG), by whatever `apt install gpg` or `brew install gpg` or `choco install gnupg`. And then, with a few lines of instructions, you can do this.
 
 ```shell
 gpg --import pgp-key.asc
@@ -114,7 +114,7 @@ gpg:                using RSA key 7CFC7C75071D126238C4743506AF0AE7B36D8DC2
 gpg: BAD signature from "WenxuanShi <whexy@outlook.com>" [ultimate]
 ```
 
-By the way, you should only trust the keys that is published officially. Like the one you get from my website. Chances were there that my website would been hacked. So you might want to double check web-archive if the fingerprint of my keys are replaced.
+By the way, you should only trust the keys that are published officially. Like the one that you get from my website. Chances were there that my website would be hacked. So you might want to double-check the web archive if the fingerprint of my keys is replaced.
 
 ### Encryption
 
@@ -124,9 +124,9 @@ You still need to import my keys with `gpg --import pgp-key.asc`. After doing th
 ❯ gpg -r 59A4998E07C1D6FB255751CCA513A02FDDFF1598 -e IMPORTANT_FILE.txt -o IMPORTANT_FILE.txt.encrypt
 ```
 
-Feel free to send my a encrypted file with my public key. As I said, I will be the only one who can read that.
+Feel free to send me an encrypted file with my public key. As I said, I will be the only one who can read that.
 
-## Publish your own keys
+## Publish your keys
 
 Publishing your keys has many other benefits than verification and encryption.
 
@@ -134,6 +134,6 @@ Publishing your keys has many other benefits than verification and encryption.
 - It will make you look professional when you put it on your blog.
 - It will make others think you're a nerd and you can finally enjoy your pathetic life with a computer without any friends in the real world.
 
-Notice that GPG can generate different key pairs as subkeys, which you can easily revoke without affecting the primary key. You should generate a dedicated subkey for signing and another subkey for encryption. It's also recommended using different subkeys in different situations. Never use your primary key unless you want to issue a new subkey pair.
+Notice that GPG can generate different key pairs as subkeys, which you can easily revoke without affecting the primary key. You should generate a dedicated subkey for signing and another subkey for encryption. It's also recommended to use different subkeys in different situations. Never use your primary key unless you want to issue a new subkey pair.
 
-Now, if you are ready for the consequences, let's publish keys!
+Now, if you are ready for the consequences, let's publish the keys!

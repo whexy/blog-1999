@@ -1,9 +1,9 @@
 import Twemoji from "@/components/Twemoji";
-import Image from "next/image";
+import Image from "@/components/Image99";
 
 const Callout = ({ pic, icon, title, children }) => {
   return (
-    <div className="callout secondbg relative z-20 mx-auto break-inside-avoid-page rounded-lg px-4 py-1 my-2">
+    <div className="callout secondbg relative z-20 mx-auto my-2 break-inside-avoid-page rounded-lg px-4 py-1">
       {icon && (
         <span className="absolute top-4 right-4 h-24 w-24 opacity-20">
           <Twemoji emoji={icon} />

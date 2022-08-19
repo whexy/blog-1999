@@ -243,7 +243,7 @@
             "id": "https://www.whexy.com/posts/keys",
             "url": "https://www.whexy.com/posts/keys",
             "title": "How to prove I am me: a digital way",
-            "summary": "I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show how to use these keys to prove I am me.",
+            "summary": "I published my keys on the website yesterday. It contains two kinds of keys: PGP and SSH. Both of them are public keys in the asymmetric encryption algorithm RSA. I'll show you how to use these keys to prove I am me.",
             "image": "https://www.whexy.com/images/digital-signature.png",
             "date_modified": "2021-12-13T00:00:00.000Z",
             "author": {

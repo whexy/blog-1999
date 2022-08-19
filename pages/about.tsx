@@ -1,4 +1,4 @@
-import Image from "next/image";
+import Image from "@/components/Image99";
 import portrait from "@/public/img/face.png";
 import { MailIcon } from "@heroicons/react/solid";
 import { allAbouts } from "contentlayer/generated";
