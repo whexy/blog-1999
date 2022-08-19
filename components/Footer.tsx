@@ -9,7 +9,7 @@ const AnimatedFancyCard = dynamic(
 const FootCard = () => {
   return (
     <AnimatedFancyCard hardness={5}>
-      <div className="select-none pt-5 pb-2">
+      <div className="select-none pt-2 pb-2">
         <div className="mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl bg-white/10">
           <Avatar className="h-16 w-16" />
           <div className="px-2">
@@ -30,13 +30,9 @@ export default function Footer() {
   const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const commitURL = `https://github.com/whexy/blog-1999`;
   return (
-    <footer className="mx-auto bg-stone-900 sm:max-w-2xl">
-      {/* <div className="px-10 py-5">
-        <NowPlaying />
-      </div>
-      <hr className="mx-10 border-white/20" /> */}
+    <footer className="mx-auto max-w-2xl bg-neutral-900">
       <FootCard />
-      <div className="flex justify-center pb-5">
+      <div className="flex justify-center pb-2">
         <a
           href={commitURL}
           className="font-mono text-xs text-white/20 hover:text-white/40"

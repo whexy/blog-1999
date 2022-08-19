@@ -8,7 +8,7 @@
   }
 
   .primary {
-    @apply rounded-lg bg-white shadow-sm dark:bg-black-readable dark:shadow-none;
+    @apply rounded-lg bg-white shadow-sm dark:bg-neutral-900 dark:shadow-none;
   }
 }
 

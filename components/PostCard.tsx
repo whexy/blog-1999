@@ -8,7 +8,7 @@ const PostCard = ({
 }) => {
   return (
     <div
-      className={`bg-white px-3 py-3 transition-all hover:bg-gray-50 dark:bg-black-readable dark:hover:bg-black ${
+      className={`bg-white px-3 py-3 transition-all hover:bg-gray-50 dark:bg-neutral-900 dark:hover:bg-neutral-800 ${
         showSummary && "rounded-lg"
       }`}
     >

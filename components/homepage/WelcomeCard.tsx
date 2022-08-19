@@ -78,7 +78,7 @@ const WelcomeCard = () => {
           </div>
         </div>
         <Link href="/about">
-          <a className="mb-6 h-[80px] w-[80px] sm:mb-0 sm:h-[120px] sm:w-[120px]">
+          <a className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]">
             <Image
               src={helloPic}
               alt="Wenxuan Shi"

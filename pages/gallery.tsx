@@ -24,32 +24,34 @@ const GalleryPage = ({ galleries }: { galleries: Gallery[] }) => {
   return (
     <Main>
       <PageTitle title="Gallery" emoji="📷" />
-      {galleries.map(g => (
-        <div key={g.theme} className="pb-10">
-          <div className="mx-1">
-            <div className="secondbg mx-auto grid h-32 w-full place-items-center rounded-lg text-center font-article">
-              <div>
-                <h2 className="text-3xl font-bold">{g.theme}</h2>
-                <p className="text-lg font-thin opacity-80">
-                  {g.description}
-                </p>
+      <div className="">
+        {galleries.map(g => (
+          <div key={g.theme} className="primary my-5 py-8 sm:px-10">
+            <div className="mx-1">
+              <div className="mx-auto grid h-24 w-full place-items-center rounded-lg text-center font-article">
+                <div>
+                  <h2 className="text-3xl font-bold">{g.theme}</h2>
+                  <p className="text-lg font-thin opacity-80">
+                    {g.description}
+                  </p>
+                </div>
               </div>
             </div>
+            <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
+              {g.images.map(i => (
+                <div key={i.name} className="my-2 mx-1">
+                  <GalleryImage
+                    image={{
+                      href: i.url,
+                      name: i.name,
+                    }}
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-          <div className="grid grid-cols-1 gap-y-4 sm:grid-cols-2 lg:grid-cols-3">
-            {g.images.map(i => (
-              <div key={i.name} className="my-2 mx-1">
-                <GalleryImage
-                  image={{
-                    href: i.url,
-                    name: i.name,
-                  }}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </Main>
   );
 };
@@ -122,7 +124,7 @@ function GalleryImage({ image }: { image: Image }) {
           layout="fill"
           objectFit="cover"
           className={cn(
-            "duration-700 ease-in-out group-hover:opacity-75",
+            "duration-700 ease-in-out sm:group-hover:opacity-75",
             isLoading
               ? "scale-110 blur-2xl grayscale"
               : "scale-100 blur-0 grayscale-0",

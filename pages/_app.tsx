@@ -97,7 +97,7 @@ const MyApp = ({ Component, pageProps }) => {
           color="#3b7ce7"
         />
         <meta name="msapplication-TileColor" content="#ffc40d" />
-        <meta name="theme-color" content="#1b1917" />
+        <meta name="theme-color" content="#171717" />
         <meta
           name="viewport"
           content="initial-scale=1.0, width=device-width"
@@ -135,7 +135,7 @@ const MyApp = ({ Component, pageProps }) => {
       ></Script>
       <style jsx global>{`
         body {
-          background-color: #1b1917;
+          background-color: #171717;
         }
       `}</style>
       <Header />

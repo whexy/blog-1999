@@ -34,7 +34,7 @@ const NowPlaying = () => {
         <div className="flex flex-shrink-0 items-center space-x-4">
           <div className="relative grid h-[50px] w-[50px] place-items-center overflow-hidden rounded-full border border-white/20">
             <div className="absolute z-20 grid h-[50px] w-[50px] place-items-center">
-              <div className="h-[10px] w-[10px] rounded-full border border-white/10 bg-stone-900"></div>
+              <div className="h-[10px] w-[10px] rounded-full border border-white/10 bg-neutral-900"></div>
             </div>
             <animated.div style={props}>
               <div className="relative h-[50px] w-[50px]">
