@@ -14,18 +14,4 @@ module.exports = withContentlayer({
       "img.cdn.whexy.com", // gallery
     ],
   },
-  webpack: config => {
-    // Turn SVGs to components
-    config.module.rules.push({
-      test: /\.svg$/i,
-      issuer: /\.[jt]sx?$/,
-      use: ["@svgr/webpack"],
-    });
-    config.resolve.fallback = {
-      fs: false,
-      path: false,
-      child_process: false,
-    };
-    return config;
-  },
 });

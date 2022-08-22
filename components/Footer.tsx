@@ -1,6 +1,6 @@
 import metadata from "@/data/metadata";
-import Avatar from "@/public/img/notion-avatar.svg";
 import dynamic from "next/dynamic";
+import Avatar from "@/components/icons/Avatar";
 const AnimatedFancyCard = dynamic(
   () => import("./AnimatedFancyCard"),
 );
