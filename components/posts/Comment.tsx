@@ -1,11 +1,14 @@
 import Giscus from "@giscus/react";
-import { useContext } from "react";
-import { ThemeContext } from "../../pages/_app";
+import { useSelector } from "react-redux";
 
 import React from "react";
+import { AppState } from "@/app/store";
 
 const Comment = ({ slug }: { slug: string }) => {
-  const { theme } = useContext(ThemeContext);
+  const darkMode = useSelector(
+    (state: AppState) => state.theme.darkMode,
+  );
+  const theme = darkMode ? "dark" : "light";
   return (
     <div className="mx-auto max-w-4xl px-2">
       <Giscus

@@ -1,14 +1,15 @@
-import { useContext } from "react";
-import { ThemeContext } from "../pages/_app";
+import { useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import { SkeletonProps } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import { AppState } from "@/app/store";
 
 const MySkeleton = (props: SkeletonProps) => {
-  const { theme } = useContext(ThemeContext);
-  const isDark = theme === "dark";
+  const darkMode = useSelector(
+    (state: AppState) => state.theme.darkMode,
+  );
 
-  if (!isDark) return <Skeleton {...props} />;
+  if (!darkMode) return <Skeleton {...props} />;
   else
     return (
       <Skeleton

@@ -2,154 +2,123 @@ import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
 import Head from "next/head";
-import Script from "next/script";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { createContext, useState, useEffect } from "react";
-import { useRouter } from "next/router";
+import { useEffect } from "react";
+
+import { SessionProvider } from "next-auth/react";
 import NextNProgress from "nextjs-progressbar";
-import * as ga from "@/lib/ga";
+import store, { AppState } from "@/app/store";
+import { Provider } from "react-redux";
 
-export const ThemeContext = createContext(null);
+// theme
+import { useSelector, useDispatch } from "react-redux";
+import { setDarkMode, unsetDarkMode } from "@/app/themeSlice";
 
-const MyApp = ({ Component, pageProps }) => {
-  const router = useRouter();
+// analytics
+import Analytics from "@/components/Analytics";
 
-  /**  Light and Dark Theme */
-
-  // Use sessionStorage to persist theme between page refreshes.
-  const [theme, setTheme] = useState("light");
-  const toggleTheme = () => {
-    const newTheme = theme === "light" ? "dark" : "light";
-    setTheme(newTheme);
-    sessionStorage.setItem("theme", newTheme);
-  };
-
+const Theme = ({ children }) => {
+  const dispatch = useDispatch();
+  const darkMode = useSelector(
+    (state: AppState) => state.theme.darkMode,
+  );
   // Set default theme.
-  useEffect(() => {
-    const storedTheme = sessionStorage.getItem("theme");
-    let targetTheme = null; // unknown
-    if (storedTheme) {
-      targetTheme = storedTheme;
-    } else {
-      const WindowPreferenceDark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-      ).matches;
-      targetTheme = WindowPreferenceDark ? "dark" : "light";
-    }
-    setTheme(targetTheme);
-  }, []);
-
-  // Monitor system theme change events.
   useEffect(() => {
     const handleThemeChange = () => {
       const WindowPreferenceDark = window.matchMedia(
         "(prefers-color-scheme: dark)",
       ).matches;
-      setTheme(WindowPreferenceDark ? "dark" : "light");
+      if (WindowPreferenceDark) {
+        dispatch(setDarkMode());
+      } else {
+        dispatch(unsetDarkMode());
+      }
     };
+    // set theme for the first time
+    handleThemeChange();
+    // monitor theme change
     window
       .matchMedia("(prefers-color-scheme: dark)")
       .addEventListener("change", handleThemeChange);
+    // unregister theme change monitor after exit
     return () => {
       window
         .matchMedia("(prefers-color-scheme: dark)")
         .removeEventListener("change", handleThemeChange);
     };
-  }, []);
-
-  /* Google Analytics */
-  useEffect(() => {
-    const handleRouteChange = url => {
-      ga.pageview(url);
-    };
-    router.events.on("routeChangeComplete", handleRouteChange);
-
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChange);
-    };
-  }, [router.events]);
+  }, [dispatch]);
 
   return (
-    <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <Head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/img/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/img/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/img/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/img/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="/img/safari-pinned-tab.svg"
-          color="#3b7ce7"
-        />
-        <meta name="msapplication-TileColor" content="#ffc40d" />
-        <meta name="theme-color" content="#171717" />
-        <meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Wenxuan's blog"
-          href="/feed/feed.xml"
-        />
-      </Head>
-      <Script
-        strategy="afterInteractive"
-        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
-      />
-      <Script
-        id="gtag-init"
-        strategy="afterInteractive"
-        dangerouslySetInnerHTML={{
-          __html: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-              page_path: window.location.pathname,
-            });
-          `,
+    <div className={darkMode ? "dark" : ""}>
+      <NextNProgress
+        color="#dc4a41"
+        options={{
+          showSpinner: false,
         }}
       />
-      <Script
-        async
-        defer
-        data-website-id={process.env.NEXT_PUBLIC_UMAMI_TRACKID}
-        src="https://tc.shiwx.org/tc.js"
-      ></Script>
-      <style jsx global>{`
-        body {
-          background-color: #171717;
-        }
-      `}</style>
-      <Header />
-      <div className={theme === "light" ? "" : "dark"}>
-        <NextNProgress
-          color="#dc4a41"
-          options={{
-            showSpinner: false,
-          }}
-        />
-        <Component {...pageProps} />
-      </div>
-      <Footer />
-    </ThemeContext.Provider>
+      <div>{children}</div>
+    </div>
+  );
+};
+
+const MyApp = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}) => {
+  return (
+    <Provider store={store}>
+      <SessionProvider session={session}>
+        <Head>
+          <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="/img/apple-touch-icon.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/img/favicon-32x32.png"
+          />
+          <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/img/favicon-16x16.png"
+          />
+          <link rel="manifest" href="/img/site.webmanifest" />
+          <link
+            rel="mask-icon"
+            href="/img/safari-pinned-tab.svg"
+            color="#3b7ce7"
+          />
+          <meta name="msapplication-TileColor" content="#ffc40d" />
+          <meta name="theme-color" content="#171717" />
+          <meta
+            name="viewport"
+            content="initial-scale=1.0, width=device-width"
+          />
+          <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="Wenxuan's blog"
+            href="/feed/feed.xml"
+          />
+        </Head>
+        <Analytics />
+        <style jsx global>{`
+          body {
+            background-color: #171717;
+          }
+        `}</style>
+        <Header />
+        <Theme>
+          <Component {...pageProps} />
+        </Theme>
+        <Footer />
+      </SessionProvider>
+    </Provider>
   );
 };
 

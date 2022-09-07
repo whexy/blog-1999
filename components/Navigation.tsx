@@ -6,8 +6,11 @@ import {
   MoonIcon,
 } from "@heroicons/react/outline";
 import { Menu } from "@headlessui/react";
-import { useContext, FC } from "react";
-import { ThemeContext } from "../pages/_app";
+import { FC } from "react";
+
+import { useSelector, useDispatch } from "react-redux";
+import { toggleDarkMode } from "@/app/themeSlice";
+import { AppState } from "@/app/store";
 
 function MyLink(props) {
   const { href, children, ...rest } = props;
@@ -19,7 +22,10 @@ function MyLink(props) {
 }
 
 const NavigationView = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
+  const darkMode = useSelector(
+    (state: AppState) => state.theme.darkMode,
+  );
+  const dispatch = useDispatch();
   return (
     <div className="flex items-center">
       {/* Desktop View */}
@@ -32,11 +38,11 @@ const NavigationView = () => {
       </div>
       <div className="px-4">
         <button
-          onClick={toggleTheme}
+          onClick={() => dispatch(toggleDarkMode())}
           className="umami--click--theme-button grid h-9 w-9 place-items-center rounded-lg bg-neutral-600 ring-[#f8c547] transition-all hover:ring-2 
           "
         >
-          {theme === "light" ? (
+          {darkMode ? (
             <MoonIcon className="h-5 w-5 stroke-gray-200" />
           ) : (
             <SunIcon className="h-5 w-5 stroke-gray-200" />

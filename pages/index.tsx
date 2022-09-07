@@ -14,7 +14,7 @@ export default function Home({ posts }) {
       <Head>
         <title>Wenxuan Shi</title>
       </Head>
-      <div className="bg-gray-100 text-black-readable dark:bg-black dark:text-white-readable">
+      <div className="min-h-[80vh] bg-gray-100 text-black-readable dark:bg-black dark:text-white-readable">
         <main className="mx-auto max-w-4xl px-2">
           <WelcomeCard />
           <RecentPosts posts={posts} />
