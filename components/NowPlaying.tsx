@@ -1,7 +1,6 @@
 import useSWR from "swr";
-import fetcher from "@/lib/fetcher";
-import { useSpring, animated } from "react-spring";
 import Image from "next/image";
+import fetcher from "@/lib/fetcher";
 
 const SpotifyIcon = () => (
   <svg
@@ -19,55 +18,36 @@ const NowPlaying = () => {
   const { data } = useSWR("/api/now-playing", fetcher, {
     refreshInterval: 30000, // Fetch API every 30 seconds
   });
-  // const data = null;
-
-  const props = useSpring({
-    loop: true,
-    from: { rotate: "0deg" },
-    to: { rotate: "360deg" },
-    config: { duration: 30000 },
-  });
-
-  return (
-    <div className="mx-auto flex scroll-m-0 items-center justify-between overflow-x-hidden text-white-readable">
-      {data && data.isPlaying ? (
-        <div className="flex flex-shrink-0 items-center space-x-4">
-          <div className="relative grid h-[50px] w-[50px] place-items-center overflow-hidden rounded-full border border-white/20">
-            <div className="absolute z-20 grid h-[50px] w-[50px] place-items-center">
-              <div className="h-[10px] w-[10px] rounded-full border border-white/10 bg-neutral-900"></div>
+  if (data && data.isPlaying)
+    return (
+      <div className="select-none pt-2 pb-2">
+        <div className="mx-auto flex items-center justify-between rounded-xl bg-white/[0.03] py-2 px-3">
+          <div className="flex items-center">
+            <Image
+              src={data.albumImageUrl}
+              alt="Album"
+              width="64"
+              height="64"
+            />
+            <div className="ml-3 px-1">
+              <a
+                href={data.songUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col"
+              >
+                <p className="text-sm text-white">{data.title}</p>
+              </a>
+              <p className="text-xs font-light text-jbgray-light">
+                by{" "}
+                <span className="text-white/70">{data.artist}</span>
+              </p>
             </div>
-            <animated.div style={props}>
-              <div className="relative h-[50px] w-[50px]">
-                <Image
-                  src={data.albumImageUrl}
-                  alt="Album"
-                  layout="fill"
-                  objectFit="cover"
-                />
-              </div>
-            </animated.div>
           </div>
-          <a
-            href={data.songUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex flex-col"
-          >
-            <p className="flex-shrink-0">{data.title}</p>
-            <p className="flex-shrink-0 text-sm text-jbgray-light">
-              {data.artist}
-            </p>
-          </a>
+          <SpotifyIcon />
         </div>
-      ) : (
-        <p>
-          Not Playing
-          <span className="text-jbgray-light"> - Spotify</span>
-        </p>
-      )}
-      <SpotifyIcon />
-    </div>
-  );
+      </div>
+    );
 };
 
 export default NowPlaying;
