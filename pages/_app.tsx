@@ -90,6 +90,18 @@ const MyApp = ({
           />
           <link rel="manifest" href="/img/site.webmanifest" />
           <link
+            rel="preload"
+            href="/fonts/noto-serif-sc-v22-chinese-simplified-regular.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
+            rel="preload"
+            href="/fonts/noto-serif-sc-v22-chinese-simplified-700.woff2"
+            as="font"
+            type="font/woff2"
+          />
+          <link
             rel="mask-icon"
             href="/img/safari-pinned-tab.svg"
             color="#3b7ce7"
