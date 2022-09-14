@@ -119,11 +119,9 @@ pre {
   font-display: swap;
   font-weight: 100;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-100.woff2")
-      format("woff2"),
+    url("/fonts/roboto-serif-v8-latin-100.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-100.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/roboto-serif-v8-latin-100.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-serif-regular - latin */
 @font-face {
@@ -132,11 +130,9 @@ pre {
   font-display: swap;
   font-weight: 400;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-regular.woff2")
-      format("woff2"),
+    url("/fonts/roboto-serif-v8-latin-regular.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-regular.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/roboto-serif-v8-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-serif-700 - latin */
 @font-face {
@@ -145,11 +141,9 @@ pre {
   font-display: swap;
   font-weight: 700;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-700.woff2")
-      format("woff2"),
+    url("/fonts/roboto-serif-v8-latin-700.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-700.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/roboto-serif-v8-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-serif-italic - latin */
 @font-face {
@@ -158,11 +152,9 @@ pre {
   font-display: swap;
   font-weight: 400;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-italic.woff2")
-      format("woff2"),
+    url("/fonts/roboto-serif-v8-latin-italic.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-italic.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/roboto-serif-v8-latin-italic.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* roboto-serif-700italic - latin */
 @font-face {
@@ -171,13 +163,26 @@ pre {
   font-display: swap;
   font-weight: 700;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-700italic.woff2")
+    url("/fonts/roboto-serif-v8-latin-700italic.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/roboto-serif-v5-latin-700italic.woff")
+      url("/fonts/roboto-serif-v8-latin-700italic.woff")
       format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+/* noto-serif-sc-200 - chinese-simplified */
+@font-face {
+  font-family: "Noto Serif SC";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 200;
+  src: local(""),
+    url("/fonts/noto-serif-sc-v22-chinese-simplified-200.woff2")
+      format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("/fonts/noto-serif-sc-v22-chinese-simplified-200.woff")
+      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
 /* noto-serif-sc-regular - chinese-simplified */
 @font-face {
   font-family: "Noto Serif SC";
@@ -185,27 +190,12 @@ pre {
   font-display: swap;
   font-weight: 400;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v16-chinese-simplified-regular.woff2")
+    url("/fonts/noto-serif-sc-v22-chinese-simplified-regular.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v16-chinese-simplified-regular.woff")
+      url("/fonts/noto-serif-sc-v22-chinese-simplified-regular.woff")
       format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
-
-/* noto-serif-sc-200 - latin_chinese-simplified */
-@font-face {
-  font-family: "Noto Serif SC";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 200;
-  src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v19-latin_chinese-simplified-200.woff2")
-      format("woff2"),
-    /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v19-latin_chinese-simplified-200.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
-}
-
 /* noto-serif-sc-700 - chinese-simplified */
 @font-face {
   font-family: "Noto Serif SC";
@@ -213,10 +203,10 @@ pre {
   font-display: swap;
   font-weight: 700;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v16-chinese-simplified-700.woff2")
+    url("/fonts/noto-serif-sc-v22-chinese-simplified-700.woff2")
       format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/noto-serif-sc-v16-chinese-simplified-700.woff")
+      url("/fonts/noto-serif-sc-v22-chinese-simplified-700.woff")
       format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
@@ -227,11 +217,9 @@ pre {
   font-display: swap;
   font-weight: 300;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-300.woff2")
-      format("woff2"),
+    url("/fonts/lato-v23-latin-300.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-300.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/lato-v23-latin-300.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* lato-regular - latin */
 @font-face {
@@ -240,11 +228,9 @@ pre {
   font-display: swap;
   font-weight: 400;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-regular.woff2")
-      format("woff2"),
+    url("/fonts/lato-v23-latin-regular.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-regular.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/lato-v23-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* lato-700 - latin */
 @font-face {
@@ -253,11 +239,9 @@ pre {
   font-display: swap;
   font-weight: 700;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-700.woff2")
-      format("woff2"),
+    url("/fonts/lato-v23-latin-700.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-700.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/lato-v23-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 /* lato-900 - latin */
 @font-face {
@@ -266,9 +250,7 @@ pre {
   font-display: swap;
   font-weight: 900;
   src: local(""),
-    url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-900.woff2")
-      format("woff2"),
+    url("/fonts/lato-v23-latin-900.woff2") format("woff2"),
     /* Chrome 26+, Opera 23+, Firefox 39+ */
-      url("https://fonts-1251112473.cos.ap-hongkong.myqcloud.com/lato-v22-latin-900.woff")
-      format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+      url("/fonts/lato-v23-latin-900.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
