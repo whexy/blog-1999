@@ -1,6 +1,6 @@
 import Image from "@/components/Image99";
 import portrait from "@/public/img/face.png";
-import { MailIcon } from "@heroicons/react/solid";
+import { EnvelopeIcon } from "@heroicons/react/24/solid";
 import { allAbouts } from "contentlayer/generated";
 import { useMDXComponent } from "next-contentlayer/hooks";
 
@@ -35,7 +35,7 @@ const InfoSection = () => {
             target="_blank"
             rel="noreferrer"
           >
-            <MailIcon className="h-6 w-6 text-red-500" />
+            <EnvelopeIcon className="h-6 w-6 text-red-500" />
           </a>
           <a
             href="https://github.com/whexy"

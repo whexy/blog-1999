@@ -159,6 +159,17 @@
             }
         },
         {
+            "id": "https://www.whexy.com/posts/evanston1",
+            "url": "https://www.whexy.com/posts/evanston1",
+            "title": "Evanston 生存小记（一）",
+            "summary": "小留在埃文斯顿的前两周",
+            "date_modified": "2022-09-14T00:00:00.000Z",
+            "author": {
+                "name": "Wenxuan Shi",
+                "url": "https://www.whexy.com"
+            }
+        },
+        {
             "id": "https://www.whexy.com/posts/faas",
             "url": "https://www.whexy.com/posts/faas",
             "title": "FaaS：为静态博客添加点赞功能",

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";

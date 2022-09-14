@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
 import {
-  MenuIcon,
+  Bars3Icon,
   SunIcon,
   MoonIcon,
-} from "@heroicons/react/outline";
+} from "@heroicons/react/24/outline";
 import { Menu } from "@headlessui/react";
 import { FC } from "react";
 
@@ -59,7 +59,7 @@ const MobileMenu = () => {
     <div className="flex items-center justify-center space-x-4 sm:hidden">
       <Menu as="div" className="relative grid place-items-center">
         <Menu.Button className="umami--click--mobile-menu-button">
-          <MenuIcon className="h-7 w-7" />
+          <Bars3Icon className="h-7 w-7" />
         </Menu.Button>
         <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
           <MobileNavItem url="/" name="Home" />

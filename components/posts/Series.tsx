@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { BookOpenIcon } from "@heroicons/react/solid";
+import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { parseISO } from "date-fns";
 
 import { allBlogs } from "contentlayer/generated";

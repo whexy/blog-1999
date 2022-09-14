@@ -1,6 +1,6 @@
 import init, { emulate } from "@/projects/wasm-riscv-emu";
 import { useState, useEffect } from "react";
-import { PlayIcon } from "@heroicons/react/solid";
+import { PlayIcon } from "@heroicons/react/24/solid";
 
 const WasmRiscvEmu = () => {
   const [rom, setRom] = useState("");
