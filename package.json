@@ -23,7 +23,7 @@
     "date-fns": "^2.29.2",
     "feed": "^4.2.2",
     "flowbite": "^1.5.3",
-    "flowbite-react": "^0.1.10",
+    "flowbite-react": "^0.2.0",
     "globby": "^13.1.2",
     "gray-matter": "^4.0.3",
     "image-size": "^1.0.2",
