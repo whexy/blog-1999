@@ -32,7 +32,6 @@ const NavigationView = () => {
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
         <DesktopNavItem url="/posts" name="Posts" />
-        <DesktopNavItem url="/gallery" name="Gallery" />
         {/* <DesktopNavItem url="/snippets" name="Snippets" /> */}
         <DesktopNavItem url="/friends" name="Friends" />
       </div>
@@ -65,7 +64,6 @@ const MobileMenu = () => {
           <MobileNavItem url="/" name="Home" />
           <MobileNavItem url="/posts" name="Posts" />
           {/* <MobileNavItem url="/snippets" name="Snippets" /> */}
-          <MobileNavItem url="/gallery" name="Gallery" />
           <MobileNavItem url="/friends" name="Friends" />
         </Menu.Items>
       </Menu>
