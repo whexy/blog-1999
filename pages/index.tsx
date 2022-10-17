@@ -13,6 +13,10 @@ export default function Home({ posts }) {
     <>
       <Head>
         <title>Wenxuan Shi</title>
+        <meta
+          name="description"
+          content="CS PhD student at Northwestern."
+        ></meta>
       </Head>
       <div className="min-h-[80vh] bg-gray-100 text-black-readable dark:bg-black dark:text-white-readable">
         <main className="mx-auto max-w-4xl px-2">

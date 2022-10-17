@@ -4,14 +4,14 @@ import helloPic from "@/public/img/face.png";
 
 const WelcomeCard = () => {
   return (
-    <div className="pt-4">
+    <div className="pt-4 font-title">
       <div className="primary flex flex-col-reverse justify-between p-4 font-title sm:flex-row sm:p-8">
         <div>
           <h1 className="pb-2 text-4xl font-bold tracking-tight">
             Wenxuan Shi
           </h1>
           <p className="text-lg">
-            <span className="opacity-80">PhD student at </span>
+            <span className="opacity-80">CS PhD student at </span>
             Northwestern
           </p>
           <div className="mt-5 flex">
@@ -58,7 +58,7 @@ const WelcomeCard = () => {
             </a>
           </div>
         </div>
-        <Link href="/about">
+        <Link href="https://shiwx.org">
           <a className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]">
             <Image
               src={helloPic}
