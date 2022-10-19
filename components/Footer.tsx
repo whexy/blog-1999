@@ -1,5 +1,4 @@
 import NowPlaying from "@/components/NowPlaying";
-import Link from "next/link";
 import metadata from "@/data/metadata";
 import dynamic from "next/dynamic";
 import Avatar from "@/components/icons/Avatar";

@@ -29,7 +29,7 @@
 }
 
 .rehype-code-title + pre {
-  @apply !mt-0 rounded-t-none;
+  @apply !mt-0 !rounded-t-none;
 }
 
 .footnotes {
