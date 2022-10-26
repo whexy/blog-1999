@@ -9,8 +9,8 @@ import { Menu } from "@headlessui/react";
 import { FC } from "react";
 
 import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "@/app/themeSlice";
-import { AppState } from "@/app/store";
+import { toggleDarkMode } from "@/store/themeSlice";
+import { AppState } from "@/store/store";
 
 function MyLink(props) {
   const { href, children, ...rest } = props;

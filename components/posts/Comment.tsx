@@ -2,7 +2,7 @@ import Giscus from "@giscus/react";
 import { useSelector } from "react-redux";
 
 import React from "react";
-import { AppState } from "@/app/store";
+import { AppState } from "@/store/store";
 
 const Comment = ({ slug }: { slug: string }) => {
   const darkMode = useSelector(

@@ -8,12 +8,12 @@ import Footer from "@/components/Footer";
 import { useEffect } from "react";
 
 import NextNProgress from "nextjs-progressbar";
-import store, { AppState } from "@/app/store";
+import store, { AppState } from "@/store/store";
 import { Provider } from "react-redux";
 
 // theme
 import { useSelector, useDispatch } from "react-redux";
-import { setDarkMode, unsetDarkMode } from "@/app/themeSlice";
+import { setDarkMode, unsetDarkMode } from "@/store/themeSlice";
 
 // analytics
 import Analytics from "@/components/Analytics";

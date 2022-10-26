@@ -7,7 +7,7 @@
       "@/layout/*": ["layout/*"],
       "@/public/*": ["public/*"],
       "@/data/*": ["data/*"],
-      "@/app/*": ["app/*"],
+      "@/store/*": ["store/*"],
       "@/projects/*": ["projects/*"],
       "contentlayer/generated": ["./.contentlayer/generated"]
     },
