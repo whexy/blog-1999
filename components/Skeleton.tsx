@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import Skeleton from "react-loading-skeleton";
 import { SkeletonProps } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
-import { AppState } from "@/app/store";
+import { AppState } from "@/store/store";
 
 const MySkeleton = (props: SkeletonProps) => {
   const darkMode = useSelector(
