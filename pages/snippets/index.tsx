@@ -8,16 +8,19 @@ import Link from "next/link";
 
 const FunctionCard = ({ title, description, slug, ...rest }) => {
   return (
-    <Link href={`/snippets/${slug}`}>
-      <a className="secondbg w-full rounded p-4" {...rest}>
-        <h3 className="mt-2 text-left text-lg font-bold text-gray-900 dark:text-gray-100">
-          {title}
-        </h3>
-        <p className="mt-1 text-gray-700 dark:text-gray-400">
-          {description}
-        </p>
-      </a>
-    </Link>
+    (<Link
+      href={`/snippets/${slug}`}
+      className="secondbg w-full rounded p-4"
+      {...rest}>
+
+      <h3 className="mt-2 text-left text-lg font-bold text-gray-900 dark:text-gray-100">
+        {title}
+      </h3>
+      <p className="mt-1 text-gray-700 dark:text-gray-400">
+        {description}
+      </p>
+
+    </Link>)
   );
 };
 

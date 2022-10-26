@@ -13,21 +13,21 @@ const PostCard = ({
       }`}
     >
       <Link href={url ? url : "/"}>
-        <a>
-          <div className="flex items-baseline justify-between rounded-xl transition-all">
-            <p className={`${showSummary && `text-lg font-bold`}`}>
-              {title}
-            </p>
-            <div
-              className={`flex-shrink-0 pl-2 font-mono tracking-wide ${
-                showSummary ? "opacity-80" : "opacity-60"
-              }`}
-            >
-              {date}
-            </div>
+
+        <div className="flex items-baseline justify-between rounded-xl transition-all">
+          <p className={`${showSummary && `text-lg font-bold`}`}>
+            {title}
+          </p>
+          <div
+            className={`flex-shrink-0 pl-2 font-mono tracking-wide ${
+              showSummary ? "opacity-80" : "opacity-60"
+            }`}
+          >
+            {date}
           </div>
-          {showSummary && <p className="opacity-60">{summary}</p>}
-        </a>
+        </div>
+        {showSummary && <p className="opacity-60">{summary}</p>}
+
       </Link>
     </div>
   );

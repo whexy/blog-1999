@@ -15,8 +15,8 @@ import { AppState } from "@/store/store";
 function MyLink(props) {
   const { href, children, ...rest } = props;
   return (
-    <Link href={href}>
-      <a {...rest}>{children}</a>
+    <Link href={href} {...rest}>
+      {children}
     </Link>
   );
 }
@@ -78,19 +78,21 @@ const DesktopNavItem: FC<{ url: string; name: string }> = ({
   const router = useRouter();
   const isActive = router.asPath === url;
   return (
-    <Link href={url}>
-      <a className="rounded-lg px-3 py-2 transition-all hover:bg-white/5">
-        <div
-          className={
-            isActive
-              ? "font-semibold text-gray-200"
-              : "font-normal text-gray-400"
-          }
-        >
-          {name}
-        </div>
-      </a>
-    </Link>
+    (<Link
+      href={url}
+      className="rounded-lg px-3 py-2 transition-all hover:bg-white/5">
+
+      <div
+        className={
+          isActive
+            ? "font-semibold text-gray-200"
+            : "font-normal text-gray-400"
+        }
+      >
+        {name}
+      </div>
+
+    </Link>)
   );
 };
 

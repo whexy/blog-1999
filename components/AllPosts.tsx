@@ -27,15 +27,15 @@ const Block: FC<{ cat: string; posts: Blog[] }> = ({
       <ul>
         {posts.map(post => (
           <li key={post.slug} className="py-2">
-            <Link href={`/posts/${post.slug}`}>
-              <a className="flex items-center space-x-4">
-                <p className="flex-shrink-0 font-mono text-sm text-neutral-400 hidden sm:block">
-                  {format(parseISO(post.publishDate), "yyyy-LL-dd")}
-                </p>
-                <h2 className="font-mono transition-all hover:text-red-500">
-                  {post.title}
-                </h2>
-              </a>
+            <Link href={`/posts/${post.slug}`} className="flex items-center space-x-4">
+
+              <p className="flex-shrink-0 font-mono text-sm text-neutral-400 hidden sm:block">
+                {format(parseISO(post.publishDate), "yyyy-LL-dd")}
+              </p>
+              <h2 className="font-mono transition-all hover:text-red-500">
+                {post.title}
+              </h2>
+
             </Link>
           </li>
         ))}
