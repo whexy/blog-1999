@@ -58,15 +58,17 @@ const WelcomeCard = () => {
             </a>
           </div>
         </div>
-        <Link href="https://shiwx.org">
-          <a className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]">
-            <Image
-              src={helloPic}
-              alt="Wenxuan Shi"
-              objectFit="cover"
-              className="secondbg overflow-hidden rounded-full"
-            />
-          </a>
+        <Link
+          href="https://shiwx.org"
+          className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]">
+
+          <Image
+            src={helloPic}
+            alt="Wenxuan Shi"
+            objectFit="cover"
+            className="secondbg overflow-hidden rounded-full"
+          />
+
         </Link>
       </div>
     </div>

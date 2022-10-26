@@ -55,79 +55,79 @@ const GithubRepo = ({ repo }: { repo: string }) => {
   }, [repo]);
 
   return (
-    <SkeletonTheme enableAnimation={!error}>
-      <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
-        <Link href={html_url}>
-          <a>
-            <div className="secondbg overflow-hidden rounded-xl">
-              <div className="flex space-x-4 p-4">
-                <div className="grid flex-none place-items-center">
-                  {ghrepo && ghrepo.owner ? (
-                    <NextImage
-                      src={ghrepo.owner.avatar_url}
-                      className="overflow-hidden rounded-full"
-                      alt={username}
-                      height={60}
-                      width={60}
-                    />
-                  ) : (
-                    <Skeleton height={60} width={60} />
-                  )}
-                </div>
-                <div className="flex flex-col justify-between space-y-1">
-                  <div>
-                    <p className="text-lg">
-                      {username}/
-                      <span className="font-semibold">
-                        {repo_name}
-                      </span>
-                    </p>
-                    {ghrepo && ghrepo.description && (
-                      <p className="text-sm font-light">
-                        {ghrepo.description}
-                      </p>
+   <SkeletonTheme enableAnimation={!error}>
+     <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
+       <Link href={html_url}>
+
+        <div className="secondbg overflow-hidden rounded-xl">
+          <div className="flex space-x-4 p-4">
+            <div className="grid flex-none place-items-center">
+              {ghrepo && ghrepo.owner ? (
+                <NextImage
+                  src={ghrepo.owner.avatar_url}
+                  className="overflow-hidden rounded-full"
+                  alt={username}
+                  height={60}
+                  width={60}
+                />
+              ) : (
+                <Skeleton height={60} width={60} />
+              )}
+            </div>
+            <div className="flex flex-col justify-between space-y-1">
+              <div>
+                <p className="text-lg">
+                  {username}/
+                  <span className="font-semibold">
+                    {repo_name}
+                  </span>
+                </p>
+                {ghrepo && ghrepo.description && (
+                  <p className="text-sm font-light">
+                    {ghrepo.description}
+                  </p>
+                )}
+              </div>
+              <div className="flex space-x-4 text-sm">
+                <div className="flex items-center space-x-1">
+                  <StarIcon className="h-4 w-4" />
+                  <p>
+                    {ghrepo ? (
+                      ghrepo.stargazers_count
+                    ) : (
+                      <Skeleton width={10} />
                     )}
-                  </div>
-                  <div className="flex space-x-4 text-sm">
-                    <div className="flex items-center space-x-1">
-                      <StarIcon className="h-4 w-4" />
-                      <p>
-                        {ghrepo ? (
-                          ghrepo.stargazers_count
-                        ) : (
-                          <Skeleton width={10} />
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <IconoirGitFork className="h-4 w-4" />
-                      <p>
-                        {ghrepo ? (
-                          ghrepo.forks_count
-                        ) : (
-                          <Skeleton width={10} />
-                        )}
-                      </p>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <CodiconIssues className="h-4 w-4" />
-                      <p>
-                        {ghrepo ? (
-                          ghrepo.open_issues_count
-                        ) : (
-                          <Skeleton width={10} />
-                        )}
-                      </p>
-                    </div>
-                  </div>
+                  </p>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <IconoirGitFork className="h-4 w-4" />
+                  <p>
+                    {ghrepo ? (
+                      ghrepo.forks_count
+                    ) : (
+                      <Skeleton width={10} />
+                    )}
+                  </p>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <CodiconIssues className="h-4 w-4" />
+                  <p>
+                    {ghrepo ? (
+                      ghrepo.open_issues_count
+                    ) : (
+                      <Skeleton width={10} />
+                    )}
+                  </p>
                 </div>
               </div>
-              {language && <img src={language} alt="languages" />}
             </div>
-          </a>
-        </Link>
-      </div>
-    </SkeletonTheme>
+          </div>
+          {language && <img src={language} alt="languages" />}
+        </div>
+
+       </Link>
+     </div>
+   </SkeletonTheme>
   );
 };
 

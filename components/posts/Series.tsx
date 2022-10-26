@@ -40,10 +40,10 @@ const Series = ({ slug, series }) => {
               slug === thisSlug && "font-bold underline"
             }`}
           >
-            <Link href={`/posts/${slug}`}>
-              <a onClick={() => trackSeriesRoute(thisSlug, slug)}>
-                {title}
-              </a>
+            <Link href={`/posts/${slug}`} onClick={() => trackSeriesRoute(thisSlug, slug)}>
+
+              {title}
+
             </Link>
           </li>
         ))}
