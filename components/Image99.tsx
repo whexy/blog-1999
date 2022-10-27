@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/alt-text */
-// Image components for blog-1999
 import Image from "next/image";
 import { ImageProps } from "next/image";
 
