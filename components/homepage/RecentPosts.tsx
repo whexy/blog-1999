@@ -1,9 +1,14 @@
+"use client";
+
 import type { Blog } from "contentlayer/generated";
 import { format, parseISO, compareDesc } from "date-fns";
 import Link from "next/link";
 import PostCard from "@/components/PostCard";
+import { allBlogs } from "contentlayer/generated";
 
-const RecentPosts = ({ posts }: { posts: Blog[] }) => {
+const RecentPosts = () => {
+  const posts: Blog[] = allBlogs;
+
   const recentPosts = posts
     .sort((p1, p2) =>
       compareDesc(parseISO(p1.publishDate), parseISO(p2.publishDate)),
@@ -49,7 +54,6 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
 
           <div className="px-3 py-3 text-blue-500 dark:text-blue-400">
             <Link href="/posts" className="flex justify-between">
-
               <p className="font-semibold ">Read more...</p>
               <svg
                 className="umami--click--more-button h-6 w-6 opacity-80 transition-opacity hover:cursor-pointer hover:opacity-100"
@@ -60,7 +64,6 @@ const RecentPosts = ({ posts }: { posts: Blog[] }) => {
                   d="M204 64v104a12 12 0 0 1-24 0V93L72.5 200.5a12.1 12.1 0 0 1-17 0a12 12 0 0 1 0-17L163 76H88a12 12 0 0 1 0-24h104a12 12 0 0 1 12 12Z"
                 />
               </svg>
-
             </Link>
           </div>
         </div>

@@ -1,16 +1,14 @@
+"use client";
+
 import Link from "next/link";
-import { useRouter } from "next/router";
-import {
-  Bars3Icon,
-  SunIcon,
-  MoonIcon,
-} from "@heroicons/react/24/outline";
+import { usePathname } from "next/navigation";
+import { Bars3Icon } from "@heroicons/react/24/outline";
 import { Menu } from "@headlessui/react";
 import { FC } from "react";
 
-import { useSelector, useDispatch } from "react-redux";
-import { toggleDarkMode } from "@/store/themeSlice";
-import { AppState } from "@/store/store";
+// import { useSelector, useDispatch } from "react-redux";
+// import { toggleDarkMode } from "@/store/themeSlice";
+// import { AppState } from "@/store/store";
 
 function MyLink(props) {
   const { href, children, ...rest } = props;
@@ -22,10 +20,10 @@ function MyLink(props) {
 }
 
 const NavigationView = () => {
-  const darkMode = useSelector(
-    (state: AppState) => state.theme.darkMode,
-  );
-  const dispatch = useDispatch();
+  // const darkMode = useSelector(
+  //   (state: AppState) => state.theme.darkMode,
+  // );
+  // const dispatch = useDispatch();
   return (
     <div className="flex items-center">
       {/* Desktop View */}
@@ -35,7 +33,7 @@ const NavigationView = () => {
         {/* <DesktopNavItem url="/snippets" name="Snippets" /> */}
         <DesktopNavItem url="/friends" name="Friends" />
       </div>
-      <div className="px-4">
+      {/* <div className="px-4">
         <button
           onClick={() => dispatch(toggleDarkMode())}
           className="umami--click--theme-button grid h-9 w-9 place-items-center rounded-lg bg-neutral-600 ring-[#f8c547] transition-all hover:ring-2 
@@ -47,7 +45,7 @@ const NavigationView = () => {
             <SunIcon className="h-5 w-5 stroke-gray-200" />
           )}
         </button>
-      </div>
+      </div> */}
       <MobileMenu />
     </div>
   );
@@ -75,13 +73,13 @@ const DesktopNavItem: FC<{ url: string; name: string }> = ({
   url,
   name,
 }) => {
-  const router = useRouter();
-  const isActive = router.asPath === url;
+  const pathname = usePathname();
+  const isActive = pathname === url;
   return (
-    (<Link
+    <Link
       href={url}
-      className="rounded-lg px-3 py-2 transition-all hover:bg-white/5">
-
+      className="rounded-lg px-3 py-2 transition-all hover:bg-white/5"
+    >
       <div
         className={
           isActive
@@ -91,8 +89,7 @@ const DesktopNavItem: FC<{ url: string; name: string }> = ({
       >
         {name}
       </div>
-
-    </Link>)
+    </Link>
   );
 };
 

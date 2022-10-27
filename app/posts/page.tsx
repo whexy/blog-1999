@@ -1,3 +1,5 @@
+"use client";
+
 import Main from "@/components/Main";
 import PageTitle from "@/components/tiny/PageTitle";
 import { allBlogs, Blog } from "contentlayer/generated";
@@ -6,7 +8,22 @@ import { format, parseISO, compareDesc } from "date-fns";
 import PostCard from "@/components/PostCard";
 import { useState } from "react";
 
-const PostsView = ({ posts }) => {
+const PostsView = () => {
+  const posts = allBlogs
+    .map(post =>
+      pick(post, [
+        "title",
+        "slug",
+        "image",
+        "summary",
+        "preview",
+        "publishDate",
+        "cat",
+      ]),
+    )
+    .sort((p1, p2) =>
+      compareDesc(parseISO(p1.publishDate), parseISO(p2.publishDate)),
+    );
   const [searchValue, setSearchValue] = useState("");
   const filteredBlogPosts = posts.filter(
     (post: Blog) =>
@@ -64,22 +81,3 @@ const PostsView = ({ posts }) => {
 };
 
 export default PostsView;
-
-export async function getStaticProps() {
-  const posts = allBlogs
-    .map(post =>
-      pick(post, [
-        "title",
-        "slug",
-        "image",
-        "summary",
-        "preview",
-        "publishDate",
-        "cat",
-      ]),
-    )
-    .sort((p1, p2) =>
-      compareDesc(parseISO(p1.publishDate), parseISO(p2.publishDate)),
-    );
-  return { props: { posts } };
-}

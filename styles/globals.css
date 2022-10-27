@@ -10,6 +10,10 @@
   .primary {
     @apply rounded-lg bg-white shadow-sm dark:bg-neutral-900 dark:shadow-none;
   }
+
+  body {
+    @apply bg-[#171717];
+  }
 }
 
 @layer utilities {
