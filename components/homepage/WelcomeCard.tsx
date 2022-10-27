@@ -60,15 +60,13 @@ const WelcomeCard = () => {
         </div>
         <Link
           href="https://shiwx.org"
-          className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]">
-
+          className="mb-6 h-[80px] w-[80px] transition-all duration-500 hover:rotate-2 hover:scale-105 sm:mb-0 sm:h-[120px] sm:w-[120px]"
+        >
           <Image
             src={helloPic}
             alt="Wenxuan Shi"
-            objectFit="cover"
-            className="secondbg overflow-hidden rounded-full"
+            className="secondbg overflow-hidden rounded-full object-cover"
           />
-
         </Link>
       </div>
     </div>
