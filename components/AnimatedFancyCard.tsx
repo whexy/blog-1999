@@ -1,3 +1,5 @@
+"use client";
+
 import { useSpring, animated } from "react-spring";
 import { useRef } from "react";
 

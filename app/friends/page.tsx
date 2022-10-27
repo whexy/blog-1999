@@ -3,29 +3,20 @@ import { friends, Friend } from "@/data/friends";
 
 // tiny
 import PageTitle from "@/components/tiny/PageTitle";
-import Main from "@/components/Main";
-import { useState } from "react";
-
-const me: Friend = {
-  name: "Whexy (me)",
-  icon: "https://avatars.githubusercontent.com/u/25165025?v=4",
-  url: "https://www.whexy.com",
-  description: "",
-};
 
 const FriendPage = () => {
-  const [chosen, setChosen] = useState<Friend>(me);
+  const me: Friend = {
+    name: "Whexy (me)",
+    icon: "https://avatars.githubusercontent.com/u/25165025?v=4",
+    url: "https://www.whexy.com",
+    description: "",
+  };
   return (
-    <Main>
+    <>
       <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
       <div className="flex items-start justify-center gap-2 pb-10">
         <div className="max-w-2xl flex-1">
-          <div
-            className="primary grid grid-cols-1 gap-1 divide-y divide-black/10 dark:divide-white/10"
-            onMouseLeave={() => {
-              setChosen(me);
-            }}
-          >
+          <div className="primary grid grid-cols-1 gap-1 divide-y divide-black/10 dark:divide-white/10">
             {friends
               .sort((f1, f2) => f1.name.localeCompare(f2.name))
               .map(friend => (
@@ -34,9 +25,6 @@ const FriendPage = () => {
                   href={friend.url}
                   target="_blank"
                   rel="noreferrer"
-                  onMouseEnter={() => {
-                    setChosen(friend);
-                  }}
                 >
                   <div className="group py-2  px-4">
                     <div className="flex items-center justify-between">
@@ -76,21 +64,21 @@ const FriendPage = () => {
             <div className="absolute top-4 right-4 h-2 w-2 rounded-full bg-green-500" />
             <div className="flex space-x-8 p-8">
               <Image
-                src={chosen.icon}
-                alt={chosen.name}
+                src={me.icon}
+                alt={me.name}
                 className="rounded-lg"
                 width={100}
                 height={100}
               />
               <div>
-                <h3 className="text-2xl">{chosen.name}</h3>
+                <h3 className="text-2xl">{me.name}</h3>
                 <a
-                  href={chosen.url}
+                  href={me.url}
                   target="_blank"
                   rel="noreferrer"
                   className="opacity-60"
                 >
-                  {chosen.url.split("//")[1]}
+                  {me.url.split("//")[1]}
                 </a>
               </div>
             </div>
@@ -119,7 +107,7 @@ const FriendPage = () => {
           </div>
         </div>
       </div>
-    </Main>
+    </>
   );
 };
 

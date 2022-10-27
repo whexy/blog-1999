@@ -1,19 +1,16 @@
-import NowPlaying from "@/components/NowPlaying";
+// import NowPlaying from "@/components/NowPlaying";
 import metadata from "@/data/metadata";
-import dynamic from "next/dynamic";
 import Avatar from "@/components/icons/Avatar";
-const AnimatedFancyCard = dynamic(
-  () => import("./AnimatedFancyCard"),
-);
+import AnimatedFancyCard from "@/components/AnimatedFancyCard";
 
 export default function Footer() {
   const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const commitURL = `https://github.com/whexy/blog-1999`;
   return (
     <footer className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-2 sm:items-start">
-      <div className="w-full pb-4">
+      {/* <div className="w-full pb-4">
         <NowPlaying />
-      </div>
+      </div> */}
       <AnimatedFancyCard hardness={5}>
         <div className="select-none pt-2 pb-2">
           <div className="mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl border border-white/10">
