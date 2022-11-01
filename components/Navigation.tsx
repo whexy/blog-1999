@@ -30,8 +30,6 @@ const NavigationView = () => {
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
         <DesktopNavItem url="/posts" name="Posts" />
-        {/* <DesktopNavItem url="/snippets" name="Snippets" /> */}
-        <DesktopNavItem url="/friends" name="Friends" />
       </div>
       {/* <div className="px-4">
         <button
@@ -61,8 +59,6 @@ const MobileMenu = () => {
         <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
           <MobileNavItem url="/" name="Home" />
           <MobileNavItem url="/posts" name="Posts" />
-          {/* <MobileNavItem url="/snippets" name="Snippets" /> */}
-          <MobileNavItem url="/friends" name="Friends" />
         </Menu.Items>
       </Menu>
     </div>

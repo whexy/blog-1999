@@ -1,3 +1,5 @@
+"use client";
+
 import useSWR from "swr";
 import Image from "next/image";
 import fetcher from "@/lib/fetcher";

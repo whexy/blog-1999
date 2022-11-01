@@ -50,27 +50,9 @@ const Blog = defineDocumentType(() => ({
   computedFields,
 }));
 
-const About = defineDocumentType(() => ({
-  name: "About",
-  filePathPattern: `about.mdx`,
-  contentType: "mdx",
-  fields: {},
-}));
-
-const Snippet = defineDocumentType(() => ({
-  name: "Snippet",
-  filePathPattern: "snippets/*.mdx",
-  contentType: "mdx",
-  fields: {
-    title: { type: "string", required: true },
-    description: { type: "string", required: true },
-  },
-  computedFields,
-}));
-
 const contentLayerConfig = makeSource({
   contentDirPath: "data",
-  documentTypes: [Blog, About, Snippet],
+  documentTypes: [Blog],
   mdx: {
     rehypePlugins: [
       [rehypeImgSize, { dir: "public" }],
