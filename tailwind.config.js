@@ -15,9 +15,9 @@ module.exports = {
     extend: {
       fontFamily: {
         article: [
-          '"Roboto Serif"',
-          '"Noto Serif SC"',
-          ...defaultTheme.fontFamily.serif,
+          "var(--font-fira)",
+          "var(--font-notosans)",
+          ...defaultTheme.fontFamily.sans,
         ],
         title: [
           "var(--font-lato)",

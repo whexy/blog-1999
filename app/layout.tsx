@@ -9,6 +9,7 @@ import Analytics from "@/components/Analytics";
 
 import { Lato } from "@next/font/google";
 import { Noto_Sans_SC } from "@next/font/google";
+import { Fira_Sans } from "@next/font/google";
 
 const lato = Lato({
   weight: ["300", "400", "700", "900"],
@@ -25,13 +26,22 @@ const noto_sans_sc = Noto_Sans_SC({
   variable: "--font-notosans",
 });
 
+const fira = Fira_Sans({
+  weight: ["100", "400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-fira",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html className={`${lato.variable} ${noto_sans_sc.variable}`}>
+    <html
+      className={`${lato.variable} ${noto_sans_sc.variable} ${fira.variable}`}
+    >
       <head>
         <link
           rel="apple-touch-icon"
