@@ -10,15 +10,14 @@
   Yet Another Blog system with <b>Next.js</b>
 </p>
 
-- Framework: Next.js
+- Framework: Next.js 13
 - Deployment: Vercel
-- Content: MDX
+- Content: MDX with [contentlayer](https://github.com/contentlayerdev/contentlayer)
 - Styling: Tailwind CSS
 
 ## Live Demo
 
-- [Wenxuan Shi's Blog (Vercel)](https://whexy.com)
-- [Wenxuan Shi's Blog (Azure)](https://www.whexy.com), recommand for users in mainland China.
+- [Wenxuan Shi's Blog](https://www.whexy.com)
 
 ## Learn more
 
@@ -28,12 +27,12 @@ I've written a post discussing how to design a blog system.
 
 ## Overview
 
-- `data/*` - MDX data that is used for blogs and the "about page". Some structed data supporting "Key" and "Friend" pages.
+- `app/*` - All pages in [Next.js 13 Layouts RFC](https://nextjs.org/blog/layouts-rfc).
+- `app/blog/*` - Blog posts using MDX and a lot of customized components.
+- `data/*` - MDX data that is used for blogs.
 - `layouts/*` - The page layout used to render data (blog posts).
 - `lib/*` - Short for "library", a collection of helpful utilities or code for external services.
 - `pages/api/*` - API routes of Next Server Function.
-- `pages/blog/*` - Static pre-rendered blog pages using MDX.
-- `pages/*` - All other static pages.
 - `public/*` - Static assets including images, files, etc.
 - `styles/*` - Fonts and Tailwind CSS config.
 
@@ -42,8 +41,8 @@ I've written a post discussing how to design a blog system.
 ```shell
 $ git clone https://github.com/whexy/blog-1999.git
 $ cd blog-1999
-$ yarn
-$ yarn dev
+$ pnpm install
+$ pnpm run dev
 ```
 
 ## Cloning / Fork
