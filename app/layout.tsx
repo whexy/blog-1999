@@ -7,13 +7,31 @@ import Footer from "@/components/Footer";
 import React from "react";
 import Analytics from "@/components/Analytics";
 
+import { Lato } from "@next/font/google";
+import { Noto_Sans_SC } from "@next/font/google";
+
+const lato = Lato({
+  weight: ["300", "400", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-lato",
+  display: "swap",
+  adjustFontFallback: false,
+});
+
+const noto_sans_sc = Noto_Sans_SC({
+  weight: ["400", "700"],
+  subsets: ["chinese-simplified"],
+  display: "swap",
+  variable: "--font-notosans",
+});
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html>
+    <html className={`${lato.variable} ${noto_sans_sc.variable}`}>
       <head>
         <link
           rel="apple-touch-icon"

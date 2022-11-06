@@ -13,8 +13,7 @@ const PostCard = ({
       }`}
     >
       <Link href={url ? url : "/"}>
-
-        <div className="flex items-baseline justify-between rounded-xl transition-all">
+        <div className="flex items-baseline justify-between rounded-xl font-title transition-all">
           <p className={`${showSummary && `text-lg font-bold`}`}>
             {title}
           </p>
@@ -27,7 +26,6 @@ const PostCard = ({
           </div>
         </div>
         {showSummary && <p className="opacity-60">{summary}</p>}
-
       </Link>
     </div>
   );
