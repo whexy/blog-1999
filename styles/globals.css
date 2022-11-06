@@ -40,8 +40,12 @@
   @apply pb-4 text-sm;
 }
 
+sup > a {
+  @apply !shadow-none;
+}
+
 .footnotes a {
-  @apply font-normal text-slate-500 dark:text-slate-300;
+  @apply font-normal text-slate-500 !shadow-none dark:text-slate-300;
 }
 
 .prose :not(pre) > code {
