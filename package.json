@@ -29,7 +29,7 @@
     "gray-matter": "^4.0.3",
     "image-size": "^1.0.2",
     "lodash": "^4.17.21",
-    "lqip-modern": "^1.2.0",
+    "lqip-modern": "^2.0.0",
     "markdown-it": "^13.0.1",
     "next": "^13.0.2",
     "next-auth": "^4.16.0",
