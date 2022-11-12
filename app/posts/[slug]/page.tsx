@@ -15,7 +15,7 @@ export default function Post({
   const Content = useMDXComponent(post.body.code);
   return (
     <BlogLayout post={post}>
-      <Content components={{ ...components } as unknown} />
+      <Content components={components} />
     </BlogLayout>
   );
 }
