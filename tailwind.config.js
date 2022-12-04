@@ -24,6 +24,10 @@ module.exports = {
           "var(--font-notosans)",
           ...defaultTheme.fontFamily.sans,
         ],
+        noto: [
+          "var(--font-notosans)",
+          ...defaultTheme.fontFamily.sans,
+        ],
       },
       colors: {
         white: {

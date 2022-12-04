@@ -3,7 +3,7 @@ import Image from "@/components/Image99";
 const ImgComponent = ({ src, alt, width, height }) => {
   return (
     <div className="break-inside-avoid-page">
-      <div className="grid place-items-center overflow-hidden rounded-lg dark:border dark:border-white/10">
+      <div className="grid place-items-center overflow-hidden rounded-lg">
         <Image
           src={`/${src}`}
           alt={alt}

@@ -5,29 +5,52 @@ summary: "The QWERT keyboard has a fundamental design fault that I can't tolerat
 cat: Misc
 ---
 
-The QWERT keyboard has a fundamental design fault that I can't tolerate:
-It puts the "CapsLock" in the middle row. This key is almost useless
-because you can always use your left pinky finger to hold down the Shift
-key to type uppercase letters.
+export const Key = ({ name }) => {
+  return (
+    <div
+      className="not-prose mx-[0.1em] inline-block rounded border border-[#9fa6ad] bg-[#e3e6e8] py-[0.1em] px-[0.6em] font-noto text-sm font-medium text-[#232629]"
+      style={{
+        boxShadow:
+          "0 1px 1px hsl(210deg 8% 5% / 15%), inset 0 1px 0 0 hsl(0deg 0% 100%)",
+      }}
+    >
+      {name}
+    </div>
+  );
+};
+
+export const Ctrl = () => <Key name="⌃ Ctrl" />;
+export const Shift = () => <Key name="⇧ Shift" />;
+export const Alt = () => <Key name="⌥ Option" />;
+export const Command = () => <Key name="⌘ Cmd" />;
+export const Hyper = () => <Key name="Hyper" />;
+export const Meh = () => <Key name="Meh" />;
+export const CapsLock = () => <Key name="⇪ CapsLock" />;
+export const Return = () => <Key name="Return" />;
+export const Esc = () => <Key name="Esc" />;
+export const Tab = () => <Key name="Tab" />;
+export const BtnA = () => <Key name="A" />;
+export const BtnC = () => <Key name="C" />;
+export const BtnBackSlash = () => <Key name="\" />;
+
+The keyboard has a fundamental design fault that I can't tolerate:
+It puts <CapsLock /> in the middle row. This key is almost useless
+because you can always use your left pinky finger to hold down <Shift /> to type uppercase letters.
 
 Think about this: your left pinky is the finger that moves most often
 using the QWERT keyboard. Almost all shortcut keys require the use of
-it. It has to move up and down to press Ctrl, Shift, Alt (Option), and
-Command (Super, Windows). However, the most convenient key for it to
-press - in other words, the key that it can reach naturally without much
-effort - is CapsLock! The most useless key in the left half of the
-keyboard!
+it. It has to move up and down to press <Ctrl />, <Shift />, <Alt />, and <Command />. However, the most convenient key for it to press - in
+other words, the key that it can reach naturally without much effort -
+is <CapsLock />! The most useless key in the left half of the keyboard!
 
 Your right pinky feels much more comfortable than your left pinky. The
-only thing it needs to do is to press the "Enter" key. I mean, it's not
+only thing it needs to do is to press <Return />. I mean, it's not
 fair! Your right pinky can do its important work without jumping around,
 while your left pinky is too busy finding the correct modifier key to
 press!
 
 Some keyboard manufacturers want to solve this problem. For example, the
-famous HHKB keyboard replaces CapsLock with Ctrl. The CapsLock instead
-becomes a combination of Fn+Tab. According to the frequency of CapsLock
-usage, this is undoubtedly a good change.
+famous HHKB keyboard replaces <CapsLock /> with <Ctrl />. The CapsLock instead becomes a combination of Fn+Tab. According to the frequency of CapsLock usage, this is undoubtedly a good change.
 
 ![](images/capslock/image2.png){}
 
@@ -36,9 +59,8 @@ designed for programmers, aren't F1-F12 essential for them too? Just
 imagine how many keys you must press to switch TTY in Linux.
 
 I do prefer my "clicky" standard keyboard with brown switches. But it
-doesn't mean my left pinky finger has to suffer. Some changes to the
-CapsLock key can make it easier to use. For example, remap CapsLock to
-other modifier keys.
+doesn't mean my left pinky finger has to suffer. Some changes to the <CapsLock /> key can make it easier to use. For example,
+remap it to other modifier keys.
 
 ## Remapping
 
@@ -50,28 +72,25 @@ with keys that make sense.
 
 Yes. A shortcut system must make sense. Otherwise, it's just a
 collection of random gorilla presses. Here is an example of a sensible
-shortcut system: Control and Command are separate keys for different
+shortcut system: <Ctrl /> and <Command /> are separate keys for different
 works in macOS. All the terminal stuff uses Control, which means you can
-press Ctrl+C to send SIGINT to a task to terminate it. At the same time,
-Command+C is used to copy the outputs to the clipboard. This design
+press <Ctrl /><BtnC /> to send SIGINT to a task to terminate it. At the same time, <Command /><BtnC /> is used to copy the outputs to the clipboard. This design
 allows "copy" operations to use the same shortcut keys globally. In
-contrast, a bad design is that you must use Ctrl+Shift+C to copy in a
+contrast, a bad design is that you have to use <Ctrl /><Shift /><BtnC /> to copy in a
 Linux terminal emulator, breaking global consistency.
 
-A friend of mine used to interchange CapsLock and Esc. He was blindly
+A friend of mine used to interchange <CapsLock /> and <Esc />. He was blindly
 enthusiastic about vim, and after a heated discussion, he recently
-upgraded to a more advanced keyboard diagram. When CapsLock is pressed
-alone, it acts like Esc. When the CapsLock key is pressed with another
+upgraded to a more advanced keyboard diagram. When <CapsLock /> is pressed
+alone, it acts like Esc. When the <CapsLock /> key is pressed with another
 key, it works like Ctrl.
 
 ## Hyper and Meh
 
-I'm a vim user who only knows how to quit it (I'm kidding). In most
+I'm a vim user who only knows how to quit it (just kidding). In most
 cases, I use VSCode with a vim keymap binding. I'm not interested in
-making CapsLock another Ctrl. So I remap CapsLock to a complex
-combination of Ctrl+Shift+Option+Command (Ctrl+Shift+Alt+Windows for
-Windows users). The modified key is the so-called **Hyper** key by the
-advanced users in the forum.
+making <CapsLock /> another Ctrl. So I remap <CapsLock /> to a complex
+combination of <Ctrl /><Shift /><Alt /><Command />. The modified key is the so-called **Hyper** key by the advanced users in the forum.
 
 Why would I need a "Hyper" key anyway? That is because I'm a programmer
 who shamefully uses IDEs. They define so many keyboard shortcuts that I
@@ -79,9 +98,7 @@ cannot avoid conflict with them when creating my own. So I decided to
 give my shortcuts a unique trigger. That is when the Hyper key comes in.
 
 There is another key called **Meh** used by some advanced users as an
-addition to the Hyper key. Meh usually refers to combining
-Ctrl+Shift+Option (Ctrl+Shift+Alt for Windows users). Guess which key I
-remapped for Meh? It's the Tab key!
+addition to Hyper. Meh usually refers to combining <Ctrl /><Shift /><Alt />. Guess which key I remapped for Meh? It's <Tab />!
 
 <Dialog>
   So, you mapped your CapsLock to some weird modifier keys and wrote a
@@ -116,9 +133,9 @@ also try to avoid using the mouse, as having my hands on the keyboard
 helps me to type and check the code. So I need a shortcut to switch
 between windows quickly and precisely.
 
-Command+Tab (or Alt+Tab for Windows users) cannot count as "precisely"
-because I always get the wrong window on another virtual desktop with
-it. Instead, with the power of window managers, I use Hyper and Meh to
+Note that <Command /> <Tab /> (or <Alt /> <Tab /> for Windows users, I guess you guys are more familiar with the name "Alt") cannot count as "precisely" because I
+always get the wrong window on another virtual desktop with it.
+Instead, with the power of window managers, I use <Hyper /> and <Meh /> to
 switch between them.
 
 | Keyboard Function | Shortcuts                                                 |
@@ -129,19 +146,18 @@ switch between them.
 | Meh + 1-9         | move the current window to virtual desktop 1~9.           |
 
 Since the browser and terminal are so frequently used in my workflow, I
-created two shortcuts to open them. Hyper+Return creates a new terminal
-window, and Hyper+\ opens a new Chrome window.
+created two shortcuts to open them. <Hyper /><Return /> creates a new terminal
+window, and <Hyper /> <BtnBackSlash /> opens a new Chrome window. I also have many shortcuts triggered by Hyper to create new ToDo lists, open Spotify, and turn on the bulb in my room.
 
-Using the keyboard to switch between windows can significantly reduce
+Using the keyboard to control everything can significantly reduce
 the frequency of using the mouse, thus motivating you to become a
-keyboardist. Recall that my Hyper key is actually the CapsLock key on
+keyboardist. Recall that my Hyper key is actually the <CapsLock /> key on
 the keyboard. When swapping between code and terminal, I simply move my
-pinky finger from 'A' to one key away to the left while keeping my
+pinky finger left one key away from <BtnA /> while keeping my
 right hand still. Now my pinky and I are both happy with it.
 
 When these shortcuts form muscle memory, it becomes so natural, precise,
 and fast that it's as if I'm using my mind to interact with the
 computer. I heard someone is working on window switching based on an
 attention mechanism (using a webcam to capture human eye movement).
-Until that happens, boost your productivity with the methods I've
-described today!
+Until that happens, why not boost your productivity with the methods I described here?
