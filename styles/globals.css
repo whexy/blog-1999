@@ -28,6 +28,11 @@
   }
 }
 
+.notion-header,
+.notion-nav-header {
+  @apply !static !z-0;
+}
+
 .rehype-code-title {
   @apply rounded-t-lg border border-b-0 border-gray-200/10 bg-[#24252f] px-5 py-3 font-mono text-sm font-bold text-gray-200;
 }
