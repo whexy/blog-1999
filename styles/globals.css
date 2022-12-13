@@ -28,11 +28,34 @@
   }
 }
 
+/* Notion */
+:root {
+  --notion-font: var(--font-fira), var(--font-lato),
+    var(--font-notosans), ui-sans-serif, system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.notion-title,
+.notion-h {
+  @apply font-title;
+}
+
 .notion-header,
 .notion-nav-header {
   @apply !static !z-0;
 }
 
+.notion-callout {
+  @apply !rounded-lg !border-none !backdrop-blur;
+}
+
+.notion-gallery-grid > a {
+  @apply !rounded-lg !border !border-black/10;
+}
+
+/* Code */
 .rehype-code-title {
   @apply rounded-t-lg border border-b-0 border-gray-200/10 bg-[#24252f] px-5 py-3 font-mono text-sm font-bold text-gray-200;
 }
@@ -53,7 +76,7 @@ sup > a {
   @apply font-normal text-slate-500 !shadow-none dark:text-slate-300;
 }
 
-.prose :not(pre) > code {
+.prose:not(pre) > code {
   @apply rounded-md border border-gray-100 bg-gray-100 px-1 py-0.5 dark:border-0 dark:bg-gray-800 dark:text-white-readable;
 }
 

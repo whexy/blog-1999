@@ -1,15 +1,12 @@
 "use client";
 import { NotionRenderer } from "react-notion-x";
 import dynamic from "next/dynamic";
+import Link from "next/link";
 
 const Code = dynamic(() =>
   import("react-notion-x/build/third-party/code").then(m => m.Code),
 );
-const Collection = dynamic(() =>
-  import("react-notion-x/build/third-party/collection").then(
-    m => m.Collection,
-  ),
-);
+import { Collection } from "react-notion-x/build/third-party/collection";
 const Equation = dynamic(() =>
   import("react-notion-x/build/third-party/equation").then(
     m => m.Equation,
@@ -36,6 +33,9 @@ export default function NotionClientRenderer(props: RenderProps) {
         Collection,
         Equation,
         Modal,
+        PageLink: ({ href, children }) => (
+          <Link href={href}>{children}</Link>
+        ),
       }}
       {...props}
     />
