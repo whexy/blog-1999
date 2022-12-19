@@ -11,7 +11,7 @@ const PageTitle = ({
   return (
     <>
       <Head>
-        <title>{`${title} | Wenxuan Shi`}</title>
+        <title>{`${title} | Whexy`}</title>
       </Head>
       <div className="flex items-center space-x-2">
         {emoji && (

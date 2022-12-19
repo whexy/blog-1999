@@ -1,12 +1,12 @@
 const metadata = {
-  title: "Wenxuan Shi", // title of the website
+  title: "Whexy", // title of the website
   description: "a student obsessed with the computing world", // description of the website
   header: {
-    logo: "wenxuan",
+    logo: "whexy",
     sublogo: "1999",
   },
   author: {
-    name: "Wenxuan Shi",
+    name: "Whexy",
     email: "gwhexy@gmail.com",
     url: "https://shiwx.org",
   },

@@ -8,7 +8,7 @@ const WelcomeCard = () => {
       <div className="primary flex flex-col-reverse justify-between p-4 font-title sm:flex-row sm:p-8">
         <div>
           <h1 className="pb-2 text-4xl font-bold tracking-tight">
-            Wenxuan Shi
+            Whexy
           </h1>
           <p className="text-lg">
             <span className="opacity-80">CS PhD student at </span>
@@ -64,7 +64,7 @@ const WelcomeCard = () => {
         >
           <Image
             src={helloPic}
-            alt="Wenxuan Shi"
+            alt="a photo of Whexy"
             className="secondbg overflow-hidden rounded-full object-cover"
           />
         </Link>

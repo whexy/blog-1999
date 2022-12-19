@@ -75,7 +75,7 @@ export default function RootLayout({
         <link
           rel="alternate"
           type="application/rss+xml"
-          title="Wenxuan's blog"
+          title="Whexy's blog"
           href="/feed/feed.xml"
         />
         <Analytics />

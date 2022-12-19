@@ -1,4 +1,4 @@
-# whexy.com (wenxuan<sup>1999</sup>)
+# whexy.com (whexy<sup>1999</sup>)
 
 <p align="center">
 <img src="https://img.shields.io/github/license/whexy/blog-1999?" />
@@ -17,7 +17,7 @@
 
 ## Live Demo
 
-- [Wenxuan Shi's Blog](https://www.whexy.com)
+- [Whexy's Blog](https://www.whexy.com)
 
 ## Learn more
 

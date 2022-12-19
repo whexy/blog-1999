@@ -1,7 +1,7 @@
 export default async function Head() {
   return (
     <>
-      <title>Wenxuan Shi</title>
+      <title>Whexy</title>
       <meta
         name="description"
         content="CS PhD student at Northwestern."
