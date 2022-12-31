@@ -1,15 +1,8 @@
-import Image from "@/components/Image99";
-
-const ImgComponent = ({ src, alt, width, height }) => {
+const ImgComponent = ({ src, alt }) => {
   return (
     <div className="break-inside-avoid-page">
       <div className="grid place-items-center overflow-hidden rounded-lg">
-        <Image
-          src={`/${src}`}
-          alt={alt}
-          width={width}
-          height={height}
-        />
+        <img src={`/${src}`} alt={alt} />
       </div>
       {alt && (
         <div className="mt-2 text-center font-sans text-sm font-light opacity-80">

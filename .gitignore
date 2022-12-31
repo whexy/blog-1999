@@ -43,9 +43,6 @@ package-lock.json
 .DS_Store
 .env.local
 
-# Contentlayer
-.contentlayer
-
 /tools
 .vscode
 /data/blog/images

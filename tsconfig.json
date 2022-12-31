@@ -23,9 +23,6 @@
       "@/projects/*": [
         "projects/*"
       ],
-      "contentlayer/generated": [
-        "./.contentlayer/generated"
-      ]
     },
     "target": "es5",
     "lib": [
@@ -55,7 +52,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".contentlayer/generated",
     ".next/types/**/*.ts"
   ],
   "exclude": [
