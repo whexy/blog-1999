@@ -1,3 +1,5 @@
+"use client";
+
 import { serialize } from "next-mdx-remote/serialize";
 import MDXContent from "@/components/MDXContent";
 import { getSanityContent } from "@/lib/sanity";
@@ -28,12 +30,7 @@ export default async function Page({ params }) {
 
   const mdxSource = await serialize(data.allBlog[0].content, {
     mdxOptions: {
-      rehypePlugins: [
-        [rehypeImgSize, { dir: "public" }],
-        rehypeCodeTitles,
-        rehypePrism,
-        rehypeKatex,
-      ],
+      rehypePlugins: [rehypeCodeTitles, rehypePrism, rehypeKatex],
       remarkPlugins: [
         remarkGfm,
         remarkMath,
