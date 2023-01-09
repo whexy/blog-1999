@@ -17,7 +17,7 @@
     "@heroicons/react": "^2.0.13",
     "@next/font": "^13.1.1",
     "@reduxjs/toolkit": "^1.9.1",
-    "@sanity/client": "^3.4.1",
+    "@sanity/client": "^4.0.1",
     "@types/lodash": "^4.14.191",
     "autoprefixer": "^10.4.13",
     "date-fns": "^2.29.3",
