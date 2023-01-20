@@ -1,5 +1,5 @@
 export async function getSanityContent({ query, variables = {} }) {
-  const { data } = await fetch(
+  const resp = await fetch(
     "https://tfex99hh.api.sanity.io/v1/graphql/production/default",
     {
       method: "POST",
@@ -8,6 +8,7 @@ export async function getSanityContent({ query, variables = {} }) {
       },
       body: JSON.stringify({ query, variables }),
     },
-  ).then(res => res.json());
+  );
+  const { data } = await resp.json();
   return data;
 }

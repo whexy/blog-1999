@@ -17,6 +17,13 @@ export default async function BlogHead({ params }) {
 
   const post = data.allBlog[0];
 
+  // check if title exists, and report error if not
+  if (!post || !post.title) {
+    console.error(
+      `The title for the post with slug "${slug}" is missing.`,
+    );
+  }
+
   return (
     <>
       <title>{post.title}</title>

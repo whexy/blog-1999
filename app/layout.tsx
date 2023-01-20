@@ -21,7 +21,7 @@ const lato = Lato({
 
 const noto_sans_sc = Noto_Sans_SC({
   weight: ["400", "700"],
-  subsets: ["chinese-simplified"],
+  subsets: ["latin"],
   display: "swap",
   variable: "--font-notosans",
 });

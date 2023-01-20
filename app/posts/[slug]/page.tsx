@@ -1,5 +1,3 @@
-"use client";
-
 import { serialize } from "next-mdx-remote/serialize";
 import MDXContent from "@/components/MDXContent";
 import { getSanityContent } from "@/lib/sanity";
@@ -8,7 +6,6 @@ import { getSanityContent } from "@/lib/sanity";
 import rehypePrism from "rehype-prism-plus";
 import rehypeCodeTitles from "rehype-code-titles";
 import rehypeKatex from "rehype-katex";
-import rehypeImgSize from "rehype-img-size";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
@@ -37,7 +34,6 @@ export default async function Page({ params }) {
         remarkUnwrapImages,
         pangu,
       ],
-      development: false,
     },
   });
 
