@@ -11,6 +11,9 @@
       "@/data/*": [
         "data/*"
       ],
+      "@/public/*": [
+        "public/*"
+      ],
       "contentlayer/generated": [
         "./.contentlayer/generated"
       ]

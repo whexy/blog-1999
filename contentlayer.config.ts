@@ -46,6 +46,7 @@ const Blog = defineDocumentType(() => ({
     series: { type: "string", required: false },
     cat: { type: "string", required: false },
     featured: { type: "boolean", required: false },
+    gpt: { type: "boolean", required: false },
   },
   computedFields,
 }));
