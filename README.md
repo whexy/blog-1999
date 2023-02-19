@@ -30,7 +30,6 @@ I've written a post discussing how to design a blog system.
 - `app/*` - All pages in [Next.js 13 Layouts RFC](https://nextjs.org/blog/layouts-rfc).
 - `app/blog/*` - Blog posts using MDX and a lot of customized components.
 - `data/*` - MDX data that is used for blogs.
-- `layouts/*` - The page layout used to render data (blog posts).
 - `lib/*` - Short for "library", a collection of helpful utilities or code for external services.
 - `pages/api/*` - API routes of Next Server Function.
 - `public/*` - Static assets including images, files, etc.

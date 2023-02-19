@@ -8,20 +8,8 @@
       "@/lib/*": [
         "lib/*"
       ],
-      "@/layout/*": [
-        "layout/*"
-      ],
-      "@/public/*": [
-        "public/*"
-      ],
       "@/data/*": [
         "data/*"
-      ],
-      "@/store/*": [
-        "store/*"
-      ],
-      "@/projects/*": [
-        "projects/*"
       ],
       "contentlayer/generated": [
         "./.contentlayer/generated"
