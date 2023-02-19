@@ -42,45 +42,8 @@ export default function RootLayout({
     <html
       className={`${lato.variable} ${noto_sans_sc.variable} ${fira.variable}`}
     >
-      <head>
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/img/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/img/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/img/favicon-16x16.png"
-        />
-        <link rel="manifest" href="/img/site.webmanifest" />
-        <link
-          rel="mask-icon"
-          href="/img/safari-pinned-tab.svg"
-          color="#3b7ce7"
-        />
-        <meta name="msapplication-TileColor" content="#ffc40d" />
-        <meta name="theme-color" content="#171717" />
-        <meta
-          name="viewport"
-          content="initial-scale=1.0, width=device-width"
-        />
-        <link
-          rel="alternate"
-          type="application/rss+xml"
-          title="Whexy's blog"
-          href="/feed/feed.xml"
-        />
-        <Analytics />
-      </head>
       <body>
+        <Analytics />
         <Header />
         <main className="min-h-[80vh] bg-gray-100 text-black-readable">
           <div className="mx-auto max-w-6xl px-2">{children}</div>
@@ -90,3 +53,19 @@ export default function RootLayout({
     </html>
   );
 }
+
+export const metadata = {
+  title: "Whexy",
+  description: "CS PhD student at Northwestern.",
+  themeColor: "#171717",
+  icons: {
+    icon: "/img/favicon-32x32.png",
+    apple: "/img/apple-touch-icon.png",
+    other: [{ rel: "mask-icon", url: "/img/safari-pinned-tab.svg" }],
+  },
+  alternates: {
+    types: {
+      "application/rss+xml": "https://www.whexy.com/feed/feed.xml",
+    },
+  },
+};
