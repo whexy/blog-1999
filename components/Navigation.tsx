@@ -26,7 +26,7 @@ const NavigationView = () => {
       <div className="hidden items-center sm:flex">
         <DesktopNavItem url="/" name="Home" />
         <DesktopNavItem url="/posts" name="Posts" />
-        <DesktopNavItem url="/dyn" name="Dyn" />
+        {/* <DesktopNavItem url="/dyn" name="Dyn" /> */}
       </div>
       <MobileMenu />
     </div>
@@ -43,7 +43,7 @@ const MobileMenu = () => {
         <Menu.Items className="absolute right-0 top-10 w-[35vw] flex-col divide-y divide-gray-100/20 rounded-lg bg-black/20 text-white ring-1 ring-black/10 backdrop-blur-xl backdrop-brightness-50">
           <MobileNavItem url="/" name="Home" />
           <MobileNavItem url="/posts" name="Posts" />
-          <MobileNavItem url="/dyn" name="Dyn" />
+          {/* <MobileNavItem url="/dyn" name="Dyn" /> */}
         </Menu.Items>
       </Menu>
     </div>
