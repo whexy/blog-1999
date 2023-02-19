@@ -23,6 +23,11 @@ export function generateMetadata({ params }) {
       publishedTime: post.publishDate,
       authors: [metadata.author.name],
     },
+    twitter: {
+      card: "summary",
+      site: metadata.author.twitter,
+      description: post.summary,
+    },
   };
 }
 

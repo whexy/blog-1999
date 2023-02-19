@@ -9,6 +9,7 @@ const metadata = {
     name: "Whexy",
     email: "gwhexy@gmail.com",
     url: "https://shiwx.org",
+    twitter: "@whexyshi",
   },
   year: "2023",
 };
