@@ -1,5 +1,3 @@
-"use client";
-
 import { useMDXComponent } from "next-contentlayer/hooks";
 import components from "@/components/MDXComponents";
 import BlogLayout from "@/layout/blog";
