@@ -7,9 +7,9 @@ import Footer from "@/components/Footer";
 import React from "react";
 import Analytics from "@/components/Analytics";
 
-import { Lato } from "@next/font/google";
-import { Noto_Sans_SC } from "@next/font/google";
-import { Fira_Sans } from "@next/font/google";
+import { Lato } from "next/font/google";
+import { Noto_Sans_SC } from "next/font/google";
+import { Fira_Sans } from "next/font/google";
 
 const lato = Lato({
   weight: ["300", "400", "700", "900"],

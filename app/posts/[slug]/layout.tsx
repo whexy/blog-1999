@@ -3,35 +3,21 @@ import { format, parseISO } from "date-fns";
 import { allBlogs } from "contentlayer/generated";
 
 // intra-blog components
-import Image from "next/image";
 import Prose from "@/components/Prose";
 const Comment = dynamic(() => import("@/components/posts/Comment"));
 const License = dynamic(() => import("@/components/posts/License"));
 const Series = dynamic(() => import("@/components/posts/Series"));
 
 import metadata from "@/data/metadata";
+import Callout from "@/components/posts/Callout";
 
-export function generateMetadata({ params }) {
-  const post = allBlogs.find(p => p.slug === params.slug);
-  return {
-    title: post.title,
-    description: post.summary,
-    openGraph: {
-      type: "article",
-      title: post.title,
-      description: post.summary,
-      publishedTime: post.publishDate,
-      authors: [metadata.author.name],
-    },
-    twitter: {
-      card: "summary",
-      site: metadata.author.twitter,
-      description: post.summary,
-    },
-  };
-}
-
-export default async function BlogLayout({ children, params }) {
+export default async function BlogLayout({
+  children,
+  params,
+}: {
+  children: React.ReactNode;
+  params: { slug: string };
+}) {
   const post = allBlogs.find(p => p.slug === params.slug);
   return (
     <div>
@@ -54,26 +40,21 @@ export default async function BlogLayout({ children, params }) {
               </div>
               <div>{post.readingTime.text}</div>
             </div>
-            {post.gpt && (
-              <div className="not-prose">
-                <div className="secondbg inline-flex items-center space-x-2 rounded-lg px-4 py-2 font-title text-sm lg:text-base">
-                  <Image
-                    src="/img/chatgpt.svg"
-                    alt="ChatGPT Icon"
-                    width={30}
-                    height={30}
-                  />
-                  <p>
-                    This blog was written with the assistance of
-                    ChatGPT, a language model designed to provide
-                    insightful and informative responses to a wide
-                    range of topics.
-                  </p>
-                </div>
-              </div>
-            )}
             {post.series && (
               <Series slug={post.slug} series={post.series} />
+            )}
+            {post.gpt && (
+              <Callout
+                title="AI Generated Content Included"
+                pic="/img/chatgpt.svg"
+              >
+                <p>
+                  This blog was written with the assistance of
+                  ChatGPT, a language model designed to provide
+                  insightful and informative responses to a wide range
+                  of topics.
+                </p>
+              </Callout>
             )}
             {children}
             {post.series && (
