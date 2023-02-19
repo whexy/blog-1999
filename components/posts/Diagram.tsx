@@ -1,7 +1,7 @@
 const Diagram = ({ src, alt, width = "100%" }) => {
   return (
     <div>
-      <div className="dark:hue-rotate-180 dark:invert">
+      <div className="dark:hue-rotate-180">
         <object
           width={width}
           data={`/${src}`}

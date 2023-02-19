@@ -16,7 +16,7 @@ const FriendCard = ({ friend }) => {
             <p>{friend.name}</p>
           </div>
           <div>
-            <p className="truncate text-jbgray-light transition-all group-hover:text-blue-600 dark:group-hover:text-blue-300">
+            <p className="truncate text-jbgray-light transition-all group-hover:text-blue-600">
               <svg width="32" height="32" viewBox="0 0 24 24">
                 <path
                   fill="currentColor"

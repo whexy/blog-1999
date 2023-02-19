@@ -6,7 +6,7 @@ const BigHi = () => {
     <div className="flex items-center justify-center space-x-2">
       <h1 className="py-10 text-center font-title text-2xl font-bold text-red-500 sm:text-5xl">
         Hi, my name is{" "}
-        <span className="text-black-readable dark:text-white-readable">
+        <span className="text-black-readable">
           {metadata.author.name}
         </span>
         .

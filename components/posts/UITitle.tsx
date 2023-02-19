@@ -3,7 +3,7 @@ import Twemoji from "@/components/Twemoji";
 const UITitle = ({ title, emoji, subtitle, children }) => {
   return (
     <div>
-      <div className="not-prose sticky top-16 z-30 mt-5 bg-white dark:bg-neutral-900">
+      <div className="not-prose sticky top-16 z-30 mt-5 bg-white">
         <div className="h-4"></div>
         <div className="secondbg flex w-full items-center justify-between rounded-lg px-4 py-3 font-title shadow-lg">
           <h2 className="text-lg font-bold sm:text-xl">{title}</h2>

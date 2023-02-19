@@ -30,7 +30,7 @@ export default function BlogLayout({
         <title>{post.title}</title>
         <meta name="description" content={post.summary} />
       </Head>
-      <div className="bg-gray-100 dark:bg-black">
+      <div className="bg-gray-100">
         <article className="pb-5 font-article sm:pt-10">
           <Prose>
             <h1>{post.title}</h1>

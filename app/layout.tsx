@@ -82,7 +82,7 @@ export default function RootLayout({
       </head>
       <body>
         <Header />
-        <main className="min-h-[80vh] bg-gray-100 text-black-readable dark:bg-black dark:text-white-readable">
+        <main className="min-h-[80vh] bg-gray-100 text-black-readable">
           <div className="mx-auto max-w-6xl px-2">{children}</div>
         </main>
         <Footer />

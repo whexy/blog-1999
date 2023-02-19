@@ -22,7 +22,7 @@ const Callout = ({ pic, icon, title, children }) => {
             </p>
           </div>
         )}
-        <div className="prose-sm max-w-none dark:prose-invert md:prose md:max-w-none">
+        <div className="prose-sm max-w-none md:prose md:max-w-none">
           {children}
         </div>
       </div>

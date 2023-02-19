@@ -25,7 +25,7 @@ const RecentPosts = () => {
         <h2 className="pl-4 pb-1 text-sm font-light opacity-80">
           Featured Posts
         </h2>
-        <div className="primary divide-y divide-black/10 overflow-hidden dark:divide-white/10">
+        <div className="primary divide-y divide-black/10 overflow-hidden">
           {featuredPosts.map(post => (
             <PostCard
               key={post.slug}
@@ -41,7 +41,7 @@ const RecentPosts = () => {
         <h2 className="pl-4 pb-1 text-sm font-light opacity-80">
           Recent Posts
         </h2>
-        <div className="primary divide-y divide-black/10 overflow-hidden dark:divide-white/10">
+        <div className="primary divide-y divide-black/10 overflow-hidden">
           {recentPosts.map(post => (
             <PostCard
               key={post.slug}
@@ -52,7 +52,7 @@ const RecentPosts = () => {
             />
           ))}
 
-          <div className="px-3 py-3 text-blue-500 dark:text-blue-400">
+          <div className="px-3 py-3 text-blue-500">
             <Link href="/posts" className="flex justify-between">
               <p className="font-semibold ">Read more...</p>
               <svg
