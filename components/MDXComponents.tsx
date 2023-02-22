@@ -7,6 +7,7 @@ import Small from "@/components/posts/Small";
 import GithubRepo from "@/components/GithubRepo";
 import UITitle from "@/components/posts/UITitle";
 import Bilibili from "@/components/posts/Bilibili";
+import Tweet from "@/components/Tweet";
 
 // Special Components
 import AnimatedFancyCard from "@/components/AnimatedFancyCard";
@@ -29,6 +30,7 @@ const MDXComponents = {
   AnimatedFancyCard, // 《个人博客搭建指北》中使用
   Statistics,
   Twemoji,
+  Tweet,
 };
 
 export default MDXComponents;

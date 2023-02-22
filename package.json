@@ -44,6 +44,7 @@
     "remark-math": "^5.1.1",
     "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
+    "rss": "^1.2.2",
     "swr": "^2.0.3",
     "twemoji": "^14.0.2"
   },
