@@ -10,6 +10,7 @@ const metadata = {
     email: "gwhexy@gmail.com",
     url: "https://shiwx.org",
     twitter: "@whexyshi",
+    mastodon: "@whexy@mastodon.social",
   },
   year: "2023",
   pages: [
