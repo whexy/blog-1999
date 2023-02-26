@@ -1,5 +1,3 @@
-"use client";
-
 import type { Blog } from "contentlayer/generated";
 import { format, parseISO, compareDesc } from "date-fns";
 import Link from "next/link";
