@@ -1,6 +1,6 @@
 "use client";
 
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated } from "@react-spring/web";
 import { useRef } from "react";
 
 const trans = (x, y, s) =>

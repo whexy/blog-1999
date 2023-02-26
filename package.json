@@ -12,8 +12,8 @@
     "contentlayer": "contentlayer build"
   },
   "dependencies": {
-    "@giscus/react": "^2.2.6",
-    "@headlessui/react": "^1.7.11",
+    "@giscus/react": "^2.2.8",
+    "@headlessui/react": "^1.7.12",
     "@heroicons/react": "^2.0.16",
     "@react-spring/web": "^9.7.0",
     "@reduxjs/toolkit": "^1.9.3",
@@ -35,7 +35,6 @@
     "react-loading-skeleton": "^3.1.1",
     "react-notion-x": "^6.16.0",
     "react-redux": "^8.0.5",
-    "react-spring": "^9.7.0",
     "reading-time": "^1.5.0",
     "rehype-code-titles": "^1.2.0",
     "rehype-img-size": "^1.0.1",
@@ -46,16 +45,16 @@
     "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
     "rss": "^1.2.2",
-    "swr": "^2.0.3",
+    "swr": "^2.0.4",
     "twemoji": "^14.0.2"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "^18.14.1",
+    "@types/node": "^18.14.2",
     "@types/react": "^18.0.28",
     "@typescript-eslint/eslint-plugin": "^5.53.0",
-    "eslint": "^8.34.0",
+    "eslint": "^8.35.0",
     "eslint-config-next": "^13.2.1",
     "postcss": "^8.4.21",
     "prettier": "^2.8.4",
