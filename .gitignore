@@ -49,3 +49,4 @@ package-lock.json
 /tools
 .vscode
 /data/blog/images
+.vercel

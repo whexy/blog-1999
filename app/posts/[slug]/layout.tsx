@@ -27,10 +27,7 @@ export default async function BlogLayout({
             <h1>{post.title}</h1>
             <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm font-light lg:text-base">
               <div className="inline-flex items-center space-x-1">
-                <div>
-                  {metadata.author.name}
-                  {post.gpt && ", ChatGPT*"} /{" "}
-                </div>
+                <div>{metadata.author.name} / </div>
                 <span>
                   {format(
                     parseISO(post.publishDate),
@@ -44,17 +41,11 @@ export default async function BlogLayout({
               <Series slug={post.slug} series={post.series} />
             )}
             {post.gpt && (
-              <Callout
-                title="AI Generated Content Included"
-                pic="/img/chatgpt.svg"
-              >
-                <p>
-                  This blog was written with the assistance of
-                  ChatGPT, a language model designed to provide
-                  insightful and informative responses to a wide range
-                  of topics.
-                </p>
-              </Callout>
+              <div className="flex">
+                <div className="rounded-full bg-[#17519914] py-1 px-3 text-sm font-bold text-[#175199] sm:text-base">
+                  AIGC Declaration: Includes AI-assisted content
+                </div>
+              </div>
             )}
             {children}
             {post.series && (
