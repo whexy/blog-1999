@@ -9,7 +9,6 @@ const License = dynamic(() => import("@/components/posts/License"));
 const Series = dynamic(() => import("@/components/posts/Series"));
 
 import metadata from "@/data/metadata";
-import Callout from "@/components/posts/Callout";
 
 export default async function BlogLayout({
   children,
