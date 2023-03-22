@@ -45,19 +45,19 @@
     "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
     "rss": "^1.2.2",
-    "swr": "^2.1.0",
+    "swr": "^2.1.1",
     "twemoji": "^14.0.2"
   },
   "devDependencies": {
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
-    "@types/node": "^18.15.3",
+    "@types/node": "^18.15.5",
     "@types/react": "^18.0.28",
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "eslint": "^8.36.0",
     "eslint-config-next": "^13.2.4",
     "postcss": "^8.4.21",
-    "prettier": "^2.8.5",
+    "prettier": "^2.8.6",
     "prettier-plugin-tailwindcss": "^0.2.5",
     "tailwindcss": "^3.2.7",
     "typescript": "^5.0.2"
