@@ -8,7 +8,7 @@
   }
 
   .primary {
-    @apply rounded-lg bg-white shadow-sm;
+    @apply rounded-2xl bg-white;
   }
 
   body {
