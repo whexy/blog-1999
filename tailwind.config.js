@@ -13,6 +13,11 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
+        sans: [
+          "var(--font-fira)",
+          "var(--font-notosans)",
+          ...defaultTheme.fontFamily.sans,
+        ],
         article: [
           "var(--font-fira)",
           "var(--font-notosans)",

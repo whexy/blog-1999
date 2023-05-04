@@ -2,6 +2,9 @@ import dynamic from "next/dynamic";
 import { format, parseISO } from "date-fns";
 import { allBlogs } from "contentlayer/generated";
 
+// temperory fix for nextjs /app scrolling issues
+import ScrollUp from "@/components/ScrollUp";
+
 // intra-blog components
 import Prose from "@/components/Prose";
 const Comment = dynamic(() => import("@/components/posts/Comment"));
@@ -20,6 +23,7 @@ export default async function BlogLayout({
   const post = allBlogs.find(p => p.slug === params.slug);
   return (
     <div>
+      <ScrollUp />
       <div className="bg-gray-100">
         <article className="pb-5 font-article sm:pt-10">
           <Prose>
@@ -41,7 +45,7 @@ export default async function BlogLayout({
             )}
             {post.gpt && (
               <div className="flex">
-                <div className="rounded-full bg-[#17519914] py-1 px-3 text-sm font-bold text-[#175199] sm:text-base">
+                <div className="rounded-full bg-[#17519914] px-3 py-1 text-sm font-bold text-[#175199] sm:text-base">
                   AIGC Declaration: Includes AI-assisted content
                 </div>
               </div>

@@ -3,16 +3,20 @@ import Link from "next/link";
 import { parseISO } from "date-fns";
 import Image from "next/image";
 
-const BigCard = ({ blog }: { blog: Blog }) => {
+const MediumCard = ({ blog }: { blog: Blog }) => {
   return (
     <div
       className={
         "primary group overflow-hidden transition-all hover:bg-gray-50"
       }
     >
-      <Link href={`/posts/${blog.slug}`}>
-        <div className={"justify-between lg:flex"}>
-          <div className="relative overflow-hidden">
+      <Link href={`/posts/${blog.slug}`} scroll={true}>
+        <div className={`justify-between`}>
+          <div
+            className={
+              "relative h-[194px] overflow-hidden lg:h-[194px]"
+            }
+          >
             <Image
               src={`/head/${blog.slug}.png`}
               alt={blog.slug}
@@ -21,12 +25,12 @@ const BigCard = ({ blog }: { blog: Blog }) => {
               className="object-cover transition-all group-hover:scale-105"
             />
           </div>
-          <div className="flex flex-shrink-0 flex-grow flex-col justify-between px-2 py-8 sm:px-8">
+          <div className="flex flex-shrink-0 flex-grow flex-col justify-between p-5">
             <div>
               <p className="text-xs font-bold text-[#6e6e73]">
                 {blog.cat}
               </p>
-              <h2 className={"font-title text-[32px] font-bold"}>
+              <h2 className="font-title text-2xl font-bold">
                 {blog.title}
               </h2>
             </div>
@@ -40,4 +44,4 @@ const BigCard = ({ blog }: { blog: Blog }) => {
   );
 };
 
-export default BigCard;
+export default MediumCard;

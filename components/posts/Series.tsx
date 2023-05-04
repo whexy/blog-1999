@@ -19,26 +19,28 @@ const Series = ({ slug, series }) => {
   const thisSlug = slug;
 
   return (
-    <div className="not-prose relative m-4 break-inside-avoid-page rounded-lg border-2 border-violet-200/80 bg-violet-200/10 p-4 font-sans">
-      <div className="absolute left-0 top-0 flex items-center justify-center space-x-2 border-b border-r border-violet-300/80 bg-violet-300/10 px-2 font-bold">
-        <BookOpenIcon className="h-6 w-6" />
-        <div>{series}</div>
+    <div>
+      <div className="not-prose relative m-4 break-inside-avoid-page rounded-lg border-2 border-violet-200/80 bg-violet-200/10 p-4 font-sans">
+        <div className="absolute left-0 top-0 flex items-center justify-center space-x-2 border-b border-r border-violet-300/80 bg-violet-300/10 px-2 font-bold">
+          <BookOpenIcon className="h-6 w-6" />
+          <div>{series}</div>
+        </div>
+        <div className="pb-4 pt-6 text-sm font-light">
+          This article is part of a series.
+        </div>
+        <ul className="list-inside list-decimal">
+          {seriesPosts.map(({ slug, title }) => (
+            <li
+              key={slug}
+              className={`hover:underline ${
+                slug === thisSlug && "font-bold underline"
+              }`}
+            >
+              <Link href={`/posts/${slug}`}>{title}</Link>
+            </li>
+          ))}
+        </ul>
       </div>
-      <div className="pt-6 pb-4 text-sm font-light">
-        This article is part of a series.
-      </div>
-      <ul className="list-inside list-decimal">
-        {seriesPosts.map(({ slug, title }) => (
-          <li
-            key={slug}
-            className={`hover:underline ${
-              slug === thisSlug && "font-bold underline"
-            }`}
-          >
-            <Link href={`/posts/${slug}`}>{title}</Link>
-          </li>
-        ))}
-      </ul>
     </div>
   );
 };
