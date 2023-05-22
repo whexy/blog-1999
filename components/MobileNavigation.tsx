@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   HomeIcon,
-  DocumentIcon,
+  //DocumentIcon,
   FaceSmileIcon,
   GlobeAltIcon,
 } from "@heroicons/react/24/outline";
