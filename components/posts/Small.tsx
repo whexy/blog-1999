@@ -1,8 +1,6 @@
 const Small = ({ children }) => {
   return (
-    <span className="text-xs font-light opacity-80 md:text-sm">
-      {children}
-    </span>
+    <span className="text-xs opacity-80 md:text-sm">{children}</span>
   );
 };
 

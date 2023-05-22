@@ -25,7 +25,7 @@ const Series = ({ slug, series }) => {
           <BookOpenIcon className="h-6 w-6" />
           <div>{series}</div>
         </div>
-        <div className="pb-4 pt-6 text-sm font-light">
+        <div className="pb-4 pt-6 text-sm">
           This article is part of a series.
         </div>
         <ul className="list-inside list-decimal">

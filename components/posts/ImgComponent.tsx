@@ -12,7 +12,7 @@ const ImgComponent = ({ src, alt, width, height }) => {
         />
       </div>
       {alt && (
-        <div className="mt-2 text-center font-sans text-sm font-light opacity-80">
+        <div className="mt-2 text-center font-sans text-sm opacity-80">
           {alt}
         </div>
       )}

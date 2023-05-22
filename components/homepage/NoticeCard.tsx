@@ -11,7 +11,7 @@ export default function NoticeCard() {
               公告
             </div>
           </div>
-          <div className="flex-1 font-light sm:pl-3">
+          <div className="flex-1 sm:pl-3">
             <div className="secondbg rounded-xl p-4">
               Purple Pride 💜
             </div>

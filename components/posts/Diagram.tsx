@@ -12,7 +12,7 @@ const Diagram = ({ src, alt, width = "100%" }) => {
         ></object>
       </div>
       {alt && (
-        <div className="text-center font-sans text-sm font-light opacity-80">
+        <div className="text-center font-sans text-sm opacity-80">
           {alt}
         </div>
       )}

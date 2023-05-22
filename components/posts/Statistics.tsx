@@ -24,7 +24,7 @@ const SU = ({
       </div>
       <p className="pb-2 text-center">{des}</p>
       {detail && (
-        <p className="whitespace-pre-wrap text-center text-xs font-light opacity-80">
+        <p className="whitespace-pre-wrap text-center text-xs opacity-80">
           {detail}
         </p>
       )}

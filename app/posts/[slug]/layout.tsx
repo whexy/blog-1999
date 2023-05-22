@@ -28,7 +28,7 @@ export default async function BlogLayout({
         <article className="pb-5 font-article sm:pt-10">
           <Prose>
             <h1>{post.title}</h1>
-            <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm font-light lg:text-base">
+            <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm lg:text-base">
               <div className="inline-flex items-center space-x-1">
                 <div>{metadata.author.name} / </div>
                 <span>

@@ -12,14 +12,14 @@ export default function Footer() {
         <NowPlaying />
       </div>
       <AnimatedFancyCard hardness={5}>
-        <div className="select-none pt-2 pb-2">
+        <div className="select-none pb-2 pt-2">
           <div className="mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl border border-white/10">
             <Avatar className="h-16 w-16" />
             <div className="px-2">
               <p className="pb-2 text-white">
                 {metadata.author.name}&apos;s Blog
               </p>
-              <p className="text-xs font-light text-jbgray-light">
+              <p className="text-xs text-jbgray-light">
                 Copyright © 2014-{metadata.year}
               </p>
             </div>

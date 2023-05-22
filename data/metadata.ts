@@ -15,7 +15,7 @@ const metadata = {
   year: "2023",
   pages: [
     { name: "Home", url: "/" },
-    { name: "Posts", url: "/posts" },
+    // { name: "Posts", url: "/posts" },
     { name: "Dyn", url: "/dyn" },
     { name: "Friends", url: "/friends" },
   ],

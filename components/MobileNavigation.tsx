@@ -26,12 +26,12 @@ const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
               Icon={HomeIcon}
               toggleMenuFn={toggleMenuFn}
             />
-            <MobileNavItem
+            {/* <MobileNavItem
               url="/posts"
               name="Posts"
               Icon={DocumentIcon}
               toggleMenuFn={toggleMenuFn}
-            />
+            /> */}
             <MobileNavItem
               url="/friends"
               name="Friends"

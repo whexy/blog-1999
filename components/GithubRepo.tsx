@@ -81,9 +81,7 @@ const GithubRepo = ({ repo }: { repo: string }) => {
                     <span className="font-semibold">{repo_name}</span>
                   </p>
                   {ghrepo && ghrepo.description && (
-                    <p className="text-sm font-light">
-                      {ghrepo.description}
-                    </p>
+                    <p className="text-sm">{ghrepo.description}</p>
                   )}
                 </div>
                 <div className="flex space-x-4 text-sm">
