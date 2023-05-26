@@ -43,13 +43,6 @@ export default async function BlogLayout({
             {post.series && (
               <Series slug={post.slug} series={post.series} />
             )}
-            {post.gpt && (
-              <div className="flex">
-                <div className="rounded-full bg-[#17519914] px-3 py-1 text-sm font-bold text-[#175199] sm:text-base">
-                  AIGC Declaration: Includes AI-assisted content
-                </div>
-              </div>
-            )}
             {children}
             {post.series && (
               <Series slug={post.slug} series={post.series} />

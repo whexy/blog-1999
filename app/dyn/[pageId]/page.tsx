@@ -1,5 +1,7 @@
 import { NotionAPI } from "notion-client";
 import NotionRenderer from "@/components/NotionClientRenderer";
+import { getPageTitle } from "notion-utils";
+import metadata from "@/data/metadata";
 
 const notion = new NotionAPI();
 
@@ -15,4 +17,26 @@ export default async function Page({ params }) {
       recordMap={recordMap}
     />
   );
+}
+
+export async function generateMetadata({ params }) {
+  const recordMap = await notion.getPage(params.pageId);
+  const title = getPageTitle(recordMap);
+
+  return {
+    title: title,
+    // description: post.summary,
+    openGraph: {
+      type: "article",
+      title: title,
+      // description: post.summary,
+      // publishedTime: post.publishDate,
+      authors: [metadata.author.name],
+    },
+    twitter: {
+      card: "summary",
+      site: metadata.author.twitter,
+      // description: post.summary,
+    },
+  };
 }
