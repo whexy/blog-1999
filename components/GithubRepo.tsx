@@ -131,7 +131,7 @@ export default GithubRepo;
 /**
  * Full Repository
  */
-export interface FullRepository {
+interface FullRepository {
   id: number;
   node_id: string;
   name: string;
@@ -297,7 +297,7 @@ export interface FullRepository {
 /**
  * Simple User
  */
-export interface SimpleUser {
+interface SimpleUser {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -324,7 +324,7 @@ export interface SimpleUser {
 /**
  * A git repository
  */
-export interface Repository {
+interface Repository {
   /**
    * Unique identifier of the repository
    */
@@ -675,7 +675,7 @@ export interface Repository {
 /**
  * License Simple
  */
-export interface LicenseSimple {
+interface LicenseSimple {
   key: string;
   name: string;
   url: string | null;
@@ -687,7 +687,7 @@ export interface LicenseSimple {
 /**
  * Simple User
  */
-export interface SimpleUser1 {
+interface SimpleUser1 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -714,7 +714,7 @@ export interface SimpleUser1 {
 /**
  * Simple User
  */
-export interface SimpleUser2 {
+interface SimpleUser2 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -741,7 +741,7 @@ export interface SimpleUser2 {
 /**
  * License Simple
  */
-export interface LicenseSimple1 {
+interface LicenseSimple1 {
   key: string;
   name: string;
   url: string | null;
@@ -753,7 +753,7 @@ export interface LicenseSimple1 {
 /**
  * Simple User
  */
-export interface SimpleUser3 {
+interface SimpleUser3 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -780,7 +780,7 @@ export interface SimpleUser3 {
 /**
  * A git repository
  */
-export interface Repository1 {
+interface Repository1 {
   /**
    * Unique identifier of the repository
    */
@@ -1131,7 +1131,7 @@ export interface Repository1 {
 /**
  * License Simple
  */
-export interface LicenseSimple2 {
+interface LicenseSimple2 {
   key: string;
   name: string;
   url: string | null;
@@ -1143,7 +1143,7 @@ export interface LicenseSimple2 {
 /**
  * Simple User
  */
-export interface SimpleUser4 {
+interface SimpleUser4 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -1170,7 +1170,7 @@ export interface SimpleUser4 {
 /**
  * Simple User
  */
-export interface SimpleUser5 {
+interface SimpleUser5 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -1197,7 +1197,7 @@ export interface SimpleUser5 {
 /**
  * A git repository
  */
-export interface Repository2 {
+interface Repository2 {
   /**
    * Unique identifier of the repository
    */
@@ -1548,7 +1548,7 @@ export interface Repository2 {
 /**
  * License Simple
  */
-export interface LicenseSimple3 {
+interface LicenseSimple3 {
   key: string;
   name: string;
   url: string | null;
@@ -1560,7 +1560,7 @@ export interface LicenseSimple3 {
 /**
  * Simple User
  */
-export interface SimpleUser6 {
+interface SimpleUser6 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -1587,7 +1587,7 @@ export interface SimpleUser6 {
 /**
  * Simple User
  */
-export interface SimpleUser7 {
+interface SimpleUser7 {
   name?: string | null;
   email?: string | null;
   login: string;
@@ -1614,7 +1614,7 @@ export interface SimpleUser7 {
 /**
  * Code of Conduct Simple
  */
-export interface CodeOfConductSimple {
+interface CodeOfConductSimple {
   url: string;
   key: string;
   name: string;
