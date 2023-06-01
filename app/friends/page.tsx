@@ -9,7 +9,7 @@ const FriendPage = () => {
   return (
     <Main>
       <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
-      <div className="mx-3 grid grid-cols-1 gap-3 pb-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="mx-3 grid grid-cols-1 gap-3 pb-5 sm:grid-cols-2">
         {friends
           .sort((f1, f2) => f1.name.localeCompare(f2.name))
           .map(friend => (
