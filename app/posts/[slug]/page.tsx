@@ -1,5 +1,5 @@
 import { useMDXComponent } from "next-contentlayer/hooks";
-import components from "@/components/MDXComponents";
+import components from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
 
 import { allBlogs } from "contentlayer/generated";

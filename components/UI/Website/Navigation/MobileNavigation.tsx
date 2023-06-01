@@ -1,9 +1,8 @@
 import Link from "next/link";
 import {
   HomeIcon,
-  //DocumentIcon,
   FaceSmileIcon,
-  GlobeAltIcon,
+  UsersIcon,
 } from "@heroicons/react/24/outline";
 /* Fancy animated menu */
 
@@ -12,7 +11,7 @@ import { useSpring, animated } from "@react-spring/web";
 const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
   const springs = useSpring({
     opacity: showMenu ? 1 : 0,
-    height: showMenu ? "40vh" : "0vh",
+    height: showMenu ? "20vh" : "0vh",
   });
 
   return (
@@ -26,22 +25,16 @@ const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
               Icon={HomeIcon}
               toggleMenuFn={toggleMenuFn}
             />
-            {/* <MobileNavItem
-              url="/posts"
-              name="Posts"
-              Icon={DocumentIcon}
-              toggleMenuFn={toggleMenuFn}
-            /> */}
             <MobileNavItem
               url="/friends"
               name="Friends"
-              Icon={FaceSmileIcon}
+              Icon={UsersIcon}
               toggleMenuFn={toggleMenuFn}
             />
             <MobileNavItem
               url="/dyn"
               name="Dyn"
-              Icon={GlobeAltIcon}
+              Icon={FaceSmileIcon}
               toggleMenuFn={toggleMenuFn}
             />
           </>

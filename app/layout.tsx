@@ -2,10 +2,10 @@
 import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
+import Header from "@/components/UI/Website/Header";
+import Footer from "@/components/UI/Website/Footer";
 import React from "react";
-import Analytics from "@/components/Analytics";
+import Analytics from "@/components/Scripts/Analytics";
 
 import { Lato } from "next/font/google";
 import { Noto_Sans_SC } from "next/font/google";

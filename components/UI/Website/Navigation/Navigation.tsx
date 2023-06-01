@@ -12,7 +12,12 @@ const NavigationView = ({ toggleMenuFn }) => {
           <DesktopNavItem key={page.name} {...page} />
         ))}
       </div>
-      <button className="sm:hidden" onClick={toggleMenuFn}>
+      <button
+        type="button"
+        className="sm:hidden"
+        onClick={toggleMenuFn}
+        title="Toggle Menu"
+      >
         <Bars3Icon className="h-6 w-6" />
       </button>
     </div>

@@ -1,8 +1,8 @@
-import Main from "@/components/Main";
+import Main from "@/components/Layouts/Main";
 import { allBlogs } from "contentlayer/generated";
 import pick from "lodash/pick";
 import { format, parseISO, compareDesc } from "date-fns";
-import PostCard from "@/components/PostCard";
+import PostCard from "@/components/UI/Homepage/PostCard";
 
 const PostsView = () => {
   const posts = allBlogs

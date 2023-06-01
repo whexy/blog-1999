@@ -1,17 +1,21 @@
-import NowPlaying from "@/components/NowPlaying";
+import NowPlaying from "@/components/UI/Website/NowPlaying";
 import metadata from "@/data/metadata";
-import Avatar from "@/components/icons/Avatar";
-import AnimatedFancyCard from "@/components/AnimatedFancyCard";
+import Avatar from "@/components/UI/Graphic/icons/Avatar";
+import Depth3D from "@/components/UI/Animation/Depth3D";
 
 export default function Footer() {
   const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
   const commitURL = `https://github.com/whexy/blog-1999`;
+
+  // get current year
+  const year = new Date().getFullYear();
+
   return (
     <footer className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-2 sm:items-start">
       <div className="w-full pb-4">
         <NowPlaying />
       </div>
-      <AnimatedFancyCard hardness={5}>
+      <Depth3D hardness={5}>
         <div className="select-none pb-2 pt-2">
           <div className="mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl border border-white/10">
             <Avatar className="h-16 w-16" />
@@ -20,12 +24,12 @@ export default function Footer() {
                 {metadata.author.name}&apos;s Blog
               </p>
               <p className="text-xs text-jbgray-light">
-                Copyright © 2014-{metadata.year}
+                Copyright © 2014-{year}
               </p>
             </div>
           </div>
         </div>
-      </AnimatedFancyCard>
+      </Depth3D>
       <div className="pb-2">
         <a
           href={commitURL}
@@ -34,24 +38,6 @@ export default function Footer() {
           rel="noopener noreferrer"
         >
           powered by blog-1999 system ({commit.substring(0, 8)})
-        </a>
-      </div>
-      <div className="flex justify-center space-x-2 pb-2 font-mono text-xs">
-        <a href="whexy.ssh.pub">
-          <abbr
-            title="SHA256:pFZ1bs/uRKhUn5oP2bgZQH6lmGG0BQWti7JYZMDTeI0"
-            className="text-white/40 hover:text-white/80"
-          >
-            pFZ1bs...(SSH)
-          </abbr>
-        </a>
-        <a href="whexy.pgp.asc">
-          <abbr
-            title="59A4 998E 07C1 D6FB 2557  51CC A513 A02F DDFF 1598"
-            className="text-white/40 hover:text-white/80"
-          >
-            0xDDFF1598(PGP)
-          </abbr>
         </a>
       </div>
     </footer>

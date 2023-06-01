@@ -2,8 +2,8 @@ import Image from "next/image";
 import friends from "../../data/friends";
 
 // tiny
-import PageTitle from "@/components/tiny/PageTitle";
-import Main from "@/components/Main";
+import PageTitle from "@/components/UI/Website/PageTitle";
+import Main from "@/components/Layouts/Main";
 
 const FriendPage = () => {
   return (

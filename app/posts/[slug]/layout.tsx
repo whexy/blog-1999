@@ -3,13 +3,13 @@ import { format, parseISO } from "date-fns";
 import { allBlogs } from "contentlayer/generated";
 
 // temperory fix for nextjs /app scrolling issues
-import ScrollUp from "@/components/ScrollUp";
+import ScrollUp from "@/components/UI/Website/ScrollUp";
 
 // intra-blog components
-import Prose from "@/components/Prose";
-const Comment = dynamic(() => import("@/components/posts/Comment"));
-const License = dynamic(() => import("@/components/posts/License"));
-const Series = dynamic(() => import("@/components/posts/Series"));
+import Prose from "@/components/Layouts/Prose";
+const Comment = dynamic(() => import("@/components/UI/Blog/Comment"));
+const License = dynamic(() => import("@/components/UI/Blog/License"));
+const Series = dynamic(() => import("@/components/UI/Blog/Series"));
 
 import metadata from "@/data/metadata";
 

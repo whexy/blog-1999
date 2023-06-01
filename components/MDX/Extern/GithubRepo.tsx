@@ -7,10 +7,10 @@ import { StarIcon } from "@heroicons/react/24/outline";
 import {
   CodiconIssues,
   IconoirGitFork,
-} from "@/components/icons/Github";
+} from "@/components/UI/Graphic/icons/Github";
 import useSWRImmutable from "swr/immutable";
 import fetcher from "@/lib/fetcher";
-import Skeleton from "@/components/Skeleton";
+import Skeleton from "@/components/UI/Website/Skeleton";
 import { SkeletonTheme } from "react-loading-skeleton";
 import { useEffect, useState } from "react";
 

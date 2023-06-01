@@ -4,7 +4,7 @@ import {
 } from "@heroicons/react/24/outline";
 import Link from "next/link";
 
-import CheckoutArrow from "@/components/icons/CheckoutArrow";
+import CheckoutArrow from "@/components/UI/Graphic/icons/CheckoutArrow";
 
 const DynJump = () => {
   return (

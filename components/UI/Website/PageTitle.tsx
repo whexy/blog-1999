@@ -1,5 +1,5 @@
 import Head from "next/head";
-import Twemoji from "@/components/Twemoji";
+import Twemoji from "@/components/UI/Graphic/Twemoji";
 
 const PageTitle = ({
   title,

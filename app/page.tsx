@@ -1,6 +1,6 @@
-import WelcomeCard from "@/components/WelcomeCard";
-import PostPage from "@/components/PostPage";
-import DynJump from "@/components/DynJump";
+import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
+import PostPage from "@/components/UI/Homepage/PostPage";
+import DynJump from "@/components/UI/Homepage/DynJump";
 
 export default function Page() {
   return (

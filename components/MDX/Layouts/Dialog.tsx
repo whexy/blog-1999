@@ -1,4 +1,4 @@
-import Avatar from "@/components/icons/Avatar";
+import Avatar from "@/components/UI/Graphic/icons/Avatar";
 
 export const Dialog = ({ children }) => {
   return (
@@ -17,7 +17,7 @@ export const Dialog = ({ children }) => {
 
 export const DialogBack = ({ children }) => {
   return (
-    <div className="not-prose mt-2 mr-4 flex items-center justify-start">
+    <div className="not-prose mr-4 mt-2 flex items-center justify-start">
       <div
         style={{ transform: `scale(-1, 1)` }}
         className="flex-shrink-0"

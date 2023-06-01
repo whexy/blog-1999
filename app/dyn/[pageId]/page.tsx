@@ -1,5 +1,5 @@
 import { NotionAPI } from "notion-client";
-import NotionRenderer from "@/components/NotionClientRenderer";
+import NotionRenderer from "@/components/UI/Dyn/NotionClientRenderer";
 import { getPageTitle } from "notion-utils";
 import metadata from "@/data/metadata";
 

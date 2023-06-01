@@ -2,8 +2,8 @@
 
 import metadata from "@/data/metadata";
 import Link from "next/link";
-import NavigationView from "@/components/Navigation";
-import MobileNavigation from "@/components/MobileNavigation";
+import NavigationView from "@/components/UI/Website/Navigation/Navigation";
+import MobileNavigation from "@/components/UI/Website/Navigation/MobileNavigation";
 
 import { useState } from "react";
 

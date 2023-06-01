@@ -1,4 +1,4 @@
-import Image from "@/components/Image99";
+import Image from "next/image";
 
 const ImgComponent = ({ src, alt, width, height }) => {
   return (
