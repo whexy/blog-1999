@@ -1,0 +1,133 @@
+---
+title: "无需虚拟机，在 Mac 上运行 Windows 游戏"
+publishDate: 2023-06-11
+summary: "苹果在 WWDC 上公布了 Game Porting Toolkit，可以将 DirectX API 转译到自家的 Metal API。通过使用套件中的模拟器，在 macOS 上运行 Windows 游戏成了现实。"
+cat: M1 (Apple Silicon)
+---
+
+苹果全系产品现已采用自研芯片 Apple Silicon，不再支持其他品牌的显卡。为此，苹果还研发了适用于其硬件的专用底层图形 API，名为 Metal。自从 macOS 10.14 起，苹果停止支持 OpenGL 和 OpenCL。因此，在 macOS 上进行大型游戏开发时，编写 Metal 代码变得至关重要。然而，尽管 Metal 在苹果生态系统中得到广泛应用，但在引擎开发者和游戏开发者中并不普遍受欢迎。其中一个主要原因是苹果在游戏界的市场份额相对较低。由于苹果设备的高昂价格和相对封闭的生态系统，游戏开发者通常更倾向于将资源投入到更广泛的平台，例如 Windows 和主流的游戏主机。
+
+然而，在 2023 年的 WWDC 大会上，苹果带来了一个令人振奋的转机。他们推出了一款名为 Game Porting Toolkit 的游戏移植工具包，其中包含一个专门用于转译 DirectX 的层。这类似于 SteamDeck 上的 Proton，该工具包能够自动将 Windows 的 DirectX API 转译成 Metal API，实现游戏的自动移植，极大地减轻了开发者的工作负担。
+
+![Game Porting Toolkit, WWDC 2023](images/GPTK/gptk.png)
+
+尽管苹果在游戏界的市场份额相对较低，但 Game Porting Toolkit 的推出表明苹果正积极努力扩大自己在游戏开发领域的影响力，为开发者提供更多机会和便利。这对于那些本来不太愿意为苹果平台开发游戏的开发者来说，无疑是一个重要的利好消息。
+
+## 安装苹果官方 Windows 游戏模拟器
+
+为了帮助开发者“快速验证游戏在 macOS 上的运行体验”，苹果在 Game Porting Toolkit 中包含了一个 Windows 游戏模拟器。开发者可以直接使用 Homebrew 安装这个模拟器，从而简化测试过程。
+
+<Callout title="Rosetta 警告" icon="⚠️">
+请注意，这个模拟器是基于 Rosetta 2 的，因此你必须使用经过转译的 x86 版本的 Homebrew 进行安装。这个限制显示了 Game Porting Toolkit 中的 x86 指令实际上是通过 Rosetta 2 进行转译后才能运行的。说句题外话：其实 M 系列芯片内部同时实现了 Arm 和 x86 两套内存模型。不得不感叹苹果自研芯片的强大。
+</Callout>
+
+我有一台闲置的 M1 Pro 笔记本，升级到了 macOS 14。安装很简单：首先确保安装了 Rosetta2 转译层、XCode 15.0，以及 x86 版本的 Homebrew，再用 Homebrew 安装模拟器就行了。
+
+我的系统原本没有Rosetta，但已经安装了 XCode 15。这是我安装模拟器的全过程：
+
+```shell
+# 安装 Rosetta 转译层
+softwareupdate --install-rosetta
+# 启动 x86 版本的 shell
+arch -x86_64 zsh
+
+# 安装 x86 版本的 Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# 修改 .zshrc，添加一个自动切换 brew 环境的脚本
+cat << 'EOF' >> ~/.zshrc
+if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+EOF
+
+# 安装模拟器
+source ~/.zshrc
+brew tap apple/apple http://github.com/apple/homebrew-apple
+brew -v install apple/apple/game-porting-toolkit
+```
+
+Homebrew 安装实际上是在编译它的 toolchain，花费的时间可能比较长。
+
+然后，从 [Apple Developer Downloads](https://developer.apple.com/download/all/) 里找到 Game porting toolkit beta，下载并运行dmg。
+
+```shell
+ditto /Volumes/Game\ Porting\ Toolkit-1.0/lib/ `brew --prefix game-porting-toolkit`/lib/
+cp /Volumes/Game\ Porting\ Toolkit*/gameportingtoolkit* /usr/local/bin
+```
+
+这样就安装完成了。
+
+## Wine?! 🍷
+
+从编译的日志中可以发现，苹果的模拟器底层使用了广受赞誉的 Wine 项目。Wine 是一个开源的兼容层，它允许在类 Unix 系统（包括 macOS）上运行 Windows 应用程序。苹果通过 Wine 为模拟器提供了对 Windows 游戏的兼容性支持。
+
+![编译 Game Porting Toolkit 的日志](images/GPTK/compile_wine.png)
+
+在 Game Porting Toolkit 的 [brew formula](https://raw.githubusercontent.com/apple/homebrew-apple/main/Formula/game-porting-toolkit.rb) 中显示，苹果使用了 CrossOver 项目作为底层，并进行了超过 5 万行的代码补丁。CrossOver 是一家著名的第三方团队，专门从事跨平台游戏移植工作。在他们的[博客文章](https://www.codeweavers.com/blog/mjohnson/2023/6/6/wine-comes-to-macos-apple-s-game-porting-toolkit-powered-by-crossover-source-code)中提到，虽然他们与苹果没有合作开发这个工具，但他们非常高兴苹果选择使用 CrossOver 的源代码作为他们的游戏移植工具包的仿真解决方案。
+
+## 使用模拟器运行 Windows 游戏
+
+苹果在 Game Porting Toolkit 中提供的模拟器包含官方对 Wine 项目在 macOS 上的封装。这意味着，不仅仅局限于游戏，你还可以尝试运行其他类型的 Windows 软件，如办公套件、设计工具、音视频编辑器等。无需再依赖虚拟机来运行 Windows 软件。
+
+在玩游戏之前，实际上更关心的是这个转译层是否能够运行**任意**的 Windows 软件。对于 macOS 平台来说，这确实是一个非常令人振奋的消息。于是，我先尝试运行Windows版本的 Steam。
+
+使用过 Wine 项目的人都知道，Wine需要指定一个路径存放它的虚拟C盘。用 WINEPREFIX 环境变量指定路径之后，我直接用 Game Porting Toolkit 内置的 winecfg 配置模拟环境。这里可以切换Windows版本，我选择Windows 10。
+
+```shell
+mkdir my-game-prefix
+WINEPREFIX=~/my-game-prefix `brew --prefix game-porting-toolkit`/bin/wine64 winecfg
+```
+
+![Wine设置页面](images/GPTK/wine_cfg.png)
+
+配置完成后，直接用 `gameportingtoolkit` 运行可执行文件就可以了。第一个参数是刚才指定的虚拟C盘路径，第二个参数可以是macOS文件系统中的exe文件，也可以是虚拟C盘里的exe文件。
+
+```shell
+# 安装 Steam
+gameportingtoolkit ~/my-game-prefix ~/Downloads/SteamSetup.exe
+# 运行 Steam
+gameportingtoolkit ~/my-game-prefix 'C:\Program Files (x86)/Steam/steam.exe'
+```
+
+我安装了Steam，并且成功运行：
+
+![使用 Game Porting Toolkit 运行 Steam](images/GPTK/steam.png)
+
+下载运行一个《赛博朋克：2077》试一试。M1Pro通过转译运行2077，高画质能稳住30FPS。全程没有BUG，没有闪退。
+
+![使用 Game Porting ToolKit 在 macOS 运行《赛博朋克：2077》](images/GPTK/2077.png)
+
+可以说，macOS的游戏生态迎来了巨大进步。
+
+## Game Porting Toolkit
+
+其实 `gameportingtoolkit` 本身就是一个脚本文件，它的内容如下：
+
+```shell
+#!/bin/zsh
+
+if [ -z "$1" ];  then
+	echo "Usage: $0 <wine-prefix-path> <executable>"
+fi
+
+exe_path="cmd.exe"
+if [ ! -z "$2" ]; then
+	exe_path="$2"
+fi
+
+
+MTL_HUD_ENABLED=1 WINEESYNC=1 WINEPREFIX="$1" `brew --prefix game-porting-toolkit`/bin/wine64 "$exe_path" 2>&1 | grep "D3DM"
+```
+
+Game Porting Toolkit 中的模拟器将 Wine 和苹果自家的 D3DMetal 技术结合起来，提供对 DirectX 11 和 12 的支持。相比于虚拟机，这种转译框架的效率要高得多。然而，它通常不适用于使用反作弊或侵略性 DRM 技术以及需要 AVX 等长指令集的游戏，比如《最后生还者》等。
+
+根据网友的测试结果，目前暴雪最新发布的《暗黑破坏神 4》也可以通过 Game Porting Toolkit 运行。这说明 Game Porting Toolkit 提供的转译框架在运行某些高度复杂的游戏上已经取得了成功。
+
+值得一提的是，由于每个游戏的特性和要求不同，使用 Game Porting Toolkit 运行特定游戏可能会面临一些挑战。因此，在尝试运行特定游戏之前，最好参考其他用户的测试结果和反馈，以了解游戏在 Game Porting Toolkit 中的兼容性和性能表现。
+
+总的来说，Game Porting Toolkit 为开发者提供了一种方便且高效的方式，将 Windows 游戏移植到 macOS 平台。在某些情况下，它已经成功实现了在 macOS 上运行一些复杂游戏的目标。在2023年的 WWDC 上，苹果专门举办了三场讲座，详细介绍了开发者如何通过 Game Porting Toolkit 快速将 Windows 游戏移植到 Mac 平台。
+
+苹果对 Wine 模拟器的改进只是 Game Porting Toolkit 中的一小部分，主要用于“快速**验证**游戏在 macOS 上的运行体验”。对玩家而言，即使开发者不采取任何优化措施，macOS 已经可以运行大多数游戏。苹果已经展现了十足的诚意和决心，如果开发者能够接受并使用这个工具包，进一步针对 macOS 平台优化体验，我们可以期待苹果的游戏生态将迎来重大变革。

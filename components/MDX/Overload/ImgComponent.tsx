@@ -2,19 +2,18 @@ import Image from "next/image";
 
 const ImgComponent = ({ src, alt, width, height }) => {
   return (
-    <div className="break-inside-avoid-page">
-      <div className="grid place-items-center overflow-hidden rounded-lg">
-        <Image
-          src={`/${src}`}
-          alt={alt}
-          width={width}
-          height={height}
-        />
-      </div>
+    <div className="not-prose break-inside-avoid-page">
+      <Image
+        src={`/${src}`}
+        alt={alt}
+        width={width}
+        height={height}
+        className="rounded-lg"
+      />
       {alt && (
-        <div className="mt-2 text-center font-sans text-sm opacity-80">
+        <p className="pt-2 text-center font-sans text-sm opacity-80">
           {alt}
-        </div>
+        </p>
       )}
     </div>
   );
