@@ -33,6 +33,17 @@ const fira = Fira_Sans({
   variable: "--font-fira",
 });
 
+export function AbobeFont() {
+  return (
+    <>
+      <link
+        rel="stylesheet"
+        href="https://use.typekit.net/zsu0zxb.css"
+      ></link>
+    </>
+  );
+}
+
 export default function RootLayout({
   children,
 }: {
@@ -50,6 +61,7 @@ export default function RootLayout({
         </main>
         <Footer />
       </body>
+      <AbobeFont />
     </html>
   );
 }

@@ -34,6 +34,10 @@ module.exports = {
         ],
         default: [
           ...defaultTheme.fontFamily.sans,
+        ],
+        mono: [
+          "input-mono-narrow",
+          ...defaultTheme.fontFamily.mono,
         ]
       },
       colors: {

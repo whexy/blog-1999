@@ -2,6 +2,7 @@ import NowPlaying from "@/components/UI/Website/NowPlaying";
 import metadata from "@/data/metadata";
 import Avatar from "@/components/UI/Graphic/icons/Avatar";
 import Depth3D from "@/components/UI/Animation/Depth3D";
+import Link from "next/link";
 
 export default function Footer() {
   const commit = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_SHA;
@@ -39,6 +40,14 @@ export default function Footer() {
         >
           powered by blog-1999 system ({commit.substring(0, 8)})
         </a>
+        <p className="font-mono text-xs text-white/40">
+          All the{" "}
+          <Link href="/fonts" className="hover:text-white/80">
+            fonts
+          </Link>{" "}
+          used on this website are licensed for Personal & Commercial
+          use.
+        </p>
       </div>
     </footer>
   );
