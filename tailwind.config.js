@@ -32,6 +32,9 @@ module.exports = {
           "var(--font-notosans)",
           ...defaultTheme.fontFamily.sans,
         ],
+        default: [
+          ...defaultTheme.fontFamily.sans,
+        ]
       },
       colors: {
         white: {

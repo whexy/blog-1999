@@ -1,4 +1,3 @@
-import { memo } from "react";
 import twemoji from "twemoji";
 
 const Twemoji = ({ emoji }) => (
@@ -13,4 +12,4 @@ const Twemoji = ({ emoji }) => (
   />
 );
 
-export default memo(Twemoji);
+export default Twemoji;

@@ -3,6 +3,7 @@ import {
   HomeIcon,
   FaceSmileIcon,
   UsersIcon,
+  MusicalNoteIcon,
 } from "@heroicons/react/24/outline";
 /* Fancy animated menu */
 
@@ -11,7 +12,7 @@ import { useSpring, animated } from "@react-spring/web";
 const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
   const springs = useSpring({
     opacity: showMenu ? 1 : 0,
-    height: showMenu ? "20vh" : "0vh",
+    height: showMenu ? "40vh" : "0vh",
   });
 
   return (
@@ -37,6 +38,12 @@ const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
               Icon={FaceSmileIcon}
               toggleMenuFn={toggleMenuFn}
             />
+            <MobileNavItem
+              url="/music"
+              name="Music Collection"
+              Icon={MusicalNoteIcon}
+              toggleMenuFn={toggleMenuFn}
+            />
           </>
         )}
       </div>
@@ -53,7 +60,9 @@ const MobileNavItem = ({ url, name, Icon, toggleMenuFn }) => (
     <div className="rounded-lg">
       <Icon className="h-6 w-6" />
     </div>
-    <div className="text-gray-400 hover:text-white">{name}</div>
+    <div className="text-center text-gray-400 hover:text-white">
+      {name}
+    </div>
   </Link>
 );
 

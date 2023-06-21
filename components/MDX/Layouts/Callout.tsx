@@ -8,12 +8,7 @@ interface CalloutProps {
   children?: React.ReactNode;
 }
 
-const Callout: React.FC<CalloutProps> = ({
-  pic,
-  icon,
-  title,
-  children,
-}) => {
+const Callout = ({ pic, icon, title, children }: CalloutProps) => {
   // const Callout = ({ pic, icon, title, children }) => {
   return (
     <div className="callout secondbg relative z-20 mx-auto my-2 break-inside-avoid-page rounded-lg px-4 py-1">
