@@ -2,9 +2,14 @@ import Main from "@/components/Layouts/Main";
 import Prose from "@/components/Layouts/Prose";
 import Lyric from "@/components/Widgets/Lyric";
 
-import musics from "@/data/music";
+export default async function Page() {
+  // fetch music data on server side, update every 10 minutes
+  const resp = await fetch(
+    "https://gist.githubusercontent.com/whexy/140120f032d8dec8ce716c1dc616716b/raw",
+    { next: { revalidate: 600 } },
+  );
+  const musics = await resp.json();
 
-export default function Page() {
   return (
     <Main>
       <div className="pb-5 pt-10">
