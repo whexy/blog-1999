@@ -16,23 +16,16 @@ export default function Lyric({
   img,
 }: LyricProps) {
   return (
-    <div className="relative h-screen font-default">
+    <div className="not-prose relative font-default">
       <Image
         src={img}
         alt={song}
-        fill
-        className="rounded-lg blur-2xl"
+        width="300"
+        height="300"
+        className="mx-auto blur-2xl"
       />
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-rows-3 place-items-center">
-        <div>
-          <h1 className="text-2xl font-bold">
-            擁有你 就不需要魔法給的勇氣
-          </h1>
-          <h2 className="text-right font-mono opacity-50">
-            Whexy&apos;s Collection Vol.42
-          </h2>
-        </div>
-        <div className="w-4/5 overflow-hidden rounded-2xl text-white sm:w-5/12">
+      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-cols-1 grid-rows-1 place-items-center">
+        <div className="w-[300px] overflow-hidden rounded-2xl text-white">
           <div className="px-4 py-2 text-2xl font-semibold backdrop-brightness-[0.2] backdrop-opacity-50">
             {typeof lyric === "string" ? (
               <div>{lyric}</div>

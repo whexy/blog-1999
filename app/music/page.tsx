@@ -1,16 +1,34 @@
+import Main from "@/components/Layouts/Main";
+import Prose from "@/components/Layouts/Prose";
 import Lyric from "@/components/Widgets/Lyric";
+
+import musics from "@/data/music";
 
 export default function Page() {
   return (
-    <div>
-      <Lyric
-        lyric={["给你一瓶魔法药水", "喝下去 就不需要氧气"]}
-        song={"給你一瓶魔法藥水"}
-        artist={"告五人"}
-        img={
-          "https://is4-ssl.mzstatic.com/image/thumb/Music122/v4/43/a9/fc/43a9fc88-3fe8-ad1a-6dfe-a222668465e5/196589267931.jpg/1000x1000bb.jpg"
-        }
-      />
-    </div>
+    <Main>
+      <div className="pb-5 pt-10">
+        <iframe
+          allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
+          height="450"
+          sandbox="allow-forms allow-popups allow-same-origin allow-scripts allow-storage-access-by-user-activation allow-top-navigation-by-user-activation"
+          className="mx-auto w-full rounded-lg"
+          src="https://embed.music.apple.com/us/playlist/whexys-choice-2023/pl.u-DdANrYBuq4xqJe"
+        />
+      </div>
+      {musics.map((music, index) => (
+        <div className="bg-gray-100" key={index}>
+          <article className="pb-5 pt-10 font-article">
+            <Prose>
+              <h2>
+                #{index + 1} {music.title}
+              </h2>
+              <Lyric {...music} />
+              <p>{music.comment}</p>
+            </Prose>
+          </article>
+        </div>
+      ))}
+    </Main>
   );
 }

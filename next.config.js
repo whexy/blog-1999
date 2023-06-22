@@ -15,7 +15,12 @@ module.exports = withContentlayer({
       "img.foreverblog.cn", // Forever Blog
       "img.cdn.whexy.com", // gallery
       "i1.hdslb.com", // bilibili,
-      "is4-ssl.mzstatic.com", // Apple Music
     ],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**.mzstatic.com",
+      }
+    ]
   },
 });

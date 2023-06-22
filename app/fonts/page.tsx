@@ -1,3 +1,4 @@
+import Main from "@/components/Layouts/Main";
 import PageTitle from "@/components/UI/Website/PageTitle";
 
 interface FontUsage {
@@ -34,9 +35,9 @@ const fonts: FontUsage[] = [
 
 export default function Page() {
   return (
-    <div>
+    <Main>
       <PageTitle title={"Fonts used on this website"} emoji={"🖋️"} />
-      <div className="flex flex-col space-y-4">
+      <div className="flex flex-col space-y-4 pb-4">
         {fonts.map(font => (
           <div key={font.name} className="primary rounded-lg p-4">
             <div className="justify-between sm:flex">
@@ -60,6 +61,6 @@ export default function Page() {
           </div>
         ))}
       </div>
-    </div>
+    </Main>
   );
 }
