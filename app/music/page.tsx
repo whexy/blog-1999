@@ -1,4 +1,3 @@
-import Main from "@/components/Layouts/Main";
 import Prose from "@/components/Layouts/Prose";
 import Lyric from "@/components/Widgets/Lyric";
 
@@ -11,7 +10,7 @@ export default async function Page() {
   const musics = await resp.json();
 
   return (
-    <Main>
+    <div>
       <div className="pb-5 pt-10">
         <iframe
           allow="autoplay *; encrypted-media *; fullscreen *; clipboard-write"
@@ -34,6 +33,6 @@ export default async function Page() {
           </article>
         </div>
       ))}
-    </Main>
+    </div>
   );
 }

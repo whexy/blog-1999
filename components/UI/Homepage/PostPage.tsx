@@ -1,4 +1,3 @@
-import Main from "@/components/Layouts/Main";
 import { allBlogs } from "contentlayer/generated";
 import pick from "lodash/pick";
 import { format, parseISO, compareDesc } from "date-fns";
@@ -22,20 +21,18 @@ const PostsView = () => {
     );
   const filteredBlogPosts = posts;
   return (
-    <Main>
-      <div className="primary mx-auto mt-4 space-y-6 py-5 sm:mt-10 sm:px-4">
-        {filteredBlogPosts.map(post => (
-          <PostCard
-            key={post.title}
-            title={post.title}
-            url={`/posts/${post.slug}`}
-            date={format(parseISO(post.publishDate), "yyyy/LL/dd")}
-            summary={post.summary}
-            showSummary={true}
-          />
-        ))}
-      </div>
-    </Main>
+    <div className="primary mx-auto mt-4 space-y-6 py-5 sm:mt-10 sm:px-4">
+      {filteredBlogPosts.map(post => (
+        <PostCard
+          key={post.title}
+          title={post.title}
+          url={`/posts/${post.slug}`}
+          date={format(parseISO(post.publishDate), "yyyy/LL/dd")}
+          summary={post.summary}
+          showSummary={true}
+        />
+      ))}
+    </div>
   );
 };
 

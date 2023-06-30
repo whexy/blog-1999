@@ -1,36 +1,46 @@
 export interface Friend {
-  name: string;
   /** URL for avatar on Github */
-  icon: string;
+  github: string;
   /** URL of blog website */
   url: string;
-  description: string;
 }
 
 export const friends: Friend[] = [
   {
-    name: "NekoDaemon",
-    icon: "https://avatars.githubusercontent.com/u/29330054?v=4",
-    url: "https://nekodaemon.com",
-    description: "",
+    github: "cla7aye15I4nd",
+    url: "dataisland.org",
   },
   {
-    name: "mstmoonshine",
-    icon: "https://avatars.githubusercontent.com/u/13410629?v=4",
-    url: "https://mstmoonshine.github.io",
-    description: "",
+    github: "Eveneko",
+    url: "eveneko.com",
   },
   {
-    name: "Gogo",
-    icon: "https://avatars.githubusercontent.com/u/12986936?v=4",
-    url: "https://blog.gogo.moe",
-    description: "",
+    github: "Gogomoe",
+    url: "blog.gogo.moe",
   },
   {
-    name: "Dataisland",
-    icon: "https://avatars.githubusercontent.com/u/17133261?v=4",
-    url: "https://dataisland.org",
-    description: "",
+    github: "MstMoonshine",
+    url: "mstmoonshine.github.io",
+  },
+  {
+    github: "macromogic",
+    url: "macromogic.xyz",
+  },
+  {
+    github: "Tert-Butyllithium",
+    url: "haonan.me",
+  },
+  {
+    github: "Tonny-Gu",
+    url: "nekodaemon.com",
+  },
+  {
+    github: "WHALEEYE",
+    url: "www.whale3ye.com",
+  },
+  {
+    github: "whexy",
+    url: "whexy.com",
   },
 ];
 

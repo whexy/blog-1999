@@ -5,8 +5,8 @@ import helloPic from "@/public/img/face.png";
 const WelcomeCard = () => {
   return (
     <div className="pt-4 font-title">
-      <div className="primary flex flex-col-reverse justify-between p-4 font-title sm:flex-row sm:p-8">
-        <div>
+      <div className="primary relative flex flex-col-reverse justify-between p-4 font-title sm:flex-row sm:p-8">
+        <div className="z-20">
           <h1 className="pb-2 text-4xl font-bold tracking-tight">
             Whexy
           </h1>

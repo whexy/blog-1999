@@ -1,4 +1,3 @@
-import Head from "next/head";
 import Twemoji from "@/components/UI/Graphic/Twemoji";
 
 const PageTitle = ({
@@ -10,9 +9,6 @@ const PageTitle = ({
 }) => {
   return (
     <>
-      <Head>
-        <title>{`${title} | Whexy`}</title>
-      </Head>
       <div className="flex items-center space-x-2">
         {emoji && (
           <div className="h-9 w-9">

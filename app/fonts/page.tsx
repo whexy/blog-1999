@@ -1,4 +1,3 @@
-import Main from "@/components/Layouts/Main";
 import PageTitle from "@/components/UI/Website/PageTitle";
 
 interface FontUsage {
@@ -35,7 +34,7 @@ const fonts: FontUsage[] = [
 
 export default function Page() {
   return (
-    <Main>
+    <div>
       <PageTitle title={"Fonts used on this website"} emoji={"🖋️"} />
       <div className="flex flex-col space-y-4 pb-4">
         {fonts.map(font => (
@@ -61,6 +60,6 @@ export default function Page() {
           </div>
         ))}
       </div>
-    </Main>
+    </div>
   );
 }

@@ -1,52 +1,62 @@
-import Image from "next/image";
-import friends from "../../data/friends";
-
-// tiny
+import FriendCard from "@/components/UI/Homepage/FriendCard";
 import PageTitle from "@/components/UI/Website/PageTitle";
-import Main from "@/components/Layouts/Main";
+import Comment from "@/components/UI/Blog/Comment";
+import { getUserData } from "@/lib/github";
+import { Metadata } from "next";
+import friends from "@/data/friends";
 
-const FriendPage = () => {
+export const metadata: Metadata = {
+  title: "My Friends",
+  description: "Friends of whexy.",
+};
+
+const FriendPage = async () => {
+  const f_info = [];
+  for (const friend of friends) {
+    if (!friend.github) continue;
+    const github_info = await getUserData(friend.github);
+    if (!github_info) continue;
+
+    // if github_info contains both name and login, use the one without space.
+    if (github_info.name && github_info.login) {
+      if (github_info.name.includes(" ")) {
+        github_info.name = github_info.login;
+      }
+    }
+
+    if (github_info.blog) {
+      github_info.blog = github_info.blog.replace(
+        /^(https?:\/\/)/,
+        "",
+      );
+    }
+
+    const { name, login, bio, avatar_url, blog } = github_info;
+    f_info.push({
+      name: name || login,
+      description: bio || "",
+      icon: avatar_url,
+      url: blog || friend.url,
+    });
+  }
+
   return (
-    <Main>
+    <div>
       <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
-      <div className="mx-3 grid grid-cols-1 gap-3 pb-5 sm:grid-cols-2">
-        {friends
+      <div className="mx-3 grid grid-cols-1 gap-8 pb-5 sm:auto-rows-fr sm:grid-cols-2">
+        {f_info
           .sort((f1, f2) => f1.name.localeCompare(f2.name))
           .map(friend => (
-            <div
-              key={friend.name}
-              className="primary group relative flex flex-row items-center justify-center gap-5 rounded-lg py-8"
-            >
-              <div className="ml-8 h-16 w-16 overflow-hidden rounded-full transition-all group-hover:scale-105 ">
-                <Image
-                  src={friend.icon}
-                  alt={friend.name}
-                  className=""
-                  width={64}
-                  height={64}
-                  placeholder="blur"
-                  blurDataURL="/img/smile.svg"
-                />
-              </div>
-              <div className="grow">
-                <p className="font-mono text-xl">{friend.name}</p>
-                <p className="w-full truncate text-sm text-jbgray-light transition-all group-hover:text-blue-600 dark:group-hover:text-blue-300">
-                  <a
-                    href={friend.url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {friend.url.split("/")[2]}
-                  </a>
-                </p>
-                <p className="pt-2 text-sm text-jbgray-light">
-                  {friend.description}
-                </p>
-              </div>
-            </div>
+            <FriendCard key={friend.name} friend={friend} />
           ))}
       </div>
-    </Main>
+      <div className="mt-10 rounded-t-lg bg-white p-4">
+        <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+          Guest Book
+        </h2>
+        <Comment slug={"friends"} />
+      </div>
+    </div>
   );
 };
 
