@@ -11,7 +11,12 @@ export default function Post({
 }) {
   const post = allBlogs.find(p => p.slug === params.slug);
   const Content = useMDXComponent(post.body.code);
-  return <Content components={components} />;
+  return (
+    <>
+      {/* @ts-expect-error Server Component */}
+      <Content components={components} />
+    </>
+  );
 }
 
 export async function generateStaticParams() {

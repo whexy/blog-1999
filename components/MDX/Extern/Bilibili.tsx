@@ -1,18 +1,11 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
 
-import useSWRImmutable from "swr/immutable";
-import fetcher from "@/lib/fetcher";
+import { getBilibiliData } from "@/lib/bilibili";
 
-const Bilibili = ({ bvid }: { bvid: string }) => {
+const Bilibili = async ({ bvid }: { bvid: string }) => {
   // get detailed info
-
-  const { data } = useSWRImmutable(
-    "/api/bilibili-video?bvid=" + bvid,
-    fetcher,
-  );
+  const data = await getBilibiliData(bvid);
 
   return (
     <Link

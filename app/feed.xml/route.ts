@@ -1,13 +1,7 @@
-import { GetServerSideProps } from "next";
-import React from "react";
 import { allBlogs } from "contentlayer/generated";
 import RSS from "rss";
 
-const RSSFeed: React.FC = () => null;
-
-export const getServerSideProps: GetServerSideProps = async ({
-  res,
-}) => {
+export async function GET() {
   const feed = new RSS({
     title: "Whexy Blog",
     description: "a student obsessed with the computing world",
@@ -26,12 +20,9 @@ export const getServerSideProps: GetServerSideProps = async ({
     });
   });
 
-  res.setHeader("Content-Type", "text/xml");
-  res.write(feed.xml({ indent: true }));
-  res.end();
-  return {
-    props: {},
-  };
-};
-
-export default RSSFeed;
+  return new Response(feed.xml({ indent: true }), {
+    headers: {
+      "Content-Type": "text/xml",
+    },
+  });
+}

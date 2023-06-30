@@ -52,6 +52,7 @@ const BlurBg = ({
         ctx.drawImage(img, 0, 0);
         const color = await fac.getColorAsync(canvas);
         setColor(makeColorLighterUntilReadable(color.hex));
+        canvas.remove();
       };
     }
     getColorAsync();

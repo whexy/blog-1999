@@ -1,6 +1,3 @@
-"use client";
-
-/* eslint-disable @next/next/no-img-element */
 import NextImage from "next/image";
 import Link from "next/link";
 import { StarIcon } from "@heroicons/react/24/outline";
@@ -8,121 +5,60 @@ import {
   CodiconIssues,
   IconoirGitFork,
 } from "@/components/UI/Graphic/icons/Github";
-import useSWRImmutable from "swr/immutable";
-import fetcher from "@/lib/fetcher";
-import Skeleton from "@/components/UI/Website/Skeleton";
-import { SkeletonTheme } from "react-loading-skeleton";
-import { useEffect, useState } from "react";
+import { getRepoData } from "@/lib/github";
+import GithubLangBar from "./GithubLangBar";
 
-const GithubRepo = ({ repo }: { repo: string }) => {
+const GithubRepo = async ({ repo }: { repo: string }) => {
   const html_url = `https://github.com/${repo}`;
   const username = repo.split("/")[0];
   const repo_name = repo.split("/")[1];
 
-  const { data, error } = useSWRImmutable(
-    `/api/github-repo?repo=${repo}`,
-    fetcher,
-  );
-
-  const ghrepo: FullRepository = { ...data };
-
-  const [language, setLanguage] = useState("");
-
-  useEffect(() => {
-    const canvas = document.createElement("canvas");
-    canvas.width = 1200;
-    canvas.height = 20;
-    const context = canvas.getContext("2d");
-    const image = new Image();
-    image.crossOrigin = "anonymous";
-    image.src = `https://opengraph.githubassets.com/1/${repo}`;
-    image.onload = () => {
-      context.drawImage(image, 0, 580, 1200, 20, 0, 0, 1200, 20);
-
-      const keyPixel = context.getImageData(0, 0, 1, 1).data;
-      if (
-        keyPixel[0] == 255 &&
-        keyPixel[1] == 255 &&
-        keyPixel[2] == 255
-      ) {
-        //do nothing
-        // if pixel is white, don't draw
-      } else {
-        const base64 = canvas.toDataURL();
-        setLanguage(base64);
-      }
-      canvas.remove();
-    };
-  }, [repo]);
+  const ghrepo: FullRepository = await getRepoData(repo);
 
   return (
-    <SkeletonTheme enableAnimation={!error}>
-      <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
-        <Link href={html_url}>
-          <div className="secondbg overflow-hidden rounded-xl">
-            <div className="flex space-x-4 p-4">
-              <div className="grid flex-none place-items-center">
-                {ghrepo && ghrepo.owner ? (
-                  <NextImage
-                    src={ghrepo.owner.avatar_url}
-                    className="overflow-hidden rounded-full"
-                    alt={username}
-                    height={60}
-                    width={60}
-                  />
-                ) : (
-                  <Skeleton height={60} width={60} />
+    <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
+      <Link href={html_url}>
+        <div className="secondbg overflow-hidden rounded-xl">
+          <div className="flex space-x-4 p-4">
+            <div className="grid flex-none place-items-center">
+              <NextImage
+                src={ghrepo.owner.avatar_url}
+                className="overflow-hidden rounded-full"
+                alt={username}
+                height={60}
+                width={60}
+              />
+            </div>
+            <div className="flex flex-col justify-between space-y-1">
+              <div>
+                <p className="text-lg">
+                  {username}/
+                  <span className="font-semibold">{repo_name}</span>
+                </p>
+                {ghrepo && ghrepo.description && (
+                  <p className="text-sm">{ghrepo.description}</p>
                 )}
               </div>
-              <div className="flex flex-col justify-between space-y-1">
-                <div>
-                  <p className="text-lg">
-                    {username}/
-                    <span className="font-semibold">{repo_name}</span>
-                  </p>
-                  {ghrepo && ghrepo.description && (
-                    <p className="text-sm">{ghrepo.description}</p>
-                  )}
+              <div className="flex space-x-4 text-sm">
+                <div className="flex items-center space-x-1">
+                  <StarIcon className="h-4 w-4" />
+                  <p>{ghrepo.stargazers_count}</p>
                 </div>
-                <div className="flex space-x-4 text-sm">
-                  <div className="flex items-center space-x-1">
-                    <StarIcon className="h-4 w-4" />
-                    <p>
-                      {ghrepo ? (
-                        ghrepo.stargazers_count
-                      ) : (
-                        <Skeleton width={10} />
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <IconoirGitFork className="h-4 w-4" />
-                    <p>
-                      {ghrepo ? (
-                        ghrepo.forks_count
-                      ) : (
-                        <Skeleton width={10} />
-                      )}
-                    </p>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <CodiconIssues className="h-4 w-4" />
-                    <p>
-                      {ghrepo ? (
-                        ghrepo.open_issues_count
-                      ) : (
-                        <Skeleton width={10} />
-                      )}
-                    </p>
-                  </div>
+                <div className="flex items-center space-x-1">
+                  <IconoirGitFork className="h-4 w-4" />
+                  <p>{ghrepo.forks_count}</p>
+                </div>
+                <div className="flex items-center space-x-1">
+                  <CodiconIssues className="h-4 w-4" />
+                  <p>{ghrepo.open_issues_count}</p>
                 </div>
               </div>
             </div>
-            {language && <img src={language} alt="languages" />}
           </div>
-        </Link>
-      </div>
-    </SkeletonTheme>
+          <GithubLangBar repo={repo} />
+        </div>
+      </Link>
+    </div>
   );
 };
 

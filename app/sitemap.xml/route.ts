@@ -1,5 +1,3 @@
-//pages/sitemap.xml.js
-
 import { allBlogs } from "contentlayer/generated";
 
 function generateSiteMap() {
@@ -20,21 +18,12 @@ function generateSiteMap() {
  `;
 }
 
-function SiteMap() {
-  // getServerSideProps will do the heavy lifting
-}
-
-export async function getServerSideProps({ res }) {
+export async function GET() {
   const sitemap = generateSiteMap();
 
-  res.setHeader("Content-Type", "text/xml");
-  // we send the XML to the browser
-  res.write(sitemap);
-  res.end();
-
-  return {
-    props: {},
-  };
+  return new Response(sitemap, {
+    headers: {
+      "Content-Type": "text/xml;",
+    },
+  });
 }
-
-export default SiteMap;
