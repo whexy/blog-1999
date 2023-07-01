@@ -57,10 +57,27 @@
 
 /* Code */
 .rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-gray-200/10 bg-[#24252f] px-5 py-3 font-mono text-sm font-bold text-gray-200;
+  @apply rounded-t-lg border border-b-0 border-black/20 bg-[#f3f3f0] px-5 py-2 font-mono text-sm font-bold;
+  position: relative;
 }
 
-.rehype-code-title + pre {
+.rehype-code-title::before {
+  content: "> ";
+}
+
+.rehype-code-title::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #f56565;
+}
+
+.rehype-code-title + #pre-container > pre {
   @apply !mt-0 !rounded-t-none;
 }
 
