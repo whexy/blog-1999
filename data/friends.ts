@@ -3,6 +3,7 @@ export interface Friend {
   github: string;
   /** URL of blog website */
   url: string;
+  feed?: string;
 }
 
 export const friends: Friend[] = [
@@ -13,6 +14,7 @@ export const friends: Friend[] = [
   {
     github: "Eveneko",
     url: "eveneko.com",
+    feed: "https://eveneko.com/atom.xml",
   },
   {
     github: "Gogomoe",
@@ -21,10 +23,12 @@ export const friends: Friend[] = [
   {
     github: "MstMoonshine",
     url: "mstmoonshine.github.io",
+    feed: "https://mstmoonshine.github.io/index.xml",
   },
   {
     github: "macromogic",
     url: "macromogic.xyz",
+    feed: "https://macromogic.xyz/atom.xml",
   },
   {
     github: "Tert-Butyllithium",
@@ -33,6 +37,7 @@ export const friends: Friend[] = [
   {
     github: "Tonny-Gu",
     url: "nekodaemon.com",
+    feed: "https://nekodaemon.com/atom.xml",
   },
   {
     github: "WHALEEYE",
@@ -41,6 +46,7 @@ export const friends: Friend[] = [
   {
     github: "whexy",
     url: "whexy.com",
+    feed: "https://www.whexy.com/feed.xml",
   },
 ];
 

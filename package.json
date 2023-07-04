@@ -47,6 +47,7 @@
     "remark-pangu": "^2.2.0",
     "remark-unwrap-images": "^3.0.1",
     "rss": "^1.2.2",
+    "rss-parser": "^3.13.0",
     "swr": "^2.2.0",
     "twemoji": "^14.0.2"
   },
