@@ -140,7 +140,7 @@ const FriendPage = async () => {
         <h2 className="px-2 pb-4 font-title text-2xl font-bold">
           Guest Book
         </h2>
-        <Comment slug={"friends"} />R
+        <Comment slug={"friends"} />
       </div>
     </div>
   );

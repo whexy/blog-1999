@@ -8,7 +8,7 @@ const ImgComponent = ({ src, alt, width, height }) => {
         alt={alt}
         width={width}
         height={height}
-        className="rounded-lg"
+        className="mx-auto rounded-lg"
       />
       {alt && (
         <p className="pt-2 text-center font-sans text-sm opacity-80">

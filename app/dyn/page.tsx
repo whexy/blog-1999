@@ -4,8 +4,8 @@ import NotionRenderer from "@/components/UI/Dyn/NotionClientRenderer";
 const notion = new NotionAPI();
 const DynamicBlogPageId = "c7308a295d2b4a08929d8f6da207260c";
 
-export const dynamic = "force-dynamic",
-  revalidate = 0;
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 
 /**
  * Retrieves a Notion page (server-side) and renders it client-side.
