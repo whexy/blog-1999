@@ -95,23 +95,21 @@ const FriendTimeLine = ({
       </h2>
       {recentUpdates.map(({ title, pubDate, link, friend }) => (
         <Link href={link} key={title}>
-          <div className="flex items-center justify-between px-1 py-2 transition-all hover:bg-gray-50">
-            <div className="flex items-center space-x-2">
-              <Image
-                src={friend.icon}
-                alt={friend.name}
-                width={32}
-                height={32}
-                className="overflow-hidden rounded-full"
-              />
-              <div className="min-w-0">
-                <p>
-                  <span className="font-bold">{friend.name}</span>
-                </p>
-                <p className="truncate">{title}</p>
-              </div>
+          <div className="flex items-center px-1 py-2 transition-all hover:bg-gray-50">
+            <Image
+              src={friend.icon}
+              alt={friend.name}
+              width={32}
+              height={32}
+              className="mr-2 flex-shrink-0 overflow-hidden rounded-full"
+            />
+            <div className="min-w-0 flex-grow">
+              <p>
+                <span className="font-bold">{friend.name}</span>
+              </p>
+              <p className="truncate text-sm sm:text-base">{title}</p>
             </div>
-            <p className="flex-shrink-0 font-mono text-sm text-gray-500">
+            <p className="flex-shrink-0 font-mono text-xs text-gray-500 sm:text-sm">
               {new Date(pubDate).toISOString().slice(0, 10)}
             </p>
           </div>
