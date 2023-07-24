@@ -10,6 +10,7 @@ export const friends: Friend[] = [
   {
     github: "cla7aye15I4nd",
     url: "dataisland.org",
+    feed: "https://rsshub.mudd.cc/whexy/friends/dataisland",
   },
   {
     github: "Eveneko",
@@ -19,6 +20,7 @@ export const friends: Friend[] = [
   {
     github: "Gogomoe",
     url: "blog.gogo.moe",
+    feed: "https://rsshub.mudd.cc/whexy/friends/gogo",
   },
   {
     github: "MstMoonshine",
@@ -33,6 +35,7 @@ export const friends: Friend[] = [
   {
     github: "Tert-Butyllithium",
     url: "haonan.me",
+    feed: "https://rsshub.mudd.cc/whexy/friends/haonan",
   },
   {
     github: "Tonny-Gu",
