@@ -66,6 +66,7 @@ const WelcomeCard = () => {
             src={helloPic}
             alt="a photo of Whexy"
             className="secondbg overflow-hidden rounded-full object-cover"
+            priority
           />
         </Link>
       </div>

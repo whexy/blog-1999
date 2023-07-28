@@ -2,6 +2,7 @@
 import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
+import "../styles/adobe/zsu0zxb.css";
 import Header from "@/components/UI/Website/Header";
 import Footer from "@/components/UI/Website/Footer";
 import React from "react";
@@ -33,17 +34,6 @@ const fira = Fira_Sans({
   variable: "--font-fira",
 });
 
-export function AbobeFont() {
-  return (
-    <>
-      <link
-        rel="stylesheet"
-        href="https://use.typekit.net/zsu0zxb.css"
-      ></link>
-    </>
-  );
-}
-
 export default function RootLayout({
   children,
 }: {
@@ -61,7 +51,6 @@ export default function RootLayout({
         </main>
         <Footer />
       </body>
-      <AbobeFont />
     </html>
   );
 }
