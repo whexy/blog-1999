@@ -15,7 +15,7 @@ export const friends: Friend[] = [
   {
     github: "Eveneko",
     url: "eveneko.com",
-    feed: "https://eveneko.com/atom.xml",
+    feed: "https://eveneko.com/index.xml",
   },
   {
     github: "Gogomoe",

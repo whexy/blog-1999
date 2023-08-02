@@ -3,6 +3,9 @@
 import Parser from "rss-parser";
 
 export const getFeeds = async (feedUrl: string) => {
+
+  console.log("getFeeds", feedUrl)
+
   // use Next.js extended fetch() to get XML
   const xml = await (
     await fetch(feedUrl, { next: { revalidate: 600 } })
