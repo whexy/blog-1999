@@ -43,8 +43,7 @@ export default function Page() {
               <div
                 id="font-name"
                 style={{ fontFamily: font.fontClassName }}
-                className="text-xl"
-              >
+                className="text-xl">
                 {font.name}
               </div>
               <div>

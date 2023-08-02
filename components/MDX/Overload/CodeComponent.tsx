@@ -37,15 +37,13 @@ const CodeComponent = ({ props, children }) => {
       id="pre-container"
       className="relative"
       onMouseEnter={() => setHover(true)}
-      onMouseLeave={() => setHover(false)}
-    >
+      onMouseLeave={() => setHover(false)}>
       <animated.div
         className="not-prose absolute right-4 top-4 grid h-[--scale] w-[--scale] place-items-center overflow-hidden rounded-lg bg-[--background-color] p-1 opacity-[--opacity-value] shadow hover:cursor-pointer"
         style={animationProps as React.CSSProperties}
         onClick={() => copyToClipboard()}
         onMouseEnter={() => setFocus(true)}
-        onMouseLeave={() => setFocus(false)}
-      >
+        onMouseLeave={() => setFocus(false)}>
         {!isCopied ? (
           <ClipboardDocumentListIcon className="text-gray-500" />
         ) : (

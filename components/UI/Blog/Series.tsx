@@ -34,8 +34,7 @@ const Series = ({ slug, series }) => {
               key={slug}
               className={`hover:underline ${
                 slug === thisSlug && "font-bold underline"
-              }`}
-            >
+              }`}>
               <Link href={`/posts/${slug}`}>{title}</Link>
             </li>
           ))}

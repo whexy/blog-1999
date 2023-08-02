@@ -126,7 +126,7 @@ const FriendPage = async () => {
   return (
     <div>
       <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
-      <div className="mx-3 grid grid-cols-1 gap-8 pb-5 sm:auto-rows-fr sm:grid-cols-2">
+      <div className="mx-3 grid grid-cols-1 grid-rows-[masonry] gap-8 pb-5 sm:auto-rows-fr sm:grid-cols-2">
         {f_list
           .sort((f1, f2) => f1.name.localeCompare(f2.name))
           .map(friend => (

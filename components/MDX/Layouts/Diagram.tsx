@@ -8,8 +8,7 @@ const Diagram = ({ src, alt, width = "100%" }) => {
           type="image/svg+xml"
           title={alt}
           className="mx-auto"
-          style={{ maxWidth: "100%" }}
-        ></object>
+          style={{ maxWidth: "100%" }}></object>
       </div>
       {alt && (
         <div className="text-center font-sans text-sm opacity-80">

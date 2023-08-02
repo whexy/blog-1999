@@ -40,7 +40,6 @@ I've written a post discussing how to design a blog system.
 
 - [构建自己的博客系统](https://www.whexy.com/posts/blog-diy) (in Chinese)
 
-
 ## Running Locally
 
 ```shell

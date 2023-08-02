@@ -40,8 +40,7 @@ const Depth3D = ({
           xys: calc(x, y, ref.current.getBoundingClientRect()),
         })
       }
-      onMouseLeave={() => api.start({ xys: [0, 0, 1] })}
-    >
+      onMouseLeave={() => api.start({ xys: [0, 0, 1] })}>
       {children}
     </animated.div>
   );

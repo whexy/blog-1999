@@ -10,11 +10,11 @@ import { useSpring, animated, config } from "@react-spring/web";
 function makeColorLighterUntilReadable(hex: string) {
   const color = colord(hex);
   const hsl0 = color.toHsl();
-  hsl0.l = 80;
+  hsl0.l = 80 - 20;
   const hsl1 = color.toHsl();
-  hsl1.l = 88;
+  hsl1.l = 88 - 20;
   const hsl2 = color.toHsl();
-  hsl2.l = 95;
+  hsl2.l = 95 - 20;
   return [
     colord(hsl0).toHex(),
     colord(hsl1).toHex(),
@@ -71,10 +71,10 @@ const BlurBg = ({
     <div
       className={`relative ${className}`}
       onMouseOver={() => setHover(true)}
-      onMouseOut={() => setHover(false)}
-    >
+      onMouseOut={() => setHover(false)}>
+      <div className="absolute inset-0 z-[5] opacity-40 bg-blend-exclusion backdrop-blur-lg"></div>
       <animated.div
-        className="absolute inset-0 z-0 bg-gradient-to-r from-[--gradient-from] via-[--gradient-via] to-[--gradient-to] shadow"
+        className="bg-noise-r absolute inset-0 z-0 from-[--gradient-from] via-[--gradient-via] to-[--gradient-to] opacity-40 bg-blend-exclusion shadow backdrop-blur-lg"
         style={animationProps as React.CSSProperties}
       />
       {children}

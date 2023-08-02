@@ -36,8 +36,7 @@ export default function Footer() {
           href={commitURL}
           className="font-mono text-xs text-white/40 hover:text-white/80"
           target="_blank"
-          rel="noopener noreferrer"
-        >
+          rel="noopener noreferrer">
           powered by blog-1999 system ({commit.substring(0, 8)})
         </a>
         <p className="font-mono text-xs text-white/40">

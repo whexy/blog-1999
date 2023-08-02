@@ -41,8 +41,7 @@ export default function RootLayout({
 }) {
   return (
     <html
-      className={`${lato.variable} ${noto_sans_sc.variable} ${fira.variable}`}
-    >
+      className={`${lato.variable} ${noto_sans_sc.variable} ${fira.variable}`}>
       <body>
         <Analytics />
         <Header />

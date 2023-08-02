@@ -8,7 +8,6 @@ export default function Analytics() {
       async
       defer
       data-website-id={process.env.NEXT_PUBLIC_UMAMI_TRACKID}
-      src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}
-    ></Script>
+      src={process.env.NEXT_PUBLIC_UMAMI_SCRIPT_URL}></Script>
   );
 }

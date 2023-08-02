@@ -55,8 +55,7 @@ const MobileNavItem = ({ url, name, Icon, toggleMenuFn }) => (
   <Link
     href={url}
     className="flex flex-col items-center rounded-lg px-4 py-6 hover:bg-white/5"
-    onClick={() => toggleMenuFn()}
-  >
+    onClick={() => toggleMenuFn()}>
     <div className="rounded-lg">
       <Icon className="h-6 w-6" />
     </div>

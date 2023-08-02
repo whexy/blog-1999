@@ -18,7 +18,11 @@ cat: M1 (Apple Silicon)
 为了帮助开发者“快速验证游戏在 macOS 上的运行体验”，苹果在 Game Porting Toolkit 中包含了一个 Windows 游戏模拟器。开发者可以直接使用 Homebrew 安装这个模拟器，从而简化测试过程。
 
 <Callout title="Rosetta 警告" icon="⚠️">
-请注意，这个模拟器是基于 Rosetta 2 的，因此你必须使用经过转译的 x86 版本的 Homebrew 进行安装。这个限制显示了 Game Porting Toolkit 中的 x86 指令实际上是通过 Rosetta 2 进行转译后才能运行的。说句题外话：其实 M 系列芯片内部同时实现了 Arm 和 x86 两套内存模型。不得不感叹苹果自研芯片的强大。
+  请注意，这个模拟器是基于 Rosetta 2 的，因此你必须使用经过转译的 x86
+  版本的 Homebrew 进行安装。这个限制显示了 Game Porting Toolkit 中的
+  x86 指令实际上是通过 Rosetta 2
+  进行转译后才能运行的。说句题外话：其实 M 系列芯片内部同时实现了 Arm
+  和 x86 两套内存模型。不得不感叹苹果自研芯片的强大。
 </Callout>
 
 我有一台闲置的 M1 Pro 笔记本，升级到了 macOS 14。安装很简单：首先确保安装了 Rosetta2 转译层、XCode 15.0，以及 x86 版本的 Homebrew，再用 Homebrew 安装模拟器就行了。

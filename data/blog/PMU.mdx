@@ -81,8 +81,7 @@ However, you cannot register the handler of PMU interrupts simply by running thi
 I want the built-in handler can work with my handler together. So I go to the Linux source code and modify the Linux version's handler called arm-pmu. I added the flag `IRQF_SHARED` to it, making the interrupt shareable, which means other handlers can hook it simultaneously.
 
 <Callout
-  title={`💭 [Bonus] Handle PMU Interrupts securely in the firmware`}
->
+  title={`💭 [Bonus] Handle PMU Interrupts securely in the firmware`}>
   It seems odd to handle PMU interrupts in the firmware, but it's
   useful, especially for some tracers that don't want to intrude into
   the operating system. Here I will only cover some basic thoughts.

@@ -32,13 +32,8 @@ module.exports = {
           "var(--font-notosans)",
           ...defaultTheme.fontFamily.sans,
         ],
-        default: [
-          ...defaultTheme.fontFamily.sans,
-        ],
-        mono: [
-          "input-mono-narrow",
-          ...defaultTheme.fontFamily.mono,
-        ]
+        default: [...defaultTheme.fontFamily.sans],
+        mono: ["input-mono-narrow", ...defaultTheme.fontFamily.mono],
       },
       colors: {
         white: {

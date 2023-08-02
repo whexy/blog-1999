@@ -6,9 +6,8 @@ export const FriendCard = ({ friend }) => {
     <Depth3D>
       <BlurBg
         url={friend.icon}
-        className="primary group relative flex h-full w-full flex-row items-center gap-5 overflow-hidden rounded-lg py-8"
-      >
-        <div className="z-10 ml-8 h-16 w-16 flex-shrink-0 overflow-hidden rounded-full border-black/50 transition-transform duration-300 group-hover:scale-[120%] group-hover:drop-shadow-xl">
+        className="primary group relative flex h-full w-full flex-row items-center gap-5 overflow-hidden rounded-lg py-8">
+        <div className="z-10 ml-8 h-16 w-16 flex-shrink-0 overflow-hidden rounded-full border-black/50 transition-transform duration-300 group-hover:scale-[120%]">
           <Image
             src={friend.icon}
             alt={friend.name}
@@ -24,8 +23,7 @@ export const FriendCard = ({ friend }) => {
             <a
               href={"https://" + friend.url}
               target="_blank"
-              rel="noreferrer"
-            >
+              rel="noreferrer">
               {friend.url.replace(/^www\./, "")}
             </a>
           </p>

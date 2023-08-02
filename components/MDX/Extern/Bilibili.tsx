@@ -10,8 +10,7 @@ const Bilibili = async ({ bvid }: { bvid: string }) => {
   return (
     <Link
       href={`https://www.bilibili.com/video/${bvid}`}
-      className="secondbg not-prose mx-2 flex break-inside-avoid-page flex-col overflow-hidden rounded-lg sm:flex-row"
-    >
+      className="secondbg not-prose mx-2 flex break-inside-avoid-page flex-col overflow-hidden rounded-lg sm:flex-row">
       {data && (
         <>
           <Image

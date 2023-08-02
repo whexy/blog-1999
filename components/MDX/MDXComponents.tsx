@@ -8,6 +8,9 @@ import Small from "@/components/MDX/Layouts/Small";
 import GithubRepo from "@/components/MDX/Extern/GithubRepo";
 import Bilibili from "@/components/MDX/Extern/Bilibili";
 import Tweet from "@/components/MDX/Extern/Tweet";
+import Spotify from "@/components/MDX/Extern/Spotify";
+import AppleMusic from "@/components/MDX/Extern/AppleMusic";
+import Lyric from "@/components/Widgets/Lyric";
 
 // Special Components
 import Depth3D from "@/components/UI/Animation/Depth3D";
@@ -27,6 +30,9 @@ const MDXComponents = {
   AnimatedFancyCard: Depth3D,
   Twemoji,
   Tweet,
+  Spotify,
+  Lyric,
+  AppleMusic,
 };
 
 export default MDXComponents;

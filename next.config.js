@@ -14,13 +14,15 @@ module.exports = withContentlayer({
       "i.scdn.co", // Spotify Album Art
       "img.foreverblog.cn", // Forever Blog
       "img.cdn.whexy.com", // gallery
-      "i1.hdslb.com", // bilibili,
     ],
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**.mzstatic.com",
-      }
-    ]
+        hostname: "**.mzstatic.com", // Apple music
+      },
+      {
+        hostname: "**.hdslb.com", // bilibili
+      },
+    ],
   },
 });

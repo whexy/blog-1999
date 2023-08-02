@@ -6,8 +6,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 1080 1080"
-    {...props}
-  >
+    {...props}>
     <defs>
       <filter
         id="a"
@@ -17,8 +16,7 @@ const SvgComponent = (props: SVGProps<SVGSVGElement>) => (
         height="140%"
         filterUnits="objectBoundingBox"
         primitiveUnits="userSpaceOnUse"
-        colorInterpolationFilters="linearRGB"
-      >
+        colorInterpolationFilters="linearRGB">
         <feMorphology
           operator="dilate"
           radius="20 20"
