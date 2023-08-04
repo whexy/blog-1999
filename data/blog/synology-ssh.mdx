@@ -1,0 +1,80 @@
+---
+title: "解决群晖无法使用 ssh 密钥登录的问题"
+publishDate: 2023-08-04
+summary: "解决在群晖 NAS 上始终无法实现密钥登录，反而一直提示输入密码的问题。"
+cat: Internet
+series: "Synology 群晖 NAS 疑难杂症"
+---
+
+近期，我遇到了一个非常奇怪的问题。通常情况下，我们可以通过使用 `ssh-copy-id` 命令将公钥复制到服务器上，实现免密登录。然而，在群晖 NAS 上，尽管我按照常规步骤操作，却始终无法实现密钥登录，反而一直提示我输入密码。
+
+在互联网上，有人推荐了一些解决方案，包括：
+
+1. 确保 `authorized_keys` 文件权限设置为 600。
+2. 确认 `sshd_config` 文件中启用了密钥登录选项。
+3. 重启 SSH 服务以应用最新的 `sshd_config` 设置。
+
+尽管我对以上方案都非常了解，但在排查问题时，我仔细核对了若干遍配置，却依然无法通过密钥登录。这让我感到相当困惑。
+
+## 调试 sshd
+
+面对无法通过密钥登录的问题，我决定直接查看 `sshd` 的日志以进行调试。下面是调试 `sshd` 的方法：
+
+1. 在另外一个端口上开启一个 `sshd` 进程，并打开 debug 日志输出，命令如下：`/bin/sshd -d -p 2222`。
+2. 尝试通过以下命令连接到 debug `sshd`：`ssh <name>@<addr> -p 2222`。
+
+通过以上步骤，我发现 `sshd` 确实接受了密钥，但在读取 `.ssh/authorized_keys` 文件时遇到了 ACL（Access Control List）权限错误，因此拒绝了认证。
+
+<Callout title="什么是 ACL 权限" icon="🔐">
+  ACL
+  权限是一套优先级高于文件系统权限的权限系统。它允许细粒度地控制对文件和目录的访问，超越了传统的基于用户和组的权限设置。使用
+  ACL
+  权限，我们可以更加灵活地管理访问控制，为特定用户或组提供特定的权限，从而确保系统的安全性和隐私保护。
+</Callout>
+
+## authorized_keys 的权限要求
+
+在网上的帖子中，大多数人都提到了将 `authorized_keys` 设置成 600 权限，但却很少有人提及到 ACL 权限的要求。其实我在自己的 [proxmox 虚拟机](/posts/proxmox) 里将 `authorized_keys` 设置成 777 权限都没有出现过问题。
+
+我查阅了 `authorized_keys` 的[文档](http://man.he.net/man5/authorized_keys)，了解这个文件具体的权限要求。
+
+<Quote
+  cite="SSHD(8)"
+  subcite="BSD System Manager's Manual"
+  url="http://man.he.net/man5/authorized_keys">
+  The content of the file is not highly sensitive, but the recommended
+  permissions are read/write for the user, and not accessible by
+  others. If this file, the `~/.ssh` directory, or the user's home
+  directory are writable by other users, then the file could be
+  modified or replaced by unauthorized users. In this case, sshd will
+  not al- low it to be used unless the StrictModes option has been set
+  to "no".
+</Quote>
+
+文档中指出以下信息：
+
+1. `authorized_keys` 文件必须属于用户本人。
+2. 如果 `authorized_keys` 位于用户的家目录 `~/.ssh` 下，则要求家目录 `~` 本身对于其他非特权用户是**不可写**的，除非将 `StrictModes` 选项设置为 "no"。
+3. `authorized_keys` 文件**不必**是 600 权限，只是在文档中推荐了这样的设置。
+
+由此可见，`authorized_keys` 自身的权限不重要，倒是对家目录的权限设置有要求……这谁能想到呢😅
+
+## ACL 权限引发的问题
+
+得知 ACL 权限引发问题后，我在搜到了一篇[博客文章](https://kiritox.me/fixing-bad-acl-permission-on-my-synology-nas/)，其中描述了类似的情况。作者也遇到了 ACL 权限问题，原因是删除了管理员账户后，群晖没有自动更新 ACL 权限表。
+
+我的情况则较为特殊：我在群晖中设置了 `Alist`，用于通过 WebDav 远程管理文件。为了实现这个目标，我不得不赋予 `alist` 用户对 `homes` 目录的读写权限。在群晖系统中，`homes` 目录是所有用户家目录的父目录，位置位于 `/var/services/homes`。
+
+文件系统的传统权限无法满足这种细粒度的权限要求：`homes` 文件夹本身属于 `admin` 用户组，而 `alist` 并不是 `admin` 组的成员。如果不使用 ACL，只能开放所有人的公共访问权限。
+
+当然，这样的做法违反了 `authorized_keys` 的要求，因为它要求家目录对于其他无特权用户是不可写的。
+
+## 解决方案
+
+针对 ACL 权限引发的问题，我有三种解决方案：
+
+1. **更新 ACL 权限表：** 如果不需要其他用户读取家目录，可以在群晖网页的 File Station 中，对 `homes` 目录进行“右键-属性”操作，重新设置权限。根据之前提到的博客文章中的方法，可以随意选择一个用户，为其添加权限后再删除，这样可以更新 ACL 权限表。
+2. **调整 `sshd_config` 中 `authorized_keys` 的位置：** 在 `sshd_config` 配置文件中，可以调整 `authorized_keys` 文件的位置。如果填写的是相对路径，则以登录用户的家目录为根目录寻找该文件。为了解决问题，我们可以使用绝对路径，将 `authorized_keys` 放到家目录之外的其他地方。但是需要注意，由于 `authorized_keys` 文件必须严格属于某个登录用户，这样的设置将导致其他需要通过 SSH 登录的用户无法使用密钥登录。
+3. **关闭 `StrictModes` 选项：** 在 `sshd_config` 中，关闭 `StrictModes` 选项。该选项决定了在接受登录之前，`sshd` 是否检查用户的文件和家目录的文件模式和所有权。关闭该选项后，`sshd` 不再对这些进行检查，这可以解决 ACL 权限引发的问题。
+
+最终，我采用了第三种解决方案，即关闭了 `StrictModes`。然而，请注意，如果开启了 `StrictModes`，千万不要将 SSH 端口对公网开放，因为这将是非常危险的做法。
