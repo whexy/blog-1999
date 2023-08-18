@@ -11,7 +11,7 @@ const WelcomeCard = () => {
             Whexy
           </h1>
           <p className="text-lg">
-            <span className="opacity-80">CS PhD student at </span>
+            <span className="opacity-80">CS student at </span>
             Northwestern
           </p>
           <div className="mt-5 flex">
