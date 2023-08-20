@@ -13,7 +13,6 @@ export default function Post({
   const Content = useMDXComponent(post.body.code);
   return (
     <>
-      {/* @ts-expect-error Server Component */}
       <Content components={components} />
     </>
   );
