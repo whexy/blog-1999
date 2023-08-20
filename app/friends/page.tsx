@@ -1,4 +1,3 @@
-import FriendCard from "@/components/UI/Homepage/FriendCard";
 import PageTitle from "@/components/UI/Website/PageTitle";
 import Comment from "@/components/UI/Blog/Comment";
 import { getUserData } from "@/lib/github";
@@ -18,6 +17,7 @@ interface FriendInfo {
   description: string;
   icon: string;
   url: string;
+  recentUpdate: boolean;
 }
 
 interface RecentUpdateItem {
@@ -54,6 +54,7 @@ const getFriendInfoList = async () => {
       description: bio || "",
       icon: avatar_url,
       url: blog || friend.url,
+      recentUpdate: false,
     });
   }
   return f_list;
@@ -67,6 +68,14 @@ const getRecentUpdate = async (f_list: FriendInfo[]) => {
     const feeds = await getFeeds(friend.feed);
     if (feeds.length > 0) {
       feeds.forEach(feed => {
+        // if the feed contains a post published within 30 days, mark it as recentUpdate.
+        const pubDate = new Date(feed.pubDate);
+        const now = new Date();
+        const diff = now.getTime() - pubDate.getTime();
+        const diffDays = Math.floor(diff / (1000 * 3600 * 24));
+        if (diffDays <= 30) {
+          f_list[i].recentUpdate = true;
+        }
         recentUpdates.push({
           title: feed.title ?? "<No Title>",
           pubDate: feed.pubDate,
@@ -89,7 +98,7 @@ const FriendTimeLine = ({
   recentUpdates: RecentUpdateItem[];
 }) => {
   return (
-    <div className="mt-10 rounded-lg bg-white p-4">
+    <div className="mt-5 rounded-lg bg-white p-4">
       <h2 className="px-2 pb-4 font-title text-2xl font-bold">
         Recent Updates
       </h2>
@@ -126,13 +135,49 @@ const FriendPage = async () => {
   return (
     <div>
       <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
-      <div className="mx-3 grid grid-cols-1 grid-rows-[masonry] gap-8 pb-5 sm:auto-rows-fr sm:grid-cols-2">
-        {f_list
-          .sort((f1, f2) => f1.name.localeCompare(f2.name))
-          .map(friend => (
-            <FriendCard key={friend.name} friend={friend} />
-          ))}
+      <div className="rounded-lg bg-white pt-4">
+        <div className="no-scrollbar grid auto-cols-auto grid-flow-col overflow-x-auto">
+          {f_list
+            .sort((f1, f2) => {
+              if (f1.recentUpdate && !f2.recentUpdate) {
+                return -1;
+              } else if (!f1.recentUpdate && f2.recentUpdate) {
+                return 1;
+              } else {
+                return f1.name.localeCompare(f2.name);
+              }
+            })
+            .map(friend => (
+              <div
+                className="mx-3 flex flex-col items-center"
+                key={friend.name}>
+                <Link
+                  href={"https://" + friend.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className={`mb-2 grid h-20 w-20 flex-shrink-0 place-items-center overflow-hidden rounded-full bg-gradient-to-tr ${
+                    friend.recentUpdate
+                      ? "from-yellow-400 to-fuchsia-600"
+                      : "from-gray-200 to-gray-400"
+                  }`}>
+                  <Image
+                    src={friend.icon}
+                    alt={friend.name}
+                    width={74}
+                    height={74}
+                    className="overflow-hidden rounded-full bg-white p-1"
+                    placeholder="blur"
+                    blurDataURL="/img/smile.svg"
+                  />
+                </Link>
+                <p className="mb-4 whitespace-nowrap text-xs text-black/80">
+                  {friend.name}
+                </p>
+              </div>
+            ))}
+        </div>
       </div>
+
       <FriendTimeLine recentUpdates={recentUpdates} />
       <div className="mt-10 rounded-t-lg bg-white p-4">
         <h2 className="px-2 pb-4 font-title text-2xl font-bold">

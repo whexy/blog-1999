@@ -11,6 +11,7 @@ const DynJump = () => {
   return (
     <div className="mx-2 grid gap-y-4 sm:grid-cols-2 sm:gap-x-4">
       <div className="relative">
+        <CheckoutArrow className="absolute left-0 top-0 hidden -translate-x-[105%] translate-y-[75%] lg:block" />
         <Link href={"/dyn"}>
           <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
             <FaceSmileIcon className="h-8 w-8" />
@@ -32,7 +33,6 @@ const DynJump = () => {
       </Link>
       <div className="relative">
         <Link href="/stars">
-          <CheckoutArrow className="absolute left-0 top-0 hidden -translate-x-[105%] translate-y-[75%] lg:block" />
           <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
             <StarIcon className="h-8 w-8" />
             <div>
