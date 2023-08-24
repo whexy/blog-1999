@@ -65,7 +65,7 @@ export const metadata = {
   },
   alternates: {
     types: {
-      "application/rss+xml": "https://www.whexy.com/feed/feed.xml",
+      "application/rss+xml": "https://www.whexy.com/feed.xml",
     },
   },
 };
