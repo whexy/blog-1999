@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import helloPic from "@/public/img/face.png";
+import helloPic from "@/public/img/face.jpeg";
 
 const WelcomeCard = () => {
   return (
