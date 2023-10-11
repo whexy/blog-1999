@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ComputedFields,
   defineDocumentType,
@@ -56,10 +57,10 @@ const contentLayerConfig = makeSource({
   documentTypes: [Blog],
   mdx: {
     rehypePlugins: [
-      [rehypeImgSize, { dir: "public" }],
+      [rehypeImgSize as any, { dir: "public" }],
       rehypeCodeTitles,
-      rehypePrism,
-      rehypeKatex,
+      rehypePrism as any,
+      rehypeKatex as any,
     ],
     remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages, pangu],
   },
