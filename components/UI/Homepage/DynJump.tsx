@@ -32,12 +32,12 @@ const DynJump = () => {
         </div>
       </Link>
       <div className="relative">
-        <Link href="/stars">
+        <Link href="/db">
           <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
             <StarIcon className="h-8 w-8" />
             <div>
-              <h2 className="font-bold">Rencent Stars</h2>
-              <p>Personal collection from internet</p>
+              <h2 className="font-bold">Dashboard</h2>
+              <p>Public personal track</p>
             </div>
           </div>
         </Link>
