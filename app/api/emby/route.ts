@@ -7,7 +7,11 @@ export async function GET(request: NextRequest) {
   if (searchParams.has("img")) {
     const Id = searchParams.get("img");
     const resp = await getImage(Id);
-    return resp;
+    if (resp.ok) {
+      return resp;
+    } else {
+      return NextResponse.error();
+    }
   } else {
     const recentPlayed = await getRecentPlayed();
     return NextResponse.json(recentPlayed);

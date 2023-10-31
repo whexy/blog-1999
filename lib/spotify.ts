@@ -23,7 +23,7 @@ const getAccessToken = async () => {
   return response.json();
 };
 
-const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=6`;
+const TOP_TRACKS_ENDPOINT = `https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=8`;
 
 export const getTopTracks = async () => {
   const { access_token } = await getAccessToken();
@@ -32,7 +32,7 @@ export const getTopTracks = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    next: { revalidate: 0 },
+    next: { revalidate: 3600 },
   });
 };
 
@@ -45,6 +45,6 @@ export const getNowPlaying = async () => {
     headers: {
       Authorization: `Bearer ${access_token}`,
     },
-    next: { revalidate: 0 },
+    next: { revalidate: 15 },
   });
 };

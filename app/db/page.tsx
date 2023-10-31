@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 import { getRecentPlayed } from "@/lib/emby";
-import { getTopTracks } from "@/lib/spotify";
+import { getTopTracks as fetchTopTracks } from "@/lib/spotify";
 
 const Page = async () => {
   return (
@@ -75,27 +75,55 @@ const Emby = async () => {
   );
 };
 
-const Spotify = async () => {
-  const resp = await getTopTracks();
+const getTopTracks = async () => {
+  const resp = await fetchTopTracks();
+
+  if (!resp.ok) {
+    console.log("Spotify API error", resp.status, resp.statusText);
+    return [];
+  }
+
   const topTracks = await resp.json();
+  if (!topTracks) {
+    console.log("Spotify API error", resp.status, resp.statusText);
+    return [];
+  }
+
+  // check if "item" is in the response json
+  if (!topTracks.items) {
+    console.log("Spotify API error", resp.status, resp.statusText);
+    return [];
+  }
+
+  // check if "items" is an array
+  if (!Array.isArray(topTracks.items)) {
+    console.log("Spotify API error", resp.status, resp.statusText);
+    return [];
+  }
+
+  return topTracks.items;
+};
+
+const Spotify = async () => {
+  const topTracks = await getTopTracks();
 
   return (
     <div className="mt-5 rounded-lg bg-white p-4">
       <h2 className="px-2 pb-4 font-title text-2xl font-bold">
-        Songs (Last 4 weeks, Top 6 tracks)
+        Songs (Last 4 weeks)
       </h2>
-      <div className="grid grid-cols-2 place-items-center gap-4 lg:grid-cols-3">
-        {topTracks.items.map(({ name, album, artists }) => (
+      <div className="grid grid-cols-2 place-items-center gap-4 sm:grid-cols-3 lg:grid-cols-4">
+        {topTracks.map(({ name, album, artists }) => (
           <div key={name}>
             <Image
               src={album.images[0].url}
               alt={name}
               height={150}
               width={150}
-              className="rounded-lg"
+              className="m-auto rounded-lg"
             />
             <p>{name}</p>
-            <p className="text-sm">
+            <p className="w-[120px] truncate whitespace-nowrap text-xs text-black/80">
               {artists.map(({ name }) => name).join(", ")}
             </p>
           </div>

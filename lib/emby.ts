@@ -18,8 +18,13 @@ export async function getRecentPlayed() {
   const url = `${EMBY_SERVER}/Users/${userId}/Items?Limit=5&Recursive=true&SortBy=DatePlayed&SortOrder=Descending`;
 
   const resp = await getEmbyAPI(url);
-  const data = await resp.json();
 
+  if (!resp.ok) {
+    console.log("Emby API Error: " + resp.status);
+    return [];
+  }
+
+  const data = await resp.json();
   const recentPlayed = [];
 
   if ("Items" in data) {
@@ -43,6 +48,8 @@ export async function getRecentPlayed() {
         });
       }
     }
+  } else {
+    console.log("Emby API Error: " + data);
   }
 
   return recentPlayed;
