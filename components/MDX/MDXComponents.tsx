@@ -10,6 +10,7 @@ import Bilibili from "@/components/MDX/Extern/Bilibili";
 import Tweet from "@/components/MDX/Extern/Tweet";
 import Spotify from "@/components/MDX/Extern/Spotify";
 import AppleMusic from "@/components/MDX/Extern/AppleMusic";
+import Food from "@/components/MDX/Extern/Food";
 import Lyric from "@/components/Widgets/Lyric";
 
 // Special Components
@@ -33,6 +34,7 @@ const MDXComponents = {
   Spotify,
   Lyric,
   AppleMusic,
+  Food,
 };
 
 export default MDXComponents;
