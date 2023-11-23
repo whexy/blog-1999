@@ -1,22 +1,51 @@
-// tiny library for rss feed parsing
-
 import Parser from "rss-parser";
 
-export const getFeeds = async (feedUrl: string) => {
-  // use Next.js extended fetch() to get XML
-  const xml = await (
-    await fetch(feedUrl, { next: { revalidate: 600 } })
-  ).text();
+const fetchXML = async feedUrl => {
+  try {
+    const response = await fetch(feedUrl, {
+      next: { revalidate: 600 },
+    });
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return await response.text();
+  } catch (error) {
+    console.error("Fetching XML failed:", error);
+    throw error; // Re-throw to handle it in the upper scope
+  }
+};
 
-  const parser = new Parser();
-  const feed = await parser.parseString(xml);
+const parseXML = async xml => {
+  try {
+    const parser = new Parser();
+    return await parser.parseString(xml);
+  } catch (error) {
+    console.error("Parsing XML failed:", error);
+    throw error; // Re-throw to handle it in the upper scope
+  }
+};
 
-  // return first 5 feed (sorted by pubDate)
-  feed.items = feed.items.sort((a, b) => {
-    return (
-      new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
-    );
-  });
+export const getFeeds = async feedUrl => {
+  if (typeof feedUrl !== "string" || !feedUrl.trim()) {
+    throw new Error("Invalid URL provided");
+  }
 
-  return feed.items.slice(0, 2);
+  try {
+    const xml = await fetchXML(feedUrl);
+    const feed = await parseXML(xml);
+
+    if (!feed.items) {
+      throw new Error("Invalid feed structure");
+    }
+
+    return feed.items.sort((a, b) => {
+      return (
+        new Date(b.pubDate).getTime() - new Date(a.pubDate).getTime()
+      );
+    });
+  } catch (error) {
+    // Handle errors from fetching and parsing
+    console.error("An error occurred in getFeeds:", feedUrl, error);
+    return []; // Return an empty array or handle accordingly
+  }
 };
