@@ -57,7 +57,6 @@ export default function RootLayout({
 export const metadata = {
   title: "Whexy",
   description: "CS PhD student at Northwestern.",
-  themeColor: "#171717",
   icons: {
     icon: "/img/favicon-32x32.png",
     apple: "/img/apple-touch-icon.png",
@@ -68,4 +67,8 @@ export const metadata = {
       "application/rss+xml": "https://www.whexy.com/feed.xml",
     },
   },
+};
+
+export const viewpoint = {
+  themeColor: "#171717",
 };
