@@ -3,7 +3,6 @@ import {
   HomeIcon,
   FaceSmileIcon,
   UsersIcon,
-  MusicalNoteIcon,
 } from "@heroicons/react/24/outline";
 /* Fancy animated menu */
 
@@ -36,12 +35,6 @@ const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
               url="/dyn"
               name="Dyn"
               Icon={FaceSmileIcon}
-              toggleMenuFn={toggleMenuFn}
-            />
-            <MobileNavItem
-              url="/music"
-              name="Music Collection"
-              Icon={MusicalNoteIcon}
               toggleMenuFn={toggleMenuFn}
             />
           </>

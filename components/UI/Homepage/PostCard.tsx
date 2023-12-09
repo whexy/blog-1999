@@ -17,13 +17,15 @@ const PostCard = ({
             {title}
           </p>
           <div
-            className={`flex-shrink-0 pl-2 font-mono tracking-wide ${
+            className={`flex-shrink-0 pl-2 font-title ${
               showSummary ? "opacity-80" : "opacity-60"
             }`}>
             {date}
           </div>
         </div>
-        {showSummary && <p className="opacity-60">{summary}</p>}
+        {showSummary && (
+          <p className="pt-1 text-sm opacity-60">{summary}</p>
+        )}
       </Link>
     </div>
   );

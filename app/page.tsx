@@ -1,6 +1,6 @@
 import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
-import PostPage from "@/components/UI/Homepage/PostPage";
 import DynJump from "@/components/UI/Homepage/DynJump";
+import PostsView from "@/components/UI/Homepage/PostPage";
 
 export default function Page() {
   return (
@@ -8,7 +8,7 @@ export default function Page() {
       <WelcomeCard />
       <div className="py-4">
         <DynJump />
-        <PostPage />
+        <PostsView feature_only />
       </div>
     </>
   );
