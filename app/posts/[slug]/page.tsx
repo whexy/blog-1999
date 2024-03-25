@@ -1,43 +1,71 @@
-import { useMDXComponent } from "next-contentlayer/hooks";
 import components from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
+import { getBlogPosts } from "@/lib/blog";
+import { MDXRemote } from "next-mdx-remote/rsc";
 
-import { allBlogs } from "contentlayer/generated";
+// rehype and remark plugins
+import rehypePrism from "rehype-prism-plus";
+import rehypeCodeTitles from "rehype-code-titles";
+import rehypeKatex from "rehype-katex";
+import remarkGfm from "remark-gfm";
+import remarkUnwrapImages from "remark-unwrap-images";
+import remarkMath from "remark-math";
+import pangu from "remark-pangu";
 
 export default function Post({
   params,
 }: {
   params: { slug: string };
 }) {
+  const allBlogs = getBlogPosts();
   const post = allBlogs.find(p => p.slug === params.slug);
-  const Content = useMDXComponent(post.body.code);
   return (
     <>
-      <Content components={components} />
+      <MDXRemote
+        components={{ ...components }}
+        source={post.content}
+        options={{
+          mdxOptions: {
+            rehypePlugins: [
+              rehypeCodeTitles,
+              rehypePrism as unknown,
+              rehypeKatex as unknown,
+            ],
+            remarkPlugins: [
+              remarkGfm,
+              remarkMath,
+              remarkUnwrapImages,
+              pangu,
+            ],
+          },
+        }}
+      />
     </>
   );
 }
 
 export async function generateStaticParams() {
+  const allBlogs = getBlogPosts();
   return allBlogs.map(p => ({ slug: p.slug }));
 }
 
 export function generateMetadata({ params }) {
+  const allBlogs = getBlogPosts();
   const post = allBlogs.find(p => p.slug === params.slug);
   return {
-    title: post.title,
-    description: post.summary,
+    title: post.metadata.title,
+    description: post.metadata.summary,
     openGraph: {
       type: "article",
-      title: post.title,
-      description: post.summary,
-      publishedTime: post.publishDate,
+      title: post.metadata.title,
+      description: post.metadata.summary,
+      publishedTime: post.metadata.publishDate,
       authors: [metadata.author.name],
     },
     twitter: {
       card: "summary",
       site: metadata.author.twitter,
-      description: post.summary,
+      description: post.metadata.summary,
     },
   };
 }

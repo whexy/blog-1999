@@ -1,7 +1,9 @@
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from "@/lib/blog";
 import RSS from "rss";
 
 export async function GET() {
+  const allBlogs = getBlogPosts();
+
   const feed = new RSS({
     title: "Whexy Blog",
     description: "a student obsessed with the computing world",
@@ -13,10 +15,10 @@ export async function GET() {
 
   allBlogs.forEach(blog => {
     feed.item({
-      title: blog.title,
-      description: blog.summary,
+      title: blog.metadata.title,
+      description: blog.metadata.summary,
       url: `https://www.whexy.com/posts/${blog.slug}`,
-      date: blog.publishDate,
+      date: blog.metadata.publishDate,
     });
   });
 

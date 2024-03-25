@@ -1,13 +1,16 @@
 import Image from "next/image";
+import sizeOf from "image-size";
 
-const ImgComponent = ({ src, alt, width, height }) => {
+const ImgComponent = ({ src, alt }) => {
+  const dimensions = sizeOf(`public/${src}`);
+
   return (
     <div className="not-prose break-inside-avoid-page">
       <Image
         src={`/${src}`}
         alt={alt}
-        width={width}
-        height={height}
+        width={dimensions.width}
+        height={dimensions.height}
         className="mx-auto rounded-lg"
       />
       {alt && (

@@ -1,6 +1,7 @@
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from "@/lib/blog";
 
 function generateSiteMap() {
+  const allBlogs = getBlogPosts();
   const XMLContent = allBlogs
     .map(
       blog => `
