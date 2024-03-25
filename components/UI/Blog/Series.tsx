@@ -1,19 +1,18 @@
 import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { parseISO } from "date-fns";
-
-import { allBlogs } from "contentlayer/generated";
+import { getBlogPosts } from "@/lib/blog";
 
 const Series = ({ slug, series }) => {
-  const seriesPosts = allBlogs
-    .filter(p => p.series === series)
+  const seriesPosts = getBlogPosts()
+    .filter(p => p.metadata.series === series)
     .sort(
       (a, b) =>
-        parseISO(a.publishDate).getTime() -
-        parseISO(b.publishDate).getTime(),
+        parseISO(a.metadata.publishDate).getTime() -
+        parseISO(b.metadata.publishDate).getTime(),
     )
     .map(p => ({
-      title: p.title,
+      title: p.metadata.title,
       slug: p.slug,
     }));
   const thisSlug = slug;

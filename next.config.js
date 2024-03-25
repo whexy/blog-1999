@@ -1,10 +1,8 @@
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { withContentlayer } = require("next-contentlayer");
-
 /**
  * @type {import('next').NextConfig}
  */
-module.exports = withContentlayer({
+module.exports = {
   reactStrictMode: true,
   images: {
     domains: [
@@ -24,4 +22,4 @@ module.exports = withContentlayer({
       },
     ],
   },
-});
+}
