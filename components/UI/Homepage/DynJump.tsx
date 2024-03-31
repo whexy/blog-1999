@@ -10,43 +10,58 @@ import Link from "next/link";
 
 const DynJump = () => {
   return (
-    <div className="grid gap-y-4 sm:grid-cols-2 sm:gap-x-4">
-      <Link href={"/posts"}>
-        <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
-          <PaperClipIcon className="h-8 w-8" />
+    <div className="overflow-x-scroll">
+      <div className="grid min-w-[64rem] auto-cols-fr grid-flow-col gap-x-4 lg:min-w-0">
+        <Link
+          href={"/posts"}
+          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          <PaperClipIcon className="my-2 h-8 w-8 rounded-lg bg-purple-100 p-1 text-purple-500" />
           <div>
-            <h2 className="font-bold">Posts</h2>
-            <p className="text-sm">Full list of articles</p>
+            <h2 className="font-title text-xl font-semibold">
+              Posts
+            </h2>
+            <p className="text-sm">Full list of articles.</p>
           </div>
-        </div>
-      </Link>
-      <Link href={"/dyn"}>
-        <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
-          <FaceSmileIcon className="h-8 w-8" />
+        </Link>
+        <Link
+          href={"/dyn"}
+          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          <FaceSmileIcon className="my-2 h-8 w-8 rounded-lg bg-green-100 p-1 text-green-500" />
           <div>
-            <h2 className="font-bold">Dyn</h2>
-            <p className="text-sm">My own space for fun</p>
+            <h2 className="font-title text-xl font-semibold">Dyn</h2>
+            <p className="text-sm">
+              Simple blogs with less serious content. Powered by
+              Notion.
+            </p>
           </div>
-        </div>
-      </Link>
-      <Link href="/db">
-        <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
-          <StarIcon className="h-8 w-8" />
+        </Link>
+        <Link
+          href={"/db"}
+          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          <StarIcon className="my-2 h-8 w-8 rounded-lg bg-yellow-100 p-1 text-yellow-500" />
           <div>
-            <h2 className="font-bold">Dashboard</h2>
-            <p className="text-sm">Public personal track</p>
+            <h2 className="font-title text-xl font-semibold">
+              Stars
+            </h2>
+            <p className="text-sm">
+              My recent music playlists, movies, and readings.
+            </p>
           </div>
-        </div>
-      </Link>
-      <Link href="/friends">
-        <div className="primary flex items-center gap-x-4 px-4 py-2 transition-all hover:bg-gray-50">
-          <UsersIcon className="h-8 w-8" />
+        </Link>
+        <Link
+          href={"/friends"}
+          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          <UsersIcon className="my-2 h-8 w-8 rounded-lg bg-blue-100 p-1 text-blue-500" />
           <div>
-            <h2 className="font-bold">Friends</h2>
-            <p className="text-sm">Some other interesting blogs</p>
+            <h2 className="font-title text-xl font-semibold">
+              Friends
+            </h2>
+            <p className="text-sm">
+              Links to some other interesting blogs of my friends.
+            </p>
           </div>
-        </div>
-      </Link>
+        </Link>
+      </div>
     </div>
   );
 };

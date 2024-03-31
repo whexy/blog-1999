@@ -46,7 +46,7 @@ export default function RootLayout({
         <Analytics />
         <Header />
         <main className="min-h-[80vh] bg-gray-100 text-black-readable">
-          <div className="mx-auto max-w-4xl px-2">{children}</div>
+          <div className="mx-auto max-w-5xl px-2">{children}</div>
         </main>
         <Footer />
       </body>
