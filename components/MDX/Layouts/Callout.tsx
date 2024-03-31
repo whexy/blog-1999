@@ -13,7 +13,7 @@ const Callout = ({ pic, icon, title, children }: CalloutProps) => {
   return (
     <div className="callout secondbg relative z-20 mx-auto my-2 break-inside-avoid-page rounded-lg px-4 py-1">
       {icon && (
-        <span className="absolute right-4 top-4 h-24 w-24 opacity-20">
+        <span className="absolute right-4 top-4 h-24 w-24 opacity-30">
           <Twemoji emoji={icon} />
         </span>
       )}

@@ -1,11 +1,11 @@
-import twemoji from "twemoji";
+import twemoji from "msemoji";
 
 const Twemoji = ({ emoji }) => (
   <span
     className="not-prose"
     dangerouslySetInnerHTML={{
       __html: twemoji.parse(emoji, {
-        folder: "svg",
+        folder: "Color",
         ext: ".svg",
       }) as unknown as string,
     }}

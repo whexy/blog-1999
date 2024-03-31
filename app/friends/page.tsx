@@ -77,7 +77,7 @@ const FriendPage = async () => {
 
   return (
     <div>
-      <PageTitle title="My Friends" emoji="🧑‍🤝‍🧑" />
+      <PageTitle title="My Friends" emoji="🤜" />
       <div className="rounded-lg bg-white pt-4">
         <div className="no-scrollbar grid auto-cols-auto grid-flow-col overflow-x-auto">
           {f_list
