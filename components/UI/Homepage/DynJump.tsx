@@ -10,7 +10,7 @@ import Link from "next/link";
 
 const DynJump = () => {
   return (
-    <div className="overflow-x-scroll">
+    <div className="no-scrollbar overflow-x-scroll">
       <div className="grid min-w-[64rem] auto-cols-fr grid-flow-col gap-x-4 lg:min-w-0">
         <Link
           href={"/posts"}
