@@ -1,0 +1,47 @@
+---
+title: "Use cgroup v2 inside docker containers"
+publishDate: 2024-05-02
+summary: "Useful docker command to enable using cgroup (v2) inside the containers"
+cat: System
+---
+
+
+<Callout title="TL;DR">
+Start Docker container with `--privileged --cgroupns=host`.
+</Callout>
+
+## Background
+
+In my recent endeavors, I've been conducting fuzzing experiments using Docker on a budget. My setup involves a few c6a.large EC2 instances from AWS, each equipped with 2 cores and 4GB of RAM. To optimize resource usage and manage costs, I execute my Docker containers with specific resource limits:
+
+```shell
+docker run -d --cpus=1.5 --memory=3.5g whexy/fuzztest:latest
+```
+
+I utilize [BandFuzz](https://fuzz.band/), a collaborative fuzzing framework that can smartly resumes fuzzing tasks if they crash. However, I encountered a significant issue when the memory usage of a container exceeded 3.5GB. The Linux Out-Of-Memory (OOM) killer would terminate the entire container, including my vital auto-resume daemon.
+
+## The Challenge
+
+My objective was clear: I needed the OOM killer to target only the fuzzers and spare the daemon. Initially, I attempted to bypass Docker's memory limits by managing cgroups directly. After some research and discussions (including insights from GPT), I tested the following command:
+
+```shell
+docker run -d --cpus=1.5 --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw whexy/fuzztest:latest
+```
+
+This approach allowed me to create a new cgroup via the filesystem interface. However, I hit a roadblock when I tried to add processes to `cgroup.procs`, encountering the frustrating error:
+
+```
+error: cgroup.procs: no such file or directory
+```
+
+Despite the file being visible, modifications were restricted.
+
+## The Solution
+
+Through further investigation, I discovered that Docker containers utilize a namespace that restricts control over the host's cgroup settings. To override this, the container must be launched with the `--cgroupns=host` flag, granting it the necessary privileges to interact directly with the host's cgroup settings.
+
+Additionally, while exploring other related Docker arguments, I noted the `--pid=host` option. This setting aligns the container’s PID namespace with that of the host, facilitating direct checks on other `cgroup.procs` files using actual PIDs. This can be particularly useful for more intricate system interactions, although it was not necessary for my current setup.
+
+## Conclusion
+
+By adjusting the Docker command to include `--privileged --cgroupns=host`, I was able to gain the control needed over cgroups within my containers, effectively isolating the OOM killer's impact to only the fuzzers, thereby safeguarding my auto-resume daemon. This setup proves crucial for maintaining the resilience and efficiency of my fuzzing experiments on a constrained budget.
