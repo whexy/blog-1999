@@ -30,8 +30,7 @@ const DynJump = () => {
           <div>
             <h2 className="font-title text-xl font-semibold">Dyn</h2>
             <p className="text-sm">
-              Simple blogs with less serious content. Powered by
-              Notion.
+              Less serious contents.
             </p>
           </div>
         </Link>
@@ -44,7 +43,7 @@ const DynJump = () => {
               Stars
             </h2>
             <p className="text-sm">
-              My recent music playlists, movies, and readings.
+              {"Articles and playlists I've recently enjoyed."}
             </p>
           </div>
         </Link>

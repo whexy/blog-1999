@@ -3,7 +3,6 @@ import { getSavedArticles } from "@/lib/freshrss";
 import Link from "next/link";
 import Image from "next/image";
 
-import { getRecentPlayed } from "@/lib/emby";
 import { getTopTracks as fetchTopTracks } from "@/lib/spotify";
 
 const Page = async () => {
@@ -12,7 +11,6 @@ const Page = async () => {
       <PageTitle title="Dashboard" emoji="📈" />
       <RSS />
       <Spotify />
-      <Emby />
     </div>
   );
 };
@@ -41,36 +39,6 @@ const RSS = async () => {
           </div>
         </Link>
       ))}
-    </div>
-  );
-};
-
-const Emby = async () => {
-  const recentPlayed = await getRecentPlayed();
-
-  return (
-    <div className="mt-5 rounded-lg bg-white p-4">
-      <h2 className="px-2 pb-4 font-title text-2xl font-bold">
-        Movies & Shows (Recent 5)
-      </h2>
-      <div className="grid place-items-center gap-4 lg:grid-cols-2">
-        {recentPlayed.map(({ Name, Id, Type }) => (
-          <div
-            key={Id}
-            className={`${Type === "Movie" && "row-span-2"}`}>
-            <Image
-              src={`/api/emby?img=${Id}`}
-              alt={Name}
-              height={300}
-              width={300}
-              className="rounded-lg object-contain"
-            />
-            <p className="w-[300px] text-center font-title text-black/80">
-              {Name}
-            </p>
-          </div>
-        ))}
-      </div>
     </div>
   );
 };
