@@ -19,7 +19,7 @@
     "date-fns": "^4.1.0",
     "fast-average-color": "^9.4.0",
     "feed": "^4.2.2",
-    "image-size": "^1.1.1",
+    "image-size": "^1.2.1",
     "lodash": "^4.17.21",
     "lqip-modern": "^2.2.1",
     "msemoji": "^1.1.2",
