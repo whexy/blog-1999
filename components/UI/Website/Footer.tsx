@@ -39,14 +39,6 @@ export default function Footer() {
           rel="noopener noreferrer">
           powered by blog-1999 system ({commit.substring(0, 8)})
         </a>
-        <p className="font-mono text-xs text-white/40">
-          All the{" "}
-          <Link href="/fonts" className="hover:text-white/80">
-            fonts
-          </Link>{" "}
-          used on this website are licensed for Personal & Commercial
-          use.
-        </p>
       </div>
     </footer>
   );

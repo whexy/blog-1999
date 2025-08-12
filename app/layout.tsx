@@ -2,15 +2,12 @@
 import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
-import "../styles/adobe/zsu0zxb.css";
 import Header from "@/components/UI/Website/Header";
 import Footer from "@/components/UI/Website/Footer";
 import React from "react";
 import Analytics from "@/components/Scripts/Analytics";
 
-import { Lato } from "next/font/google";
-import { Noto_Sans_SC } from "next/font/google";
-import { Fira_Sans } from "next/font/google";
+import { Lato, Fira_Sans, Noto_Sans_SC, JetBrains_Mono } from "next/font/google";
 
 const lato = Lato({
   weight: ["300", "400", "700", "900"],
@@ -34,14 +31,30 @@ const fira = Fira_Sans({
   variable: "--font-fira",
 });
 
+const jetbrains_mono = JetBrains_Mono({
+  weight: ["400", "700"],
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains",
+});
+
+// Centralize font config and derive className cleanly
+const fonts = [
+  { name: "lato", variable: lato.variable },
+  { name: "notoSansSC", variable: noto_sans_sc.variable },
+  { name: "fira", variable: fira.variable },
+  { name: "jetbrainsMono", variable: jetbrains_mono.variable },
+] as const;
+
+const fontVariables = fonts.map((f) => f.variable).join(" ");
+
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
   return (
-    <html
-      className={`${lato.variable} ${noto_sans_sc.variable} ${fira.variable}`}>
+    <html className={fontVariables}>
       <body>
         <Analytics />
         <Header />

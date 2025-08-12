@@ -28,12 +28,8 @@ module.exports = {
           "var(--font-notosans)",
           ...defaultTheme.fontFamily.sans,
         ],
-        noto: [
-          "var(--font-notosans)",
-          ...defaultTheme.fontFamily.sans,
-        ],
         default: [...defaultTheme.fontFamily.sans],
-        mono: ["input-mono-narrow", ...defaultTheme.fontFamily.mono],
+        mono: ["var(--font-jetbrains)", ...defaultTheme.fontFamily.mono],
       },
       colors: {
         white: {
