@@ -39,24 +39,9 @@ module.exports = {
         black: {
           DEFAULT: colors.black,
           readable: "#1D1D1F",
-          elegant: "#1F1F24",
         },
         secondary: {
           DEFAULT: "#F6F6F6",
-          dark: "#1F1F24",
-        },
-        spgray: {
-          DEFAULT: "#121212",
-          secondary: "#181818",
-          bright: "#282828",
-        },
-        jbgray: {
-          DEFAULT: "#27282c",
-          light: "rgb(138, 138, 140)",
-        },
-        nwpurple: {
-          DEFAULT: "rgb(65, 39, 118)",
-          light: "rgb(152, 78, 187)",
         },
       },
       typography: theme => ({

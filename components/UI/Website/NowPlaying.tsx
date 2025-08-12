@@ -35,8 +35,8 @@ const NowPlaying = () => {
   });
   if (data && data.isPlaying)
     return (
-      <div className="select-none pb-2 pt-2">
-        <div className="mx-auto flex items-center justify-between rounded-xl bg-white/[0.03] px-3 py-2">
+      <div className="select-none pb-2 pt-2 max-w-lg">
+        <div className="mx-auto flex items-center justify-between rounded-xl bg-black-readable px-3 py-2">
           <div className="flex items-center">
             <Image
               src={data.albumImageUrl}
@@ -52,7 +52,7 @@ const NowPlaying = () => {
                 className="flex flex-col">
                 <p className="text-sm text-white">{data.title}</p>
               </a>
-              <p className="text-xs text-jbgray-light">
+              <p className="text-xs text-gray-300">
                 by{" "}
                 <span className="text-white/70">{data.artist}</span>
               </p>
