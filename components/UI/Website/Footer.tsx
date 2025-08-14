@@ -13,13 +13,13 @@ export default function Footer() {
     <footer className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-2 py-4">
       <Depth3D hardness={5}>
         <div className="select-none pb-2 pt-2">
-          <div className="mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl border border-white/10">
+          <div className="primary mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl py-2 shadow-lg">
             <Avatar className="h-16 w-16" />
             <div className="px-2">
-              <p className="pb-2 text-white">
+              <p className="pb-2">
                 {metadata.author.name}&apos;s Blog
               </p>
-              <p className="text-xs text-gray-300">
+              <p className="text-xs text-gray-600">
                 Copyright © 2014-{year}
               </p>
             </div>

@@ -1,31 +1,18 @@
 import Link from "next/link";
-const PostCard = ({
-  title,
-  url,
-  date,
-  summary,
-  showSummary = false,
-}) => {
+const PostCard = ({ title, url, summary, showSummary = false }) => {
   return (
-    <div
-      className={`bg-white px-3 py-3 transition-all hover:bg-gray-50 ${
-        showSummary && "rounded-lg"
-      }`}>
-      <Link href={url ? url : "/"}>
-        <div className="flex items-baseline justify-between rounded-xl font-title transition-all">
-          <p className={`${showSummary && `text-lg font-bold`}`}>
+    <div className="flex w-full flex-col gap-2.5 text-black">
+      <Link href={url ? url : "/"} className="group">
+        <div className="-m-4 rounded-2xl p-4 transition-all duration-300 group-hover:scale-[1.02] group-hover:bg-gray-100/60 group-hover:shadow-lg group-hover:shadow-black/5">
+          <h3 className="font-article text-lg font-bold leading-relaxed transition-colors duration-200 group-hover:text-gray-800 sm:text-xl">
             {title}
-          </p>
-          <div
-            className={`flex-shrink-0 pl-2 font-title ${
-              showSummary ? "opacity-80" : "opacity-60"
-            }`}>
-            {date}
-          </div>
+          </h3>
+          {showSummary && summary && (
+            <p className="mt-2.5 font-article text-sm leading-relaxed opacity-60 transition-opacity duration-200 group-hover:opacity-80 sm:text-base">
+              {summary}
+            </p>
+          )}
         </div>
-        {showSummary && (
-          <p className="pt-1 text-sm opacity-60">{summary}</p>
-        )}
       </Link>
     </div>
   );

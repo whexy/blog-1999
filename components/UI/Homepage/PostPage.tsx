@@ -1,4 +1,4 @@
-import { format, parseISO, compareDesc } from "date-fns";
+import { parseISO, compareDesc } from "date-fns";
 import PostCard from "@/components/UI/Homepage/PostCard";
 import { getBlogPosts } from "@/lib/blog";
 
@@ -18,16 +18,12 @@ const PostsView = ({ feature_only = false }) => {
     );
   }
   return (
-    <div className="primary mx-auto mt-4 space-y-6 py-5 sm:mt-10 sm:px-4">
+    <div className="flex w-full flex-col gap-12 overflow-hidden rounded-3xl border border-white/20 bg-white/80 px-6 py-8 backdrop-blur-sm sm:gap-16 sm:px-8 sm:py-12">
       {filteredBlogPosts.map(post => (
         <PostCard
           key={post.metadata.title}
           title={post.metadata.title}
           url={`/posts/${post.slug}`}
-          date={format(
-            parseISO(post.metadata.publishDate),
-            "yyyy/LL/dd",
-          )}
           summary={post.metadata.summary}
           showSummary={true}
         />

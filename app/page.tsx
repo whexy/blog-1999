@@ -1,15 +1,11 @@
 import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
-import DynJump from "@/components/UI/Homepage/DynJump";
 import PostsView from "@/components/UI/Homepage/PostPage";
 
 export default function Page() {
   return (
-    <>
+    <div className="flex w-full flex-col gap-8">
       <WelcomeCard />
-      <div className="py-4">
-        <DynJump />
-        <PostsView feature_only />
-      </div>
-    </>
+      <PostsView />
+    </div>
   );
 }

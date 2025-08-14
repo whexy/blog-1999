@@ -63,8 +63,10 @@ export default function RootLayout({
       <body>
         <Analytics />
         <Header />
-        <main className="min-h-[80vh] bg-gray-100 text-black-readable">
-          <div className="mx-auto max-w-5xl px-2">{children}</div>
+        <main className="min-h-[80vh] bg-white-readable text-black-readable">
+          <div className="mx-auto box-border flex w-full max-w-[720px] flex-col px-1 py-4 sm:px-4 sm:py-10">
+            {children}
+          </div>
         </main>
         <Footer />
       </body>

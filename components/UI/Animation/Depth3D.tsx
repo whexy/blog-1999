@@ -21,9 +21,9 @@ const Depth3D = ({
   hardness?: number;
 }) => {
   const calc = (x: number, y: number, rect: DOMRect) => [
-    (y - rect.top - rect.height / 2) / hardness,
-    -(x - rect.left - rect.width / 2) / (hardness * 2),
-    0.95,
+    -(y - rect.top - rect.height / 2) / hardness,
+    (x - rect.left - rect.width / 2) / (hardness * 2),
+    0.96,
   ];
 
   const ref = React.useRef(null);

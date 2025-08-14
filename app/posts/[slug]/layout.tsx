@@ -12,6 +12,7 @@ const Series = dynamic(() => import("@/components/UI/Blog/Series"));
 
 import metadata from "@/data/metadata";
 import { getBlogPosts } from "@/lib/blog";
+import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
 
 export default async function BlogLayout({
   children,
@@ -25,8 +26,9 @@ export default async function BlogLayout({
   const post = allBlogs.find(p => p.slug === slug);
   return (
     <div>
+      <WelcomeCard showButtons={false} />
       <ScrollUp />
-      <div className="bg-gray-100">
+      <div>
         <article className="pb-5 font-article sm:pt-10">
           <Prose>
             <h1>{post.metadata.title}</h1>
