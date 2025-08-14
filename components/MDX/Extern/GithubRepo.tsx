@@ -13,7 +13,15 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
   const username = repo.split("/")[0];
   const repo_name = repo.split("/")[1];
 
-  const ghrepo: FullRepository = await getRepoData(repo);
+  const ghrepo: FullRepository | null = await getRepoData(repo);
+
+  if (!ghrepo || !ghrepo.owner) {
+    return (
+      <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 text-red-500">
+        <p>GitHub repository data could not be loaded.</p>
+      </div>
+    );
+  }
 
   return (
     <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
