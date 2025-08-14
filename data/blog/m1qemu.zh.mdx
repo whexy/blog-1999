@@ -1,0 +1,110 @@
+---
+title: "使用 QEMU 在 M1 Macbook 上运行 Linux 镜像"
+publishDate: 2021-08-16
+summary: "作为一名喜欢系统编程的学生，我一直想在 M1 Macbook 上直接开发 Linux 内核，而不需要嵌套虚拟机。这篇博客是开发环境的搭建指南。目标是在搭载 Apple Silicon 的 macOS 上的 QEMU 中运行 Linux 内核。"
+cat: M1 (Apple Silicon)
+lang: zh
+---
+
+作为一名喜欢系统编程的学生，我一直想在 M1 Macbook 上直接开发 Linux 内核，而不需要嵌套虚拟机。这篇博客是开发环境的搭建指南。目标是在搭载 Apple Silicon 的 macOS 上的 QEMU 中运行 Linux 内核。
+
+~~M1 很棒，巴拉巴拉巴拉... 但它能运行《孤岛危机》吗？呃... 我是说，QEMU？~~
+
+## 在 Apple Silicon 上构建 QEMU
+
+### 原生运行
+
+目前（**2021年8月24日**），简单地使用 `brew install qemu` 在 M1 macOS 上不会工作。这种情况在未来可能会改变。
+
+在这个教程中，我们将构建在搭载 M1 Apple Silicon 的 macOS 上运行的 QEMU 原生版本。
+
+### 补丁
+
+我的解决方案是自己构建 QEMU。今年早些时候的一些博客[^1]指出 QEMU 在 M1 上不支持虚拟化框架（**hvf**），因此应该使用 [@\_AlexGraf](https://twitter.com/_AlexGraf) 编写的虚拟化框架补丁。
+
+事情每天都在变化。现在主分支已经合并了一些 hvf 补丁，但仍然没有完全支持 Apple Silicon。这里我们使用 QEMU 6.0（这是2021年8月24日的最新稳定版本），并使用 Alexander Graf 的补丁 v8。
+
+<GithubRepo repo="qemu/qemu" />
+
+### 构建说明
+
+我从 GitHub 获取了最新的 QEMU git。要构建 qemu，首先安装依赖。
+
+```bash
+brew install ninja pkgconfig glib pixman
+```
+
+<Dialog>你可能需要先查看我的调试技巧，让你的生活更轻松。</Dialog>
+
+1. 克隆 Git 仓库并检出到稳定的 6.0.0 版本
+
+```bash
+git clone https://github.com/qemu/qemu
+cd qemu
+git checkout 3c93dfa42c394fdd55684f2fbf24cf2f39b97d47
+```
+
+2. 补丁
+
+```bash
+curl https://patchew.org/QEMU/20210519202253.76782-1-agraf@csgraf.de/mbox | git am
+```
+
+3. 执行自动配置和构建
+
+```bash
+mkdir build && cd build
+../configure --target-list=aarch64-softmmu
+make -j8
+```
+
+与今年早些时候写的博客不同，唯一的参数只是 `--target-list=aarch64-softmmu`。不要添加 `--enbale-hvf` 或 `--disable-gnutls`。
+
+4. 安装 QEMU
+
+```bash
+sudo make install
+```
+
+现在我们有了 `qemu-system-aarch64` 二进制文件，我们可以用 `qemu-system-aarch64 --version` 运行它来查看是否准备就绪。
+
+```
+❯ qemu-system-aarch64 --version
+QEMU emulator version 6.0.50 (v6.0.0-1407-g44242f6937)
+Copyright (c) 2003-2021 Fabrice Bellard and the QEMU Project developers
+```
+
+## 在 QEMU 上运行 Linux
+
+为了测试 QEMU 是否在笔记本电脑上实际工作，我下载了 Ubuntu Server 20.04 (aarch64)。以下是运行虚拟机的脚本。
+
+```bash
+#!/bin/sh
+qemu-system-aarch64 \
+    -accel hvf \
+    -m 2048 \
+    -cpu cortex-a57 -M virt,highmem=off  \
+    -drive file=/usr/local/share/qemu/edk2-aarch64-code.fd,if=pflash,format=raw,readonly=on \
+    -drive file=ovmf_vars.fd,if=pflash,format=raw \
+    -serial telnet::4444,server,nowait \
+    -drive if=none,file=disk.qcow2,format=qcow2,id=hd0 \
+    -device virtio-blk-device,drive=hd0,serial="dummyserial" \
+    -device virtio-net-device,netdev=net0 \
+    -netdev user,id=net0 \
+    -vga none -device ramfb \
+    -cdrom ubuntu-20.04.2-live-server-arm64.iso \
+    -device usb-ehci -device usb-kbd -device usb-mouse -usb \
+    -monitor stdio
+```
+
+![](images/zz1pLq.png)
+
+## 调试技巧
+
+我在安装 QEMU 时实际遇到了许多问题。以下是你可能想要做的事情。
+
+- 建议使用 gcc-11 而不是 apple clang (cc)。首先用 homebrew 安装 gcc。但是，我成功地用 apple clang 构建了 QEMU。
+- 注意自动配置。它会显示某个功能是启用还是禁用的信息。
+- 使用 `qemu-system-aarch64 -accel help` 检查你的 QEMU 是否支持 hvf。如果不支持，那么补丁时有一些问题。
+
+[^1]: [Linux Desktop on Apple Silicon/M1 in Practice](https://gist.github.com/akihikodaki/87df4149e7ca87f18dc56807ec5a1bc5); [在 M1 上用 QEMU 运行 Debian 虚拟机](https://jia.je/software/2021/01/02/aarch64-debian-in-qemu-m1/); etc.

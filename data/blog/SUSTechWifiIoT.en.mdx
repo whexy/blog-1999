@@ -1,0 +1,85 @@
+---
+title: "Connecting Smart Devices to SUSTech Campus Network"
+publishDate: 2021-12-28
+summary: "During my four years at SUSTech, every semester I encountered the challenge of connecting IoT devices to the campus network. This blog post mainly introduces how to make smart devices bypass authentication and directly access the campus network, and the principles behind these operations."
+series: "Tinkering with SUSTech Campus Network"
+cat: Internet
+lang: en
+---
+
+During my four years at SUSTech, every semester I encountered the challenge of connecting IoT devices to the campus network. This blog post mainly introduces how to make smart devices bypass authentication and directly access the campus network, and the principles behind these operations.
+
+## SUSTech Campus Network Authentication Principles
+
+After connecting to WiFi, SUSTech campus network's DHCP server assigns an IP address based on the device's MAC address. This MAC-IP address mapping relationship remains basically unchanged. Therefore, the IP address obtained by devices when logging into the campus network remains basically the same each time.
+
+<Dialog>
+  Students studying computer networks, remember to memorize the full
+  name of DHCP before final exams. You're welcome~
+</Dialog>
+
+When DHCP assigns IP addresses to networked devices, it also informs devices of the school's dedicated DNS addresses `172.18.1.92`, `172.18.1.93`. The school's dedicated DNS not only provides public domain name resolution services but also provides short address resolution for the campus intranet (for example, directly entering `ehall/` in the browser can access the online service hall).
+
+After obtaining an IP address, devices can access all campus intranet services (including but not limited to: [PMS Lianchuang Printing](http://pms.sustech.edu.cn), [SUSTech Intranet File Quick Transfer](https://send.cra.moe), [CRA Cloud Storage](https://dl.cra.moe), etc.). At this time, external network requests from devices will be rejected and redirected to the "campus network authentication" page.
+
+For devices wanting to access the external network, they need to authenticate through external network requests, namely "campus network authentication". Campus network authentication has two methods:
+
+1. CAS account login, with authentication address `172.16.16.20:803`. The authentication process requires entering student/employee ID and password.
+2. Guest login, with authentication address `172.16.16.20/srun_portal_sms`. The authentication process requires entering phone number and SMS verification code.
+
+After successful authentication, the device IP is added to SUSTech's network exit whitelist and can normally access the internet. IP addresses remain in the whitelist for a long time, and even if devices occasionally disconnect, they don't need to re-authenticate.
+
+### General Network Connection Process
+
+Taking a brand new iPhone connecting to campus network as an example:
+
+1. iPhone selects SUSTech-wifi-5G in wireless LAN settings. During connection, SUSTech's DHCP server records the iPhone's MAC address and assigns a new IP address and DNS server addresses.
+2. After WiFi connection succeeds, iOS automatically accesses `http://captive.apple.com/hotspot-detect.html` to check if the WiFi requires "login". Since this is an external network request, it will be redirected to the "campus network authentication" page. iOS pops up a login prompt.
+3. After entering CAS account password and passing authentication, the device IP address enters the exit whitelist. The iPhone can then access the internet.
+
+Disconnecting this iPhone and reconnecting to campus network after one minute:
+
+1. iPhone reconnects to SUSTech-wifi-5G. During connection, SUSTech's DHCP server finds the historical MAC-IP correspondence and assigns the same IP address and DNS server addresses as the last connection.
+2. After WiFi connection succeeds, iOS automatically accesses `http://captive.apple.com/hotspot-detect.html` to check if WiFi requires "login". At this time the whitelist is still effective, so it won't redirect to the authentication page. Therefore iOS can normally open the detection website without popping up a login prompt. The iPhone can access the internet.
+
+## How Your Smart Devices Connect to the Internet
+
+As mentioned earlier, the essence of "campus network authentication" is adding the device's IP address to SUSTech's network exit whitelist. Smart devices, because they lack screens and keyboards, cannot normally enter account passwords for authentication. We need some tricks to get smart devices' IPs into the whitelist in advance.
+
+### MAC Address Spoofing
+
+Let's review the two conditions mentioned earlier: first, SUSTech campus network assigns unchanging IP addresses based on historical MAC-IP correspondence; second, IP addresses can remain in the whitelist for a long time after entering it.
+
+Below explains the specific process of MAC address spoofing. For convenience, let's assume there are two devices: one is a computer with MAC address `mac-pc` and IP address `IP-pc`. The other is a smart device that needs internet access, with MAC address `mac-iot` and IP address `IP-iot`.
+
+1. Turn off the smart device. Disconnect the computer from WiFi.
+2. Modify the computer's MAC address to the smart device's MAC address `mac-iot`, then connect to WiFi. Trick the DHCP server into assigning the computer the IP `IP-iot` that should belong to the smart device.
+3. Use this "fake" IP address `IP-iot` on the computer for campus network authentication, thus adding `IP-iot` to the campus network exit whitelist.
+4. Disconnect the computer from WiFi. Restore the computer's original MAC address `mac-pc` and reconnect to WiFi. The computer should now get its original IP address `IP-pc`.
+5. After the smart device powers on, it automatically connects to campus WiFi and obtains IP address `IP-iot`. This IP address already entered the whitelist in step 3, so the device can directly access the internet.
+
+I successfully used this method to connect HomePod and Xiaomi Mijia smart desk lamp.
+
+<div className="flex flex-col space-y-2">
+<Callout icon="💡" title="How to Get Smart Device MAC Addresses?">
+
+1. Can be found on packaging. According to commercial department requirements, all network-capable devices must label MAC addresses on product packaging. For example, HomePod's packaging box has a sticker with the device's MAC address.
+
+2. Can be found by connecting to hotspots/routers. For example, after connecting devices to Windows-shared hotspots, you can find device details including MAC addresses in Windows hotspot settings.
+
+</Callout>
+<Callout icon="💡" title="How to Modify Computer MAC Addresses?">
+    Taking macOS as an example, simply execute `sudo ifconfig en0 ether <NEW MAC ADDRESS>` in terminal while disconnected from network.
+</Callout>
+</div>
+
+### Seamless Authentication
+
+<Dialog>
+  Attempted multiple times without success. This solution is for
+  reference only.
+</Dialog>
+
+Many students might not know that the Network Information Service Center provides a network management platform. You can manage all devices connected to SUSTech-wifi / SUSTech-wifi-5G under your account through this platform. In campus network environment, log into [SUSTech Personal Network Management Platform](http://172.16.16.20:8900/home) and use CAS login.
+
+In this platform's navigation "Self-Service Menu", select "User" - "Seamless Authentication" to enter seamless authentication configuration. Add the smart device's MAC address on the configuration page. After power cycling the device, it can access external networks without authentication after connecting.

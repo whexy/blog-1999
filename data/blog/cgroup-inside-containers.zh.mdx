@@ -1,0 +1,47 @@
+---
+title: "在 Docker 容器内使用 cgroup v2"
+publishDate: 2024-05-02
+summary: "有用的 Docker 命令，用于在容器内启用 cgroup (v2) 的使用"
+cat: System
+lang: zh
+---
+
+<Callout title="TL;DR">
+  使用 `--privileged --cgroupns=host` 启动 Docker 容器。
+</Callout>
+
+## 背景
+
+在我最近的工作中，我一直在使用 Docker 在预算有限的情况下进行模糊测试实验。我的设置涉及几个来自 AWS 的 c6a.large EC2 实例，每个实例配备 2 个核心和 4GB RAM。为了优化资源使用并管理成本，我使用特定的资源限制执行 Docker 容器：
+
+```shell
+docker run -d --cpus=1.5 --memory=3.5g whexy/fuzztest:latest
+```
+
+我使用 [BandFuzz](https://fuzz.band/)，这是一个协作模糊测试框架，如果任务崩溃，它可以智能地恢复模糊测试任务。然而，当容器的内存使用超过 3.5GB 时，我遇到了一个重大问题。Linux 内存不足 (OOM) 杀手会终止整个容器，包括我重要的自动恢复守护进程。
+
+## 挑战
+
+我的目标很明确：我需要 OOM 杀手只针对模糊测试器，而不影响守护进程。最初，我试图通过直接管理 cgroups 来绕过 Docker 的内存限制。经过一些研究和讨论（包括 GPT 的见解），我测试了以下命令：
+
+```shell
+docker run -d --cpus=1.5 --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:rw whexy/fuzztest:latest
+```
+
+这种方法允许我通过文件系统接口创建新的 cgroup。然而，当我尝试将进程添加到 `cgroup.procs` 时，我遇到了令人沮丧的错误：
+
+```
+error: cgroup.procs: no such file or directory
+```
+
+尽管文件是可见的，但修改受到限制。
+
+## 解决方案
+
+通过进一步调查，我发现 Docker 容器使用了一个限制对主机 cgroup 设置控制的命名空间。要覆盖这一点，容器必须使用 `--cgroupns=host` 标志启动，赋予它与主机 cgroup 设置直接交互的必要权限。
+
+此外，在探索其他相关的 Docker 参数时，我注意到了 `--pid=host` 选项。这个设置将容器的 PID 命名空间与主机的命名空间对齐，使用实际 PID 便于直接检查其他 `cgroup.procs` 文件。这对于更复杂的系统交互特别有用，尽管对我当前的设置来说不是必需的。
+
+## 结论
+
+通过调整 Docker 命令包含 `--privileged --cgroupns=host`，我能够获得对容器内 cgroups 的所需控制，有效地将 OOM 杀手的影响隔离到仅模糊测试器，从而保护我的自动恢复守护进程。这种设置对于在有限预算下维护我的模糊测试实验的弹性和效率至关重要。

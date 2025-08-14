@@ -38,11 +38,14 @@ export function middleware(request: NextRequest) {
   // - Static files (_next/static)
   // - Images and public files
   // - Favicon
+  // - Specific routes that don't use localization
   if (
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/images/") ||
     pathname.startsWith("/img/") ||
+    pathname.startsWith("/dyn") ||
+    pathname.startsWith("/friends") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();

@@ -1,0 +1,84 @@
+---
+title: "Solving SSH Key Login Issues on Synology NAS"
+publishDate: 2023-08-04
+summary: "Resolving the issue where SSH key login fails on Synology NAS, consistently prompting for password instead."
+cat: Internet
+series: "Synology NAS Troubleshooting"
+lang: en
+---
+
+Recently, I encountered a very strange issue. Typically, we can use the `ssh-copy-id` command to copy public keys to a server and achieve passwordless login. However, on my Synology NAS, despite following the standard procedures, I was unable to achieve key-based login and was constantly prompted to enter a password.
+
+On the internet, some people recommended solutions including:
+
+1. Ensure the `authorized_keys` file permissions are set to 600.
+2. Confirm that key login options are enabled in the `sshd_config` file.
+3. Restart the SSH service to apply the latest `sshd_config` settings.
+
+Although I was very familiar with all these solutions, when troubleshooting the issue, I carefully checked the configuration multiple times but still could not log in using keys. This left me quite confused.
+
+## Debugging sshd
+
+Faced with the inability to log in using keys, I decided to directly examine the `sshd` logs for debugging. Here's how to debug `sshd`:
+
+1. Start an `sshd` process on another port with debug logging enabled using the command: `/bin/sshd -d -p 2222`.
+2. Try connecting to the debug `sshd` with: `ssh <name>@<addr> -p 2222`.
+
+Through these steps, I discovered that `sshd` indeed accepted the key, but encountered ACL (Access Control List) permission errors when reading the `.ssh/authorized_keys` file, thus rejecting the authentication.
+
+<Callout title="What are ACL permissions" icon="🔐">
+  ACL permissions are a permission system with higher priority than
+  file system permissions. They allow fine-grained control over file
+  and directory access, going beyond traditional user and group-based
+  permission settings. Using ACL permissions, we can more flexibly
+  manage access control, providing specific permissions for specific
+  users or groups, thus ensuring system security and privacy
+  protection.
+</Callout>
+
+## Permission Requirements for authorized_keys
+
+In most online posts, people mention setting `authorized_keys` to 600 permissions, but few mention ACL permission requirements. In fact, on my own [proxmox virtual machine](/posts/proxmox), I've never had issues even when setting `authorized_keys` to 777 permissions.
+
+I consulted the `authorized_keys` [documentation](http://man.he.net/man5/authorized_keys) to understand the specific permission requirements for this file.
+
+<Quote
+  cite="SSHD(8)"
+  subcite="BSD System Manager's Manual"
+  url="http://man.he.net/man5/authorized_keys">
+  The content of the file is not highly sensitive, but the recommended
+  permissions are read/write for the user, and not accessible by
+  others. If this file, the `~/.ssh` directory, or the user's home
+  directory are writable by other users, then the file could be
+  modified or replaced by unauthorized users. In this case, sshd will
+  not al- low it to be used unless the StrictModes option has been set
+  to "no".
+</Quote>
+
+The documentation indicates the following:
+
+1. The `authorized_keys` file must belong to the user themselves.
+2. If `authorized_keys` is located in the user's home directory `~/.ssh`, then the home directory `~` itself must be **not writable** by other non-privileged users, unless the `StrictModes` option is set to "no".
+3. The `authorized_keys` file does **not necessarily** need 600 permissions; this is just recommended in the documentation.
+
+This shows that the permissions of `authorized_keys` itself are not important, but there are requirements for home directory permissions... who would have thought? 😅
+
+## Issues Caused by ACL Permissions
+
+After learning that ACL permissions were causing the problem, I found a [blog post](https://kiritox.me/fixing-bad-acl-permission-on-my-synology-nas/) describing a similar situation. The author also encountered ACL permission issues because Synology didn't automatically update the ACL permission table after deleting an administrator account.
+
+My situation was more specific: I had set up `Alist` on Synology to remotely manage files through WebDAV. To achieve this goal, I had to grant the `alist` user read and write permissions to the `homes` directory. In the Synology system, the `homes` directory is the parent directory of all user home directories, located at `/var/services/homes`.
+
+Traditional file system permissions cannot meet such fine-grained permission requirements: the `homes` folder itself belongs to the `admin` user group, and `alist` is not a member of the `admin` group. Without using ACL, the only option would be to open public access permissions for everyone.
+
+Of course, this approach violates the `authorized_keys` requirement that the home directory should not be writable by other unprivileged users.
+
+## Solutions
+
+For the issues caused by ACL permissions, I have three solutions:
+
+1. **Update ACL permission table:** If other users don't need to read the home directory, you can right-click on the `homes` directory in Synology's File Station web interface, select "Properties", and reset permissions. According to the method mentioned in the blog post, you can randomly select a user, add permissions for them, then delete them to update the ACL permission table.
+2. **Adjust the `authorized_keys` location in `sshd_config`:** In the `sshd_config` configuration file, you can adjust the location of the `authorized_keys` file. If a relative path is specified, the file is searched relative to the login user's home directory. To solve the problem, we can use an absolute path to place `authorized_keys` outside the home directory. However, note that since the `authorized_keys` file must strictly belong to a specific login user, this setting will prevent other users who need SSH login from using key-based login.
+3. **Disable the `StrictModes` option:** In `sshd_config`, disable the `StrictModes` option. This option determines whether `sshd` checks the file modes and ownership of the user's files and home directory before accepting login. After disabling this option, `sshd` no longer performs these checks, which can resolve ACL permission issues.
+
+Ultimately, I adopted the third solution, disabling `StrictModes`. However, please note that if you disable `StrictModes`, never expose the SSH port to the public internet, as this would be very dangerous.

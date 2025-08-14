@@ -7,7 +7,6 @@ import {
 } from "@/lib/blog";
 import { compile, run } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
-import Link from "next/link";
 
 // rehype and remark plugins
 import rehypePrism from "rehype-prism-plus";
@@ -24,39 +23,9 @@ interface PageProps {
   params: Promise<{ lang: Language; slug: string }>;
 }
 
-function LanguageSwitcher({
-  slug,
-  currentLang,
-  availableLanguages,
-}: {
-  slug: string;
-  currentLang: Language;
-  availableLanguages: Language[];
-}) {
-  if (availableLanguages.length <= 1) return null;
-
-  return (
-    <div className="mb-6 flex gap-2">
-      {availableLanguages.map(lang => (
-        <Link
-          key={lang}
-          href={`/${lang}/posts/${slug}`}
-          className={`rounded px-3 py-1 text-sm transition-colors ${
-            currentLang === lang
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}>
-          {lang === "en" ? "English" : "中文"}
-        </Link>
-      ))}
-    </div>
-  );
-}
-
 export default async function LanguagePost({ params }: PageProps) {
   const { lang, slug } = await params;
   const post = getBlogPost(slug, lang);
-  const availableLanguages = getAvailableLanguages(slug);
 
   if (!post) {
     return <div>Post not found</div>;
@@ -75,16 +44,7 @@ export default async function LanguagePost({ params }: PageProps) {
 
   const { default: MDXContent } = await run(compiled, runtime);
 
-  return (
-    <>
-      <LanguageSwitcher
-        slug={slug}
-        currentLang={lang}
-        availableLanguages={availableLanguages}
-      />
-      <MDXContent components={components} />
-    </>
-  );
+  return <MDXContent components={components} />;
 }
 
 export async function generateStaticParams() {

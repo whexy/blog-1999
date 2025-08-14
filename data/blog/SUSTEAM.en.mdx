@@ -1,0 +1,95 @@
+---
+title: "SUSTeam: Ultimate Gaming Platform"
+publishDate: 2021-01-28
+summary: "Gaming platform made during junior year. Main languages were Kotlin and TypeScript. Looking back, it turned out pretty well, and we got full marks anyway :)"
+cat: Projects
+lang: en
+---
+
+Gaming platform made during junior year. Main languages were Kotlin and TypeScript. Looking back, it turned out pretty well, and we got full marks anyway :)
+
+Backend repository (Language: Kotlin, Framework: Vert.X. Provides Java SDK and a sample mini-game.):
+
+<GithubRepo repo="SUSTech-OOAD-2020FALL-SUSTeam/SUSTeamBackend" />
+
+Frontend repository (Frontend language: TypeScript, Frameworks: Vue and Electron.):
+
+<GithubRepo repo="SUSTech-OOAD-2020FALL-SUSTeam/SUSTeamFrontEnd" />
+
+For users, SUSTeam provides a web frontend mainly for browsing and purchasing, and a client that adds local game library, download, and update functions on top of the web interface. For developers, SUSTeam provides a management platform and SDK for integrating platform services.
+
+![](images/2hVdKm5GuszHvDB.png)
+
+## What's the Experience of Developing with Kotlin
+
+At the tech selection meeting, the decision to use Kotlin for the backend was made by the strongest girl in our group. Modern languages like Kotlin that are young, flexible, and thriving had only been encountered with Swift before. The remaining three people in the group had never seen it, so we had to bite the bullet and learn.
+
+Modern languages have their benefits. For example, singletons or companion objects - Kotlin handles them with one keyword. And function extensions that support static dispatch save a lot of inheritance or decorators. Flexible closures (contexts) also make code more readable. These features are absent in old-school languages.
+
+The main reason for deciding to develop with Kotlin was our appreciation for the Vert.X framework. Now everyone knows coroutines perform excellently, and Vert.X's Event Loop combines seamlessly with Kotlin's `suspend`. ~~Those writing transactions don't need to make things so complicated for themselves.~~ Later, Vert.X lived up to expectations. In the last two weeks when requirements were changed temporarily to add real-time frontend-backend communication, our chosen STOMP protocol also had excellent implementation in Vert.X. Even testing was directly mocked, really saving a lot of time (letting us work on the remaining 5 other projects).
+
+## What's the Experience of Using Vue Again
+
+The frontend for the sophomore database project chose Vue, and we were among the few groups that used a frontend framework in the course. During the defense, we saw quite a few eye-searing groups that went with raw HTML and JS; witnessed one jaw-dropping Unity frontend group (for a train ticket booking system); and many more that simply didn't do frontend, just using CLI to get by. But this time frontend was mandatory, and aesthetics were included in grading criteria, so Vue became the choice for most groups.
+
+Actually, I personally wanted to use React. Because I don't like writing many `v-if` and `v-bind`, putting control flow outside templates, making mouse wheel sounds everywhere (writing a bit here, writing a bit there, auto-jump often doesn't work). Component splitting plugins aren't very smart either, so writing props becomes a bit more tedious. However, most team members hadn't touched frontend frameworks, so I had to compromise and choose the more beginner-friendly Vue.
+
+But we hit a snag here with TypeScript. This choice made everyone quite awkward: we really liked writing components in class form using Annotations, and really liked defining interfaces to make API calls more standardized - strict languages are appealing. However, many open-source libraries had poor TypeScript support, and a lot of time was spent fixing compatibility issues. The TypeScript community has a long way to go.
+
+![](images/T8czuWo36DqKSHh.png)
+
+## Core Project Work
+
+### Topic Selection and Workload
+
+OOAD provided many options, including database OJ, course assignment management platform, software engineering tool deployment platform, gaming platform, tower defense game, and card game - seven options total. We felt we couldn't handle the performance issues of database OJ well, while the software engineering tool deployment platform and course assignment management platform were too simple. Finally, we chose to make a gaming platform.
+
+The gaming platform required not only display and trading but also a series of requirements for DLC, discounts, announcements, reviews, incremental updates, friend systems, and achievements. On top of the platform foundation, we also needed to provide SDK for developers to easily integrate services. After careful analysis, the workload for frontend, backend, and SDK was still considerable.
+
+![](images/IJDLXBZViu3U1T7.png)
+
+### Interesting Work
+
+Actually, we solved different problems every day. This section can only ramble about memorable impressions.
+
+#### Unit Testing
+
+For main functions, we had unit tests. This might be uncommon in student-developed projects. Unit tests mocked the DAO layer, allowing testing without affecting the database.
+
+Regarding the Kotlin unit testing library, it was another pile of pitfalls. Five different problems occurred in five people's local environments. Anyway, after changing gradle versions and JDK versions (and it couldn't be the latest version), it finally ran normally.
+
+#### File Upload and Download
+
+Game display images or videos need upload/download, and game files also need upload/download, with distinctions between publicly visible and privately visible content. In the second month of development, I was responsible for solving this problem. It's essentially cloud storage with permission management.
+
+During upload, Vert.X's StaticHandler handles it, automatically storing files with GUID names without extensions in a temporary folder. The chain of responsibility passes to our own Handler, which moves files to storage directories (can be high-capacity disks) and records uploader, file type, public visibility, etc. in logs.
+
+Download authentication for non-public files wasn't actually my responsibility, because authentication itself is very complex (e.g., whether users purchased games, whether they bought DLC, whether they have viewing permissions, etc.). Here we expose an interface for other business calls.
+
+#### Friend Online Status
+
+Using relational databases to store friend online status? We considered it inadvisable. Whether users are online and what games they're playing change rapidly and shouldn't be stored in relational databases. The final project used a global HashMap to store this information. Redis could actually be used. If we could continue optimizing the project, this would be an area for improvement.
+
+Determining if users are online can't rely solely on active logout; clients might crash. Heartbeat packets might be a good design. Our approach was that whenever users trigger any real-time backend transaction, it updates their last online time, and exceeding a threshold indicates offline status. The first baton in the responsibility chain handles this.
+
+![](images/nWEo1OCU9Vhy5Mp.png)
+
+#### Client Notifications
+
+For the first three months of development, everyone thought we just needed to make a pure HTTP server. But client notifications, friend chat, and invitation online were features we didn't want to abandon. This required server support for real-time communication. We temporarily chose the STOMP protocol. Unfortunately, after everything was written on the backend, the frontend didn't have time to adapt in the last week, so this feature was regrettably abandoned.
+
+## What's the Experience of Having a Good Team
+
+All five students participating in the project were excellent! We collaborated very efficiently, and there were no situations of blaming each other.
+
+The tool for managing project progress was Notion's progress board, which can very conveniently set completion levels, assign tasks to everyone, and track progress. The team communication tool was Slack, which, as a development-specific communication tool, can deeply integrate with git, sending every push to group chat (so we can catch who force-pushed in time).
+
+We also had habits of mutual code review, though not mandatory. In Github, you can add comments to code, which is especially useful for early team coordination.
+
+![](images/cRWe8A1DNvaqQm6.png)
+
+## Acknowledgement
+
+The frontend really hit my aesthetic points. The main page layout borrowed from EPIC, but I think it looks better than theirs.
+
+After completing this project, I made up my mind to learn modern Go and Rust. Knowledge stack needs constant updating~

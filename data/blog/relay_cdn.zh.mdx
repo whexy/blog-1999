@@ -1,0 +1,191 @@
+---
+title: 使用 CDN 自建中继服务
+publishDate: 2022-06-08
+summary: "构建一个受益于 CDN 快速传输的中继服务，并具有其他优势。"
+cat: Internet
+series: CDN 实现网络流量中继
+lang: zh
+---
+
+如今，许多中继服务都存在，但它们无法确保你的数据安全。大约10%的网站仍在使用HTTP，发往这些网站的流量对中继提供商来说是透明的。我不信任任何公共中继服务。自建中继服务是一个很好的替代方案。
+
+## 架构
+
+**单服务器。** 你可以选择任何你喜欢的中继协议，并将其部署在可信的服务器上。然而，依赖单一源是危险的。例如，你的ISP可能会阻断流向未授权服务器的大量流量。此外，当你到不同地区旅行时，体验可能会有所不同。
+
+**多服务器。** 将你的中继服务部署到不同位置的多个服务器可能是一个解决方案。作为参考，许多公共中继服务在其他地区都有很多服务器。然而，这样的解决方案成本更高。
+
+**带CDN的单服务器。** 幸运的是，CDN可以提供大量我们可以利用的服务器。我找到了一种在CDN帮助下构建自建中继服务的方法。最终，我们将拥有一个受益于CDN快速传输的中继服务，并具有其他优势：
+
+- 无阻断
+- 成本节约
+- 可靠性增强
+
+## CDN如何为我们工作
+
+<Callout title="内容分发网络（CDN）" icon="🌐">
+内容分发网络（CDN）是指地理分布的服务器组，它们协同工作以提供互联网内容的快速传输。
+
+CDN在邻近服务器（节点）上缓存网站资产，以在不同地区提供更好的网络体验。如果CDN节点没有缓存响应资产或缓存已过期，它将返回源站点获取。
+
+</Callout>
+
+**作为虫洞。** CDN在我们的中继服务中扮演虫洞的角色，这意味着它作为设备和我们服务器之间的快捷方式。由于某些原因，流向我们服务器的流量可能会拥塞甚至被阻断。我们希望CDN作为具有更好质量和安全性的端到端通道来转发流量。
+
+## 适合的协议
+
+CDN不会转发它接收到的每个数据包。许多云服务提供商只允许他们的CDN处理HTTP和HTTPS协议。此外，他们可能还支持WS（[WebSocket](https://en.wikipedia.org/wiki/WebSocket)）和WSS（基于SSL/TLS的WebSocket），因为许多网站使用它们作为标准通信协议。
+
+我们应该明智地选择中继协议以实现最大的CDN兼容性和安全性。协议必须依赖HTTP(S)/WS(S)。[Trojan](https://trojan-gfw.github.io/trojan/)和[Vmess](https://www.v2ray.com/developer/protocols/vmess.html)是两个流行的基于WS的协议。在这篇文章中，我将使用它们来演示我们的服务如何工作。
+
+<Callout title="无缓存策略" icon="⚠️">
+
+我们不希望CDN缓存任何内容，因为我们中继的是私人流量。换句话说，我们希望每个资产都**立即过期**，这不是CDN应该工作的方式。实际上，我们**故意滥用**CDN来帮助我们的中继服务。
+
+由于WebSocket是有状态协议，Trojan和Vmess不会受到缓存策略的影响。但如果你选择基于无状态HTTP/HTTPS的协议，记住要正确配置缓存策略。
+
+</Callout>
+
+因此，设备上的中继应用程序将流量包装成Trojan/Vmess数据包，然后用WebSocket打包并发送到CDN。CDN将使用回源策略将数据包转发到我们的服务器。
+
+<Diagram
+  src="images/relay_cdn/payload.svg"
+  alt="发送到CDN的数据包"
+  width="400px"
+/>
+
+## 网络质量
+
+许多中继服务受到拥塞线路的困扰。一些"专业版"服务使用更好的公共线路来解决拥塞问题。你可能听说过CN2 GIA、IPLC或类似的公共线路。但还有更多线路，如AWS（亚马逊）和Azure（微软），这些线路不对公众开放。我们使用CDN的中继服务可以利用这些私有线路来获得更好的网络质量。
+
+流量可以使用专用CDN通道，而不是两个地区之间的公共线路。此外，如果我们选择同一云服务提供的服务器和CDN，我们可以免费获得专用回源线路。
+
+<Diagram src="images/relay_cdn/CDN.svg" />
+
+**反阻断。** ISP不太可能阻断流向邻近CDN节点的流量，因为它们是对所有用户的标准服务。模式识别阻断算法不会起作用，因为它们看起来就像带有TLS加密的常规WebSocket流量。ISP不会监督邻近CDN节点之后的流量。
+
+## 安全性
+
+我们不信任任何公共中继服务，因为对我们来说它们是黑盒子。在我们的自建中继服务中，安全性是首要目标。
+
+<Diagram src="images/relay_cdn/security.svg" />
+
+**TLS。** 为了确保ISP无法监控流量，我们使用TLS加密来保证WebSocket数据包安全地传输到邻近CDN节点。CDN将解密TLS流量并获取WebSocket数据包。
+
+**AEAD。** CDN可能能够扫描我们数据包中的信息。这就是为什么我们用AEAD加密流量。AEAD是VMess/Trojan协议支持的用于加密原始TCP/UDP数据包的对称加密算法。
+
+<Dialog>为什么从设备发送数据包到CDN时不使用AEAD代替TLS？</Dialog>
+
+<DialogBack>
+  如果这样做，我们将有一个未加密的WebSocket数据包，包含VMess/Trojan载荷，这是可识别的。所以对整个WebSocket数据包进行混淆是必要的。
+</DialogBack>
+
+如果我们信任云服务提供商，AEAD是不必要的。例如，我使用[AWS](https://aws.amazon.com/)，它提供[CloudFront](https://aws.amazon.com/cloudfront/)服务和EC2实例。我相信亚马逊不会扫描我的流量，CloudFront和EC2之间的私有链接不容易受到攻击。所以在链接上禁用了AEAD。此外，我也不需要在私有链接上使用TLS。
+
+## 动手实践
+
+如果我们理解其原理，使用CDN构建自建中继服务很简单。在开始之前，让我们做最后检查。
+
+<Callout title="准备清单" icon="📝">
+
+要构建我们的自建中继服务，我们需要以下内容：
+
+- 一个远程服务器（如EC2或免费的Oracle Cloud）
+- 一个CDN服务（如CloudFront或Cloudflare）
+- 一个域名来获取SSL证书（如whexy.com）
+- 支持基于WSS的Vmess/Trojan的客户端应用（如[Clash](https://github.com/Dreamacro/clash)）
+- 支持基于WS的Vmess/Trojan的服务器应用（如[trojan-go](https://hub.docker.com/r/p4gefau1t/trojan-go)或[xray](https://hub.docker.com/r/teddysun/xray)）
+
+</Callout>
+
+在以下步骤中，我将使用：
+
+- AWS EC2作为远程服务器
+- AWS CloudFront作为CDN服务
+- Vmess作为中继协议
+- Xray作为服务器应用
+- Clash作为客户端应用
+
+### 服务器配置
+
+首先，我们需要配置我们的服务器来开启基于Vmess-over-WebSocket的中继服务。我偏好使用[xray](https://hub.docker.com/r/teddysun/xray)提供的docker镜像。
+
+```shell
+mkdir ~/xray
+vim ~/xray/config.json
+docker run -d -v ~/xray:/etc/xray --network=host --restart=always teddysun/xray
+```
+
+配置JSON文件应该像这样：
+
+```json:config.json
+{
+  "inbounds": [
+    {
+      "port": 10090,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [
+          {
+            "id": "49dd2152-17af-436b-8539-fe6adff56529",
+            "alterId": 0
+          }
+        ]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": {
+          "path": "/api/v1"
+        }
+      }
+    }
+  ],
+  "outbounds": [
+    {
+      "protocol": "freedom",
+      "settings": {}
+    }
+  ]
+}
+```
+
+你应该使用[UUID生成器](https://www.uuidgenerator.net/version4)来生成你的唯一ID，并将`49dd2152-17af-436b-8539-fe6adff56529`替换掉。你也可以将WS路径`/api/v1`和端口号`10090`改为任何你喜欢的。
+
+### CDN配置
+
+**获取SSL证书。** 由于设备和CDN之间的通信使用TLS，我们需要获取SSL证书。我使用AWS Certificate Manager来获取证书。这很简单，你可以获得一组域名的证书（例如，`*.cdn.whexy.com`）而不是一个特定域名。
+
+**CDN设置。** 之后，我们可以配置我们的CDN。使用适当的域名，如`gobear.cdn.whexy.com`作为备用CNAME，并使用我们之前获得的相应证书。将HTTP端口更改为10090，作为我们服务的端口号。你将在后面获得一个CDN特定的域名（例如，`tkn.cloudfront.net`）。
+
+**DNS设置。** 转到你域名的DNS设置。添加一个指向CDN特定域名的`gobear.cdn.whexy.com`的CNAME记录。
+
+### 设备配置
+
+我使用Clash作为客户端。使用以下配置作为连接到我们服务器的例子：
+
+```yaml
+- {
+    name: CDN-relay,
+    server: gobear.cdn.whexy.com,
+    port: 443,
+    type: vmess,
+    uuid: 49dd2152-17af-436b-8539-fe6adff56529,
+    alterId: 0,
+    tls: true,
+    skip-cert-verify: true,
+    network: ws,
+    ws-opts:
+      { path: /api/v1, headers: { Host: gobear.cdn.whexy.com } },
+    udp: true,
+  }
+```
+
+<Dialog>当然，这只是一个例子。不要试图将其作为真实配置使用。</Dialog>
+
+## 还有一件事：IP池
+
+现在我们有了一个带CDN的自建中继服务。客户端将在地理域名解析服务（DNS）的帮助下自动连接到**最近的**CDN节点。
+
+然而，我们不应该依赖地理DNS，因为它不会总是回复**最快**节点的地址。如果我们知道CDN节点的IP列表，我们可以使用客户端应用来进行速度测试。
+
+为此，在客户端配置文件中将`server`字段替换为CDN节点的IP地址。我不会在这篇文章中解释如何获取地址列表。所以我将把那部分留给你完成。

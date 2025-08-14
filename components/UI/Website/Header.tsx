@@ -52,7 +52,7 @@ const Header = () => {
             </Link>
             <Link
               ref={notionRef}
-              href={`/${currentLang}/dyn`}
+              href="/dyn"
               className={`font-title text-sm font-medium transition-colors duration-150 ${
                 isNotionPage
                   ? "text-black"
@@ -62,7 +62,7 @@ const Header = () => {
             </Link>
             <Link
               ref={friendsRef}
-              href={`/${currentLang}/friends`}
+              href="/friends"
               className={`font-title text-sm font-medium transition-colors duration-150 ${
                 isFriendsPage
                   ? "text-black"

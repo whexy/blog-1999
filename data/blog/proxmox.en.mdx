@@ -1,0 +1,236 @@
+---
+title: "Virtualization is all you need"
+publishDate: 2023-07-17
+summary: "Introducing my multi-operating system solution: bare-metal virtualization."
+cat: Internet
+featured: true
+lang: en
+---
+
+Modern computer systems are vast wholes composed of multiple layers. Each layer presents an interface to upper layers, abstracting specific operational processes into functions[^1]. Virtualization takes over a part of the system and implements lower-layer interface functions in virtual environments, allowing upper layers to run normally, thus achieving transformation from physical to virtual.
+
+[^1]: [Classification and Introduction of Virtualization Technologies - Zhihu (zhihu.com)](https://zhuanlan.zhihu.com/p/102809005)
+
+<Callout title="Virtualization Technology" icon="🎭">
+  Virtualization can be applied to various layers of computer systems.
+  For example, emulators (like QEMU) provide instruction set
+  virtualization, CPUs provide hardware virtualization, containers
+  provide process virtualization, translation layers like Rosetta and
+  Wine provide library function virtualization, while JVM provides
+  runtime virtualization, etc.
+</Callout>
+
+This article mainly discusses traditional "virtual machines" - running multiple operating systems through virtualization technology.
+
+Using virtualization software on existing operating systems is a familiar approach for many readers. I suggest time-precious readers choose this efficient and concise method. Currently, all mainstream operating systems have their own virtualization APIs, providing virtualization as a built-in operating system feature. With operating system help, virtualization software can use CPU and I/O resources at near-native speeds.
+
+Creating virtual machines today is unprecedentedly simple: Windows users can directly use the built-in "favorite son" Hyper-V software. Linux distribution users have Gnome-boxes as first choice. For macOS users wanting to run Windows, I don't recommend purchasing Mac machines.
+
+![Hyper-V Virtual Machine](images/proxmox/hyperv.png)
+
+However, for someone who needs to frequently use multiple operating systems simultaneously, using "virtualization software" has some disadvantages:
+
+1. Host operating systems aren't specially optimized for virtualization. For example, Windows occupies substantial resources even when idle, limiting virtual machine performance.
+2. Host operating system stability doesn't meet requirements. Once resource usage becomes too high, Windows and macOS likely crash, affecting daily use.
+3. Host operating system security doesn't meet requirements. Since host operating systems have higher privileges than all virtual machines, once host machines are attacked, all virtual machines are affected. Moreover, complete host operating systems usually have broad attack surfaces, making risks higher.
+
+To solve these problems, I turned to another virtualization solution: bare-metal virtualization.
+
+<Callout title="Types of Virtual Machine Monitors" icon="📚" >
+
+Computer system engineers habitually call operating system kernels Supervisors. The "manager" responsible for coordinating virtual machines is the Supervisor of Supervisors, hence named Hypervisor. Directly translated as "super-admin," literally translated as "virtual machine monitor."
+
+Hypervisors can be hardware, firmware, or software. Their function is separating system resources and creating and managing virtual machines. Traditionally, Hypervisors are divided into two types:
+
+- Type 1 virtual machine monitors: can directly access hardware.
+- Type 2 virtual machine monitors: indirectly access hardware through underlying operating systems.
+
+I personally think this classification method should be obsoleted. It's built on an assumption: operating systems themselves don't provide virtualization functionality.
+
+Currently, mainstream operating systems have virtualization APIs that can directly access hardware, such as Hyper-V and KVM. This makes boundaries between Type 1 and Type 2 very blurry, and classification significance unclear. So subsequent text will avoid discussing categories.
+
+</Callout>
+
+## Requirements and Challenges
+
+Let me first explain why virtualization is so important to me.
+
+- Primary prerequisite: I have a high-performance host machine.
+- I'm an Arch Linux user, customizing usage according to preferences. For example, I use i3 for window management and created unique shortcuts. Using Linux for development is enjoyable.
+- I often play large games, accumulating quite a few games in Steam and Xbox libraries.
+- I enjoy photography, occasionally using Lightroom, PhotoShop for photo editing, DaVinci Resolve for video creation, and AU for vocal mixing.
+- I occasionally use stable-diffusion and other lightweight or medium-level AI models for creative assistance.
+- I deploy numerous services on local LANs, such as RSS scrapers, media servers, photo servers.
+
+When using single operating systems, I encountered these problems:
+
+1. Conflict between development and entertainment. I like developing under Linux systems, but most games don't support Linux. Additionally, Linux lacks HDR and online video hardware acceleration support. Therefore, I need Windows for gaming and video watching.
+2. Conflict between gaming and creation. Both Nvidia and AMD offer two types of graphics drivers for Windows: one optimized for gamers, another for creators. Installing game drivers limits some creative software features, and vice versa.
+3. Conflict between versions and environments. Running open-source AI models on Windows is often extremely troublesome. I don't know Powershell. Managing runtime environments on Windows is very cumbersome. Different AI models often require different CUDA versions, making environment switching very difficult.
+4. Conflict between experience and stability. I daily use Windows Insider Canary Channel and other latest test versions. But for important services like photo and media servers, I need extremely stable environments to run them.
+
+## Bare-Metal Virtualization
+
+For the above-mentioned problems, Bare-Metal Virtualization provides an effective solution. Bare-metal virtualization means running a lightweight dedicated virtualization layer directly on hardware, then running multiple completely isolated operating systems on this virtualization layer. This way, we can run multiple operating systems simultaneously without mutual interference.
+
+![Bare-metal virtualization](images/proxmox/bmv.png)
+
+The benefit of bare-metal virtualization is allowing me to switch operating systems on demand anytime without interrupting current work. For example, I can use Linux for development work while running Windows in another virtual machine for gaming or creation. Since virtual machines are completely isolated, there are no conflict problems. Even if one virtual machine has problems, it won't affect other virtual machines.
+
+Additionally, bare-metal virtualization allows me to flexibly configure different hardware resources and environment settings for each virtual machine, meeting various different needs. For example, I can configure more VRAM and CPU resources for virtual machines running AI models while setting CUDA versions to specific versions required by models.
+
+Although bare-metal virtualization sounds complex, it's not difficult in practice. There are now many free and powerful bare-metal virtualization solutions, such as VMware ESXi with free personal licenses and open-source Proxmox. These tools provide user-friendly web interfaces for easy virtual machine creation, configuration, and management.
+
+## Proxmox
+
+I chose the open-source virtualization management platform—Proxmox as my bare-metal virtualization solution. This platform's core is built on a custom Linux Debian distribution.
+
+<Dialog>
+  This is why I don't want to discuss Hypervisor types - is it Type 1
+  or Type 2?
+</Dialog>
+
+A significant feature of Proxmox is simultaneously supporting both KVM full virtualization and LXC container virtualization levels. KVM full virtualization can run any operating system, while LXC container virtualization allows running various Linux programs in isolated environments, providing higher performance and lighter resource usage.
+
+Additionally, Proxmox provides an easy-to-use web interface through which users can freely configure each virtual machine's hardware resources like CPU, memory, and hard drives. It also supports various network configurations including NAT, bridging, and isolation for configuring structured virtual machine networks.
+
+![Proxmox VE 8.0 Web Interface](images/proxmox/proxmox.png)
+
+Proxmox also has many advanced features customized for virtualization environments, including but not limited to dynamic memory management, CPU overload protection, disk over-provisioning, ZFS, Ceph, multi-node support, template cloning, and snapshots. Some features can automatically adjust virtual machine resource allocation to ensure stable system operation.
+
+## I/O Devices
+
+Running VMWare Workstation on Windows doesn't require much consideration about I/O devices because I/O devices work through host operating system drivers. For bare-metal virtualization solutions, allocating I/O devices becomes important.
+
+To improve performance and reduce latency, we need to consider different I/O solutions for different devices. For example, I used virtIO to virtualize network cards and hard disk controllers. I implemented GPU passthrough through IOMMU. For faster network connections, you can also use network cards supporting SR-IOV.
+
+### Implementing I/O Semi-virtualization with virtIO
+
+**Applicable to network cards, storage controllers, serial ports**
+
+virtIO is a standard, universal I/O virtualization framework and semi-virtualization technology. Operating systems in virtual machines know they're running in virtual environments and interact directly with virtual hardware through special drivers, greatly reducing switching between virtual and host machines and avoiding actual hardware emulation, thus improving performance.
+
+### Implementing I/O Passthrough with IOMMU
+
+**Applicable to GPUs and storage controllers**
+
+IOMMU might be an unfamiliar term. In old computer systems, I/O devices (like network cards, graphics cards, disk controllers) could directly access main memory through DMA chips, creating security risks. IOMMU, as DMA extension, provides hardware-level memory isolation and access control for I/O devices. It introduces IOMMU tables in systems to track mapping relationships between devices and memory.
+
+When discussing GPU passthrough or other device passthrough, IOMMU becomes particularly important. I/O hardware devices write data to memory via DMA. In traditional virtualization environments, host machines need to intercept device DMA requests, then modify DMA request target memory addresses, redirecting them to virtual machine memory regions. If systems support IOMMU, device mapping memory addresses can be directly modified, reducing frequent switching between host machines and virtual machines.
+
+<Callout
+  title="Relationship Between Virtualization and Isolation"
+  icon="🤝">
+  MMU (Memory Management Unit) primarily provides memory isolation
+  between processes while also assisting memory virtualization. IOMMU
+  (Input/Output Memory Management Unit) provides memory isolation
+  between devices while also helping hardware I/O virtualization.
+  Isolation is the foundation of virtualization, and hardware-level
+  isolation provides tremendous convenience for upper-layer
+  virtualization.
+</Callout>
+
+### Implementing Hardware I/O Virtualization with SR-IOV
+
+**Applicable to network cards and storage controllers**
+
+SR-IOV, full name Single Root I/O Virtualization, is hardware-assisted I/O sharing technology. By creating multiple virtual devices (called virtual functions) within single physical devices, each virtual machine can directly access a virtual function, thus implementing I/O device virtualization.
+
+Each virtual function has independent device resources like memory, interrupts, and DMA streams, allowing virtual machines to interact directly with physical devices, bypassing I/O stacks requiring host machine participation, greatly improving data processing speeds.
+
+## My Bare-Metal Virtualization Configuration
+
+Let me first talk about my host machine configuration.
+
+| Hardware | Specifications                          |
+| -------- | --------------------------------------- |
+| CPU      | AMD Ryzen 7 5800X, 8 cores 16 threads   |
+| Memory   | 48GB DDR4 (two 16GB, two 8GB)           |
+| GPU1     | Nvidia GeForce RTX3080 (10G VRAM)       |
+| GPU2     | AMD Radeon RX6950XT                     |
+| Disk1    | Samsung 980 Pro NVMe SSD 2TB            |
+| Disk2    | Western Digital Blue SN550 NVMe SSD 1TB |
+| Disk3    | Seagate BarraCuda HDD 4TB               |
+
+### Storage
+
+First, solve storage problems. I want all systems running on SSDs for high-speed operation. Generally, bare-metal virtualization uses ZFS or Ceph. For my needs, these solutions are too complex. Fortunately, Proxmox also supports managing storage through LVM (Logical Volume Manager). I integrated two SSDs into the same LVM and created a ThinPool on this LVM for storing virtual disks.
+
+ThinPool storage space is allocated on-demand, only occupying physical space when data is actually written. This feature allows **over-provisioning** of virtual disks to prepare for possible future storage needs growth. For example, when creating virtual machines for Windows installation, since I can't accurately predict future possible disk space needs, I chose to directly create a 100TB virtual hard disk. In Windows' view, this 100TB virtual hard disk has been formatted as NTFS file system and thinks it actually has 100TB available space. However, actually, all my SSD storage combined totals only 3TB. If Windows uses up this 3TB hard disk space someday, I can connect another hard disk and add it to LVM, thus expanding ThinPool capacity. Throughout this process, Windows systems inside virtual machines are unaware of external storage space changes.
+
+### Network
+
+Then solve network problems. For wired network connections, Proxmox can directly create virtual networks and automatically connect to routers. However, for wireless network (WiFi) connections, problems arise because access points (APs) refuse any unauthenticated frames, making transparent forwarding network bridging difficult to implement[^2].
+
+[^2]: [WLAN - Proxmox VE](https://pve.proxmox.com/wiki/WLAN)
+
+My solution is creating a new bridged subnet, like 10.10.10.0/24, setting Proxmox IP to fixed 10.10.10.10, enabling IPv4 forwarding and enabling MASQUERADE for NAT functionality. Then I created an OpenWRT virtual machine, manually setting its IP address to 10.10.10.11, gateway to host machine IP 10.10.10.10, enabling DHCP service to automatically allocate IP addresses in the 10.10.10.100-254 range.
+
+In this solution, host machines are responsible for bridging all virtual machine networks and handling outbound request NAT forwarding. Virtual machine interconnections are directly implemented through bridging without forwarding. OpenWRT virtual machines only serve as DHCP servers, not as routers, only responsible for automatically allocating IP addresses after virtual machine startup. After testing, virtual machine network speeds can easily reach maximum uplink and downlink bandwidth.
+
+### Virtual Machines
+
+After solving storage and network problems, I began creating virtual machines on-demand.
+
+I created these desktop Linux virtual machines:
+
+- Manjaro virtual machine for development.
+- Ubuntu virtual machine for running AI models.
+- Kali virtual machine for experiencing new features.
+
+Next, I created three Windows virtual machines:
+
+- Windows 11 specifically for gaming, with AMD Adrenalin Edition drivers installed.
+- Another Windows 11 specifically for gaming, with GeForce Game Ready drivers installed.
+- Windows 11 for running creative software, with AMD PRO Edition drivers installed.
+
+Both gaming Windows mount the same virtual disk, so I don't need to install games twice.
+
+<Dialog>
+  For normal external monitor use, these virtual machines are all
+  configured with GPU passthrough. If two virtual machines pass
+  through the same GPU, they cannot run simultaneously.
+</Dialog>
+
+I also created several Ubuntu Server virtual machines to assist NAS in running some services. I'll detail these services in another blog (recently I plan to start writing about PT content, which is another big topic). These servers can automatically configure usernames, passwords, SSH login keys through cloud-init, with convenience like creating instances on AWS.
+
+Finally, I ran my RSS scraper, media server, and photo server in three LXC containers. Since they were originally designed to run in Docker, I used "nesting" approach: LXC containers containing Docker containers. This poses no problems because Linux's cgroups and namespaces are inherently tree-structured, supporting nesting, and this approach brings no performance loss.
+
+### Daily Usage
+
+During daily use, I simultaneously open Manjaro for development and Windows 11 for gaming. Switching between VMs is simple.
+
+**Screen Switching** These two systems pass through different GPUs, so I only need to connect video cables from both GPUs to the monitor. Switch virtual machine screens by switching monitor input sources.
+
+**Keyboard/Mouse Switching** Proxmox can pass through USB devices. Passthrough means directly connecting entire USB devices to virtual machines, allowing virtual machines exclusive device use. This provides optimal performance and complete device access rights, but the disadvantage is USB devices cannot be shared between other virtual machines or hosts. I use KVM (Keyboard, Video, and Mouse) switches to share keyboards and mice between two virtual machines.
+
+![KVM Switch](images/proxmox/kvm_switch.jpg)
+
+KVM switches are usually used for switching keyboards, video, and mice between multiple computers. They have multiple USB interfaces for connecting keyboards and mice, and two USB output ports for connecting two computers. Connect both KVM switch output ports to the host, then bind them to different virtual machines through USB port passthrough.
+
+## Nvidia's Disgusting vGPU Situation
+
+At the end of the article, I must mention vGPU. Nvidia supports GPU virtualization on Windows through Hyper-V. For example, Ubuntu running in WSL2 can perform graphics computing through vGPU, though with significant performance loss.
+
+In Linux, Nvidia also supports container-level GPU virtualization. Just install Nvidia-docker to use GPUs in different containers. If you're an AI developer, you can manage different CUDA versions, Torch versions, etc. through Nvidia-docker - very convenient.
+
+However, only extremely expensive enterprise GPUs support **real** vGPU. I'm talking about SR-IOV-based virtualized I/O solutions. Actually, GitHub project vgpu_unlock has proven that Nvidia's low-end consumer GPUs (like RTX2060) all have built-in vGPU hardware support, but Nvidia drivers actively block this functionality. The purpose is to sell their "high-end" commercial graphics cards.
+
+<Callout title="Commercial Value of vGPU" icon="💰">
+  I once developed computing power platforms at a major company,
+  providing distributed training services. If platforms can sell
+  elastic tasks, they can greatly reduce vacancy rates and maximize
+  resource utilization. For example, a 4-card training task finding 8
+  idle cards can automatically expand to 8-card tasks. This single
+  function reportedly saved hundreds of millions. Selling
+  finer-grained elastic tasks can squeeze more benefits from idle
+  resources, especially inference tasks.
+</Callout>
+
+As consumers, watching Nvidia's successive bad moves these years - from vGPU locks to "leaking" consumer GPU hash computation lock bypass patches to RTX4060's reverse upgrades. Every time I see such practices that disgust ordinary consumers for commercial interests, I want to pull out Linus's classic expression pack.
+
+![Linus: NVIDIA, FUCK YOU](images/proxmox/fuckyou_nvidia.jpeg)
+
+However, Nvidia still successfully caught two major events - mining waves and AIGC. Its contempt for consumers has earned today's AI era monopoly giant status. This proves hardware manufacturers can completely make big money through software and business models.
+
+Some manufacturers were once disruptors, entrepreneurs, navigators. Looking at them now, they're just another story of dragon slayers eventually becoming dragons.

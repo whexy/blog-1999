@@ -1,0 +1,130 @@
+---
+title: Variance in Rust (Rust 中的协变、逆变与不变)
+publishDate: 2021-02-21
+summary: "我正在观看 Jon Gjengset 的直播编程视频，主题是"子类型和型变"。这是我的笔记。"
+cat: Rust
+lang: zh
+---
+
+我正在观看 Jon Gjengset 的直播编程视频，主题是"子类型和型变"。这是我的笔记。
+
+[Jon Gjengset's live coding stream](https://www.youtube.com/watch?v=--wzpkTuCrA&feature=push-lsb&attr_tag=ivAldDGwbw3k1GZn%3A6)
+
+## 生命周期缩短
+
+Rust 编译器会自动将参数的生命周期缩短到最短的那个。
+例如：
+
+```rust
+fn main() {
+	let s = String::new();
+	let x = "static str"; // `x` is `&'static str`
+	let mut y = &*s; // `y` is `&'s str`
+	y = x;
+	// Still compilable!
+  // Rust automatically shrink the lifetime static to s.
+}
+```
+
+这是合理的，因为你总是可以信任来自生命周期更长的值，而不用担心值会以某种方式失效。背后的机制是 Rust 有一套子类型和型变系统。
+
+## 子类型
+
+就像 Java 中的例子一样，类 `Cat` 是类 `Animal` 的子类型。
+简而言之，当 `T` 至少和 `U` 一样有用时，我们说 `T` 是 `U` 的子类型（记作 `T <: U`）。`T` 能做 `U` 能做的任何事情，但 `T` 可能还具有其他能力。
+在 Rust 中，生命周期 `'static` 是每个生命周期的子类型。然后 Rust 编译器使用不同的型变规则来检查程序是否应该编译。
+
+## 型变（Variance）
+
+你可能在许多其他编程语言中理解型变。编程中有三种类型的型变，分别称为**协变（covariance）**、**逆变（contra-variance）**和**不变（invariance）**。
+
+### 协变
+
+协变是最常见的情况。Rust 中的大多数东西都是协变的。
+例如：
+
+```rust
+/// define a function which takes an lifetime sticker `a`
+fn foo(_: &'a str) {}
+
+// and you can call the function with
+foo(&'a str);
+// or
+foo(&'static str);
+```
+
+在这个例子中，我们可以给函数传递生命周期为 `a` 或 `static` 的参数。这是因为 `static` 是 `a` 的子类型。
+静态字符串的生命周期比所需的 `'a` 更长，所以不用担心借用的变量会意外被丢弃。
+
+### 逆变
+
+让我们考虑下面的高阶函数例子。
+
+```rust
+/// define a function which takes a function,
+/// which takes a lifetime sticker `a`.
+fn foo(bar: Fn(&'a str) -> ()) {
+	bar(str);
+}
+
+let x : Fn(&'a str) -> ();
+foo(x); // that makes sense.
+
+let y : Fn(&'static str) -> ();
+foo(y); // should that make sense ???
+```
+
+`foo(y)` 应该能够编译吗？绝对不行！假设如果 `foo(y)` 能编译，那么我们实际上在高阶函数中做的事情就像：
+
+```rust
+let baz = &*String::new();
+// lifetime of baz is shorter than 'static
+fn y(_: &'static str) {}
+// an function that needs a static borrowing
+y(baz);
+// [!!] Should not compile
+// because a static lifetime is required.
+```
+
+调用者提供了一个生命周期有限的参数。但我们得到的函数需要一个静态生命周期参数。这是不被允许的。
+然而，让我们考虑另一个例子：
+
+```rust
+/// define a function which takes a function,
+/// which takes a parameter with static lifetime.
+fn foo(bar: Fn(&'static str) -> ()) {
+	bar("Hello Whexy~");
+}
+
+let x : Fn(&'static str) -> ();
+foo(x); // that makes sense.
+
+let y : Fn(&'a str) -> ();
+foo(y); // that makes sense too.
+```
+
+这个例子完美地编译了。因为函数 `y` 需要一个生命周期有限的参数。调用者给它一个生命周期更长的静态参数。同样，不用担心借用的变量会意外被丢弃。
+所以逆变是一个特定的规则。
+`T <: U ==> Fn(U) <: Fn(T)`
+
+### 不变
+
+不变意味着"没有型变"。简而言之，就是"只要给我确切需要的东西，不要耍花招。"
+让我们看这个例子：
+
+```rust
+fn foo(s: &mut &'a str, x: &'a str) {
+	*s = x;
+}
+let mut x = "Hello"; // x : &'static str
+let z = String::new();
+foo(x, &z); // foo(&'static str, &'z str)
+drop(z);
+println!("{}", x); // OOPS!
+```
+
+这段代码无法编译，因为我们要访问 `x`，而它指向一个已经被丢弃的内存区域。实际上，在 `&'a mut T` 中，`T` 是不变的。然而，`'a` 是协变的。这并不难理解，所以我把这留给你作为练习。
+
+## 参考：类型的型变
+
+类型的型变在 ["The Rustonomicon"](https://doc.rust-lang.org/nomicon/subtyping.html) 中有列出。

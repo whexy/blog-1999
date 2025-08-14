@@ -1,0 +1,226 @@
+---
+title: "Building Your Own Blog System"
+publishDate: 2022-02-03
+summary: "In 2014, I registered this domain to build a personal blog. I've used WordPress, Hexo, Hugo, and other blog systems. Last year, on a whim, I decided to DIY one. After six months of iteration and updates, I received positive feedback from many friends. This article mainly introduces the experience summarized during the development of this blog system."
+image: images/blog-diy/title.png
+series: Blog Development Diary
+cat: "Blog System"
+featured: true
+lang: en
+---
+
+I often get asked by friends: "Your website is nice, what template did you use?" Actually, this website was written by me from scratch. Starting in 2020, I tried to build a CMS and content distribution site (hereafter referred to as blog system) from the ground up. After years of iterative updates, it has become the underlying framework supporting my [personal blog](https://www.whexy.com), [PhD academic homepage](https://shiwx.org), and some [project documentation](https://shiwx.org/bandfuzz). The characteristics of this blog system are: using a mature frontend technology stack, supporting MDX, with good SEO indexing and performance.
+
+My blog system has been open-sourced on Github, give it a Star to support it~
+
+<GithubRepo repo="whexy/blog-1999" />
+
+## Blog System
+
+Simply put, a "blog system" is responsible for converting blog content into readable blog pages. Taking the most famous open-source blog system Hexo as an example: webmasters only need to provide articles in Markdown format, and they can use Node.js scripts to generate a static blog website. They can also use publicly available blog themes from the internet to adjust the website's appearance. These blog systems are very convenient and well-suited for quickly building blog websites. Combined with the flourishing static web hosting services in recent years (such as GitHub Pages, Netlify, object storage services, etc.), blogs can be quickly deployed to the internet. The cost of building and maintaining operations is extremely low.
+
+### Self-built Blog System
+
+So why build your own blog system? The fundamental reason is: static website generators lack customizability. The customizability here doesn't mean changing themes, but deep customization of the content presented on web pages.
+
+<Diagram src="images/blog-diy/chart.svg" />
+
+Based on my personal experience, static website generators can quickly build simple blog websites. However, as requirements become more complex, implementation costs increase steeply. For example, I once used Hexo as my blog system. Some complex features required writing plugins myself; to write plugins, I needed to understand Hexo's underlying knowledge; finally, I wrote the plugin, but it didn't work, only to discover it was a Hexo bug itself, so I had to raise an issue in the open-source community... In your own built blog system, you can complete deep customization in the most comfortable way—the system is yours from top to bottom, change whatever you want, implement whatever you need.
+
+---
+
+The article will next discuss how to build your own blog system in three parts:
+
+1. **Design**: Optimizing typography, components, and pages to build reading pages that are both aesthetically pleasing and practical.
+2. **Technology**: Recommending various frameworks and open-source projects suitable for blog system development.
+3. **Distribution**: Improving blog traffic through CDN selection, SEO optimization, RSS subscription, and other methods.
+
+## Part 1. Design
+
+<AnimatedFancyCard>
+  <Callout icon="✍️" title="Complete control over site design">
+    One benefit of building your own blog system is that bloggers can
+    have complete control over site design, rather than being torn
+    between choices in theme stores. This design can even be refined
+    to animation effects when elements are hovered over. For example,
+    this card is an animated component that has 3D effects when the
+    mouse hovers and moves slowly.
+  </Callout>
+</AnimatedFancyCard>
+
+Good design can express your ideas more clearly and present your work more concisely. When designing blog systems, special attention should be paid to the three key points mentioned below.
+
+### Typography
+
+Typography is a profession. Standardized, comfortable typography can greatly enhance the reading experience of blogs and retain your readers. As amateurs, we certainly can't produce the exquisite layouts of books. However, as long as we follow standards, we can still achieve comfortable layouts. Here I recommend the typography specification "Chinese Copywriting Guidelines" on GitHub with over ten thousand stars. It includes rules for spacing in mixed Chinese and English text, full-width and half-width punctuation marks, capitalization of English nouns, etc., very suitable for blog systems to reference.
+
+<GithubRepo repo="sparanoid/chinese-copywriting-guidelines" />
+
+### Component Design
+
+Blog content is usually rich text, generally written using Markdown syntax. However, Markdown only defines a small portion of commonly used styles. Compared to blog generators that can only use standard Markdown syntax, custom blog systems can easily add unique styles to reflect the blogger's style.
+
+Abstracting styles into components can provide a more consistent and beautiful reading experience. Even components can add simple interactions or provide some basic functionality, such as displaying real-time status, collapsing question answers, etc. Components elevate plain text into a medium that can communicate with readers.
+
+These are custom components I frequently use in my blog:
+
+- Callout, marking text paragraphs with color blocks slightly prominent from the background, used to insert related content outside the main narrative, provide background knowledge, or extend discussion on certain topics.
+- Dialogue bubbles, creating instant messaging chat-like effects, used to raise questions or provide reference information.
+
+I also created some dynamic components, such as displaying real-time GitHub repository information. Dynamic components give blogs longer timeliness and provide readers with more intuitive information.
+
+Components in an article shouldn't be excessive; they should exist as aids to enhance the reading experience, not obstacles to reading.
+
+### Page Optimization
+
+Readers' reading environments differ, which may have different impacts on blog page display. For example, fonts shouldn't be too large on small screen devices to avoid affecting page layout; light themes shouldn't be used on devices with dark mode enabled to avoid disrupting reader experience continuity.
+
+**Mobile-first**. More and more readers use small screen devices (viewport width less than 640px). According to site statistics, 70% of traffic comes from mobile devices. Adopting responsive design is key to beautiful display on mobile devices. Using media queries can conveniently switch styles.
+
+**Dark mode**. Browsing white-background black-text content in a dark environment is torture for readers, so blogs need separate adaptation for dark mode. To not affect text recognition, the color contrast between text and background needs to reach at least 4.5:1. Here I recommend reading Google Material Design team's dark mode design guide [Dark theme - Material Design](https://material.io/design/color/dark-theme.html), which contains detailed design rules for dark mode.
+
+## Part 2. Technology
+
+If backend technology is "rapidly changing," then frontend technology can be described as "ever-changing." Here's a brief introduction to the technology frameworks and open-source projects I've used in building blog systems for reference.
+
+### React Ecosystem
+
+React is the frontend framework that has consistently held the largest market share. It embeds HTML in JS, using function computation to dynamically return HTML for optimal performance. Such websites are called "Single Page Applications." Although blogs appear to consist of multiple pages, they're actually a single page where components are constantly replaced and updated. My current blog system is entirely based on React. When jumping between blog pages, repeated content (such as top bars, bottom bars, LOGO, etc.) doesn't reload.
+
+However, executing JS in browsers to generate pages, this "client-side rendering" mode can cause lag on some performance-limited devices, and may even cause page rendering misalignment or blank pages. This is when "server-side rendering" frameworks are needed to compensate for React's shortcomings.
+
+#### Next.js
+
+Next.js can be said to be the officially endorsed server-side rendering framework, having recently held the [Next.js Conf](https://nextjs.org/conf) conference. From the name, you can see this framework represents the direction of future frontend technology development.
+
+Next.js's approach is to first render an HTML on the server and pass it to users, then run JS to replace "outdated" or "rough" content. This process is vividly called "hydration"—slowly filling a shriveled webpage with vivid content. My blog also uses this technology in many places:
+
+- Images on web pages first show a blurred placeholder, then load when entering the user's visible area.
+- Dynamic font loading, unused characters are removed from font files.
+- GitHub widgets cache star counts during rendering, updating the cache when users open pages.
+
+#### MDX and Components
+
+[MDX](https://mdxjs.com) is Markdown's extension in the React ecosystem, officially called "Markdown for the component era." By introducing MDX, we can use Markdown format text in blog pages and embed React components, such as interactive charts, real-time polls, etc., greatly enriching blog functionality.
+
+<Callout icon="💡" title="Adding Components">
+  There are two ways to add components to blog articles. One is MDX
+  that I'm currently using, which allows adding React Components.
+  Another is a small trick I used before: modifying the Markdown
+  renderer, adding custom syntax to render special HTML tags, then
+  using tag selectors to define corresponding styles in CSS and
+  document queries to implement corresponding logic in JS.
+</Callout>
+
+### Tailwind CSS
+
+[Tailwind CSS](https://tailwindcss.com/) greatly facilitates web style development. It simplifies tedious CSS stylesheets into several simple properties. For example, to implement a Flex dynamic layout centering a box:
+
+<div>
+  <div className="not-prose flex items-center justify-center border-y-2 border-gray-300/20">
+    <div className="h-[40px] w-[40px] bg-gradient-to-br from-blue-400 to-teal-500 " />
+  </div>
+</div>
+
+Using traditional HTML+CSS, you need to write many styles:
+
+```html:wo/Tailwind.html
+<style type="text/css">
+  .box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-width: 1px;
+  }
+
+  .box div {
+    width: 100px;
+    height: 100px;
+    background-color: rgb(220 252 231);
+  }
+</style>
+
+<div class="box">
+  <div></div>
+</div>
+```
+
+With Tailwind CSS, you don't even need CSS files, just write an HTML page:
+
+```html:w/Tailwind.html
+<div class="flex items-center justify-center border">
+  <div class="h-[100px] w-[100px] bg-red-100"></div>
+</div>
+```
+
+You could say Tailwind CSS is the reason this blog system was born. Even without CSS knowledge, you can easily design web pages. It handles complex scenarios like screen sizes, dark mode, mouse hover states, etc. with extremely short classNames. These scenarios often require dozens or even hundreds of lines of code when written in CSS.
+
+### Interaction
+
+Blogs usually come with a comment system. Traditional comments require powerful backend database support for registration, login, rich text, ad blocking, and other functions, increasing the difficulty of blog system development. Now you can use universal comment platforms. This is a view embedded in blogs that calls third-party platforms (such as GitHub issues) to complete comments. Famous ones include discus and utterances, as well as [giscus](https://giscus.app/) that I'm currently using.
+
+Additionally, some small features can be developed based on Serverless.
+
+### Some Technology Frameworks Ultimately Not Used
+
+#### 11ty + Nunjucks
+
+Initially, I used [11ty](https://www.11ty.dev/) as a static website generator. It implements template webpage rendering based on [Mozilla Nunjucks](https://mozilla.github.io/nunjucks/) syntax. You need to write an HTML template, leaving blanks (telling 11ty "put the title here," "put article content here"). 11ty fills in the blanks according to your specified rules to generate final web pages. Such static website generators are most suitable for writing blog websites.
+
+But generators also have disadvantages:
+
+- Can abstract components, but it's difficult to abstract logic
+- Cannot control rendering order, making complex functionality implementation difficult
+
+After I added more pages, code reuse became a big problem. So ultimately I stopped using 11ty.
+
+#### Headless CMS
+
+"Headless" means "without a head," generally meaning "without interface" or "without system." Headless CMS is a currently popular blog content management solution abroad, obtaining data through GraphQL (graph database). Essentially, it's a blog backend server. Here I recommend this article [Headless CMS explained in 1 minute](https://www.contentful.com/r/knowledgebase/what-is-headless-cms/) to understand the concept of Headless CMS.
+
+Previously, we stored articles in local Markdown files, then had generators generate static websites. Each new blog post required rebuilding the entire website and uploading to servers. Server-side rendering allows you to trigger server-side re-rendering after CMS updates (such as publishing new articles or modifying old articles), with users getting updates during the webpage "hydration phase."
+
+Headless CMS is generally used by large blog websites operated by teams, such as labs or small companies. For personal blogs, Headless CMS is overkill. So I tried it for a while then returned to traditional git-managed blog update solutions.
+
+### Technology Summary
+
+The current technology stack used by the blog:
+
+- React for component encapsulation and page rendering
+- Next.js for server-side rendering
+- MDX for extending Markdown capabilities
+- Tailwind CSS for style design
+
+## Part 3. Distribution
+
+Improving blog quality, continuously gaining new readers, enhancing your voice in the community, ultimately achieving communication with more people and mutual improvement. Blog distribution is an important part.
+
+### SEO Indexing
+
+SEO indexing represents how well blog articles are indexed by search engines. The best way to improve SEO is to have other websites include more links to your website (such as exchanging friend links, publishing ads, etc.). Improving page Metrics also helps enhance SEO.
+
+### Metrics
+
+Metrics are used to evaluate webpage performance on different devices. [Lighthouse](https://developers.google.com/web/tools/lighthouse) from Google's team is a famous measurement tool. Browsers using Chromium kernel all include this functionality in developer tools. It measures indicators including Performance, Accessibility, Best Practices, etc. You can get very detailed data like First Contentful Paint, Max Potential First Input Delay, etc., for optimizing website experience.
+
+### CDN
+
+Blog loading speed is positively correlated with readership. To load webpage content as quickly as possible, CDN is needed to push webpage content from central servers to edge servers. My website is deployed on Vercel and accelerated with Azure CDN. Here I recommend this article: ["Personal Blog CDN Selection and Advanced Usage Guide"](https://nekodaemon.com/2021/08/12/个人博客CDN选型和进阶玩法指北/), which compares the pros and cons of various personal blog CDN solutions.
+
+### Subscription
+
+Loyal readers can get the latest blog content first by subscribing to RSS. This blog provides a non-full-text RSS source: [RSS2.0](https://www.whexy.com/feed.xml).
+
+<Dialog>Why not full-text source?</Dialog>
+<DialogBack>
+  RSS distribution doesn't support CSS, so if it were full-text, our
+  custom components couldn't display properly.
+</DialogBack>
+
+Regarding RSS readers, I recommend Reeder for iOS/macOS platforms. You can also self-host an RSS subscription center to sync reading progress across devices, such as the open-source [FreshRSS](https://freshrss.org/).
+
+## Summary
+
+This concludes "Building Your Own Blog System." I introduced the thinking and work when building your own blog system from three perspectives. This article also encourages you to build your own blog system because it's very interesting. Just like reading, watching movies, and playing games, configuring and optimizing blog systems has become one of my hobbies in my spare time.
+
+If you like this blog or want to get notifications first, you can subscribe to updates via RSS. You're also welcome to follow my GitHub and Twitter accounts. I mainly share content about computer system security. If you have any questions or suggestions about this article, please leave comments below. See you later~

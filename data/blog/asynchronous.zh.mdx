@@ -1,0 +1,54 @@
+---
+title: "异步互斥锁"
+publishDate: 2021-09-05
+summary: "异步程序也可以通过线程池应用于多线程系统。然而，在其中使用互斥锁可能会出现问题。"
+cat: Rust
+lang: zh
+---
+
+异步程序可以通过"线程池"应用于多线程系统。然而，在其中使用互斥锁可能会出现问题。
+
+这里是来自 Jon Gjengset 直播 ["Crust of Rust: async/await"](https://www.youtube.com/watch?v=ThjvMReOXYM&t=1437s) 的例子。
+
+```rust
+async fn main() {
+  let x = Arc::new(Mutex::new(0));
+  let x1 = Arc::clone(&x);
+  tokio::spawn(async move {
+    loop {
+      let x = x1.lock();
+      tokio::fs::read_to_string("file").await;
+      *x += 1;
+      // x 的锁在这里自动释放
+    }
+  });
+  let x2 = Arc::clone(&x);
+  tokio::spawn(async move {
+    loop {
+      *x2.lock() -= 1;
+    }
+  });
+}
+```
+
+两个生成的异步函数将会改变 `x` 中的值。
+
+使用 `spawn` 允许我们同时执行异步函数（创建两个事件循环）。因此我们必须使用 Mutex 来保护 `x` 的值。但是 `spawn` 可能不会给我们另一个线程来运行程序，因为它是"智能的"。它会决定是否创建另一个线程来执行，还是继续使用现有的线程。
+
+假设这次 `spawn` 决定只在一个线程中运行程序。当第 7 行 `tokio::fs::read_to_string("file").await;` 执行时，函数将让步并返回到执行器（tokio 运行时）。然后，执行器决定执行第 15 行的函数 `*x2.lock() -= 1;`。现在我们遇到了**死锁**。控制流看起来像这样。
+
+```rust
+let x = x1.lock(); // 异步函数 1 获取锁
+tokio::fs::read_to_string("file").await; // 函数 1 让步！
+
+// tokio 运行时存储上下文并切换到函数 2
+
+*x2.lock() -= 1; // 异步函数 2 尝试获取锁但失败；
+// 线程被阻塞。
+```
+
+`x2` 将等待锁被释放。有趣的是，操作系统从未想过线程可以以这种行为执行。通常，锁在线程之间有效。一旦线程尝试获取锁，操作系统将阻塞它，直到锁被释放。
+
+在这个特定情况下，锁应该由线程本身释放！然而，线程被操作系统阻塞，所以锁永远不会被释放！主要原因是线程是抢占式调度的，而异步函数是协作式调度的。锁是为抢占式调度模式发明的。
+
+所以这个故事告诉我们，在异步编程中应该小心使用 Mutex。如果你想在异步程序中使用 `std::Mutex`，你不应该在临界区内让 await 发生。

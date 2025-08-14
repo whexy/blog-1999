@@ -1,0 +1,409 @@
+---
+title: "React Learning Notes"
+publishDate: 2020-10-21
+summary: "React utilizes almost all the characteristics of native JavaScript. With proficiency in JavaScript, React won't bring you many surprises. However, compared to Vue, writing React also gives a solid feeling."
+cat: "Blog System"
+lang: en
+---
+
+React utilizes almost all the characteristics of native JavaScript. With proficiency in JavaScript, React won't bring you many surprises. However, compared to Vue, writing React also gives a solid feeling.
+
+Notes after reading [React Documentation](https://zh-hans.reactjs.org/docs/getting-started.html)
+
+## JSX
+
+```javascript
+const element = <h1>Hello, world!</h1>;
+```
+
+JSX is a JavaScript extension. It embeds HTML elements into JavaScript code.
+
+## Elements
+
+```javascript
+const element = <h1>Hello, world</h1>;
+ReactDOM.render(element, document.getElementById("root"));
+```
+
+React DOM elements are static immutable minimal units maintained by the framework. Therefore React claims its overhead is very small.
+Since they are immutable units, each page update is actually new elements overwriting old elements.
+
+## Components
+
+React combines elements and underlying components, abstracting them into higher-dimensional reusable components.
+
+There are two ways to define components: function components and class components (ES6 Later)
+
+```javascript
+//Function
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+//Class
+class Welcome extends React.Component {
+  render() {
+    return <h1>Hello, {this.props.name}</h1>;
+  }
+}
+```
+
+User-defined components require the first letter to be capitalized. Once defined, they can be called directly in JSX.
+
+```javascript
+function Welcome(props) {
+  return <h1>Hello, {props.name}</h1>;
+}
+
+const element = <Welcome name="Sara" />;
+ReactDOM.render(element, document.getElementById("root"));
+```
+
+React gives an example in the documentation showing the benefits of extracting components into multiple small components for program writing. In this example, React suggests naming props from the component's own perspective, rather than depending on the context of the calling component.
+
+Additionally, components must ensure they don't modify incoming props.
+
+## State
+
+Function components are a simpler type of component that don't support other features. When using class components, you can achieve the purpose of storing state by maintaining the class's "member variables."
+
+The following example maintains its own state when the component is mounted. State is a JS object.
+
+```javascript
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+
+However, direct modification of `this.state` won't be **captured** by React and thus won't update on the page. ~~Perhaps this is one of the reasons for many negative comments about React?~~
+
+You need to call the `this.setState(object)` function to update state. This function has several characteristics:
+
+1.  Updates are asynchronous, so you can't rely on state values to calculate the next state.
+2.  `this.setState()` can accept functions as parameters. This function's first parameter is the previous state, and the second parameter is the component's parameters. **Using functions as parameters can solve asynchronous update errors.**
+
+```js
+this.setState((state, props) => ({
+  counter: state.counter + props.increment,
+}));
+```
+
+3.  State updates are shallow merges. `this.setState(small_obj)` won't overwrite other properties outside of `small_obj`.
+
+### Downward Flow
+
+All kinds of GUI drawing languages constantly emphasize one concept — **consistency**. Frontend often displays and modifies the same data source in different components. For example, after a user changes their username in settings, all places displaying the username need to be updated synchronously. If each component maintains its own update operations, you enter a bug-prone zone.
+
+For example, the iOS frontend framework SwiftUI emphasizes the concept of "Single Source of Truth" everywhere. Although React doesn't have a strict concept of state screening, you can pass the content of `state` as the next `props` to child components. React vividly calls this writing style "downward flow."
+
+However, React prohibits any modification of incoming properties. If we want to modify a single data source in child components, we need to call the **unique modification function**, which is calling the modification function implemented by ancestors holding state (called "reverse data flow" in ["Thinking in React"](https://zh-hans.reactjs.org/docs/thinking-in-react.html)). ~~This is quite troublesome.~~ React claims this is to facilitate bug tracking because data modification has only one entry point.
+
+## Lifecycle
+
+After a component is placed in the DOM, the `componentDidMount()` function will be called. When it's about to be destroyed, the `componentWillUnmount()` function will be called to release occupied resources.
+
+```js
+class Clock extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { date: new Date() };
+  }
+
+  componentDidMount() {
+    this.timerID = setInterval(() => this.tick(), 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerID);
+  }
+
+  tick() {
+    this.setState({
+      date: new Date(),
+    });
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>Hello, world!</h1>
+        <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+      </div>
+    );
+  }
+}
+```
+
+## Event Handling
+
+React element events are similar to DOM elements. Syntactically, React uses camelCase (onClick) and passes a JSX-wrapped function, rather than strings in DOM.
+
+```html
+<!-- Traditional DOM approach -->
+<button onclick="handler()">A button</button>
+```
+
+```jsx
+<!--  React element approach-->
+<button onClick={handler}>
+    A button
+</button>
+```
+
+You can pass parameters to event handlers.
+
+```jsx
+<button onClick={e => this.handler(id, e)}>A button</button>
+```
+
+Where `e` is React's event object.
+
+<Callout icon="💡" title="TIPS">
+  Due to JavaScript design, JSX callback functions don't carry this
+  references by default (because class methods don't bind this). So
+  when defining components, you need to bind this in advance.
+</Callout>
+
+Reference reading:
+[JavaScript's Crucial Apply, Call and Bind](https://hijiangtao.github.io/2017/05/07/Full-Usage-of-Apply-Call-and-Bind-in-JavaScript/)
+
+```js
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { isToggleOn: true };
+
+    // This binding is essential for using `this` in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn,
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? "ON" : "OFF"}
+      </button>
+    );
+  }
+}
+```
+
+There's experimental syntax that can solve this problem. Write the `handleClick()` function like this:
+
+```js
+handleCLick() = () => {
+    console.log(this);
+}
+```
+
+This way you can call this in the function without explicitly binding this externally.
+Or you can also write it in JSX like this:
+
+```jsx
+<button onClick={() => this.handleClick()}>A button</button>
+```
+
+## Conditional Rendering
+
+React renders elements through function component return values or class component `render()` functions. Therefore, as long as you use conditional statements in components and return different JSX, you can achieve conditional rendering.
+
+```jsx
+function Greeting(props) {
+  const isLoggedIn = props.isLoggedIn;
+  if (isLoggedIn) {
+    return <UserGreeting />;
+  }
+  return <GuestGreeting />;
+}
+
+ReactDOM.render(
+  // Try changing to isLoggedIn={true}:
+  <Greeting isLoggedIn={false} />,
+  document.getElementById("root"),
+);
+```
+
+It's worth noting that every time you call the `setState()` function, React automatically re-executes `render()`.
+So you can create stateful components like this:
+
+```jsx
+class LoginControl extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleLoginClick = this.handleLoginClick.bind(this);
+    this.handleLogoutClick = this.handleLogoutClick.bind(this);
+    this.state = { isLoggedIn: false };
+  }
+
+  handleLoginClick() {
+    this.setState({ isLoggedIn: true });
+  }
+
+  handleLogoutClick() {
+    this.setState({ isLoggedIn: false });
+  }
+
+  render() {
+    const isLoggedIn = this.state.isLoggedIn;
+    let button;
+    if (isLoggedIn) {
+      button = <LogoutButton onClick={this.handleLogoutClick} />;
+    } else {
+      button = <LoginButton onClick={this.handleLoginClick} />;
+    }
+
+    return (
+      <div>
+        <Greeting isLoggedIn={isLoggedIn} />
+        {button}
+      </div>
+    );
+  }
+}
+```
+
+Stateful components can **calculate** elements to display based on state in the `render()` function first.
+
+There's also a cooler way to write it:
+
+```jsx
+<div>
+  <h1>Hello!</h1>
+  {unreadMessages.length > 0 && (
+    <h2>You have {unreadMessages.length} unread messages.</h2>
+  )}
+</div>
+```
+
+In JavaScript, `true && express` returns `express`. Conversely, `false && express` returns `false`. If it returns `false`, React will ignore rendering this group of elements.
+
+Of course, ternary operators can also be used for conditional rendering:
+
+```jsx
+<div>
+  {isLoggedIn ? (
+    <LogoutButton onClick={this.handleLogoutClick} />
+  ) : (
+    <LoginButton onClick={this.handleLoginClick} />
+  )}
+</div>
+```
+
+## Lists
+
+Similar to `v-for` in Vue, React can also achieve "lazy" repeated component rendering.
+
+```jsx
+const numbers = [1, 2, 3, 4, 5];
+const listItems = numbers.map(number => <li>{number}</li>);
+ReactDOM.render(
+  <ul>{listItems}</ul>,
+  document.getElementById("root"),
+);
+```
+
+In the above code, `listItems` is an array of JSX. React flexibly inserts it into the page.
+
+It's best to bind keys to list elements. This way, React can identify which elements have changed. Keys should be bound in array context. For example, keys are usually set in the `map()` method.
+
+```jsx
+function ListItem(props) {
+  return <li>{props.value}</li>;
+}
+
+function NumberList(props) {
+  const numbers = props.numbers;
+  const listItems = numbers.map(number => (
+    <ListItem key={number.toString()} value={number} />
+  ));
+  return <ul>{listItems}</ul>;
+}
+
+const numbers = [1, 2, 3, 4, 5];
+ReactDOM.render(
+  <NumberList numbers={numbers} />,
+  document.getElementById("root"),
+);
+```
+
+## Forms
+
+As mentioned earlier, React recommends a "downward flow" approach. That is, you can ensure data handled in React comes from the **same source**. In HTML, form elements usually maintain their own state by browsers themselves. For example:
+
+```html
+<form>
+  <label>
+    <input type="text" name="name" />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+```
+
+The input box value is maintained by the browser itself. In fact, we can let React take over state, thus achieving the goal of **single data source**. Form elements taken over by React are called "controlled components."
+
+```jsx
+<form onSubmit={this.handleSubmit}>
+  <label>
+    Name:
+    <input
+      type="text"
+      value={this.state.value}
+      onChange={this.handleChange}
+    />
+  </label>
+  <input type="submit" value="Submit" />
+</form>
+```
+
+Tags like input, textarea, select can all be taken over by React.
+
+## Composition
+
+React recommends using JS syntax for code reuse between components.
+
+### Containment Relationship
+
+Recommended approach for component nesting:
+
+```jsx
+function FancyBorder(props) {
+  return (
+    <div className={"FancyBorder FancyBorder-" + props.color}>
+      {props.children}
+    </div>
+  );
+}
+
+function WelcomeDialog() {
+  return (
+    <FancyBorder color="blue">
+      <h1 className="Dialog-title">Welcome</h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecraft!
+      </p>
+    </FancyBorder>
+  );
+}
+```
+
+Pass child components to render results through `prop.children`. If we specify tag parameter names in JSX, we don't need to use `children`.
+
+### Specialization Relationship
+
+React can also design "abstract parent components." "Child components" that implement these components are achieved by passing specific parameters.

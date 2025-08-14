@@ -1,0 +1,102 @@
+---
+title: Anonymous CDN Traffic Relay
+publishDate: 2022-08-17
+summary: "Continuing the discussion on blocking and anti-blocking games around edge networks."
+cat: Internet
+series: CDN Traffic Relay Implementation
+lang: en
+---
+
+In the previous blog, I introduced a solution for implementing network traffic relay using CDN: [Self-host Relay Service with CDN](https://www.whexy.com/posts/relay_cdn). We encapsulate TCP and UDP traffic in Websocket channels and forward them to relay servers through CDN.
+
+Using CDN to forward traffic makes it impossible for monitoring third parties to determine the real address of relay servers, increasing the difficulty for censors to block them. Such security features have motivated more and more users to use similar methods to bypass internet censorship. For example, [Trojan project documentation](https://p4gefau1t.github.io/trojan-go/advance/websocket/) recommends using Websocket for CDN forwarding. Mainstream proxy software has also added support for Websocket channels.
+
+The increasingly popular practice of using CDN to hide service addresses has forced censorship agencies to find new methods to maintain blocking. For example, Russia requires CDN service providers to prohibit "domain fronting" functionality[^1]. Korea Communications Standards Commission uses SNI sniffing to block websites[^2]. Chinese mainland and Russian telecom operators comprehensively block ESNI[^3].
+
+This blog will introduce blocking and anti-blocking games around CDN. Although increasingly strict blocking sounds disappointing, it's precisely the joint action of escalating blocking strategies and constantly changing anti-blocking methods that promotes the internet's vigorous development toward greater security and privacy.
+
+## How CDN Handles HTTPS Requests
+
+CDN service providers typically deploy multiple data centers globally, with each data center having multiple nodes. User requests first reach the nearest nodes, then are forwarded to next nodes until reaching target servers. This forwarding process is called "origin pull."
+
+<Diagram
+  src="images/relay_cdn/HTTPS.svg"
+  alt="CDN processing HTTPS requests"
+/>
+
+CDN service providers typically select optimal nodes for origin pull based on user geographic location, network quality, and other information. Users make DNS queries to authoritative DNS, which returns optimal node IP addresses. As shown in ① and ② in the diagram.
+
+After obtaining optimal node IP addresses, users initiate HTTPS requests to nodes. In this step, users establish TLS connections with nodes. Users send SNI extensions during TLS handshake phases. Nodes select correct TLS certificates for responses based on SNI values. As shown in ③ in the diagram.
+
+After TLS connections are established, nodes forward request content to origin servers based on HTTP request Host headers. As shown in ④ in the diagram.
+
+## Server Name Indication (SNI)
+
+<Quote
+  cite="Cloudflare Co-founder and CEO"
+  subcite="Matthew Prince"
+  url="https://www.theregister.com/2018/07/17/encrypted_server_names/">
+  Traditional SNI is absolutely one of the last gaps in the encryption
+  armor.
+</Quote>
+
+Many web servers host more than one website and may have their own TLS certificates for each website. If servers show wrong certificates to clients, clients cannot safely connect to desired websites, causing "Your connection is not private" errors.
+
+SNI solves this problem by indicating which website clients are trying to access. SNI extensions are part of TLS handshake phases, located in ClientHello messages. CDN nodes select correct TLS certificates for responses based on SNI values.
+
+Paradoxically, only after successfully completing TLS handshakes using SNI can encryption occur. SNI is sent at TLS handshake beginnings and is not encrypted. As a result, any attackers monitoring connections between clients and servers can read SNI parts of handshakes to determine which websites clients are establishing connections with. Korea Communications Standards Commission monitored user internet behavior precisely this way.
+
+## Domain Fronting
+
+Domain fronting is a technique for evading censorship by hiding real connection addresses based on CDN. The famous encrypted chat software Telegram once used Amazon CDN for domain fronting to escape Russian blocking.
+
+<Diagram
+  src="images/relay_cdn/Domain fronting.svg"
+  alt="Domain fronting technique principle diagram"
+/>
+
+This technique's principle is using different domain names at different communication layers. Use harmless domain names in plaintext DNS requests and TLS Server Name Indication (SNI) to initialize connections and announce to censors, while actual "sensitive" domain names to connect to are only sent after establishing encrypted HTTPS connections, preventing them from being exposed in plaintext to network censors. Domain fronting allows users to connect to blocked services via HTTPS while appearing to communicate with completely different sites on the surface.
+
+<Dialog>
+  Why don't CDNs select origin servers based on SNI flags in TLS, but
+  instead forward based on HTTP request header Host values?
+</Dialog>
+
+TLS encrypted communication doesn't necessarily require legal certificates. For example, after users receive "Your connection is not private" warnings and click "Still visit," browsers and servers can still use expired or incorrect certificates for encrypted communication. Some old browsers don't even send SNI. Based on such observations, CDN service providers generally only use HTTP request header Host values as forwarding basis.
+
+Censors typically find it difficult to distinguish characteristics of disguised traffic from legitimate traffic, forcing censors to choose between allowing all seemingly harmless traffic or completely blocking domain traffic. Complete blocking may cause significant collateral damage.
+
+But censors can force CDN service providers to prohibit domain fronting functionality. For example, Google, Cloudflare, and other manufacturers have modified forwarding logic. Now, most CDN service providers verify whether SNI matches Host before forwarding. If they don't match, origin pull is refused.
+
+## Encrypted Server Name Indication (ESNI)
+
+As Cloudflare's founder said, plaintext-transmitted SNI is the last gap in the entire network encryption system. Filling this gap helps improve the entire internet's privacy. As the name suggests, ESNI achieves its purpose by encrypting the Server Name Indication (SNI) part of TLS handshakes.
+
+Since client hello messages are sent before clients and servers negotiate TLS encryption keys, ESNI encryption keys must be transmitted through other means. Cloudflare's solution is: add public keys to domain DNS records. This way, when clients look up server IPs through DNS resolution, they can simultaneously obtain server public keys. Then clients use these public keys to encrypt SNI records so only correct servers can decrypt them.
+
+Of course, if attackers tamper with DNS resolution return values through DNS spoofing, replacing public keys, ESNI still cannot ensure connection privacy. Therefore, Cloudflare hopes all users use DNS-over-HTTPS to ensure DNS privacy.
+
+ESNI protects HTTPS privacy. DNS requests sent via HTTPS protect ESNI correctness. This creates a complete closed loop of network encryption systems. Censors cannot monitor user internet behavior through any means (accessed webpage addresses, transmitted data content, etc.). Freedom seems to have achieved final victory. At DEF CON 2020, everyone enthusiastically discussed Domain Hiding techniques.
+
+<Diagram
+  src="images/relay_cdn/Domain Hiding.svg"
+  alt="Domain hiding technique principle diagram"
+/>
+
+## The Encrypted Internet Edifice
+
+Thanks to "end-to-end encryption," so-called "Domain Hiding Technology" is no technology at all—it doesn't need to do anything! The encrypted internet edifice has been completed, with only some decorative work remaining. Hmm, however, as shown in the diagram, its beautiful clear sky is shrouded by two clouds—two red clouds still float around that CDN cloud.
+
+Today in 2022, for CDN service providers, user request data remains plaintext. HTTPS requests sent by users are decrypted at edge nodes; CDN service providers can (and must) understand specific request details. For example, using HTTP header Host information to determine origin server addresses or implementing different caching strategies for different URLs. If censors control CDN service providers, we directly regress to HTTP era! Even if we encrypt HTTP payloads through other methods, we're just back to square one—CDN cannot provide any additional protection.
+
+The fact is so cruel. We can almost certainly believe censors have firmly controlled CDN service providers. Centralized network structures are destined to be unable to escape censorship.
+
+This blog's opening mentioned: CDN service providers typically deploy multiple data centers globally, with each data center having multiple nodes. User requests first reach nearest nodes, then are forwarded node to node until reaching target servers. CDN's cloud wraps "edge networks" composed of tens of thousands of nodes. Yes, censors can forcefully control these networks. So what if—we replace "edge networks" with decentralized networks composed of hundreds of millions of devices? Networks where every node participates in data transmission, where you and I are all torch bearers, while censors cannot control entire networks. What if we write information on immutable public ledgers? Cryptography can already ensure transmission secrecy. Its next goal is protecting data itself.
+
+Comrades, we're at revolution's eve. Now, people with ideals are investing in next-generation Web technology development. Behind clouds are countless stars. By then, what exciting blocking and breakthrough games will there be? I can't wait to see them.
+
+[^1]: [Google Shuts Down Domain Fronting, Affecting Anti-Censorship Tools](https://www.solidot.org/story?sid=56211). Solidot.
+
+[^2]: [South Korea is Censoring the Internet by Snooping on SNI Traffic](https://www.bleepingcomputer.com/news/security/south-korea-is-censoring-the-internet-by-snooping-on-sni-traffic/). Bleeping Computer. 2019
+
+[^3]: [Possible blocking of Encrypted SNI extension in China](https://web.archive.org/web/20200801221253/https://mailarchive.ietf.org/arch/msg/tls/YzT5LjLJ_6WWhdnU2wVsKNKR6_I/). iyouport.

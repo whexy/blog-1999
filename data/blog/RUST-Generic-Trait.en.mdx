@@ -1,0 +1,154 @@
+---
+title: Understanding Rust Generic Traits
+publishDate: 2021-02-01
+summary: "In Rust, traits can also be generic. Generic traits are introduced for two reasons: first, to make traits not limited by specific types, and second, to provide broader constraint capabilities."
+cat: Rust
+lang: en
+---
+
+In Rust, traits can also be generic. Generic traits are introduced for two reasons: first, to make traits not limited by specific types, and second, to provide broader constraint capabilities.
+
+## Not Limited by Specific Types
+
+In Rust, "casting" is actually a kind of trait. In a world without generic traits, how should type conversion work?
+
+We could first write a trait called `CastFromI32`. All types that implement the `CastFromI32` trait can be cast from the `i32` type.
+
+```rust
+struct MyType {}
+
+pub trait CastFromI32 {
+  fn from(_: i32) -> Self;
+}
+
+impl CastFromI32 for MyType {
+  fn from(origin: i32) -> Self {
+    // -- cast code --
+  }
+}
+```
+
+This is far from enough. Now, I also want to be able to cast from other types like `i64`/`u32`/`u64`/`f8`/`f32`/... This means we need to write a series of traits like `CastFromI64`/`CastFromU32`/..., and then expect developers to implement them one by one.
+
+```rust
+struct MyType {}
+
+pub trait CastFromI32 {
+  fn from(_: i32) -> Self;
+}
+
+pub trait CastFromI64 {
+  fn from(_: i64) -> Self;
+}
+
+pub trait CastFromU32 {
+  fn from(_: u32) -> Self;
+}
+
+// pub trait CastFrom ...
+// damn, so much!
+```
+
+This is undoubtedly tedious. But with generic traits, we can do this:
+
+```rust
+struct MyType {}
+
+pub trait CastFrom<T> {
+  fn from(_: T) -> Self;
+}
+```
+
+Generic traits make "traits not limited by specific types." This allows us to write more concise code. Developers can also use macros to reduce workload.
+
+## Broader Constraint Capabilities
+
+Traits are similar to interfaces in other languages, providing constraints. In object-oriented programming, we often write interfaces like `Flyable` and `Eatable` to distinguish ducks and pizzas from other classes. Traits in Rust work similarly.
+
+"Operator overloading" is also implemented through traits. Let's first look at what the addition trait looks like.
+
+```rust
+pub trait Add<Rhs = Self> {
+    /// The resulting type after applying the `+` operator.
+    type Output;
+    fn add(self, rhs: Rhs) -> Self::Output;
+}
+```
+
+Here, `Rhs` is a generic that specifies the type of the addend, defaulting to the same type as the adder (`Self`). `Output` is an associated type that specifies the type of the addition result. Associated types are a special form of generics.
+
+By implementing the `Add` trait, I would write addition for a complex number class like this:
+
+```rust
+struct Complex {
+    real: f64,
+    imag: f64,
+}
+
+impl Add for Complex {
+    type Output = Complex;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Complex {
+            real: self.real + rhs.real,
+            imag: self.imag + rhs.imag,
+        }
+    }
+}
+```
+
+But as an excellent library author, you also want `Complex` to support more data types for the underlying real and imaginary parts, such as `i64`/`u32`/`u64`/`f8`/`f32`/... This means we need to make `Complex` generic, roughly like this:
+
+```rust
+struct Complex<T> {
+    real: T,
+    imag: T,
+}
+
+impl<T> Add for Complex<T> {
+    type Output = Complex<T>;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Complex {
+            real: self.real + rhs.real, // compile error ❌️ here!
+            imag: self.imag + rhs.imag,
+        }
+    }
+}
+```
+
+Compilation... error! This is because the generic `T` we use could be any type, such as a duck or pizza, which don't have addition operations. The compiler is smart enough to detect this. So, `T` needs to be constrained. The constraint condition is "T has addition, and both the addend type and result type are also T", which translates to Rust as `T: Add<T, Output=T>`.
+
+In `Add<T, Output=T>`, the first `T` refers to `Rhs`, the type of the addend. In the `Add` trait, we already mentioned the default value is `Self`, so we can omit it here. The second `T` is the associated type `Output`, the type of the result, which needs to be specified as `T`.
+
+So the correct way to write it is:
+
+```rust
+struct Complex<T> {
+    real: T,
+    imag: T,
+}
+
+impl<T> Add for Complex<T>
+    where T: Add<Output=T>   // or, `where T: Add<T, Output=T>`
+{
+    type Output = Complex<T>;
+
+    fn add(self, rhs: Self) -> Self::Output {
+        Complex {
+            real: self.real + rhs.real,
+            imag: self.imag + rhs.imag,
+        }
+    }
+}
+```
+
+Reviewing our changes: we added constraints to the previously unrestricted type `T`. This constraint condition "T has addition, and both the addend type and result type are also T" is quite abstract. We make the constraint valid by adjusting the specific types in the generic `Add` trait. Now, you should understand why I say "generic traits have broader constraint capabilities."
+
+## Conclusion
+
+When writing this article, it was my second day of working with Rust. The content certainly has many shortcomings, so please feel free to correct me.
+
+If you find this helpful, you can continue following my blog. There's an RSS subscription link below.
+
+Please do not repost without permission.

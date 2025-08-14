@@ -1,0 +1,139 @@
+---
+title: "Running Windows Games on Mac Without Virtual Machines"
+publishDate: 2023-06-11
+summary: "At WWDC, Apple announced the Game Porting Toolkit, which can translate DirectX APIs to Apple's own Metal API. Using the emulator included in the toolkit, running Windows games on macOS has become a reality."
+cat: M1 (Apple Silicon)
+lang: en
+---
+
+Apple's entire product line now uses its self-developed Apple Silicon chips and no longer supports graphics cards from other brands. For this reason, Apple also developed a dedicated low-level graphics API for its hardware called Metal. Since macOS 10.14, Apple has stopped supporting OpenGL and OpenCL. Therefore, writing Metal code has become crucial when developing large games on macOS. However, although Metal is widely used within Apple's ecosystem, it's not generally popular among engine developers and game developers. One major reason is Apple's relatively low market share in the gaming industry. Due to the high price of Apple devices and their relatively closed ecosystem, game developers usually prefer to invest resources in broader platforms like Windows and mainstream game consoles.
+
+However, at the 2023 WWDC conference, Apple brought an exciting turnaround. They introduced a game porting toolkit called Game Porting Toolkit, which includes a dedicated layer for translating DirectX. Similar to Proton on SteamDeck, this toolkit can automatically translate Windows DirectX APIs to Metal APIs, achieving automatic game porting and greatly reducing developers' workload.
+
+![Game Porting Toolkit, WWDC 2023](images/GPTK/gptk.png)
+
+Although Apple's market share in the gaming industry is relatively low, the launch of Game Porting Toolkit shows Apple is actively working to expand its influence in game development, providing developers with more opportunities and conveniences. This is undoubtedly important good news for developers who were previously reluctant to develop games for Apple platforms.
+
+## Installing Apple's Official Windows Game Emulator
+
+To help developers "quickly verify game running experience on macOS," Apple included a Windows game emulator in Game Porting Toolkit. Developers can directly install this emulator using Homebrew, simplifying the testing process.
+
+<Callout title="Rosetta Warning" icon="⚠️">
+  Note that this emulator is based on Rosetta 2, so you must use the
+  translated x86 version of Homebrew for installation. This limitation
+  shows that x86 instructions in Game Porting Toolkit are actually
+  translated through Rosetta 2 before running. A side note: M-series
+  chips actually implement both Arm and x86 memory models internally.
+  One has to admire the power of Apple's self-developed chips.
+</Callout>
+
+I have an idle M1 Pro laptop upgraded to macOS 14. Installation is simple: first ensure Rosetta2 translation layer, XCode 15.0, and x86 version of Homebrew are installed, then install the emulator using Homebrew.
+
+My system originally didn't have Rosetta but already had XCode 15 installed. This is my complete emulator installation process:
+
+```shell
+# Install Rosetta translation layer
+softwareupdate --install-rosetta
+# Start x86 version shell
+arch -x86_64 zsh
+
+# Install x86 version of Homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Modify .zshrc, add script to automatically switch brew environment
+cat << 'EOF' >> ~/.zshrc
+if [ "$(arch)" = "arm64" ]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+    eval "$(/usr/local/bin/brew shellenv)"
+fi
+EOF
+
+# Install emulator
+source ~/.zshrc
+brew tap apple/apple http://github.com/apple/homebrew-apple
+brew -v install apple/apple/game-porting-toolkit
+```
+
+Homebrew installation is actually compiling its toolchain, which may take quite a while.
+
+Then, from [Apple Developer Downloads](https://developer.apple.com/download/all/) find Game porting toolkit beta, download and run the dmg.
+
+```shell
+ditto /Volumes/Game\ Porting\ Toolkit-1.0/lib/ `brew --prefix game-porting-toolkit`/lib/
+cp /Volumes/Game\ Porting\ Toolkit*/gameportingtoolkit* /usr/local/bin
+```
+
+Installation is now complete.
+
+## Wine?! 🍷
+
+From compilation logs, you can discover that Apple's emulator uses the highly acclaimed Wine project at its core. Wine is an open-source compatibility layer that allows Windows applications to run on Unix-like systems (including macOS). Apple provides compatibility support for Windows games through Wine for its emulator.
+
+![Game Porting Toolkit compilation log](images/GPTK/compile_wine.png)
+
+In Game Porting Toolkit's [brew formula](https://raw.githubusercontent.com/apple/homebrew-apple/main/Formula/game-porting-toolkit.rb), it shows Apple used the CrossOver project as the foundation with over 50,000 lines of code patches. CrossOver is a famous third-party team specializing in cross-platform game porting work. In their [blog post](https://www.codeweavers.com/blog/mjohnson/2023/6/6/wine-comes-to-macos-apple-s-game-porting-toolkit-powered-by-crossover-source-code), they mentioned that although they didn't collaborate with Apple on developing this tool, they're very pleased that Apple chose to use CrossOver's source code as their game porting toolkit's emulation solution.
+
+## Using the Emulator to Run Windows Games
+
+Apple's emulator provided in Game Porting Toolkit contains an official Wine project wrapper on macOS. This means you can try running not just games, but other types of Windows software like office suites, design tools, audio-video editors, etc. No more relying on virtual machines to run Windows software.
+
+Before playing games, I was actually more concerned about whether this translation layer could run **any** Windows software. For the macOS platform, this is indeed very exciting news. So I first tried running the Windows version of Steam.
+
+Anyone who has used the Wine project knows that Wine needs a specified path to store its virtual C drive. After specifying the path with the WINEPREFIX environment variable, I directly used Game Porting Toolkit's built-in winecfg to configure the simulation environment. Here you can switch Windows versions; I chose Windows 10.
+
+```shell
+mkdir my-game-prefix
+WINEPREFIX=~/my-game-prefix `brew --prefix game-porting-toolkit`/bin/wine64 winecfg
+```
+
+![Wine settings page](images/GPTK/wine_cfg.png)
+
+After configuration, you can directly run executable files using `gameportingtoolkit`. The first parameter is the virtual C drive path specified earlier, and the second parameter can be an exe file in the macOS file system or an exe file in the virtual C drive.
+
+```shell
+# Install Steam
+gameportingtoolkit ~/my-game-prefix ~/Downloads/SteamSetup.exe
+# Run Steam
+gameportingtoolkit ~/my-game-prefix 'C:\Program Files (x86)/Steam/steam.exe'
+```
+
+I installed Steam and successfully ran it:
+
+![Running Steam with Game Porting Toolkit](images/GPTK/steam.png)
+
+Downloaded and ran Cyberpunk 2077 to test. M1 Pro running 2077 through translation, high graphics settings maintained stable 30FPS. No bugs throughout, no crashes.
+
+![Running Cyberpunk 2077 on macOS using Game Porting ToolKit](images/GPTK/2077.png)
+
+It can be said that macOS gaming ecosystem has made huge progress.
+
+## Game Porting Toolkit
+
+Actually, `gameportingtoolkit` itself is a script file with the following content:
+
+```shell
+#!/bin/zsh
+
+if [ -z "$1" ];  then
+	echo "Usage: $0 <wine-prefix-path> <executable>"
+fi
+
+exe_path="cmd.exe"
+if [ ! -z "$2" ]; then
+	exe_path="$2"
+fi
+
+
+MTL_HUD_ENABLED=1 WINEESYNC=1 WINEPREFIX="$1" `brew --prefix game-porting-toolkit`/bin/wine64 "$exe_path" 2>&1 | grep "D3DM"
+```
+
+Game Porting Toolkit's emulator combines Wine with Apple's own D3DMetal technology, providing support for DirectX 11 and 12. Compared to virtual machines, this translation framework is much more efficient. However, it's usually not suitable for games using anti-cheat or aggressive DRM technology and games requiring AVX and other long instruction sets, such as The Last of Us.
+
+According to online user test results, Blizzard's latest release Diablo 4 can also run through Game Porting Toolkit. This shows that Game Porting Toolkit's translation framework has succeeded in running some highly complex games.
+
+It's worth noting that since each game has different characteristics and requirements, using Game Porting Toolkit to run specific games may face some challenges. Therefore, before trying to run specific games, it's best to refer to other users' test results and feedback to understand game compatibility and performance in Game Porting Toolkit.
+
+Overall, Game Porting Toolkit provides developers with a convenient and efficient way to port Windows games to the macOS platform. In some cases, it has successfully achieved the goal of running some complex games on macOS. At WWDC 2023, Apple specifically held three sessions detailing how developers can quickly port Windows games to Mac platforms through Game Porting Toolkit.
+
+Apple's improvements to the Wine emulator are just a small part of Game Porting Toolkit, mainly used to "quickly **verify** game running experience on macOS." For players, even if developers don't take any optimization measures, macOS can already run most games. Apple has shown full sincerity and determination. If developers can accept and use this toolkit, further optimizing experience for the macOS platform, we can expect Apple's gaming ecosystem to undergo major transformation.

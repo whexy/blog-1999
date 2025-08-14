@@ -1,0 +1,132 @@
+---
+title: "Shell Script for Automatically Logging into SUSTech Campus Network"
+publishDate: 2019-08-22
+summary: "Our school's campus network is just different from others - the data packets sent by Post aren't easy to figure out. This article proposes a black magic bash script for Unix-like systems to log into the campus network."
+series: "Tinkering with SUSTech Campus Network"
+cat: Internet
+lang: en
+---
+
+Our school's campus network is just different from others - the data packets sent by Post aren't easy to figure out. This article proposes a black magic bash script for Unix-like systems to log into the campus network.
+
+Southern University of Science and Technology (hereinafter referred to as "SUSTech") as an emerging university, uses relatively modern network systems. The school's various systems underwent several iterations and completed unified CAS authentication integration in 2014.
+
+![](images/vFPkaDR5AH6mj7g.png)
+
+## Some Problems with Campus Network
+
+Although the UI and operability of various network systems are modern and intelligent, some of the school's network management measures are still rigid. For instance, single device speed limit of 3Mbps (no intelligent allocation), student accounts limited to 5 devices. Actually, SUSTech as an elite education school advocates "small class teaching," and the total number of people isn't even as much as the total seating capacity of three libraries, making these restrictions very strange.
+
+The 5-device limit per account should be just right for average students. But as a computer science student, after eating soil for a year and gradually adding to the WiFi list:
+
+3. The three-piece set that SUSTech people own: computer, tablet, phone
+4. The reading artifact popular among college students: Kindle
+5. Wearable devices (watches) owned by more than half of students
+6. Dormitory smart devices (networked desk lamps, smart air conditioner controllers)
+7. Another Windows computer (😁)
+
+Having so many devices isn't because I'm stupid with too much money (quite the opposite), but due to interest and professional needs.
+
+I happened to test the network speed in the lakeside dormitory area on the day SUSTech upgraded its network and removed speed limits during summer. Downloads peaked at 188Mbps, uploads peaked at 240Mbps. This was still in the dormitory area, network speed distributed by single dormitory APs. I heard that in the Xin Garden dormitory area it briefly spiked to 400Mbps. Speeds would be even higher in teaching, research, and family areas.
+
+![Wall-mounted wireless APs installed by SUSTech beside each dormitory door](images/MWnAXdoclwkPFCy.jpg)
+
+Additionally, all devices connected to campus WiFi need CAS login. This makes devices like desk lamps and smart air conditioner controllers without interactive interfaces unable to connect to campus network normally.
+
+To solve this series of problems, I bought a second-hand mining router Newifi D2 on Xianyu, pre-installed with OpenWrt. And carrying forward the school spirit of "dare to venture and try, seek truth and be pragmatic, reform and innovate, pursue excellence," I explored a series of solutions.
+
+## Setbacks:
+
+If you plug the router into the dormitory's network port, it fails directly. Because wired network belongs to China Telecom's broadband business and requires payment.
+
+<Dialog>
+  Our dormitory subscribed to this in the first few months of entering
+  school and got scammed badly—— OW Daily disconnections, often
+  couldn't connect to internet.
+</Dialog>
+
+The solution here is to utilize the dual network card router's characteristics: A network card in Client mode wirelessly connects to school WiFi, B network card in AP mode creates a small local area network.
+
+I thought, with this networking method, next I just need to use any device to log into campus network. All devices use authentication information from router's A network card to access internet.
+
+### Setback 1: Cannot access CAS login page, OpenWrt cannot resolve intranet addresses
+
+Just after creating the network, I found all networks were inaccessible. But the router settings page showed A network card was indeed assigned an IP address from the school intranet. Finally tried manually accessing [Southern University of Science and Technology Campus Network Authentication Page](172.16.16.20:803/sustc_cas.php) by direct IP address, success. After that I could indeed access internet, but still couldn't access school website, self-service printers, course selection system, and other campus services.
+
+Searching for answers on Google, I found the problem was with DNS resolution (surprise: the first person to discover this problem and post on Enshan forum was a senior from SUSTech). The router didn't inherit the school's DNS. For convenience, SUSTech uses its own DNS for intranet to implement services like ACM OnlineJudge, self-service printing, utility bill payments. This way you only need to enter short addresses like acm/, pms/ in browser address bar to access corresponding pages.
+
+Before completing campus network authentication, SUSTech redirects all network requests to cas.sustech.edu.cn server. Devices using campus DNS normally can resolve this server, but routers ignore all intranet DNS resolution for security reasons, causing address resolution errors.
+
+The solution is to cancel "rebind protection" in router DNS settings. Everything works normally after that.
+
+### Setback 2: Getting Kicked Off
+
+After configuring such a network setup, I connected air conditioner, desk lamp, Kindle, and a bunch of other things. The next day when going out to class, I demonstrated "remote air conditioner control" to classmates but failed on the spot. Embarrassingly, after investigating the cause, I found that because it exceeded the 5-device limit per account, the router got kicked offline. When going out, devices I carried automatically connected to campus network, but the total number of devices was clearly less than 5, so there shouldn't be problems.
+
+More mysteriously, this situation only occurred when I went "down the mountain" to class, not when going "up the mountain" to class. (Based on altitude judgment, I lived in "mid-mountain" lakeside dormitory, far from any teaching area)
+
+Later discovered: on the path from lakeside dormitory to the first teaching building down the mountain, campus network 5GHz frequency signal is very weak, so phones jump back and forth between 2.4GHz and 5GHz frequencies, and CAS judged the phone as two different devices because of this. (-\_-||)
+
+Solving this problem was quite difficult, so I decided to write an automatic campus network login script and put it on the router to run periodically.
+
+## Writing the Script
+
+Even for simple network operations, I only knew Python. Since Python is an interpreted language, I first needed to install Python interpreter on the router. This was the beginning of collapse—the router's flash memory was only 32MB, and before finishing download the router was full. This solution failed.
+
+Next I tried installing Python on the router's external devices. After dealing with a bunch of system issues with soft links and hard links, Python finally could run on the router! I excitedly ran several algorithm competition problems on the router... it seems the router's performance could handle algorithm competitions. But when finally running the login script, I found the router still lagged for nearly 10 seconds (the script used regex matching on a large string). Unbearable, abandoned this solution.
+
+During this period the router experienced countless Resets and Reboots, detailed in the previous blog post "Building Movie Platform".
+
+Finally I decided to learn how to write Linux scripts. However, nothing is that simple—SUSTech campus network authentication isn't as simple as other schools that just POST submit account and password forms. For some purposes, SUSTech also requires POSTing a strange "execution". This execution is a one-time long string generated by the server when accessing the webpage, needing to be picked out from HTML.
+
+Let me post Python code to explain the difficulty of logging into campus network:
+
+![](images/ycrZpVNbPOWXSIg.png)
+
+## Linux Shell Script
+
+Finally I figured out 8 methods of text string processing in Shell, using `grep` and `${}` commands to process the execution. Below I directly share this sh file, hope it helps everyone.
+
+```shell {7-9} showLineNumbers
+#!/bin/bash
+source /etc/profile
+set -e
+curl https://cas.sustc.edu.cn/cas/login?service=http%3A%2F%2F172.16.16.20%3A803%2Fsustc_cas.php > a.txt
+s=$(grep -o -E "on\"\ value=\"(.+?)\"" a.txt)
+echo $s
+s=${s#*\"}
+s=${s#*\"}
+s=${s%%\"*}
+echo $s
+unm=Enter_student/employee_ID_here
+pwd=Enter_password_here
+curl "https://cas.sustc.edu.cn/cas/login?service=http%3A%2F%2F172.16.16.20%3A803%2Fsustc_cas.php" --data "username=$unm&password=$pwd&execution=$s&_eventId=submit&geolocation="
+```
+
+Among these, lines 7~9 are mysterious black magic that I figured out while slacking off at work.
+
+Next, just put the script on the router and run it periodically.
+
+## If Only Everything Were That Simple
+
+Periodic running generally uses CronTab, you just need to configure CronTab to run specified scripts at desired times. But configuring CronTab also stepped on many mines.
+
+First, **there must be a newline character at the end**, otherwise the last CronTab entry won't execute. (Countless blood and tears!!!)
+
+Second, CronTab needs sufficient permissions to run scripts. If not confident, script permissions should be set to 777.
+
+Third, the script's first line should add `#!/usr/bin/sh` to ensure shell scripts are run by shell. Best to `source` your profile file on the second line to have correct environment configuration.
+
+---
+
+After going through countless hardships, I finally could automatically log into SUSTech campus network. Finally achieved the goals of remotely controlling dormitory air conditioning anytime, anywhere, and lying in bed to turn off roommate's desk lamp. After some configuration, dormitory air conditioning rises to 27°C at 2:00 AM and automatically shuts off at 3:00 AM. Summer electricity bills finally dropped a bit...
+
+Freshmen military training is almost over, they're about to return to school for credit-based course selection battle~~field~~ (gambling) ground, using unimaginably high scores to occupy your favorite humanities electives! In a few days, I'll introduce how to write a simple course-grabbing script to let you "pick up leftovers" after credit-based course selection failures, competing with 1000 people for single-digit course quotas. Stay tuned.
+
+<Dialog>
+  {
+    "2021 Update: Due to school changing to new educational administration system, original course-grabbing script became invalid, so article was deleted."
+  }
+</Dialog>
+
+If you think this article is good and like my creations, welcome to bookmark [Whexy's Blog](https://www.whexy.com). The blog also implements RSS subscription functionality. If you have an RSS reader, you can find the RSS address in the blog sidebar and add it to your subscription.

@@ -1,0 +1,72 @@
+---
+title: "12307 Train Ticket Purchase Platform"
+publishDate: 2020-05-28
+image: images/12307_Title.png
+summary: "Final project for the Database Principles course in sophomore year. Features include ticket search, transfers, booking, remaining ticket queries, route management, and more. The backend uses Flask framework and the frontend uses Vue. The project received full marks."
+cat: Projects
+lang: en
+---
+
+Final project for the Database Principles course in sophomore year. Features include ticket search, transfers, booking, remaining ticket queries, route management, and more. The backend uses Flask framework and the frontend uses Vue. The project received full marks.
+
+12307 was my first time creating frontend pages. I had touched on it briefly when writing WannaAC (previous blog post), but that was just a single page - a table and an input field level of difficulty. This frontend involved page routing, button interactions, authentication, backend API calls, and more... so I spent some time studying the Vue framework.
+
+<Dialog>
+  The project didn't require frontend work, and many groups only
+  implemented CLI interaction.
+</Dialog>
+
+I usually prefer simple and clean interfaces, and the web style implemented with ElementUI this time is exactly the design style I favor.
+
+![Booking page](images/id2b1xHZWXm54jE.png)
+
+Vue advocates abstracting repetitive elements into components for easy reuse. I created a "train ticket component" and placed several "real train tickets" on the order viewing page. Compared to displaying a bunch of text, this feels more intuitive.
+
+![View orders](images/T2e8t3vLMFgxBpr.png)
+
+## Work From Home
+
+When creating this project, it happened to be during the COVID-19 pandemic outbreak, with online teaching at school. My teammate <span className="font-mono"><a href="/friends">@macromogic</a></span> and I completed the project collaboration online. For about a month, we basically used Tencent Meeting every night to share screens and code together.
+
+Working on projects online was actually quite interesting. We forced ourselves to practice various Git usage techniques, such as `rebase`, `fast-forward`, and `git -f` 😅.
+
+<Dialog>
+  Later I learned that this was actually a prototype of "pair
+  programming" in agile development. Choosing a good teammate is
+  really important. Subsequently, we collaborated on final projects
+  for embedded systems, object-oriented programming, computer
+  networks, operating systems, and software engineering.
+</Dialog>
+
+## ORM
+
+ORM was an extra credit item. But actually, for databases with complex table relationships like ticketing systems, I personally don't advocate excessive ORM usage.
+
+<Callout icon="🤔" title="When Not to Use ORM">
+  {`ORM is originally intended as a translation layer to facilitate converting "data" in databases into "objects" in OO languages. Because OO languages have very powerful capabilities for handling "objects," ORM can shine in backend projects.\r\n\r\n
+However, ORM is not a silver bullet. When query complexity is very high, the mental burden of ORM far exceeds writing SQL statements directly. Due to the opaque nature of ORM translation, code debugging or architecture adjustments become very difficult.
+`}
+</Callout>
+
+For example, in the train ticket availability query process, the logic we need to implement in one query includes:
+
+- Direct train services from origin to destination
+- In such a train, whether there exists a seat that can be booked for every segment from origin to destination
+
+This description translates to a join query of 7-8 tables in SQL. If translated to ORM, it becomes the following screen-long, dazzling, and hard-to-maintain code.
+
+![Using ORM to query ticket availability](images/12307_code_demo.png)
+
+## Transfer Trains
+
+How should we design the algorithm for querying transfer trains? It seems we only need to run a shortest path algorithm query to get results. If we pre-compute the shortest paths and store the solutions as a [number of stations * number of stations] matrix, it should be a feasible algorithm.
+
+Actual queries are more complex than imagined solutions. The number of transfers should be as low as possible. Transfer waiting time should be as short as possible. Ticket prices should be as low as possible. This has become a **multi-objective optimization problem** without an optimal solution. Combined with frequent adjustments to train schedules by China Railway (suspending or adding trains), different passenger volumes on various routes, designing a dynamically excellent transfer algorithm is very difficult.
+
+Our design incorporated some heuristic search. Since transfers usually occur at major hub stations with high passenger volume, we dynamically increase the weight of major hub stations based on passenger flow. To further improve search speed, we don't perform edge expansion from small stations in our shortest path algorithm. After such optimization, our transfer train algorithm is overall satisfactory.
+
+## Anecdotes
+
+In the first half of 2021, I accidentally received an email asking how to start this project (open sourced on GitHub). Upon closer inspection, it turned out to be a student from another school wanting to use this project as his graduation design...
+
+Since this project was a final assignment by two sophomores, there are still many parts that can be optimized. If you're interested in train ticketing systems, we can discuss together. If you like this blog post, you can subscribe to updates via RSS. Feel free to follow my GitHub and Twitter accounts, where I'll share more interesting and high-quality content. If you have any questions or suggestions about this article, please leave a comment below. See you~
