@@ -1,0 +1,48 @@
+---
+title: "使用 Next.js 构建双语博客"
+publishDate: 2025-08-14
+summary: "如何使用 Next.js App Router 实现一个合适的双语博客系统，保持服务端渲染和基于 URL 的语言切换功能。"
+image: images/blog-diy/title.png
+series: 博客开发
+featured: true
+lang: zh
+---
+
+# 使用 Next.js 构建双语博客
+
+这篇文章演示了我们基于 Next.js App Router 构建的新双语博客系统，在支持多语言的同时保持完整的服务端渲染。
+
+## 架构概述
+
+我们的系统使用：
+- **基于 URL 的路由**: `/en/posts/[slug]` 和 `/zh/posts/[slug]`
+- **服务端渲染**: 所有组件都保持为服务端组件
+- **基于文件的语言检测**: 文章命名为 `post.en.mdx` 和 `post.zh.mdx`
+- **自动回退**: 如果请求的语言不存在，显示可用语言版本
+
+## 优势
+
+1. **SEO 优化**: 每种语言都有独立的 URL
+2. **服务端渲染**: 快速的初始页面加载
+3. **渐进增强**: 无需 JavaScript 即可工作
+4. **简洁 URL**: 语言是 URL 结构的一部分
+
+这种方法在提供无缝双语支持的同时保持了 Next.js 的性能优势。
+
+## 代码示例
+
+```typescript
+// 服务端组件 - 无需客户端 JavaScript
+export default async function Post({ params }: PageProps) {
+  const { lang, slug } = await params;
+  const post = getBlogPost(slug, lang);
+  
+  // 服务端 MDX 编译
+  const compiled = await compile(post.content, options);
+  const { default: MDXContent } = await run(compiled, runtime);
+  
+  return <MDXContent components={components} />;
+}
+```
+
+这是我们双语博客示例的中文版本！

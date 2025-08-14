@@ -1,0 +1,48 @@
+---
+title: "Building a Bilingual Blog with Next.js"
+publishDate: 2025-08-14
+summary: "How to implement a proper bilingual blog system using Next.js App Router with server-side rendering and URL-based language switching."
+image: images/blog-diy/title.png
+series: Blog Development
+featured: true
+lang: en
+---
+
+# Building a Bilingual Blog with Next.js
+
+This post demonstrates our new bilingual blog system built with Next.js App Router, maintaining full server-side rendering while supporting multiple languages.
+
+## Architecture Overview
+
+Our system uses:
+- **URL-based routing**: `/en/posts/[slug]` and `/zh/posts/[slug]`
+- **Server-side rendering**: All components remain as server components
+- **File-based language detection**: Posts named `post.en.mdx` and `post.zh.mdx`
+- **Automatic fallbacks**: Shows available language if requested language doesn't exist
+
+## Benefits
+
+1. **SEO Optimized**: Each language gets its own URL
+2. **Server-Side Rendered**: Fast initial page loads
+3. **Progressive Enhancement**: Works without JavaScript
+4. **Clean URLs**: Language is part of the URL structure
+
+This approach maintains Next.js performance benefits while providing seamless bilingual support.
+
+## Code Example
+
+```typescript
+// Server component - no client-side JavaScript needed
+export default async function Post({ params }: PageProps) {
+  const { lang, slug } = await params;
+  const post = getBlogPost(slug, lang);
+  
+  // Server-side MDX compilation
+  const compiled = await compile(post.content, options);
+  const { default: MDXContent } = await run(compiled, runtime);
+  
+  return <MDXContent components={components} />;
+}
+```
+
+This is the English version of our bilingual blog example!
