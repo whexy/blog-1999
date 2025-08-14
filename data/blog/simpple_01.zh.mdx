@@ -1,0 +1,184 @@
+---
+title: "使用 Apple 虚拟化框架构建 ARM VMM"
+publishDate: 2025-08-14
+summary: "使用 Apple 的虚拟化框架在 ARM 架构上构建虚拟机监控器。全部使用 Rust 实现。"
+series: Simpple 虚拟化
+cat: "Projects"
+lang: zh
+---
+
+关于在 Linux x86 系统上使用 KVM 构建 VMM 的教程和博客文章数不胜数。我从来没有完整看完过其中任何一篇。我总是被一些 x86 细节搞得厌烦，失去了处理所有这些历史遗留问题的兴趣。
+
+但如果不实现一个 VMM（或者用 Rust 写一个操作系统），你就不能称自己是"系统程序员"。所以我决定开始一个新的 VMM 项目，但不是在 x86 Linux 上。
+
+ARM 架构比 x86 要干净和现代得多。在 ARM 芯片上实现 VMM 要容易得多：
+
+- 完全忘记"实模式"、"长模式"和"保护模式"这些噩梦。
+- 没有变长指令编码的头痛问题。每条指令都恰好是 32 位长，句号。
+- 大多数系统程序员都使用 macOS 作为日常驱动。所以现在为 ARM 构建 VMM 实际上很有实用意义。
+
+就像 Linux 有 KVM 一样，macOS 为你提供了虚拟化框架。KVM 是一个你需要用 `ioctl` 调用来操作的设备——相当笨重。而虚拟化框架则是一套干净的 C API。它为你提供构建 VMM 所需的一切：vCPU、虚拟内存和中断。就这些。不多不少。
+
+所以在这个系列的博客文章中，我将使用 Apple 的虚拟化框架，用 Rust 构建一个 VMM。整个重点是保持教育性——我会去掉所有不必要的复杂性，让事情尽可能直观。你会很快看到，一旦你摆脱所有 x86 的累赘，拥抱未来，这会是多么干净、优雅和_令人愉悦_。
+
+<Callout title="项目命名" icon="🍎">
+好吧，这次我对命名非常自豪。我把它叫做 `simpple-vm`。首先，它是 **simple**（简单的）——这就是重点。其次，它是为 Apple 硬件设计的。第三，因为虚拟化基本上就是**模拟**（**sim**ulating）A**pple** 芯片。看到我的巧思了吗？三个 'p' 把所有这些联系在一起。
+</Callout>
+
+## 最小示例
+
+好了，是时候动手了！实际上，既然我们要深入 ARM 领域，让我们撸起袖子干吧！
+
+你可能首先想要查看的是 [Apple 的虚拟化框架文档](https://developer.apple.com/documentation/hypervisor?language=objc)。嘿，先别点击那个链接，跟着我。你真的不想一开始就深入那个文档。Apple 的文档说实话相当糟糕。你会花一半时间猜测他们到底想表达什么。所以现在先忘了那个——我要以正确的方式带你了解这个框架。
+
+### 工作流程
+
+这里有一个图展示了如何使用虚拟化 API 实际运行虚拟机。非常简单：
+
+![虚拟化 API 应用程序工作流程](images/simpple/HF_workflow.png)
+
+1. 从 `hv_vm_create` 开始启动 VM。
+2. 然后 `hv_vm_map` 给它一些内存。
+3. Apple 将每个 vCPU 绑定到一个 macOS 线程，所以你需要 `pthread_create` 来为你想要的 vCPU 数量生成线程。
+4. 在每个线程内，你调用 `hv_vcpu_create` 来设置 vCPU，然后 `hv_vcpu_run` 来启动它。
+5. 销毁 vCPU，取消映射内存，销毁 VM。
+
+实际上，这就是这个框架给你的全部。我没有提到中断，但我们暂时不会涉及那些。
+
+现在，让我们写一些实际的代码，看看效果如何？
+
+### Rust 绑定
+
+在我们开始之前还有一件事：虚拟化框架都是 C API，所以我们需要一些 Rust 绑定。当然，我们可以直接把它们扔给 [bindgen](https://github.com/rust-lang/rust-bindgen) 完事，但为什么要重新发明轮子？实际上有相当多的 Rust 绑定：
+
+| 项目 | 描述 | Apple Silicon 支持 |
+|---------|-------------|----------------------|
+| [saurvs/hypervisor-rs](https://github.com/saurvs/hypervisor-rs) | 虚拟化框架的早期 Rust 绑定 | ❌ |
+| [Impalabs/applevisor](https://github.com/Impalabs/applevisor) | 专门为 Apple Silicon 设计的 Rust 绑定 | ✅ |
+| [marysaka/ahv](https://github.com/marysaka/ahv) | 另一套 Apple Silicon 虚拟化绑定 | ✅ |
+| [RWTH-OS/xhypervisor](https://github.com/RWTH-OS/xhypervisor) | 古老的 `hypervisor-rs` 的分支，为 Apple Silicon 更新 | ✅ |
+| [cloud-hypervisor/hypervisor-framework](https://github.com/cloud-hypervisor/hypervisor-framework) | "高级" Rust 绑定（无文档） | ✅ |
+
+在撰写本文时，`ahv` 拥有最多的星星，这是选择依赖项的一个不错的标准。我试用了一下，感觉相当稳定。所以我们在整个项目中使用 `ahv` 绑定。
+
+<Dialog>
+剧透警告！我最终写了自己的 Rust 绑定，你会在后续系列中看到。
+</Dialog>
+
+终于到编码时间了！这是一个如何使用 `ahv` 绑定来使用虚拟化框架的最小示例。
+
+```rust
+use ahv::*;
+const CODE: hv_ipa_t = 0x20000;
+
+fn main() -> Result<()> {
+    let payload = [0x40, 0x00, 0x80, 0xd2]; // mov x0, #2
+    let mut vm = VirtualMachine::new(None)?;
+    let handle = vm.allocate_from(&payload)?;
+    vm.map(handle, CODE, MemoryPermission::EXECUTE)?;
+
+    let mut vcpu = vm.create_vcpu(None)?;
+    vcpu.set_register(Register::CPSR, 0x3c4)?; // EL1t
+    vcpu.set_register(Register::PC, CODE)?;
+
+    let _ = vcpu.run()?;
+    println!("x0 is {}", vcpu.get_register(Register::X0)?);
+    Ok(())
+}
+```
+
+这里发生的事情是：我们有一个 ARM 机器码载荷，只有一条指令——`mov x0, #2`。我们将这个载荷映射到地址 0x20000 的虚拟内存中。然后我们将 PC 寄存器指向载荷的开始，这样 CPU 就知道从哪里开始执行。点击运行，让它做它的事情，然后查看 `x0` 寄存器来看我们的结果。它应该打印 `x0 is 2`。
+
+让我们尝试一些更有趣的东西。这次，我们想要实际操作内存。我们已经有一个映射的内存区域用于我们的 `payload`，但如果我们想要做任何真正的加载/存储操作，我们需要另一块内存来玩。所以让我们创建一个并映射它。这个不需要是可执行的——只需要读写权限。
+
+```rust
+const DATA: hv_ipa_t = 0x40000;
+
+// 在 main 函数中：
+let data = vec![0u8; 1024]; // 1KB
+let data_handle = vm.allocate_from(&data)?;
+vm.map(data_handle, DATA, MemoryPermission::READ_WRITE)?;
+```
+
+现在我们可以更新我们的载荷来对这个内存做一些事情：
+
+```rust
+let payload = [
+	0x41, 0x05, 0x80, 0xd2, // mov x1, #42
+	0x82, 0x00, 0xa0, 0xd2, // mov x2, #0x40000
+	0x41, 0x00, 0x00, 0xf9, // str x1, [x2]
+	0x40, 0x00, 0x40, 0xf9, // ldr x0, [x2]
+];
+```
+
+其他的一切都保持不变。这次它应该打印 `x0 is 42`——我们将 42 存储到内存中，然后立即加载回来。经典。
+
+完整代码供你参考：
+
+```rust
+use ahv::*;
+const CODE: hv_ipa_t = 0x20000;
+const DATA: hv_ipa_t = 0x40000;
+
+fn main() -> Result<()> {
+    let payload = [
+        0x41, 0x05, 0x80, 0xd2, // mov x1, #42
+        0x82, 0x00, 0xa0, 0xd2, // mov x2, #0x40000
+        0x41, 0x00, 0x00, 0xf9, // str x1, [x2]
+        0x40, 0x00, 0x40, 0xf9, // ldr x0, [x2]
+    ];
+
+    let mut vm = VirtualMachine::new(None)?;
+    let payload_handle = vm.allocate_from(&payload)?;
+    vm.map(payload_handle, CODE, MemoryPermission::EXECUTE)?;
+
+    let data = vec![0u8; 1024]; // 1KB
+    let data_handle = vm.allocate_from(&data)?;
+    vm.map(data_handle, DATA, MemoryPermission::READ_WRITE)?;
+
+    let mut vcpu = vm.create_vcpu(None)?;
+    vcpu.set_register(Register::CPSR, 0x3c4)?; // EL1t
+    vcpu.set_register(Register::PC, CODE)?;
+
+    let _ = vcpu.run()?;
+    println!("x0 is {}", vcpu.get_register(Register::X0)?);
+    Ok(())
+}
+```
+
+我确信你渴望编写自己的代码并尝试这些东西。但要注意——有一个讨厌的陷阱：macOS 不会让任何随机的二进制文件使用虚拟化程序。你需要用 `com.apple.security.hypervisor` 权限签名你的二进制文件。你需要一个 `entitlements.plist` 文件——直接拿[这个](https://github.com/whexy/simpple-vm/blob/master/entitlements.plist)省点麻烦。然后用 `codesign` 签名你的二进制文件：
+
+```bash
+codesign --sign - --entitlements entitlements.plist ${BINARY_PATH}
+```
+
+## 生成载荷
+
+前面的例子工作得很好，但你可能想知道——我到底是怎么想出这些载荷的？我在脑子里组装机器码还是什么的？
+
+当然不是！好吧，其实我_可以_做到——在本科时一门荒唐的嵌入式开发课程的期末考试中我确实不得不这样做。但对于这些例子，我只是使用了这个[在线汇编器](https://shell-storm.org/online/Online-Assembler-and-Disassembler)来生成载荷。只要确保你选择"AArch64"就可以了。
+
+但我们绝对不想每次想测试新东西时都复制粘贴载荷。那会很快变得无聊。所以让我介绍我的最好朋友：[Keystone](https://www.keystone-engine.org/)。Keystone 是一个轻量级汇编器，可以为我们生成载荷而无需所有手工操作。最棒的部分？你可以直接从你的 Rust 程序中调用它。所以让我们直接将它集成到我们的 VMM 中，让我们的生活更轻松。
+
+```rust
+use keystone_engine::{Arch, Keystone, Mode};
+
+fn gen_payload() -> Result<Vec<u8>> {
+    let engine = Keystone::new(Arch::ARM64, Mode::LITTLE_ENDIAN)?;
+    let asm = r#"
+        mov x0, #42
+        add x0, x0, #3
+    "#;
+    let result = engine.asm(asm.to_string(), 0)?;
+    Ok(result.bytes)
+}
+
+fn main() -> Result<()> {
+    let payload = gen_payload()?;
+    // ... 剩余代码 ...
+}
+```
+
+要让 Keystone 在 Rust 中编译，我们需要链接到 C++ 运行时。这有点麻烦，但查看我的 [build.rs](https://github.com/whexy/simpple-vm/blob/master/build.rs) 来看如何正确地让 Cargo 处理它。
+
+我们的下一步是使用这个框架来加载实际的裸机程序。在即将到来的系列中，我将演示如何加载 `u-boot` 项目。一旦我们有了引导加载程序，我们的最终目标就是加载 Linux！
