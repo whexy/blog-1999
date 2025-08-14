@@ -44,6 +44,7 @@ export function middleware(request: NextRequest) {
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/images/") ||
     pathname.startsWith("/img/") ||
+    pathname.startsWith("/notion-img") ||
     pathname.startsWith("/dyn") ||
     pathname.startsWith("/friends") ||
     pathname.includes(".")

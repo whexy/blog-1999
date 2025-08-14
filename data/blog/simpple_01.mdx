@@ -22,7 +22,11 @@ Just like Linux has KVM, macOS gives you the Hypervisor Framework. KVM is a devi
 So in this series of blog posts, I'm going to build a VMM using Apple's Hypervisor Framework, in Rust. The whole point is to keep it educational—I'll strip away all the unnecessary complexity and make things as straightforward as possible. You'll quickly see how clean, elegant, and _enjoyable_ it can be, once you get rid of all the x86 cruft and embrace the future.
 
 <Callout title="Project naming" icon="🍎">
-OK, I'm actually pretty proud of the naming this time. I'm calling it `simpple-vm`. First, it's **simple**—that's the whole point. Second, it's for Apple hardware. And third, because virtualization is basically **sim**ulating the A**pple** silicon. See what I did there? The triple 'p' ties it all together.
+  OK, I'm actually pretty proud of the naming this time. I'm calling
+  it `simpple-vm`. First, it's **simple**—that's the whole point.
+  Second, it's for Apple hardware. And third, because virtualization
+  is basically **sim**ulating the A**pple** silicon. See what I did
+  there? The triple 'p' ties it all together.
 </Callout>
 
 ## A minimal example
@@ -43,7 +47,6 @@ Here's a figure showing how to actually run a virtual machine with the Hyperviso
 4. Inside each thread, you call `hv_vcpu_create` to set up the vCPU, then `hv_vcpu_run` to start it.
 5. Destroy vCPUs, unmap memory, destroy VM.
 
-
 Actually, that's pretty much all this framework gives you. I didn't mention interrupts, but we're not going to touch those for a while.
 
 Now, how about write some actual code and see how it goes?
@@ -52,18 +55,19 @@ Now, how about write some actual code and see how it goes?
 
 One more thing before we dive in: the Hypervisor Framework is all C APIs, so we need some Rust bindings. Sure, we could just throw them to [bindgen](https://github.com/rust-lang/rust-bindgen) and call it a day, but why reinvent the wheel? There are actually quite a few Rust bindings floating around:
 
-| Project | Description | Apple Silicon Support |
-|---------|-------------|----------------------|
-| [saurvs/hypervisor-rs](https://github.com/saurvs/hypervisor-rs) | Early Rust bindings for Hypervisor Framework | ❌ |
-| [Impalabs/applevisor](https://github.com/Impalabs/applevisor) | Rust bindings specifically for Apple Silicon | ✅ |
-| [marysaka/ahv](https://github.com/marysaka/ahv) | Another set of Apple Silicon Hypervisor bindings | ✅ |
-| [RWTH-OS/xhypervisor](https://github.com/RWTH-OS/xhypervisor) | Fork of ancient `hypervisor-rs`, updated for Apple Silicon | ✅ |
-| [cloud-hypervisor/hypervisor-framework](https://github.com/cloud-hypervisor/hypervisor-framework) | "High level" Rust bindings (no docs) | ✅ |
+| Project                                                                                           | Description                                                | Apple Silicon Support |
+| ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | --------------------- |
+| [saurvs/hypervisor-rs](https://github.com/saurvs/hypervisor-rs)                                   | Early Rust bindings for Hypervisor Framework               | ❌                    |
+| [Impalabs/applevisor](https://github.com/Impalabs/applevisor)                                     | Rust bindings specifically for Apple Silicon               | ✅                    |
+| [marysaka/ahv](https://github.com/marysaka/ahv)                                                   | Another set of Apple Silicon Hypervisor bindings           | ✅                    |
+| [RWTH-OS/xhypervisor](https://github.com/RWTH-OS/xhypervisor)                                     | Fork of ancient `hypervisor-rs`, updated for Apple Silicon | ✅                    |
+| [cloud-hypervisor/hypervisor-framework](https://github.com/cloud-hypervisor/hypervisor-framework) | "High level" Rust bindings (no docs)                       | ✅                    |
 
 At the time of writing, `ahv` has the most stars, which is as good a metric as any for picking dependencies. I played around with it a bit and it feels pretty solid. So we're going with `ahv` bindings for this whole project.
 
 <Dialog>
-Spoiler alert! I eventually write my own Rust bindings, which you'll see in a later series.
+  Spoiler alert! I eventually write my own Rust bindings, which you'll
+  see in a later series.
 </Dialog>
 
 Finally, coding time! Here is a minimal example of how to use Hypervisor Framework with `ahv` bindings.
