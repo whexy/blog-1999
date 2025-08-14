@@ -7,7 +7,12 @@ import Footer from "@/components/UI/Website/Footer";
 import React from "react";
 import Analytics from "@/components/Scripts/Analytics";
 
-import { Lato, Fira_Sans, Noto_Sans_SC, JetBrains_Mono } from "next/font/google";
+import {
+  Lato,
+  Fira_Sans,
+  Noto_Sans_SC,
+  JetBrains_Mono,
+} from "next/font/google";
 
 const lato = Lato({
   weight: ["300", "400", "700", "900"],
@@ -46,7 +51,7 @@ const fonts = [
   { name: "jetbrainsMono", variable: jetbrains_mono.variable },
 ] as const;
 
-const fontVariables = fonts.map((f) => f.variable).join(" ");
+const fontVariables = fonts.map(f => f.variable).join(" ");
 
 export default function RootLayout({
   children,
@@ -82,6 +87,6 @@ export const metadata = {
   },
 };
 
-export const viewpoint = {
+export const viewport = {
   themeColor: "#171717",
 };

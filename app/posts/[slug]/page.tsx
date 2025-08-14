@@ -1,7 +1,8 @@
 import components from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
 import { getBlogPosts } from "@/lib/blog";
-import { MDXRemote } from "next-mdx-remote/rsc";
+import { compile, run } from "@mdx-js/mdx";
+import * as runtime from "react/jsx-runtime";
 
 // rehype and remark plugins
 import rehypePrism from "rehype-prism-plus";
@@ -12,34 +13,31 @@ import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
 import pangu from "remark-pangu";
 
-export default function Post({
+export default async function Post({
   params,
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const allBlogs = getBlogPosts();
-  const post = allBlogs.find(p => p.slug === params.slug);
+  const post = allBlogs.find(p => p.slug === slug);
+
+  // Compile and render MDX content
+  const compiled = await compile(post.content, {
+    outputFormat: "function-body",
+    rehypePlugins: [
+      rehypeCodeTitles,
+      rehypePrism as unknown,
+      rehypeKatex as unknown,
+    ],
+    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages, pangu],
+  });
+
+  const { default: MDXContent } = await run(compiled, runtime);
+
   return (
     <>
-      <MDXRemote
-        components={{ ...components }}
-        source={post.content}
-        options={{
-          mdxOptions: {
-            rehypePlugins: [
-              rehypeCodeTitles,
-              rehypePrism as unknown,
-              rehypeKatex as unknown,
-            ],
-            remarkPlugins: [
-              remarkGfm,
-              remarkMath,
-              remarkUnwrapImages,
-              pangu,
-            ],
-          },
-        }}
-      />
+      <MDXContent components={components} />
     </>
   );
 }
@@ -49,9 +47,14 @@ export async function generateStaticParams() {
   return allBlogs.map(p => ({ slug: p.slug }));
 }
 
-export function generateMetadata({ params }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
   const allBlogs = getBlogPosts();
-  const post = allBlogs.find(p => p.slug === params.slug);
+  const post = allBlogs.find(p => p.slug === slug);
   return {
     title: post.metadata.title,
     description: post.metadata.summary,

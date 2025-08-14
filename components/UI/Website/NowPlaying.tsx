@@ -35,7 +35,7 @@ const NowPlaying = () => {
   });
   if (data && data.isPlaying)
     return (
-      <div className="select-none pb-2 pt-2 max-w-lg">
+      <div className="max-w-lg select-none pb-2 pt-2">
         <div className="mx-auto flex items-center justify-between rounded-xl bg-black-readable px-3 py-2">
           <div className="flex items-center">
             <Image

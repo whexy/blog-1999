@@ -29,7 +29,10 @@ module.exports = {
           ...defaultTheme.fontFamily.sans,
         ],
         default: [...defaultTheme.fontFamily.sans],
-        mono: ["var(--font-jetbrains)", ...defaultTheme.fontFamily.mono],
+        mono: [
+          "var(--font-jetbrains)",
+          ...defaultTheme.fontFamily.mono,
+        ],
       },
       colors: {
         white: {

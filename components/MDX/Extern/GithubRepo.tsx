@@ -17,7 +17,7 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
 
   if (!ghrepo || !ghrepo.owner) {
     return (
-      <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 text-red-500">
+      <div className="not-prose transtion-all mx-auto max-w-xl font-sans text-red-500 duration-300">
         <p>GitHub repository data could not be loaded.</p>
       </div>
     );

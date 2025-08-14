@@ -80,4 +80,5 @@ On Linux, `posix_spawn()` is just implemented with `fork()` and `exec()`. It wil
 This is the solution we finally adopted. It enables fast creation of new processes, avoids invalid copies of fork, and eliminates the need to create processes in advance, regardless of the pool size.
 
 [^1]: [Multi-processing in Python; Process vs Pool | by Nikhil Verma | Medium](https://lih-verma.medium.com/multi-processing-in-python-process-vs-pool-5caf0f67eb2b)
+
 [^2]: [Minimizing Memory Usage for Creating Application Subprocesses (archive.org)](https://web.archive.org/web/20190922113430/https://www.oracle.com/technetwork/server-storage/solaris10/subprocess-136439.html)

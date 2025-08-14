@@ -29,9 +29,7 @@ const DynJump = () => {
           <FaceSmileIcon className="my-2 h-8 w-8 rounded-lg bg-green-100 p-1 text-green-500" />
           <div>
             <h2 className="font-title text-xl font-semibold">Dyn</h2>
-            <p className="text-sm">
-              Less serious contents.
-            </p>
+            <p className="text-sm">Less serious contents.</p>
           </div>
         </Link>
         <Link

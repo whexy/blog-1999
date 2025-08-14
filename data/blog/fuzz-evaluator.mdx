@@ -6,7 +6,10 @@ cat: "Fuzzing"
 ---
 
 <Callout title="作者声明" icon="✍️">
-本文主要是对 fuzz-evaluator 的报告内容的总结，不代表本人观点。如需阅读原文，请访问 [SoK: Prudent Evaluation Practices for Fuzzing](https://www.computer.org/csdl/proceedings-article/sp/2024/313000a137/1Ub23V26Svm)。本人对文章以外可能产生的任何解读误差不负责任。文中的数据和观点仅供参考，不构成任何建议与意见。
+  本文主要是对 fuzz-evaluator
+  的报告内容的总结，不代表本人观点。如需阅读原文，请访问 [SoK: Prudent
+  Evaluation Practices for
+  Fuzzing](https://www.computer.org/csdl/proceedings-article/sp/2024/313000a137/1Ub23V26Svm)。本人对文章以外可能产生的任何解读误差不负责任。文中的数据和观点仅供参考，不构成任何建议与意见。
 </Callout>
 
 Fuzzing 指的是软件安全领域的“模糊测试”，是一种暴力找洞的测试方法。模糊测试随机产生一些输入，然后观察程序的行为。如果程序在某个输入上表现出异常，那么这个输入就可能发现了一个“漏洞”。虽然业内提出了“白盒”和“灰盒”的测试方法以增加可控性，但**随机性**仍然是模糊测试的核心特点。
@@ -30,12 +33,17 @@ Fuzzing 指的是软件安全领域的“模糊测试”，是一种暴力找洞
 ## 背景介绍
 
 <Callout title="CISPA" icon="🇩🇪">
-上文中提到的德国 CISPA 团队在 Fuzzing 领域有比较高的声誉和影响力。他们和 Google Fuzzing 团队也保持着良好关系，使得他们能获得大量真实可靠的测试数据。
+  上文中提到的德国 CISPA 团队在 Fuzzing
+  领域有比较高的声誉和影响力。他们和 Google Fuzzing
+  团队也保持着良好关系，使得他们能获得大量真实可靠的测试数据。
 </Callout>
 
-
 <Callout title="Google & Fuzzing" icon="🔍">
-谷歌在 Fuzzing 领域有着丰富的经验和资源。他们的 OSS-Fuzz 项目是业界公认的 Fuzzing 平台，也是 Fuzzing 领域的标杆。他们的研究人员也参与开发或维护了 AFL、honggfuzz、libAFL、syzkaller 等著名的 Fuzzing 工具，以及 Fuzzing Test Suite（FTS）、FuzzBench 等测试套件。
+  谷歌在 Fuzzing 领域有着丰富的经验和资源。他们的 OSS-Fuzz
+  项目是业界公认的 Fuzzing 平台，也是 Fuzzing
+  领域的标杆。他们的研究人员也参与开发或维护了
+  AFL、honggfuzz、libAFL、syzkaller 等著名的 Fuzzing 工具，以及
+  Fuzzing Test Suite（FTS）、FuzzBench 等测试套件。
 </Callout>
 
 最近，我们关注到在 GitHub 有一个名为 [fuzz-evaluator](https://github.com/fuzz-evaluator) 的账号。它一直在更新一些 Fuzzing 论文的复现结果。这些复现结果都是以 GitHub 仓库的形式发布的，包括了复现的代码、数据、实验环境等。我们也并不惊讶的发现，这些复现结果往往和原论文的实验结果有出入。私下里，我们都叫它“Fuzzing 警察”。
@@ -68,7 +76,6 @@ Fuzzing 指的是软件安全领域的“模糊测试”，是一种暴力找洞
 
 - 有 17% 的论文使用了 LAVA-M，5% 的论文使用了 CGC。这是两个过时的测试套件；
 - 10% 使用 FuzzBench，8% 使用 FTS，4% 使用 Magma，1% 使用 UniBench。这些测试套件是比较新的，也是业界公认的测试套件。
-
 
 ### 比较对象
 
@@ -115,7 +122,7 @@ Fuzzing 指的是软件安全领域的“模糊测试”，是一种暴力找洞
 尽管使用了代码覆盖率，也有一些论文使用了不公平或无法复现的比较方式。例如：
 
 - DARWIN (NDSS'23 distinguished paper) 测试时没有提供 baseline，其实只比 AFL 高出 1.73%。它声称在 15 个 target 上领先，实际上只有 4 个；
-- FUZZJIT (USENIX'23)  声称比 SOTA 高 33% 代码覆盖，实际低了 12%；
+- FUZZJIT (USENIX'23) 声称比 SOTA 高 33% 代码覆盖，实际低了 12%；
 - EcoFuzz (USENIX'20) 使用了“路径数”作为指标，实际代码覆盖（分支覆盖）比所有文中的比较对象都低；
 - PolyFuzz (USENIX'23) 使用了不同的初始种子进行比较，使自己获得了 273% 的初始优势；
 - FishFuzz (USENIX'23) 测量覆盖率时使用了不公平的插桩，它声称的 8.44% 提升实际只有 1.69%。
@@ -126,7 +133,7 @@ Fuzzing 指的是软件安全领域的“模糊测试”，是一种暴力找洞
 
 放卫星、吹大牛，这些似乎已经成为了 Fuzzing 领域的常态。现在，一些真正有价值的研究被埋没在了这些噱头之下。我们需要更多的人站出来，对不负责任的研究进行批判。我们更需要更多的人站出来，对那些有价值的研究进行肯定。**故事谁都会讲，道理谁都能说得高大上，公式谁都能列一大堆，但你能把 Benchmark 里的所有目标测完吗？你能不挑 case 吗？你能在均值上提升 3% 的分支覆盖率吗？**
 
-最后，比起关起门来自己做实验，我们更需要的是公开透明的公证机制。例如，Google 的 FuzzBench 项目就是一个很好的例子。除了一个非常不错的测试集，它还提供了一个公开公平的测试环境。免费的谷歌云机器，写几行 Dockerfile 就可以在上面跑实验（不需要开源，在 Docker 里提供二进制就行）。我建议所有已发表的 Fuzzing 论文都应该在 FuzzBench 上公开测试，*免得工业界瞧不起咱们*。我们起码可以避免一些不负责任的研究者通过一些小把戏来忽悠审稿人。
+最后，比起关起门来自己做实验，我们更需要的是公开透明的公证机制。例如，Google 的 FuzzBench 项目就是一个很好的例子。除了一个非常不错的测试集，它还提供了一个公开公平的测试环境。免费的谷歌云机器，写几行 Dockerfile 就可以在上面跑实验（不需要开源，在 Docker 里提供二进制就行）。我建议所有已发表的 Fuzzing 论文都应该在 FuzzBench 上公开测试，_免得工业界瞧不起咱们_。我们起码可以避免一些不负责任的研究者通过一些小把戏来忽悠审稿人。
 
 再比如，去参加公开的 Fuzzing 比赛，也是一个很好的方法。例如近两年一直在举办的 [SBFT Fuzzing Competition](https://sbft24.github.io/tools/fuzzing)。2023 年的获奖者是 Hastefuzz，只是关了 sanitizer 就把所有人甩在后面，这不得让那些动不动提升 20% 的文章汗颜？2024 年的获奖者是 BandFuzz，没开源，暂时不知道是谁写的，也不知道他们是不是也会在文章里吹大牛。但是，至少他们的实验结果是公开的，是可复现的。
 

@@ -10,6 +10,7 @@ E‐paper (a.k.a. “E‐Ink”) displays are perfect for low‐power and daylig
 ## Hardware Setup
 
 We’ll assume:
+
 - A Waveshare‐style 7.5″ e‐paper module with SPI interface (resolution 800×480).
 - A Raspberry Pi Pico 2 running MicroPython.
 
@@ -19,19 +20,21 @@ We need to use the SPI interface of the Pico. The Pico 2 has two SPI interfaces:
 
 Below are my pin connections. The e‐paper typically has the following signals:
 
-| e‐Paper Pin | Description | Pico Pin for SPI0 Example |
-| --- | --- | --- |
-| VCC | 3.3 V power | 3V3 (e.g. Pin 36) |
-| GND | Ground | GND (e.g. Pin 38) |
-| DIN | MOSI (SPI TX) | SPI0 TX / GP7 (Pin 10) |
-| CLK | SCLK (SPI CLK) | SPI0 SCK / GP6 (Pin 9) |
-| CS | SPI CS | SPI0 CSn / GP5 (Pin 7) |
-| DC | Data/Command | GP8 (Pin 11) |
-| RST | Reset | SPI0 RST / GP9 (Pin 12) |
-| BUSY | Busy signal | GP10 (Pin 14) |
+| e‐Paper Pin | Description    | Pico Pin for SPI0 Example |
+| ----------- | -------------- | ------------------------- |
+| VCC         | 3.3 V power    | 3V3 (e.g. Pin 36)         |
+| GND         | Ground         | GND (e.g. Pin 38)         |
+| DIN         | MOSI (SPI TX)  | SPI0 TX / GP7 (Pin 10)    |
+| CLK         | SCLK (SPI CLK) | SPI0 SCK / GP6 (Pin 9)    |
+| CS          | SPI CS         | SPI0 CSn / GP5 (Pin 7)    |
+| DC          | Data/Command   | GP8 (Pin 11)              |
+| RST         | Reset          | SPI0 RST / GP9 (Pin 12)   |
+| BUSY        | Busy signal    | GP10 (Pin 14)             |
 
 <Callout title="Note for GPIOs" icon="👉">
-    For DC, RST, BUSY, you can actually use any GPIOs you want. I just randomly picked GP8, GP9, GP10. Of course, if you want to use other GPIOs, you need to change the code accordingly.
+  For DC, RST, BUSY, you can actually use any GPIOs you want. I just
+  randomly picked GP8, GP9, GP10. Of course, if you want to use other
+  GPIOs, you need to change the code accordingly.
 </Callout>
 
 ## MicroPython Script on the Pico
@@ -134,7 +137,7 @@ class EPD_800x480:
         self.read_busy()
 
     def init(self):
-        """Initialize the display (power on, set registers, etc.). 
+        """Initialize the display (power on, set registers, etc.).
            Make sure to match your e‐paper’s datasheet or Waveshare example code!
         """
         self.hardware_reset()
@@ -147,7 +150,7 @@ class EPD_800x480:
         # This is a placeholder; adapt to your hardware:
         self.send_command(0x01)  # POWER SETTING
         self.send_data(0x07)
-        self.send_data(0x07)  
+        self.send_data(0x07)
         self.send_data(0x3f)
         self.send_data(0x3f)
 
@@ -202,7 +205,7 @@ class EPD_800x480:
 
     def display(self, black_buffer):
         """black_buffer is a bytes/bytearray of 48,000 bytes (800x480 // 8).
-           We'll invert each byte on the fly, because the hardware often 
+           We'll invert each byte on the fly, because the hardware often
            expects 1=white and 0=black.
         """
         size = (self.width * self.height) // 8

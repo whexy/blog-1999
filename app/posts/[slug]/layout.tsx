@@ -18,10 +18,11 @@ export default async function BlogLayout({
   params,
 }: {
   children: React.ReactNode;
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
+  const { slug } = await params;
   const allBlogs = getBlogPosts();
-  const post = allBlogs.find(p => p.slug === params.slug);
+  const post = allBlogs.find(p => p.slug === slug);
   return (
     <div>
       <ScrollUp />

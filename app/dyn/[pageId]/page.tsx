@@ -8,8 +8,13 @@ const notion = new NotionAPI();
 export const dynamic = "force-dynamic",
   revalidate = 0;
 
-export default async function Page({ params }) {
-  const recordMap = await notion.getPage(params.pageId);
+export default async function Page({
+  params,
+}: {
+  params: Promise<{ pageId: string }>;
+}) {
+  const { pageId } = await params;
+  const recordMap = await notion.getPage(pageId);
   return (
     <NotionRenderer
       darkMode={false}
@@ -19,8 +24,13 @@ export default async function Page({ params }) {
   );
 }
 
-export async function generateMetadata({ params }) {
-  const recordMap = await notion.getPage(params.pageId);
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ pageId: string }>;
+}) {
+  const { pageId } = await params;
+  const recordMap = await notion.getPage(pageId);
   const title = getPageTitle(recordMap);
 
   return {

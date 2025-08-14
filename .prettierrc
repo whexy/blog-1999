@@ -3,9 +3,7 @@
   "bracketSameLine": true,
   "bracketSpacing": true,
   "insertPragma": false,
-  "plugins": [
-    "prettier-plugin-tailwindcss"
-  ],
+  "plugins": ["prettier-plugin-tailwindcss"],
   "printWidth": 70,
   "proseWrap": "preserve",
   "requirePragma": false,
