@@ -53,6 +53,7 @@ export default async function BlogLayout({
               <Series
                 slug={post.slug}
                 series={post.metadata.series}
+                lang={lang}
               />
             )}
             {children}
@@ -60,6 +61,7 @@ export default async function BlogLayout({
               <Series
                 slug={post.slug}
                 series={post.metadata.series}
+                lang={lang}
               />
             )}
             <License />

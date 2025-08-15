@@ -3,7 +3,7 @@ import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { parseISO } from "date-fns";
 import { getBlogPosts } from "@/lib/blog";
 
-const Series = ({ slug, series }) => {
+const Series = ({ slug, series, lang = "en" }) => {
   const seriesPosts = getBlogPosts()
     .filter(p => p.metadata.series === series)
     .sort(
@@ -18,25 +18,59 @@ const Series = ({ slug, series }) => {
   const thisSlug = slug;
 
   return (
-    <div>
-      <div className="not-prose relative m-4 break-inside-avoid-page rounded-lg border-2 border-violet-200/80 bg-violet-200/5 p-4 font-sans">
-        <div className="absolute left-0 top-0 flex items-center justify-center space-x-2 border-b border-r border-violet-300/80 bg-violet-300/10 px-2 font-bold">
-          <BookOpenIcon className="h-6 w-6" />
-          <div>{series}</div>
+    <div className="not-prose relative m-4">
+      <div className="relative overflow-hidden rounded-2xl border border-black/5 bg-white/10 p-6 shadow-sm shadow-black/5 backdrop-blur-md">
+        {/* Background decoration */}
+        <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-red-100/20 via-red-50/10 to-orange-100/20" />
+        <div className="absolute -right-8 -top-8 -z-10 h-32 w-32 rounded-full bg-gradient-to-r from-red-200/20 to-orange-200/20 blur-2xl" />
+        <div className="absolute -bottom-6 -left-6 -z-10 h-24 w-24 rounded-full bg-gradient-to-r from-red-200/15 to-orange-200/15 blur-xl" />
+
+        {/* Glass shine effect */}
+        <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60" />
+
+        {/* Header */}
+        <div className="relative mb-6 flex items-center gap-3">
+          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-red-500/20 to-orange-500/20 backdrop-blur-sm">
+            <BookOpenIcon className="h-5 w-5 text-red-700" />
+          </div>
+          <h3 className="font-title text-lg font-semibold text-gray-800">
+            {series}
+          </h3>
         </div>
-        <ul className="list-inside list-decimal pt-6">
-          {seriesPosts.map(({ slug, title }) => (
-            <li
-              key={slug}
-              className={`${slug === thisSlug && "font-bold"}`}>
+
+        {/* Series list */}
+        <div className="relative space-y-2">
+          {seriesPosts.map(({ slug, title }, index) => {
+            const isActive = slug === thisSlug;
+            return (
               <Link
-                href={`/posts/${slug}`}
-                className="rounded-sm p-1 transition-all hover:bg-violet-800/5">
-                {title}
+                key={slug}
+                href={`/${lang}/posts/${slug}`}
+                className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
+                  isActive
+                    ? "bg-white/40 shadow-sm"
+                    : "hover:bg-white/20"
+                }`}>
+                <span
+                  className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-lg text-sm font-medium transition-all ${
+                    isActive
+                      ? "bg-gradient-to-br from-red-500 to-orange-600 text-white shadow-md"
+                      : "bg-white/30 text-gray-600 group-hover:bg-white/50"
+                  }`}>
+                  {index + 1}
+                </span>
+                <span
+                  className={`text-sm leading-tight ${
+                    isActive
+                      ? "font-semibold text-gray-900"
+                      : "text-gray-700 group-hover:text-gray-900"
+                  }`}>
+                  {title}
+                </span>
               </Link>
-            </li>
-          ))}
-        </ul>
+            );
+          })}
+        </div>
       </div>
     </div>
   );

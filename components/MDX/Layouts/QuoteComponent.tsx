@@ -2,32 +2,66 @@ import React from "react";
 
 const QuoteComponent = ({ cite, subcite, url, children }) => {
   return (
-    <div className="secondbg relative mx-2 break-inside-avoid-page rounded-lg px-2 py-4">
-      <div
-        className="absolute top-1 mr-2 text-3xl leading-none text-slate-500/20"
-        aria-hidden="true">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          className="h-14 w-14 fill-slate-500/20"
-          style={{ transform: "scale(-1, -1)" }}>
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path d="M18.62 18h-5.24l2-4H13V6h8v7.24L18.62 18zm-2-2h.76L19 12.76V8h-4v4h3.62l-2 4zm-8 2H3.38l2-4H3V6h8v7.24L8.62 18zm-2-2h.76L9 12.76V8H5v4h3.62l-2 4z" />
-        </svg>
-      </div>
-      <div className="pl-8 pr-2 text-sm">{children}</div>
-      {cite && (
-        <div className="not-prose pr-2 text-right opacity-70">
-          {url ? (
-            <a href={url}>
-              <p className="text-sm font-bold">{cite}</p>
-            </a>
-          ) : (
-            <p className="text-sm font-bold">{cite}</p>
-          )}
-          {subcite && <p className="text-base">{subcite}</p>}
+    <div className="not-prose relative mx-auto my-8 max-w-4xl break-inside-avoid-page">
+      {/* Main quote container */}
+      <div className="relative overflow-hidden rounded-3xl border border-white/20 bg-gradient-to-br from-gray-100/80 via-gray-50/60 to-gray-100/40 p-8 shadow-sm backdrop-blur-xl">
+        {/* Subtle inner glow */}
+        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-gray-50/30 via-transparent to-slate-50/20" />
+
+        {/* Large opening quote mark */}
+        <div className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-gray-300/60">
+          &ldquo;
         </div>
-      )}
+
+        {/* Quote content with proper spacing */}
+        <div className="relative ml-8 mr-4">
+          <blockquote className="text-base font-medium leading-relaxed tracking-wide text-gray-800">
+            {children}
+          </blockquote>
+
+          {/* Closing quote mark */}
+          <div className="ml-1 inline select-none font-serif text-2xl text-gray-300/60">
+            &rdquo;
+          </div>
+        </div>
+
+        {/* Citation section */}
+        {cite && (
+          <div className="relative ml-8 mt-6 border-l-2 border-gray-200/50 pl-4">
+            {url ? (
+              <a
+                href={url}
+                className="group block transition-all duration-200 hover:translate-x-1"
+                target="_blank"
+                rel="noopener noreferrer">
+                <div className="text-sm font-semibold text-gray-600 transition-colors group-hover:text-gray-800">
+                  — {cite}
+                </div>
+                {subcite && (
+                  <div className="mt-0.5 text-sm text-gray-500 transition-colors group-hover:text-gray-600">
+                    {subcite}
+                  </div>
+                )}
+              </a>
+            ) : (
+              <div>
+                <div className="text-sm font-semibold text-gray-600">
+                  — {cite}
+                </div>
+                {subcite && (
+                  <div className="mt-0.5 text-sm text-gray-500">
+                    {subcite}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
+        {/* Decorative elements */}
+        <div className="absolute bottom-4 right-4 h-16 w-16 rounded-full bg-gradient-to-br from-gray-400/40 to-slate-100/40 blur-xl" />
+        <div className="absolute bottom-8 left-4 h-12 w-12 rounded-full bg-gradient-to-br from-gray-400/30 to-slate-100/30 blur-lg" />
+      </div>
     </div>
   );
 };
