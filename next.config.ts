@@ -2,6 +2,19 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   reactStrictMode: true,
+  headers: async () => {
+    return [
+      {
+        source: '/giscus.css',
+        headers: [
+          { key: 'Access-Control-Allow-Origin', value: 'https://giscus.app' },
+          { key: 'Access-Control-Allow-Methods', value: 'GET, OPTIONS' },
+          { key: 'Access-Control-Allow-Headers', value: 'Origin, Content-Type, Accept' },
+          { key: 'Timing-Allow-Origin', value: 'https://giscus.app' },
+        ],
+      },
+    ];
+  }, 
   images: {
     remotePatterns: [
       {
