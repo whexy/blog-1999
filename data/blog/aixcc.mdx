@@ -1,0 +1,250 @@
+---
+title: "We lost the AIxCC. So, what's now?"
+publishDate: 2025-08-21
+summary: "Two years, seven million dollars on the table, and in the end, we lost."
+cat: "AIxCC"
+lang: en
+---
+
+Two years, seven million dollars on the table, and in the end, we lost.
+
+I’ve been bragging about this for a long time: “We’re participating in a competition. We pulled in basically all the students from our research lab, plus collaborators from other universities, to make it happen. The competition lasts a full two years, and we’re all in.”
+
+Some of you were skeptical, like, _“How can you guys devote two years to a competition when you still have PhD research commitments?”_
+
+To be fair, for us this _is_ research. Nobody had really done work in this area before, and research is all about tackling problems that no one else has tried yet. Well, I’d better introduce the competition for those who aren’t familiar.
+
+<Callout title="AIxCC" icon="🐞">
+AIxCC, short for the **AI Cybersecurity Challenge**, is a competition hosted by DARPA and later joined by ARPA-H. The setup is simple to say but hard to do: you’re handed a code repository with security bugs that the organizers secretly injected. Your mission is to build a system that can find those bugs, figure out how to trigger them, and then fix them.
+
+Here’s the catch: **you don’t get to do any of that yourself.** It’s a fully automated, black-box competition. No human is allowed to inspect the project or review the code. You write your system, submit it, and from that point on, it’s the system that does the job, completely on its own. All you can do is sit back and watch it run, with zero interference in between.
+</Callout>
+
+So our job shifted from _being_ security experts to _building_ a security expert system (that might replace our job one day). In the competition, this system was called a Cybersecurity Reasoning System (CRS). A ton of work, right? Interesting. Challenging. Exciting. And if we actually pull it off, it can change the security community’s mindset about AI. It might even spark a new research trend, or maybe even a whole new field. That’s one big reason we wanted to participate.
+
+Second reason, the prize money wasn’t small: one million to kick things off, two million for reaching the finals, and four million for the winner. That’s a total of seven million dollars on the table.
+
+A huge research opportunity, plus the hope for serious pile of money. That’s how our two-year journey began.
+
+<Dialog>
+To be fair, we did get the first million as a startup award, and then another two million as finalists. So this post isn’t all doom and gloom.
+</Dialog>
+
+## The Journey
+
+I first heard about this competition in the winter of 2023. At the time, I was in the second year of my PhD. The first year had been rough: lots of self-doubt, lots of failed experiments. By that summer, I was almost convinced my research had hit a dead end.
+
+I had tried using reinforcement learning to replace the heuristic-based seed selection in AFL. That went nowhere. Turns out seed selection doesn’t matter that much in fuzzing. So I pivoted: what if reinforcement learning could _run_ fuzzers instead? To my surprise, the first prototype outperformed AFL++ on FuzzBench coverage. I got excited, quickly wrapped up the system, submitted it to the SBFT fuzzing competition in January 2024, and won first prize.
+
+<GithubRepo repo="whexy/bandfuzz" />
+
+Our PI, Xinyu, was thrilled. At that time, the lab was split into two groups: one focused on system security research like kernel pwn, and the other on AI security like backdoor attacks. BandFuzz was the first crossover project that brought AI knowledge into security tools. It proved we had the ability to take on the DARPA competition.
+
+Then the rules for the semi-final arrived. Finding bugs alone wasn’t enough, we had to produce a POC, an actual program input that triggered the bug. That shifted everything. Suddenly fuzzing became central to the competition, and from that point on, I was in charge of it, all the way until the end.
+
+On February 28, 2024, after an all-nighter, we had our first prototype. Fetch the repo. Build it. Run fuzzing. Get a POC. Feed it into an LLM. Generate a diff. Rerun the patch. Confirm the bug was fixed.
+
+<Callout title="Timeline" icon="⏰">
+- 6 AM — Xinyu walked into the lab and found us still debugging.
+- 7 AM — I drove everyone home, collapsed into bed, and woke up to a parking ticket.
+</Callout>
+
+From there, everything escalated. The prototype worked, and suddenly new teams sprang up: kernel fuzzing, static analysis, directed fuzzing, Java, patching, integration.
+
+Everyone was in motion. Writing CodeQL. Building protobufs. Hacking kernel tools. Training LLM seed generators. Gluing pipelines. Setting up databases. Busy mornings. Daily stand-ups. Mountains of Uber Eats.
+
+But we hadn’t planned well. One month before the deadline, half the components still weren’t merged. So I became the glue — flew from Chicago to Salt Lake City, sat with the integration team, and pulled the system together.
+
+Bugs piled up. Versions jumped from 0.0.1 to 2.3.2. The system crashed every 20 seconds. Yelling. Fixing. Finally stable. Test. Submit. Celebrate.
+
+And then — the **luckiest** thing ever happened. The submission deadline got delayed. GitHub’s servers went down right at the cutoff, and many teams couldn’t submit. The organizers extended the deadline to 9 AM the next morning.
+
+At 6 AM, my phone rang. A teammate had found a serious bug: one SQL query might stop us from generating new patches after its first run. If that was true, our entire system would fail in the real evaluation.
+
+Emergency call. Everyone woke up. Laptops open, eyes half-shut, but hands flying on keyboards. Debugging, testing, patching. The clock kept ticking. Finally, **seconds** before the new deadline, we pushed a fresh Docker image to fix it.
+
+## Semi-Final at Def Con 32
+
+The semi-final results were announced at DEF CON 32, in August 2024, in Las Vegas. It was my first time ever in Vegas.
+
+By then, a full month had passed since we submitted. We had to wait that long just to see the results. DARPA really wanted to make it dramatic. They even built a little “town” inside DEF CON, with fake trains you could ride that rattled and shook, like something out of Disneyland. The whole competition was broadcast with flashy visualizations. A giant screen displayed **Achievements**: whenever a team was the first to find a bug (by submitting a correct PoV) or land a patch (a correct fix), a golden badge would pop up. When we showed up early that first morning, we were the only team with golden badges.
+
+The rest of DEF CON was fun too. We even went to the Sphere to see a movie. Our team stayed at the top of the achievement board, so I didn’t feel much worry about making it to the finals.
+
+<Dialog>
+At least, that’s how I felt. One of our teammate was so nervous he grabbed a T-shirt from SHELLPHISH and sat in the hall pretending to be one of their members.
+</Dialog>
+
+Our team name is **42-b3yond-6ug**. The nice thing was, we were the only team whose name started with a number, so whenever organizers announced anything alphabetically, we were always first. When it came time to announce the finalists, we didn’t even have time to feel nervous.
+
+Seeing the semi-final results, we felt confident. We were the only team to find a bug in the Linux kernel. We were strong at bug-finding — thanks to fuzzing — and we had racked up plenty of achievement badges.
+
+## A side story
+
+Not long after we made it into the finals, I also stepped into my third year as a PhD student. There was a short pause before the organizers released the rules for the final round. During that break, I spent two months writing a paper on fuzzing seed generation with large language models — the very same tool I built and used in the semi-final. The paper came back with a strong rejection from the academic community: _“LLM is not your contribution.”_
+
+To make things worse, my BandFuzz paper got scooped. We were so busy that we didn’t even notice until another group published a paper at a top conference — using the exact same method as ours.
+
+<Dialog>
+That was the moment I realized the academia wasn't ready for this. Still stuck on heuristics, still gatekeeping, still blind to what was coming.
+</Dialog>
+
+What neither the academic community, nor even we, fully saw was what was coming next. In the semi-finals, we had relied on GPT-4o and Claude-3. But within just a year, the landscape exploded: GPT-o1, Claude 3.5, GPT-o3, Claude-4, GPT-4.1, Claude-4.1, GPT-5. The models were racing ahead. Suddenly, even the most AI-skeptical researchers had no choice but to keep up or risk being left behind. Everyone wanted to be part of it.
+
+There was no better opportunity than AIxCC to continue “being part of it”: a stage that brought together universities, industry, government, and the media, all focused on AI and software security. So we kept going.
+
+## The journey, Sequel
+
+In January 2025, I finally received the rules for the final competition, and they were shockingly different from the semi-final.
+
+<Callout title="AIxCC Final Rules" icon="⚖️">
+First, the final would stretch across ten full days. Our system wasn’t just solving challenges anymore; it had to survive constant pressure, handle failures, and recover from crashes without human intervention.
+
+Second, our compute budget jumped from the three 64-core servers we had before to \$85,000 worth of Azure credits. That completely changed the game: we now had to design, scale, and manage our own infrastructure.
+
+Then came the LLM budget. It went from a tiny \$100 cap to a staggering \$50,000. That wasn’t just more tokens; it opened the door to entirely new solution strategies that were unimaginable in the semi-final.
+
+The format itself also changed. Everything had to run in an OSS-Fuzz compatible environment, which meant the pipeline we had carefully built for the semi-final were suddenly obsolete. We would need to rebuild from the ground up.
+
+And to make things even more intense, the organizers added three unscored rehearsal rounds before the final. The first was set for April 1st, giving us only a few short weeks to get everything ready.
+</Callout>
+
+From the semi-final experience, we learned the hard way that we couldn’t handle such a large team. It had been chaotic, with some components half-developed, never merged, and eventually abandoned. So for the finals, we shrank the group down to a core team of about eight PhD students (plus their advisors).
+
+But with fewer hands and deadlines closing in, I raised concerns about integration. In the semi-final, we had crammed integration into the last month, and it was a disaster. I was there in Salt Lake City; I saw the chaos firsthand. This time, Xinyu put me in charge of integration. Which meant I now had two jobs: leading the fuzzing subsystem (fuzzing itself plus some supporting agents), and keeping the whole system glued together.
+
+### Towards Round 1
+
+Taking on integration meant I couldn’t just stay in one corner of the project. I had to touch almost everything. That’s when my role shifted from being just a developer to something closer to *a principal engineer*.
+
+The truth is, I had no real experience as an architect. So in the end, the pipeline reflected my own biases. I wrote the infrastructure automation. I drew the blueprint that became our Kubernetes component graph. And I pushed through several key technical decisions — message-driven pipelines, pumping, storage. Not everyone loved them, but they held the system together.
+
+**That pushed me into a weird spot.** I wasn’t the team leader, so I had no authority to boss anyone around. But since I had designed the system, I still got all the complaints — the database schema wasn’t what they wanted, the pumping system was “too much trouble.” Basically, I got yelled at from both sides without actually being in charge of anything. My real challenge wasn’t coding — it was figuring out how to talk to people without breaking collaboration, without looking like a jerk, and without making everyone secretly hate me.
+
+I also had to rush out some new components to adapt to the updated competition format. That’s when I discovered how good Go was for this kind of work: strongly typed, clearly defined, fast to develop, and with easy async support. So yes, you’ll find a lot of Go code in our system. That, too, was one of my biases.
+
+By the end of February, we finally had the system running end-to-end for the first time. We also put a lot of effort into mocking tests. By March (one month before Round 1), we had collected over 100 real-world buggy commits that could be turned into tests.
+
+<Callout title="Another side story" icon="📖">
+A week before the Round 1 submission, I forced myself to step away. The long hours were starting to take a physical toll. I went on a short trip to Vegas, hoping to rest, but the stress followed me. It even bled into how I interacted with people, straining relationships I cared about. That was when I realized this competition wasn’t just burning LLM tokens; it was burning me too.
+</Callout>
+
+Still, there was a silver lining: for the first time, we had a real system running end-to-end. Whatever came next, we knew we had built something that worked, and that gave us hope.
+
+### Approaching Round 2
+
+We survived Round 1. As expected, plenty of components crashed during the run, but our system was tough enough to absorb the hits. We had backups everywhere (three independent fuzzing pipelines, for example), so nothing broke beyond repair.
+
+One of our key tools was a program slicer: a static analysis tool that mapped paths to target locations, and it had been a huge help for fuzzing. But in Round 1, it failed completely. The tool depended on old LLVM 14, while the challenges were written in the new C23 syntax.
+
+So we tried to port it to LLVM 18. That turned out to be a mistake. We gambled on porting our slicer to a new compiler, and it backfired. And yet, we had four people stuck on it, which meant only four others were left to maintain the rest of the system.
+
+Meanwhile, new pressure landed on my plate. In Round 1, we had only spent about \$1,000 of our \$10,000 budget across two days. And then the organizers announced Round 2 would come with a \$20,000 budget. That’s when it hit me: it was time to get serious about scaling.
+
+Here’s where a bit of luck paid off. Earlier, I had pushed the team to adopt message-driven pipelines and store component status in a KV cache. At the time, it was just a crash-recovery strategy, making sure we didn’t lose progress. But it turned out to be exactly what we needed for scaling. We worked out scaling plans for each component: more tasks meant more fuzzers, more PoVs meant more triage... They all works fine.
+
+I also took the time to completely rewrite BandFuzz. Now, on a much larger scale, it could launch and manage nearly 2,000 fuzzers across the cluster. That's when reinforcement learning really shines.
+
+### Go for Round 3
+
+Our program slicer crashed again in Round 2. And we still had three people stuck on it.
+
+Meanwhile, BandFuzz’s performance had dropped. The culprit was our seed service: under high pressure, it collapsed. BandFuzz fell back to peer-to-peer syncing, which meant 90% of its time was wasted just shuffling seeds between fuzzers instead of actually finding bugs.
+
+We knew seeds had to be synced across fuzzers working on the same target, but at this scale, peer-to-peer wasn’t enough. So we built a centralized seed minimization service to stop the system from flooding. And after Round 2, even that wasn’t enough — the service itself had to be distributed.
+
+So we redesigned the whole thing with a MapReduce-style approach: coverage data for each new seed went into the KV cache, and a global query fetched only distinct seeds.
+
+Looking back, I’m proud of that part. The fuzzing workflow was built for scale: smart target selection, efficient seed synchronization, flexible by design. By the end of May, we locked it down. Fuzzing became the first subsystem we could finally mark as _“done.”_
+
+But the other parts didn’t go as well. The organizers announced a new rule: submitting duplicate patches would be punished. To deal with it, we came up with an idea called **“super patch.”**
+
+The idea was clever — cross-run every PoV against every candidate patch, measure the “fixing coverage,” and submit the patch that fixed the most. A patch that fixed a superset of bugs became the _super patch_. Simple, elegant in theory.
+
+The problem was timing. It needed a brand-new patch component, redesigned and wired into the pipeline, but we had only one week before Round 3 and less than a month before the final submission. I was stretched thin, trying to hold the whole system together. Others were buried in the slicer or swamped with development work. So this one slipped. No code reviews. No PRs. Not even my usual habit of arguing over the details.
+
+### Weeks Before the Final
+
+The weeks before the final were a blur. Our program slicer crashed yet again in Round 3. The system kept me busy around the clock, while the department sent polite-but-firm reminders about my PhD requirements. Between holding the system together and cramming for my qualification exam, there wasn’t much breathing room. But somehow, things kept moving forward.
+
+And then, after two years of nonstop building, patching, crashing, fixing, and running — we finally stood at the starting line of the real showdown: Final.
+
+## Final at Def Con 33
+
+The final results were announced at DEF CON 33, in August 2025, in Las Vegas. By then, it was my third time in Vegas. The city no longer felt new.
+
+For some reason, I wasn’t as excited as the year before. The event itself felt smaller, flatter. No buffets. No Sphere. No train rides. No cartoon mascots celebrating new patches. Just seven televisions, each looping interviews with the seven finalist teams. My face was on one of them. It felt strange, almost hollow, to watch myself like that.
+
+The winners were announced on the very first day. Our team sat together, looking too small in the crowd. In front of us was Team Atlanta, filling five whole rows. When the organizers said their name, the room erupted — it felt like an earthquake.
+
+We were sixth. Out of seven.
+
+## What went wrong
+
+Here’s how scoring in AIxCC worked:
+
+<Callout title="Scoring" icon="💯">
+- Each correct PoV submission (a crashy input) earned 2 points.
+- Each correct Patch submission earned 6 points.
+- Each correct SARIF submission earned 1 point.
+- If you bundled together (Po+ Patch), you got a **1.5x bonus multiplier**.
+</Callout>
+
+Now, take a look at the scoreboard breakdown. (Yes, they mislabeled the columns — the Bundle and SARIF scores are reversed.)
+
+![Scoreboard](images/aixcc/scoreboard.png)
+
+Looking closer, our team’s performance was:
+- PoV submissions: 70.37 points — _**2nd** place among all teams_.
+- SARIF submissions: 9.80 points — _**1st** place_.
+- Patch submissions: 14.22 points — _**6th** place_.
+
+On paper, our patch score makes no sense. In our internal tests, the patch success rate was around **90%** for mitigating PoVs, and about **50%** for fixing root causes. We shouldn’t have landed anywhere near the bottom on patches.
+
+But then comes the part that still stings. Remember that brand-new patch component we rushed in — built one month before the final, with no code reviews? That was it. Two small bugs, buried inside, interacted in just the wrong way. The result: every single patch agent in our pipeline froze on the *first day* of the competition. They only came back to life at the very end — far too late to matter. As a matter of fact, **our system ran for four days without any available patch agents.** And that single failure dragged our entire score down.
+
+## What did we do wrong
+
+No matter how much regret we carry, it doesn’t change the fact: we lost because of bugs. Every system has cracks. And in a competition like this, you only get one chance.
+
+I wasn’t the team leader. I had no authority to boss anyone around. But since I had designed the system — and was, in practice, acting as the principal engineer — it feels like I should take responsibility for most of the technical mistakes we made.
+
+Our components evolved at their own pace, integration was messy, and in reality our “testing team” was just one person — restarting the pipeline again and again to see if bugs were fixed. There wasn’t a single day we didn’t restart the system. It never ran longer than 48 hours without a reset.
+
+<Dialog>
+That left a gaping hole: we never truly tested how the system behaved over time.
+</Dialog>
+
+Yes, we put in effort. By the end, we had collected nearly 300 real-world buggy commits to use as mock tests. But with too few hands, only a fraction ever made it into the suite. And even then, we rarely dug deep into the results. It was often impossible to tell whether the system had found the intended bug, or just stumbled into some unrelated one. We didn’t even review the generated patches, since that required manual analysis.
+
+We were so narrowly focused on one metric — _does it crash or not?_ — that we forgot the bigger picture. A great system isn’t just one that stays alive; it’s one that understands its own abilities. Failing to emphasize that understanding is where the cracks began to grow.
+
+And the final lesson? The simplest one of all:
+
+**Do not touch your code in the last minute.**
+
+## Kudos to Other Teams
+
+Still, losing doesn’t mean we didn’t admire what others built. Quite the opposite.
+
+Let’s be honest: we could never have beaten Team Atlanta. They are too strong. So here’s my sincere respect and applause to them — a great team, with great people, who did a great job.
+
+I'm also deeply impressed by the solutions from the other finalists. Personally, I really admired Theori’s system. It was an LLM-first approach, representing exactly the direction I hope this field will continue to move toward. I genuinely enjoyed reading their code.
+
+Trail of Bits built something that felt almost like looking into a mirror of our own system — so many similarities in design, but with a level of engineering polish that we can only respect.
+
+I’m also grateful to the _all-you-need-is-a-fuzzing-brain_ team. I had the chance to talk with them at DEF CON, and it was a real pleasure to get to know them. Although they're a small team, they perform exceptionally well.
+
+SHELLPHISH will always feel like brothers — one of the co-authors of BandFuzz is actually on their team. And I guess their system hit snags like ours did. I also believe they’re far stronger than what the scoreboard showed.
+
+And finally, LACROSSE. I was genuinely surprised to see they wrote their entire system in Lisp — a language I didn’t even realize was still alive. But they pulled it off. And for that: respect.
+
+## At the end of this journey
+
+One of my friends said: _“Ah, the damn competition is finally over.”_
+
+And maybe they’re right. I probably talked about it too much, for too long, until even my friends were tired of hearing about it. Two years, thousands of commits, countless crashes, and more sleepless nights than I can count. We didn’t win. But I walked away with something bigger than a prize: the experience of building a system that worked at scale, with real capability, and with a team I’m proud to have been part of.
+
+I learned how to wrestle with code, with scale, with people — and sometimes with myself.
+
+Two years gone in a blink. But the code still runs. And so do we.
