@@ -13,7 +13,7 @@ export default function Footer() {
     <footer className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-2 py-4">
       <Depth3D hardness={5}>
         <div className="select-none pb-2 pt-2">
-          <div className="primary mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl py-2 shadow-lg">
+          <div className="primary mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl py-2">
             <Avatar className="h-16 w-16" />
             <div className="px-2">
               <p className="pb-2">

@@ -3,7 +3,6 @@ import "../styles/globals.css";
 import "../styles/prism/prism-dark.css";
 import "../styles/katex/katex.css";
 import Header from "@/components/UI/Website/Header";
-import Footer from "@/components/UI/Website/Footer";
 import React from "react";
 import Analytics from "@/components/Scripts/Analytics";
 
@@ -68,7 +67,6 @@ export default function RootLayout({
             {children}
           </div>
         </main>
-        <Footer />
       </body>
     </html>
   );

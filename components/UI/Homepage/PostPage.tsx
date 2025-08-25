@@ -1,6 +1,6 @@
 import { parseISO, compareDesc } from "date-fns";
-import PostCard from "@/components/UI/Homepage/PostCard";
 import { getAllBlogPosts } from "@/lib/blog";
+import Link from "next/link";
 
 type Language = "en" | "zh";
 
@@ -35,6 +35,25 @@ const PostsView = ({ lang }: PostsViewProps) => {
           showSummary={true}
         />
       ))}
+    </div>
+  );
+};
+
+const PostCard = ({ title, url, summary, showSummary = false }) => {
+  return (
+    <div className="flex w-full flex-col gap-2.5 text-black">
+      <Link href={url ? url : "/"} className="group">
+        <div className="group-hover:secondbg -m-4 rounded-2xl p-4 transition-all duration-300">
+          <h3 className="font-article text-lg font-bold leading-relaxed transition-colors duration-200 group-hover:text-gray-800 sm:text-xl">
+            {title}
+          </h3>
+          {showSummary && summary && (
+            <p className="mt-2.5 font-article text-sm leading-relaxed opacity-60 transition-opacity duration-200 group-hover:opacity-80 sm:text-base">
+              {summary}
+            </p>
+          )}
+        </div>
+      </Link>
     </div>
   );
 };

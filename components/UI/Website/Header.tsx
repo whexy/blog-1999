@@ -54,6 +54,11 @@ const Header = () => {
               }`}>
               Friends
             </Link>
+            <Link
+              href="https://shiwx.org"
+              className="font-title text-sm font-medium text-gray-700 transition-colors duration-150 hover:text-gray-900">
+              About
+            </Link>
           </nav>
         </div>
 
