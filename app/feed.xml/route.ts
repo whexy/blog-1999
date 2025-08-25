@@ -1,8 +1,8 @@
-import { getBlogPosts } from "@/lib/blog";
+import { getAllBlogPosts } from "@/lib/blog";
 import RSS from "rss";
 
 export async function GET() {
-  const allBlogs = getBlogPosts();
+  const allBlogs = getAllBlogPosts();
 
   const feed = new RSS({
     title: "Whexy Blog",

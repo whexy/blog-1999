@@ -1,19 +1,15 @@
 import { parseISO, compareDesc } from "date-fns";
 import PostCard from "@/components/UI/Homepage/PostCard";
-import { getBlogPosts } from "@/lib/blog";
+import { getAllBlogPosts } from "@/lib/blog";
 
 type Language = "en" | "zh";
 
 interface PostsViewProps {
-  feature_only?: boolean;
   lang?: Language;
 }
 
-const PostsView = ({
-  feature_only = false,
-  lang,
-}: PostsViewProps) => {
-  const allBlogs = getBlogPosts(lang);
+const PostsView = ({ lang }: PostsViewProps) => {
+  const allBlogs = getAllBlogPosts();
 
   const posts = allBlogs.sort((p1, p2) =>
     compareDesc(
@@ -22,12 +18,9 @@ const PostsView = ({
     ),
   );
 
-  let filteredBlogPosts = posts;
-  if (feature_only) {
-    filteredBlogPosts = posts.filter(
-      post => post.metadata.featured === "true",
-    );
-  }
+  const filteredBlogPosts = posts.filter(
+    p => p.metadata.lang === lang,
+  );
 
   const urlPrefix = lang ? `/${lang}` : "";
 

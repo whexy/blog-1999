@@ -1,11 +1,13 @@
 import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
 import { parseISO } from "date-fns";
-import { getBlogPosts } from "@/lib/blog";
+import { getAllBlogPosts } from "@/lib/blog";
 
 const Series = ({ slug, series, lang = "en" }) => {
-  const seriesPosts = getBlogPosts()
-    .filter(p => p.metadata.series === series)
+  const seriesPosts = getAllBlogPosts()
+    .filter(
+      p => p.metadata.series === series && p.metadata.lang === lang,
+    )
     .sort(
       (a, b) =>
         parseISO(a.metadata.publishDate).getTime() -

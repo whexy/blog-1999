@@ -1,7 +1,7 @@
-import { getBlogPosts } from "@/lib/blog";
+import { getAllBlogPosts } from "@/lib/blog";
 
 function generateSiteMap() {
-  const allBlogs = getBlogPosts();
+  const allBlogs = getAllBlogPosts();
   const XMLContent = allBlogs
     .map(
       blog => `

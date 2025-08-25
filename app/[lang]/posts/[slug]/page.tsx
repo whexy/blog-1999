@@ -1,10 +1,6 @@
 import components from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
-import {
-  getBlogPost,
-  getBlogPosts,
-  getAvailableLanguages,
-} from "@/lib/blog";
+import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
 import { compile, run } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
 
@@ -15,7 +11,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
-import pangu from "remark-pangu";
+import { Metadata } from "next";
 
 type Language = "en" | "zh";
 
@@ -39,7 +35,7 @@ export default async function LanguagePost({ params }: PageProps) {
       rehypePrism as unknown,
       rehypeKatex as unknown,
     ],
-    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages, pangu],
+    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages],
   });
 
   const { default: MDXContent } = await run(compiled, runtime);
@@ -48,23 +44,15 @@ export default async function LanguagePost({ params }: PageProps) {
 }
 
 export async function generateStaticParams() {
-  const allPosts = getBlogPosts();
-  const params: { lang: Language; slug: string }[] = [];
-
-  // Generate params for all posts in both languages
-  const uniqueSlugs = Array.from(new Set(allPosts.map(p => p.slug)));
-
-  for (const slug of uniqueSlugs) {
-    const availableLanguages = getAvailableLanguages(slug);
-    for (const lang of availableLanguages) {
-      params.push({ lang, slug });
-    }
-  }
-
-  return params;
+  return getAllBlogPosts().map(post => ({
+    lang: post.metadata.lang,
+    slug: post.slug,
+  }));
 }
 
-export async function generateMetadata({ params }: PageProps) {
+export async function generateMetadata({
+  params,
+}: PageProps): Promise<Metadata> {
   const { lang, slug } = await params;
   const post = getBlogPost(slug, lang);
 
@@ -92,3 +80,5 @@ export async function generateMetadata({ params }: PageProps) {
     },
   };
 }
+
+export const dynamicParams = false;
