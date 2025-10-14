@@ -2,11 +2,12 @@ import { NotionAPI } from "notion-client";
 import NotionRenderer from "@/components/UI/Dyn/NotionClientRenderer";
 import { getPageTitle } from "notion-utils";
 import metadata from "@/data/metadata";
+import { Metadata } from "next";
 
 const notion = new NotionAPI();
 
-export const dynamic = "force-dynamic",
-  revalidate = 0;
+export const dynamic = "auto";
+export const revalidate = 600;
 
 export default async function Page({
   params,
@@ -28,7 +29,7 @@ export async function generateMetadata({
   params,
 }: {
   params: Promise<{ pageId: string }>;
-}) {
+}): Promise<Metadata> {
   const { pageId } = await params;
   const recordMap = await notion.getPage(pageId);
   const title = getPageTitle(recordMap);
