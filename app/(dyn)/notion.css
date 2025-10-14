@@ -1,0 +1,64 @@
+/* Notion */
+:root {
+  --notion-font:
+    var(--font-fira), var(--font-lato), var(--font-notosans),
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+    "Segoe UI Symbol", "Noto Color Emoji" !important;
+}
+
+.notion-title,
+.notion-h {
+  @apply font-title;
+}
+
+.notion-header,
+.notion-nav-header {
+  @apply !static !z-0;
+}
+
+.notion-callout {
+  @apply !rounded-lg !border-none;
+}
+
+.notion-asset-wrapper-image {
+  @apply !overflow-hidden !rounded-lg;
+}
+
+/* Database Gallery View */
+
+.notion-gallery-grid {
+  @apply !border-none;
+}
+
+.notion-gallery-grid > a {
+  @apply !rounded-lg !border !border-black/10;
+}
+
+.notion-collection-header {
+  @apply !hidden;
+}
+
+.notion-collection-card-cover {
+  @apply !h-40;
+}
+
+/* Page links */
+
+.notion-page-link {
+  @apply font-title;
+}
+
+.notion-page-cover {
+  @apply !rounded-lg;
+}
+
+.notion-page-title-text {
+  @apply !text-pretty;
+}
+
+/* fix list title duplication*/
+.notion-list-item-title {
+  @apply !hidden;
+}

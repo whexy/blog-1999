@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
-import "../styles/globals.css";
-import "../styles/prism/prism-dark.css";
-import "../styles/katex/katex.css";
+import "../../styles/globals.css";
+import "../../styles/prism/prism-dark.css";
+import "../../styles/katex/katex.css";
 import Header from "@/components/UI/Website/Header";
 import React from "react";
 import Analytics from "@/components/Scripts/Analytics";
@@ -12,6 +12,7 @@ import {
   Noto_Sans_SC,
   JetBrains_Mono,
 } from "next/font/google";
+import { Metadata } from "next";
 
 const lato = Lato({
   weight: ["300", "400", "700", "900"],
@@ -72,7 +73,7 @@ export default function RootLayout({
   );
 }
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Whexy",
   description: "CS PhD student at Northwestern.",
   icons: {
