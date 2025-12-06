@@ -30,7 +30,7 @@ function getLocale(request: NextRequest): string {
   return defaultLocale;
 }
 
-export function middleware(request: NextRequest) {
+export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Skip middleware for:
@@ -88,6 +88,6 @@ export const config = {
      * - favicon.ico (favicon file)
      * - Images and other static assets
      */
-    "/((?!api|_next/static|_next/image|favicon.ico|images|img|files).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|giscus.css|robots.txt|images|img|files).*)",
   ],
 };

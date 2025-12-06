@@ -1,6 +1,22 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@plugin "@tailwindcss/aspect-ratio";
+@plugin "@tailwindcss/container-queries";
+
+@theme inline {
+  --color-white-readable: #F5F5F7;
+  --color-black-readable: #1D1D1F;
+  --color-secondary: #F6F6F6;
+
+  --font-sans: var(--font-fira), var(--font-notosans),
+    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-article: var(--font-fira), var(--font-notosans), var(--font-sans);
+  --font-title: var(--font-lato), var(--font-notosans), var(--font-sans);
+  --font-mono: var(--font-jetbrains),
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  --font-default: var(--font-sans);
+}
 
 @layer base {
   .secondbg {

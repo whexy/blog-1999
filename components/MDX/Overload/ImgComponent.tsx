@@ -1,8 +1,10 @@
 import Image from "next/image";
+import { readFileSync } from "fs";
 import sizeOf from "image-size";
 
 const ImgComponent = ({ src, alt }) => {
-  const dimensions = sizeOf(`public/${src}`);
+  const buffer = readFileSync(`public/${src}`);
+  const dimensions = sizeOf(buffer);
 
   return (
     <div className="not-prose break-inside-avoid-page">

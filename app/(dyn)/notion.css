@@ -1,3 +1,13 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-white-readable: #F5F5F7;
+  --color-black-readable: #1D1D1F;
+  --color-secondary: #F6F6F6;
+
+  --font-title: var(--font-lato), var(--font-notosans), var(--font-sans);
+}
+
 /* Notion */
 :root {
   --notion-font:
