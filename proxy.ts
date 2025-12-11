@@ -58,22 +58,22 @@ export function proxy(request: NextRequest) {
       pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
   );
 
-  // Redirect if there is no locale
+  // Rewrite if there is no locale (using rewrite instead of redirect to preserve CDN)
   if (!pathnameHasLocale) {
     const locale = getLocale(request);
 
-    // Clone the request URL to preserve the original host (works with CDN)
+    // Clone the request URL for internal rewrite
     const url = request.nextUrl.clone();
 
-    // For root path, redirect to language-specific root
+    // For root path, rewrite to language-specific root
     if (pathname === "/") {
       url.pathname = `/${locale}`;
-      return NextResponse.redirect(url);
+      return NextResponse.rewrite(url);
     }
 
     // For other paths, add language prefix
     url.pathname = `/${locale}${pathname}`;
-    return NextResponse.redirect(url);
+    return NextResponse.rewrite(url);
   }
 
   return NextResponse.next();
