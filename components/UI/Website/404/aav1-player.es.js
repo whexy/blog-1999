@@ -1,5 +1,5 @@
-import { jsxs as C, Fragment as N, jsx as F } from "react/jsx-runtime";
-import { useRef as z, useState as S, useEffect as M } from "react";
+import { jsxs as C, Fragment as z, jsx as F } from "react/jsx-runtime";
+import { useRef as N, useState as R, useEffect as M } from "react";
 class B {
   /**
    * Parse an AAV1 file from an ArrayBuffer
@@ -88,10 +88,10 @@ function O(h = 8, e = 16, t = 4) {
     alpha: !0
   });
   s.fillStyle = "black", s.fillRect(0, 0, a, n);
-  const U = Math.floor(e * t * 0.85);
-  s.font = `${U}px "SF Mono", Menlo, "Courier New", monospace`, s.textAlign = "center", s.textBaseline = "middle", s.fillStyle = "white", s.imageSmoothingEnabled = !0, s.imageSmoothingQuality = "high";
+  const S = Math.floor(e * t * 0.85);
+  s.font = `${S}px "SF Mono", Menlo, "Courier New", monospace`, s.textAlign = "center", s.textBaseline = "middle", s.fillStyle = "white", s.imageSmoothingEnabled = !0, s.imageSmoothingQuality = "high";
   for (let g = 0; g < 96; g++) {
-    const d = 32 + g, o = String.fromCharCode(d), u = g % 16, E = Math.floor(g / 16), p = (u * h + h / 2) * t, l = (E * e + e / 2) * t;
+    const d = 32 + g, o = String.fromCharCode(d), u = g % 16, T = Math.floor(g / 16), p = (u * h + h / 2) * t, l = (T * e + e / 2) * t;
     s.fillText(o, p, l);
   }
   return m;
@@ -122,11 +122,12 @@ out vec4 fragColor;
 // Textures
 uniform usampler2D u_cellData;    // RGBA8UI: (glyph, fg, bg, attr)
 uniform sampler2D u_glyphAtlas;   // RGBA8: pre-rendered glyphs
+uniform sampler2D u_palette;      // RGBA8: palette texture (256x1)
 
 // Uniforms
-uniform vec4 u_palette[16];       // RGBA colors (normalized [0,1])
 uniform vec2 u_gridSize;          // Grid dimensions (width, height)
 uniform vec2 u_atlasGridSize;     // Atlas grid dimensions (16, 6)
+uniform float u_paletteSize;      // Number of colors in palette
 
 void main() {
   // 1. Compute cell coordinates (flip Y for correct orientation)
@@ -158,15 +159,16 @@ void main() {
   vec4 glyphSample = texture(u_glyphAtlas, atlasUV);
   float glyphAlpha = glyphSample.r;
   
-  // 7. Lookup colors from palette
-  vec4 fgColor = u_palette[fgIndex];
-  vec4 bgColor = u_palette[bgIndex];
+  // 7. Lookup colors from palette texture
+  // Sample at center of texel: (index + 0.5) / paletteSize
+  vec4 fgColor = texture(u_palette, vec2((float(fgIndex) + 0.5) / u_paletteSize, 0.5));
+  vec4 bgColor = texture(u_palette, vec2((float(bgIndex) + 0.5) / u_paletteSize, 0.5));
   
   // 8. Mix foreground and background based on glyph alpha
   fragColor = mix(bgColor, fgColor, glyphAlpha);
 }
 `;
-class k {
+class W {
   /**
    * Initialize WebGL2 renderer
    * @param {HTMLCanvasElement} canvas - Target canvas element
@@ -208,7 +210,8 @@ class k {
       glyphAtlas: e.getUniformLocation(i, "u_glyphAtlas"),
       palette: e.getUniformLocation(i, "u_palette"),
       gridSize: e.getUniformLocation(i, "u_gridSize"),
-      atlasGridSize: e.getUniformLocation(i, "u_atlasGridSize")
+      atlasGridSize: e.getUniformLocation(i, "u_atlasGridSize"),
+      paletteSize: e.getUniformLocation(i, "u_paletteSize")
     };
   }
   /**
@@ -322,17 +325,39 @@ class k {
       null
       // data (allocate only)
     ), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_MIN_FILTER, t.NEAREST), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_MAG_FILTER, t.NEAREST), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_WRAP_S, t.CLAMP_TO_EDGE), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_WRAP_T, t.CLAMP_TO_EDGE);
+    const r = this.metadata.paletteSize, i = new Uint8Array(r * 4);
+    for (let a = 0; a < r * 4; a++)
+      i[a] = Math.round(this.metadata.palette[a] * 255);
+    this.paletteTexture = t.createTexture(), t.activeTexture(t.TEXTURE2), t.bindTexture(t.TEXTURE_2D, this.paletteTexture), t.texImage2D(
+      t.TEXTURE_2D,
+      0,
+      // level
+      t.RGBA,
+      // internal format
+      r,
+      // width
+      1,
+      // height
+      0,
+      // border
+      t.RGBA,
+      // format
+      t.UNSIGNED_BYTE,
+      // type
+      i
+      // data
+    ), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_MIN_FILTER, t.NEAREST), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_MAG_FILTER, t.NEAREST), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_WRAP_S, t.CLAMP_TO_EDGE), t.texParameteri(t.TEXTURE_2D, t.TEXTURE_WRAP_T, t.CLAMP_TO_EDGE);
   }
   /**
    * Set uniform values
    */
   initUniforms() {
     const e = this.gl;
-    e.uniform1i(this.uniformLocations.glyphAtlas, 0), e.uniform1i(this.uniformLocations.cellData, 1), e.uniform2f(
+    e.uniform1i(this.uniformLocations.glyphAtlas, 0), e.uniform1i(this.uniformLocations.cellData, 1), e.uniform1i(this.uniformLocations.palette, 2), e.uniform2f(
       this.uniformLocations.gridSize,
       this.metadata.width,
       this.metadata.height
-    ), e.uniform2f(this.uniformLocations.atlasGridSize, 16, 6), e.uniform4fv(this.uniformLocations.palette, this.metadata.palette);
+    ), e.uniform2f(this.uniformLocations.atlasGridSize, 16, 6), e.uniform1f(this.uniformLocations.paletteSize, this.metadata.paletteSize);
   }
   /**
    * Upload frame data to GPU
@@ -371,27 +396,27 @@ class k {
    */
   destroy() {
     const e = this.gl;
-    this.glyphAtlasTexture && e.deleteTexture(this.glyphAtlasTexture), this.cellDataTexture && e.deleteTexture(this.cellDataTexture), this.program && e.deleteProgram(this.program);
+    this.glyphAtlasTexture && e.deleteTexture(this.glyphAtlasTexture), this.cellDataTexture && e.deleteTexture(this.cellDataTexture), this.paletteTexture && e.deleteTexture(this.paletteTexture), this.program && e.deleteProgram(this.program);
   }
 }
 function q({ url: h, fps: e, width: t, height: r }) {
-  const i = z(null), [a, n] = S("loading"), [m, s] = S(null), [U, g] = S(null);
+  const i = N(null), [a, n] = R("loading"), [m, s] = R(null), [S, g] = R(null);
   return M(() => {
-    let d = null, o = null, u = null, E = null, p = -1, l = !1;
-    const R = new AbortController();
+    let d = null, o = null, u = null, T = null, p = -1, l = !1;
+    const U = new AbortController();
     async function L() {
       try {
         let c = function(D) {
           if (!(l || !u || !o)) {
-            if (D >= x) {
+            if (D >= w) {
               const b = Math.max(
                 1,
                 Math.min(
                   f.frameCount,
-                  Math.floor((D - x) / _) + 1
+                  Math.floor((D - w) / x) + 1
                 )
               );
-              p = (p + b) % f.frameCount, x += b * _;
+              p = (p + b) % f.frameCount, w += b * x;
               const X = u.getFrameData(p);
               o.uploadFrame(X), o.render();
             }
@@ -399,13 +424,13 @@ function q({ url: h, fps: e, width: t, height: r }) {
           }
         };
         n("loading");
-        const T = await fetch(h, { cache: "no-store", signal: R.signal });
-        if (!T.ok)
-          throw new Error(`Failed to fetch ${h}: ${T.statusText}`);
-        const I = await T.arrayBuffer();
+        const E = await fetch(h, { cache: "no-store", signal: U.signal });
+        if (!E.ok)
+          throw new Error(`Failed to fetch ${h}: ${E.statusText}`);
+        const I = await E.arrayBuffer();
         if (l) return;
         u = new B(I);
-        const f = u.getMetadata(), v = typeof e == "number" ? e : null, w = v && v > 0 ? v : f.fps, A = Number.isFinite(w) && w > 0 ? w : 24;
+        const f = u.getMetadata(), _ = typeof e == "number" ? e : null, v = _ && _ > 0 ? _ : f.fps, A = Number.isFinite(v) && v > 0 ? v : 24;
         g({
           width: f.width,
           height: f.height,
@@ -417,15 +442,15 @@ function q({ url: h, fps: e, width: t, height: r }) {
         if (l) return;
         if (!i.current)
           throw new Error("Canvas element not available");
-        if (o = new k(i.current, f, P, y, {
+        if (o = new W(i.current, f, P, y, {
           width: t,
           height: r
         }), l) return;
         const G = u.getFrameData(0);
         if (o.uploadFrame(G), o.render(), p = 0, l) return;
-        E = performance.now();
-        const _ = 1e3 / A;
-        let x = E + _;
+        T = performance.now();
+        const x = 1e3 / A;
+        let w = T + x;
         n("playing"), d = requestAnimationFrame(c);
       } catch (c) {
         if (l || (c == null ? void 0 : c.name) === "AbortError") return;
@@ -433,9 +458,9 @@ function q({ url: h, fps: e, width: t, height: r }) {
       }
     }
     return L(), () => {
-      l = !0, R.abort(), d !== null && (cancelAnimationFrame(d), d = null), o && (o.destroy(), o = null), u = null;
+      l = !0, U.abort(), d !== null && (cancelAnimationFrame(d), d = null), o && (o.destroy(), o = null), u = null;
     };
-  }, [h, e, t, r]), /* @__PURE__ */ C(N, { children: [
+  }, [h, e, t, r]), /* @__PURE__ */ C(z, { children: [
     a === "loading" && /* @__PURE__ */ F("div", { children: "Loading animation..." }),
     a === "error" && /* @__PURE__ */ C("div", { style: { color: "red" }, children: [
       "Error: ",
