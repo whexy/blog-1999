@@ -16,6 +16,10 @@
     "@mdx-js/mdx": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
     "@react-spring/web": "^10.0.3",
+    "@tailwindcss/aspect-ratio": "^0.4.2",
+    "@tailwindcss/container-queries": "^0.1.1",
+    "@tailwindcss/postcss": "^4.1.18",
+    "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.21",
     "colord": "^2.9.3",
     "date-fns": "^4.1.0",
@@ -29,6 +33,7 @@
     "notion-client": "^7.7.1",
     "notion-types": "^7.7.1",
     "notion-utils": "^7.7.1",
+    "postcss": "^8.5.6",
     "react": "^19.2.1",
     "react-dom": "^19.2.1",
     "react-loading-skeleton": "^3.5.0",
@@ -46,13 +51,8 @@
     "rss": "^1.2.2",
     "rss-parser": "^3.13.0",
     "swr": "^2.3.6",
-    "twemoji": "^14.0.2",
-    "postcss": "^8.5.6",
     "tailwindcss": "^4.1.17",
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/postcss": "^4.1.17",
-    "@tailwindcss/typography": "^0.5.19"
+    "twemoji": "^14.0.2"
   },
   "pnpm": {
     "overrides": {

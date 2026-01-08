@@ -4,23 +4,26 @@
 @plugin "@tailwindcss/container-queries";
 
 @theme inline {
-  --color-white-readable: #F5F5F7;
-  --color-black-readable: #1D1D1F;
-  --color-secondary: #F6F6F6;
+  --color-white-readable: #f5f5f7;
+  --color-black-readable: #1d1d1f;
+  --color-secondary: #f6f6f6;
 
-  --font-sans: var(--font-fira), var(--font-notosans),
-    system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-  --font-article: var(--font-fira), var(--font-notosans), var(--font-sans);
-  --font-title: var(--font-lato), var(--font-notosans), var(--font-sans);
-  --font-mono: var(--font-jetbrains),
-    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --font-sans:
+    var(--font-fira), var(--font-notosans), system-ui, -apple-system,
+    BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-article:
+    var(--font-fira), var(--font-notosans), var(--font-sans);
+  --font-title:
+    var(--font-lato), var(--font-notosans), var(--font-sans);
+  --font-mono:
+    var(--font-jetbrains), ui-monospace, SFMono-Regular, Menlo,
+    Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
   --font-default: var(--font-sans);
 }
 
 @layer base {
   .secondbg {
-    @apply border-black/10 bg-secondary/90 backdrop-blur;
+    @apply bg-secondary/90 border-black/10 backdrop-blur;
   }
 
   .primary {
@@ -152,4 +155,54 @@ pre {
   margin-left: -8px;
   color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
+}
+
+/* ASCII Animation Colors (ANSI color palette) */
+.ascii-frame .black {
+  color: #000;
+}
+.ascii-frame .red {
+  color: #cd0000;
+}
+.ascii-frame .green {
+  color: #00cd00;
+}
+.ascii-frame .yellow {
+  color: #cdcd00;
+}
+.ascii-frame .blue {
+  color: #0000ee;
+}
+.ascii-frame .magenta {
+  color: #cd00cd;
+}
+.ascii-frame .cyan {
+  color: #00cdcd;
+}
+.ascii-frame .white {
+  color: #e5e5e5;
+}
+.ascii-frame .gray {
+  color: #7f7f7f;
+}
+.ascii-frame .bright-red {
+  color: #ff0000;
+}
+.ascii-frame .bright-green {
+  color: #00ff00;
+}
+.ascii-frame .bright-yellow {
+  color: #ffff00;
+}
+.ascii-frame .bright-blue {
+  color: #5c5cff;
+}
+.ascii-frame .bright-magenta {
+  color: #ff00ff;
+}
+.ascii-frame .bright-cyan {
+  color: #00ffff;
+}
+.ascii-frame .bright-white {
+  color: #fff;
 }

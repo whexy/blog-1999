@@ -1,0 +1,219 @@
+/* Standalone CSS for 404 page - not affected by Tailwind */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f7;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans",
+    "Helvetica Neue", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.not-found-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.not-found-content {
+  width: 100%;
+  max-width: 1000px;
+}
+
+/* Terminal Window Styling */
+.terminal-window {
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+  max-width: 100%;
+  margin-bottom: 40px;
+}
+
+.terminal-header {
+  background: linear-gradient(to bottom, #3c3c3c 0%, #2b2b2b 100%);
+  padding: 10px 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.terminal-buttons {
+  display: flex;
+  gap: 6px;
+}
+
+.terminal-button {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.terminal-button-close {
+  background-color: #ff5f57;
+}
+
+.terminal-button-minimize {
+  background-color: #ffbd2e;
+}
+
+.terminal-button-maximize {
+  background-color: #28ca42;
+}
+
+.terminal-title {
+  font-family: "Courier New", Courier, monospace;
+  font-size: 12px;
+  color: #999;
+  flex: 1;
+  text-align: center;
+  margin-right: 60px;
+}
+
+/* ASCII Frame Styling - Critical for proper rendering */
+.ascii-frame {
+  background-color: #000;
+  padding: 20px;
+  font-family: "Courier New", Courier, monospace;
+  font-size: 7px;
+  line-height: 1;
+  white-space: pre;
+  overflow: auto;
+  color: #e5e5e5;
+  max-height: 70vh;
+  text-align: center;
+}
+
+/* Small laptops like 13-14 inch MacBooks (~1440px width) */
+@media (min-width: 1280px) {
+  .ascii-frame {
+    font-size: 9px;
+  }
+}
+
+/* Larger laptops and desktops (15 inch+ MacBooks, ~1680px+ width) */
+@media (min-width: 1536px) {
+  .ascii-frame {
+    font-size: 10px;
+  }
+}
+
+/* Large desktops */
+@media (min-width: 1920px) {
+  .ascii-frame {
+    font-size: 12px;
+  }
+}
+
+/* ANSI color palette for ASCII art */
+.ascii-frame .black {
+  color: #000;
+}
+.ascii-frame .red {
+  color: #cd0000;
+}
+.ascii-frame .green {
+  color: #00cd00;
+}
+.ascii-frame .yellow {
+  color: #cdcd00;
+}
+.ascii-frame .blue {
+  color: #0000ee;
+}
+.ascii-frame .magenta {
+  color: #cd00cd;
+}
+.ascii-frame .cyan {
+  color: #00cdcd;
+}
+.ascii-frame .white {
+  color: #e5e5e5;
+}
+.ascii-frame .gray {
+  color: #7f7f7f;
+}
+.ascii-frame .bright-red {
+  color: #ff0000;
+}
+.ascii-frame .bright-green {
+  color: #00ff00;
+}
+.ascii-frame .bright-yellow {
+  color: #ffff00;
+}
+.ascii-frame .bright-blue {
+  color: #5c5cff;
+}
+.ascii-frame .bright-magenta {
+  color: #ff00ff;
+}
+.ascii-frame .bright-cyan {
+  color: #00ffff;
+}
+.ascii-frame .bright-white {
+  color: #fff;
+}
+
+/* 404 Message Styling */
+.message-container {
+  text-align: center;
+}
+
+.message-container h1 {
+  font-size: 72px;
+  font-weight: bold;
+  color: #1d1d1f;
+  margin-bottom: 16px;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.message-container .subtitle {
+  font-size: 24px;
+  color: #1d1d1f;
+  margin-bottom: 8px;
+}
+
+.message-container .description {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 32px;
+}
+
+.message-container .button {
+  display: inline-block;
+  padding: 12px 24px;
+  background-color: #1d1d1f;
+  color: #f5f5f7;
+  text-decoration: none;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.message-container .button:hover {
+  opacity: 0.9;
+}
+
+/* Hide animation on mobile */
+@media (max-width: 639px) {
+  .terminal-window {
+    display: none;
+  }
+}
