@@ -12,7 +12,11 @@ const Series = dynamic(() => import("@/components/UI/Blog/Series"));
 
 import metadata from "@/data/metadata";
 import { getBlogPost } from "@/lib/blog";
+import { extractHeadings } from "@/lib/toc";
 import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
+const JumpTable = dynamic(
+  () => import("@/components/UI/Blog/JumpTable"),
+);
 
 type Language = "en" | "zh";
 
@@ -30,8 +34,11 @@ export default async function BlogLayout({
     return <div>Post not found</div>;
   }
 
+  const headings = extractHeadings(post.content);
+
   return (
     <div>
+      <JumpTable headings={headings} />
       <WelcomeCard showButtons={false} />
       <ScrollUp />
       <div>

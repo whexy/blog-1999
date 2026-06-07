@@ -1,4 +1,4 @@
-import components from "@/components/MDX/MDXComponents";
+import { createMDXComponents } from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
 import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
 import { compile, run } from "@mdx-js/mdx";
@@ -40,7 +40,7 @@ export default async function LanguagePost({ params }: PageProps) {
 
   const { default: MDXContent } = await run(compiled, runtime);
 
-  return <MDXContent components={components} />;
+  return <MDXContent components={createMDXComponents()} />;
 }
 
 export async function generateStaticParams() {
