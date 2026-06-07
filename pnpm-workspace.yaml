@@ -1,8 +1,15 @@
 # pnpm 10+ configuration home (replaces the deprecated `pnpm` field in
-# package.json). Dependency `overrides` would also live here if needed.
+# package.json).
 #
 # Allow only these dependencies to run install lifecycle scripts. `sharp` builds
 # its native bindings for Next.js image optimization; the rest are pulled in by
 # react-notion-x / tooling.
 onlyBuiltDependencies:
   - sharp
+
+# Transitive dependency pins.
+# - baseline-browser-mapping: pulled in via browserslist; pinned to a recent
+#   release so its bundled Baseline data isn't stale (silences the build-time
+#   "data is over two months old" warning).
+overrides:
+  baseline-browser-mapping: ^2.10.34
