@@ -15,7 +15,6 @@ const Header = () => {
   const isBlogPage =
     pathname === `/${currentLang}` || pathname === "/";
   const isNotionPage = pathname === "/dyn";
-  const isFriendsPage = pathname === "/friends";
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-sm print:hidden">
@@ -44,15 +43,6 @@ const Header = () => {
                   : "text-gray-700 hover:text-gray-900"
               }`}>
               Notion
-            </Link>
-            <Link
-              href="/friends"
-              className={`font-title text-sm font-medium transition-colors duration-150 ${
-                isFriendsPage
-                  ? "text-black"
-                  : "text-gray-700 hover:text-gray-900"
-              }`}>
-              Friends
             </Link>
             <Link
               href="https://shiwx.org"

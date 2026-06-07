@@ -113,7 +113,7 @@ shell on `cd` (run `direnv allow` once).
 ### Target & Module
 
 - Target: ES2017
-- Module: esnext, Node resolution
+- Module: esnext, bundler resolution (set by Next 16)
 - JSX: react-jsx (React 17+ transform)
 
 ## Project Structure

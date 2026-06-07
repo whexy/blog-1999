@@ -1,9 +1,5 @@
 import Link from "next/link";
-import {
-  HomeIcon,
-  FaceSmileIcon,
-  UsersIcon,
-} from "@heroicons/react/24/outline";
+import { HomeIcon, FaceSmileIcon } from "@heroicons/react/24/outline";
 /* Fancy animated menu */
 
 import { useSpring, animated } from "@react-spring/web";
@@ -16,19 +12,13 @@ const MobileNavigation = ({ showMenu, toggleMenuFn }) => {
 
   return (
     <animated.div style={{ ...springs }}>
-      <div className="grid grid-cols-3 py-6 sm:hidden">
+      <div className="grid grid-cols-2 py-6 sm:hidden">
         {showMenu && (
           <>
             <MobileNavItem
               url="/"
               name="Home"
               Icon={HomeIcon}
-              toggleMenuFn={toggleMenuFn}
-            />
-            <MobileNavItem
-              url="/friends"
-              name="Friends"
-              Icon={UsersIcon}
               toggleMenuFn={toggleMenuFn}
             />
             <MobileNavItem

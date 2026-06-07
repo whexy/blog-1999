@@ -1,6 +1,5 @@
 import {
   FaceSmileIcon,
-  UsersIcon,
   StarIcon,
   PaperClipIcon,
 } from "@heroicons/react/24/outline";
@@ -42,19 +41,6 @@ const DynJump = () => {
             </h2>
             <p className="text-sm">
               {"Articles and playlists I've recently enjoyed."}
-            </p>
-          </div>
-        </Link>
-        <Link
-          href={"/friends"}
-          className="primary px-4 py-2 transition-all hover:bg-gray-50">
-          <UsersIcon className="my-2 h-8 w-8 rounded-lg bg-blue-100 p-1 text-blue-500" />
-          <div>
-            <h2 className="font-title text-xl font-semibold">
-              Friends
-            </h2>
-            <p className="text-sm">
-              Links to some other interesting blogs of my friends.
             </p>
           </div>
         </Link>
