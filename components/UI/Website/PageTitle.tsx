@@ -15,7 +15,7 @@ const PageTitle = ({
             <Twemoji emoji={emoji} />
           </div>
         )}
-        <h1 className="py-10 font-title text-3xl font-bold tracking-tight text-black-readable md:text-5xl">
+        <h1 className="font-title text-black-readable py-10 text-3xl font-bold tracking-tight md:text-5xl">
           {title}
         </h1>
       </div>

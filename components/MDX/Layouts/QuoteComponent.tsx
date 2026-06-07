@@ -9,25 +9,25 @@ const QuoteComponent = ({ cite, subcite, url, children }) => {
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-gray-50/30 via-transparent to-slate-50/20" />
 
         {/* Large opening quote mark */}
-        <div className="absolute left-6 top-4 select-none font-serif text-6xl leading-none text-gray-300/60">
+        <div className="absolute top-4 left-6 font-serif text-6xl leading-none text-gray-300/60 select-none">
           &ldquo;
         </div>
 
         {/* Quote content with proper spacing */}
-        <div className="relative ml-8 mr-4">
-          <blockquote className="text-base font-medium leading-relaxed tracking-wide text-gray-800">
+        <div className="relative mr-4 ml-8">
+          <blockquote className="text-base leading-relaxed font-medium tracking-wide text-gray-800">
             {children}
           </blockquote>
 
           {/* Closing quote mark */}
-          <div className="ml-1 inline select-none font-serif text-2xl text-gray-300/60">
+          <div className="ml-1 inline font-serif text-2xl text-gray-300/60 select-none">
             &rdquo;
           </div>
         </div>
 
         {/* Citation section */}
         {cite && (
-          <div className="relative ml-8 mt-6 border-l-2 border-gray-200/50 pl-4">
+          <div className="relative mt-6 ml-8 border-l-2 border-gray-200/50 pl-4">
             {url ? (
               <a
                 href={url}
@@ -59,7 +59,7 @@ const QuoteComponent = ({ cite, subcite, url, children }) => {
         )}
 
         {/* Decorative elements */}
-        <div className="absolute bottom-4 right-4 h-16 w-16 rounded-full bg-gradient-to-br from-gray-400/40 to-slate-100/40 blur-xl" />
+        <div className="absolute right-4 bottom-4 h-16 w-16 rounded-full bg-gradient-to-br from-gray-400/40 to-slate-100/40 blur-xl" />
         <div className="absolute bottom-8 left-4 h-12 w-12 rounded-full bg-gradient-to-br from-gray-400/30 to-slate-100/30 blur-lg" />
       </div>
     </div>

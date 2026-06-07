@@ -35,7 +35,7 @@ export default async function BlogLayout({
       <WelcomeCard showButtons={false} />
       <ScrollUp />
       <div>
-        <article className="pb-5 font-article sm:pt-10">
+        <article className="font-article pb-5 sm:pt-10">
           <Prose>
             <h1>{post.metadata.title}</h1>
             <div className="-mt-5 flex items-center justify-between pb-5 font-sans text-sm lg:text-base">

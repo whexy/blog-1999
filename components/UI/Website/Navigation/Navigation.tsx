@@ -30,7 +30,7 @@ const DesktopNavItem: FC<{ url: string; name: string }> = ({
   return (
     <Link
       href={url}
-      className="rounded-lg px-3 py-2 font-title transition-all hover:bg-white/5">
+      className="font-title rounded-lg px-3 py-2 transition-all hover:bg-white/5">
       <div className="font-normal text-gray-400">{name}</div>
     </Link>
   );

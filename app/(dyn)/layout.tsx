@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import "../../styles/globals.css";
 import "./notion.css";
 import Header from "@/components/UI/Website/Header";
@@ -62,7 +61,7 @@ export default function RootLayout({
       <body>
         <Analytics />
         <Header />
-        <main className="min-h-[80vh] bg-white text-black-readable">
+        <main className="text-black-readable min-h-[80vh] bg-white">
           <div className="mx-auto box-border flex w-full max-w-[700px] flex-col">
             {children}
           </div>

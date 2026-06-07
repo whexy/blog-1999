@@ -8,7 +8,7 @@ export const Dialog = ({ children }) => {
         <div className="absolute inset-0 rounded-3xl rounded-br-md bg-white/10" />
 
         {/* Speech bubble tail */}
-        <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-br-md bg-gradient-to-br from-blue-500/90 to-blue-600/90"></div>
+        <div className="absolute -right-0.5 -bottom-0.5 h-3 w-3 rounded-br-md bg-gradient-to-br from-blue-500/90 to-blue-600/90"></div>
 
         <div className="relative text-base leading-snug text-white [&_a]:text-blue-100 [&_a]:underline [&_a]:transition-colors [&_a]:after:ml-1 [&_a]:after:text-xs [&_a]:after:content-['↗'] [&_a]:hover:text-white">
           {children}

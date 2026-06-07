@@ -24,7 +24,7 @@ const Series = ({ slug, series, lang = "en" }) => {
       <div className="relative overflow-hidden rounded-2xl border border-black/5 bg-white/10 p-6 shadow-sm shadow-black/5 backdrop-blur-md">
         {/* Background decoration */}
         <div className="absolute inset-0 -z-10 rounded-2xl bg-gradient-to-br from-red-100/20 via-red-50/10 to-orange-100/20" />
-        <div className="absolute -right-8 -top-8 -z-10 h-32 w-32 rounded-full bg-gradient-to-r from-red-200/20 to-orange-200/20 blur-2xl" />
+        <div className="absolute -top-8 -right-8 -z-10 h-32 w-32 rounded-full bg-gradient-to-r from-red-200/20 to-orange-200/20 blur-2xl" />
         <div className="absolute -bottom-6 -left-6 -z-10 h-24 w-24 rounded-full bg-gradient-to-r from-red-200/15 to-orange-200/15 blur-xl" />
 
         {/* Glass shine effect */}

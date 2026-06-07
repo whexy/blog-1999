@@ -44,7 +44,7 @@ const Comment = ({ slug }: { slug: string }) => {
         term={`posts/${slug}`}
         reactionsEnabled="0"
         emitMetadata="1"
-      // theme={theme}
+        // theme={theme}
       />
     </div>
   );

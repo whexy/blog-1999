@@ -35,8 +35,8 @@ const NowPlaying = () => {
   });
   if (data && data.isPlaying)
     return (
-      <div className="max-w-lg select-none pb-2 pt-2">
-        <div className="mx-auto flex items-center justify-between rounded-xl bg-black-readable px-3 py-2">
+      <div className="max-w-lg pt-2 pb-2 select-none">
+        <div className="bg-black-readable mx-auto flex items-center justify-between rounded-xl px-3 py-2">
           <div className="flex items-center">
             <Image
               src={data.albumImageUrl}

@@ -1,4 +1,3 @@
-/* eslint-disable react/no-unknown-property */
 import "../../styles/globals.css";
 import "../../styles/prism/prism-dark.css";
 import "../../styles/katex/katex.css";
@@ -63,7 +62,7 @@ export default function RootLayout({
       <body>
         <Analytics />
         <Header />
-        <main className="min-h-[80vh] bg-white-readable text-black-readable">
+        <main className="bg-white-readable text-black-readable min-h-[80vh]">
           <div className="mx-auto box-border flex w-full max-w-[720px] flex-col px-1 py-4 sm:px-4 sm:py-10">
             {children}
           </div>

@@ -19,7 +19,7 @@ const FriendTimeLine = async ({
   if (!f_list || !Array.isArray(f_list)) {
     return (
       <div className="mt-5 rounded-lg bg-white p-4">
-        <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+        <h2 className="font-title px-2 pb-4 text-2xl font-bold">
           Recent Updates
         </h2>
         <p className="py-8 text-center text-gray-500">
@@ -69,7 +69,7 @@ const FriendTimeLine = async ({
 
   return (
     <div className="mt-5 rounded-lg bg-white p-4">
-      <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+      <h2 className="font-title px-2 pb-4 text-2xl font-bold">
         Recent Updates
       </h2>
 
@@ -190,7 +190,7 @@ const FriendPage = async () => {
                       blurDataURL="/img/smile.svg"
                     />
                   </Link>
-                  <p className="mb-4 whitespace-nowrap text-xs text-black/80">
+                  <p className="mb-4 text-xs whitespace-nowrap text-black/80">
                     {friend.name || "Unknown"}
                   </p>
                 </div>
@@ -201,7 +201,7 @@ const FriendPage = async () => {
 
       <FriendTimeLine f_list={safeFriendsList} />
       <div className="mt-10 rounded-t-lg bg-white p-4">
-        <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+        <h2 className="font-title px-2 pb-4 text-2xl font-bold">
           Guest Book
         </h2>
         <Comment slug={"friends"} />

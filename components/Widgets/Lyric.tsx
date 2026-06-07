@@ -16,7 +16,7 @@ export default function Lyric({
   img,
 }: LyricProps) {
   return (
-    <div className="not-prose relative font-default">
+    <div className="not-prose font-default relative">
       <Image
         src={img}
         alt={song}
@@ -24,7 +24,7 @@ export default function Lyric({
         height="300"
         className="mx-auto blur-2xl"
       />
-      <div className="absolute bottom-0 left-0 right-0 top-0 z-10 grid grid-cols-1 grid-rows-1 place-items-center">
+      <div className="absolute top-0 right-0 bottom-0 left-0 z-10 grid grid-cols-1 grid-rows-1 place-items-center">
         <div className="w-[300px] overflow-hidden rounded-2xl text-white">
           <div className="px-4 py-2 text-2xl font-semibold backdrop-brightness-[0.2] backdrop-opacity-50">
             {typeof lyric === "string" ? (
@@ -42,7 +42,7 @@ export default function Lyric({
               className="h-12 w-12 rounded"
             />
             <div>
-              <p className="text-lg font-bold leading-tight">
+              <p className="text-lg leading-tight font-bold">
                 {song}
               </p>
               <p className="text-lg">{artist}</p>
