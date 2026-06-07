@@ -14,12 +14,12 @@ const Callout = ({ pic, icon, title, children }: CalloutProps) => {
     <div className="callout relative mx-auto my-2 break-inside-avoid-page">
       {/* Icon/pic background - outside the blurred container */}
       {icon && (
-        <span className="absolute right-4 top-4 z-0 h-24 w-24 opacity-30">
+        <span className="absolute top-4 right-4 z-0 h-24 w-24 opacity-30">
           <Twemoji emoji={icon} />
         </span>
       )}
       {pic && (
-        <span className="not-prose absolute right-4 top-4 z-0 opacity-20">
+        <span className="not-prose absolute top-4 right-4 z-0 opacity-20">
           <Image src={pic} alt="" height={96} width={96} />
         </span>
       )}
@@ -29,12 +29,12 @@ const Callout = ({ pic, icon, title, children }: CalloutProps) => {
         <div className="py-1 sm:px-4">
           {title && (
             <div className="not-prose">
-              <p className="my-1 font-sans text-base font-semibold md:-mb-2 md:mt-4 md:text-lg">
+              <p className="my-1 font-sans text-base font-semibold md:mt-4 md:-mb-2 md:text-lg">
                 {title}
               </p>
             </div>
           )}
-          <div className="prose-sm relative z-10 max-w-none md:prose">
+          <div className="prose-sm md:prose relative z-10 max-w-none">
             {children}
           </div>
         </div>

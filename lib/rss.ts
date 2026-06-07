@@ -112,7 +112,7 @@ const validateUrl = (feedUrl: unknown): string => {
       );
     }
     return url.toString();
-  } catch (error) {
+  } catch {
     throw new RSSValidationError(`Invalid URL format: ${trimmedUrl}`);
   }
 };

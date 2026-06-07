@@ -1,0 +1,7 @@
+.next
+node_modules
+public
+pnpm-lock.yaml
+
+# Vendored / pre-built bundle (minified), not authored source.
+components/UI/Website/404/aav1-player.es.js

@@ -14,7 +14,7 @@ interface FriendsPageClientProps {
 const FriendTimeLine = ({ f_list }: { f_list: FriendInfo[] }) => {
   return (
     <div className="mt-5 rounded-lg bg-white p-4">
-      <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+      <h2 className="font-title px-2 pb-4 text-2xl font-bold">
         Recent Updates
       </h2>
 
@@ -110,7 +110,7 @@ const FriendsPageClient = ({
                     blurDataURL="/img/smile.svg"
                   />
                 </Link>
-                <p className="mb-4 whitespace-nowrap text-xs text-black/80">
+                <p className="mb-4 text-xs whitespace-nowrap text-black/80">
                   {friend.name}
                 </p>
               </div>
@@ -120,7 +120,7 @@ const FriendsPageClient = ({
 
       <FriendTimeLine f_list={friendsList} />
       <div className="mt-10 rounded-t-lg bg-white p-4">
-        <h2 className="px-2 pb-4 font-title text-2xl font-bold">
+        <h2 className="font-title px-2 pb-4 text-2xl font-bold">
           Guest Book
         </h2>
         <Comment slug={"friends"} />

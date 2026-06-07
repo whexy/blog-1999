@@ -1,6 +1,17 @@
 "use client";
 
-import { AAV1Player as AAV1PlayerCore } from "./aav1-player.es.js";
+import type { ComponentType } from "react";
+import { AAV1Player as AAV1PlayerCoreUntyped } from "./aav1-player.es.js";
+
+interface AAV1PlayerCoreProps {
+  url: string;
+  fps?: number;
+  width?: number;
+  height?: number;
+}
+
+const AAV1PlayerCore =
+  AAV1PlayerCoreUntyped as ComponentType<AAV1PlayerCoreProps>;
 
 interface AAV1PlayerProps {
   url: string;
@@ -18,7 +29,7 @@ export default function AAV1Player({
   className = "",
 }: AAV1PlayerProps) {
   // Create props object, only including width/height if provided
-  const coreProps: Record<string, unknown> = { url, fps };
+  const coreProps: AAV1PlayerCoreProps = { url, fps };
 
   if (width !== undefined) {
     coreProps.width = width;
@@ -29,7 +40,7 @@ export default function AAV1Player({
 
   return (
     <div className={className}>
-      <AAV1PlayerCore {...(coreProps as any)} />
+      <AAV1PlayerCore {...coreProps} />
     </div>
   );
 }

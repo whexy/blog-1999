@@ -57,7 +57,7 @@ export default function Tweet({
           rel="noopener noreferrer"
           className="author ml-4 flex flex-col !no-underline">
           <span
-            className="flex items-center font-semibold leading-5 tracking-tight !text-neutral-900 dark:!text-neutral-100"
+            className="flex items-center leading-5 font-semibold tracking-tight !text-neutral-900 dark:!text-neutral-100"
             title={author.name}>
             {author.name}
             {author.verified ? (
@@ -94,7 +94,7 @@ export default function Tweet({
           </svg>
         </a>
       </div>
-      <div className="mb-1 mt-4 whitespace-pre-wrap leading-normal  !text-neutral-700 dark:!text-neutral-200">
+      <div className="mt-4 mb-1 leading-normal whitespace-pre-wrap !text-neutral-700 dark:!text-neutral-200">
         {formattedText}
       </div>
       {media && media.length ? (

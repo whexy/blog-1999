@@ -49,6 +49,31 @@ $ pnpm install
 $ pnpm run dev
 ```
 
+### With Nix
+
+The project is Nix-managed using the [numtide/blueprint](https://numtide.github.io/blueprint/)
+layout. A reproducible toolchain (Node.js 22, pnpm 10, TypeScript) is provided
+via a flake devshell:
+
+```shell
+$ nix develop          # enter the dev shell, then `pnpm install && pnpm run dev`
+$ nix flake check      # run lint + typecheck in a sandbox (offline)
+$ nix fmt              # format the tree (prettier + nixfmt via treefmt)
+```
+
+Entering the dev shell installs [git-hooks.nix](https://github.com/cachix/git-hooks.nix)
+pre-commit hooks (treefmt formatting, ESLint, `tsc`, nil/statix), which then run
+on every `git commit`.
+
+With [direnv](https://direnv.net), the dev shell loads automatically on `cd`:
+
+```shell
+$ direnv allow         # one-time, picks up .envrc
+```
+
+The Nix files live under `nix/` (`devshell.nix`, `formatter.nix`, `treefmt.nix`,
+`pre-commit-check.nix`, `checks/`, `packages/`).
+
 ## Cloning / Fork
 
 Please follow the MIT license and remove all of my personal information (resume, blog posts, images, etc.).

@@ -50,3 +50,17 @@ package-lock.json
 .vscode
 /data/blog/images
 .vercel
+
+# TypeScript incremental build cache
+*.tsbuildinfo
+
+# Nix
+result
+result-*
+
+# direnv
+.direnv/
+.envrc.local
+
+# git-hooks.nix
+/.pre-commit-config.yaml

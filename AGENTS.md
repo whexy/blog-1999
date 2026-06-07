@@ -4,12 +4,12 @@ This document provides coding agents with essential information about the blog-1
 
 ## Project Overview
 
-Next.js 13+ blog system with MDX content and Notion CMS integration. Uses App Router with TypeScript, Tailwind CSS, and server-side rendering.
+Next.js (App Router) blog system with MDX content and Notion CMS integration. Uses TypeScript, Tailwind CSS v4, React 19, and server-side rendering. The toolchain is Nix-managed (Node 22 / pnpm 10).
 
 ## Build & Development Commands
 
 ```bash
-# Install dependencies (uses pnpm)
+# Install dependencies (uses pnpm 10)
 pnpm install
 
 # Development server (http://localhost:3000)
@@ -21,18 +21,50 @@ pnpm run build
 # Start production server
 pnpm run start
 
-# Lint all files
+# Lint all files (ESLint flat config)
 pnpm run lint
+
+# Auto-fix lint/formatting issues
+pnpm run lint:fix
 
 # Export static site
 pnpm run export
 ```
+
+### Nix (Blueprint layout)
+
+The repo is Nix-managed via [numtide/blueprint](https://numtide.github.io/blueprint/),
+with all Nix files under `nix/` (prefix configured in `flake.nix`).
+
+```bash
+nix develop        # reproducible dev shell (Node 22, pnpm 10, TypeScript) + installs git hooks
+nix flake check    # runs lint + typecheck checks in an offline sandbox
+nix fmt            # treefmt: prettier (project) + nixfmt (*.nix)
+```
+
+With [direnv](https://direnv.net), `.envrc` (`use flake`) auto-loads the dev
+shell on `cd` (run `direnv allow` once).
+
+- `nix/devshell.nix` - default dev shell; its shellHook installs the git-hooks.
+- `nix/formatter.nix` + `nix/treefmt.nix` - `nix fmt` (shared treefmt config).
+- `nix/pre-commit-check.nix` - [git-hooks.nix](https://github.com/cachix/git-hooks.nix)
+  config (treefmt, eslint, tsc, nil, statix). Devshell-only (not a flake check),
+  because eslint/tsc/prettier need the project-local `node_modules`. Runs on
+  every `git commit`; the generated `.pre-commit-config.yaml` is gitignored.
+- `nix/checks/{lint,typecheck}.nix` - flake checks (consume the deps package via
+  `perSystem.self.pnpm-deps`). These provide the offline/CI lint+typecheck
+  coverage that the working-tree git hooks cannot run in the sandbox.
+- `nix/packages/pnpm-deps.nix` - offline pnpm dependency store, exposed as
+  `packages.<system>.pnpm-deps` (a fixed-output derivation). **When
+  `pnpm-lock.yaml` changes, the `hash` here must be regenerated**: set it to
+  `pkgs.lib.fakeHash`, run a build, copy the `got:` hash.
 
 ### Testing
 
 - No automated test suite currently configured
 - Manual testing via `pnpm run dev` and browser verification
 - Type checking via TypeScript compiler: `npx tsc --noEmit`
+- CI-style verification: `nix flake check` (lint + typecheck, fully offline)
 
 ## Code Style & Formatting
 
@@ -50,10 +82,16 @@ pnpm run export
 
 ### ESLint Rules
 
-- Extends: `next/core-web-vitals`, `@typescript-eslint/recommended`, `prettier`
+- **Flat config**: `eslint.config.mjs` (ESLint 9 flat config; the legacy
+  `.eslintrc.json` has been removed)
+- Composes: `@eslint/js` recommended, `eslint-config-next` (core-web-vitals +
+  typescript), `typescript-eslint` recommended, and
+  `eslint-plugin-prettier/recommended`
 - **Unused vars**: Error
 - **Explicit any**: Error (avoid `any` type)
 - Prettier integration enabled
+- Run directly with `pnpm run lint` (`eslint .`); `next lint` is removed in
+  Next 16
 
 ## TypeScript Configuration
 
@@ -213,6 +251,11 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 4. **Path aliases**: Use `@/` imports, not relative paths across directories
 5. **Caching**: Blog posts cached in memory, cleared with `clearBlogCache()`
 6. **Date handling**: Posts have timezone logic (pre-2022: UTC+8, post-2022: UTC-6)
+7. **pnpm config**: Dependency `overrides` / `onlyBuiltDependencies` live in
+   `pnpm-workspace.yaml` (pnpm 10), not the deprecated `pnpm` field in
+   `package.json`.
+8. **Nix deps hash**: After changing `pnpm-lock.yaml`, regenerate the hash in
+   `nix/packages/pnpm-deps.nix` or `nix flake check` will fail.
 
 ## Before Committing
 
@@ -220,3 +263,4 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 2. Verify TypeScript: `npx tsc --noEmit`
 3. Test in browser with `pnpm run dev`
 4. Ensure build succeeds: `pnpm run build`
+5. Or run all checks at once: `nix flake check`

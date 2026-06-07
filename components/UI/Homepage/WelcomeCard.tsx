@@ -14,9 +14,9 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
         className={`relative mb-2.5 w-full overflow-hidden rounded-3xl border border-black/5 bg-white/10 shadow-sm shadow-black/5 backdrop-blur-md ${showButtons ? "p-6 lg:p-8" : "p-4"}`}>
         {/* Background decoration - contained within card */}
         <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-blue-100/30 via-purple-50/20 to-pink-100/30" />
-        <div className="absolute left-4 top-4 -z-10 h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/20 to-cyan-200/20 blur-xl" />
-        <div className="absolute bottom-4 right-6 -z-10 h-20 w-20 rounded-full bg-gradient-to-r from-purple-200/15 to-pink-200/15 blur-lg" />
-        <div className="absolute right-4 top-8 -z-10 h-16 w-16 rounded-full bg-gradient-to-r from-yellow-200/15 to-orange-200/15 blur-lg" />
+        <div className="absolute top-4 left-4 -z-10 h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/20 to-cyan-200/20 blur-xl" />
+        <div className="absolute right-6 bottom-4 -z-10 h-20 w-20 rounded-full bg-gradient-to-r from-purple-200/15 to-pink-200/15 blur-lg" />
+        <div className="absolute top-8 right-4 -z-10 h-16 w-16 rounded-full bg-gradient-to-r from-yellow-200/15 to-orange-200/15 blur-lg" />
         {/* Glass shine effect */}
         <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60" />
         {/* Subtle inner glow */}
@@ -44,15 +44,15 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
           <div
             className={`flex flex-col ${showButtons ? "gap-4 md:order-1 md:gap-5" : "order-2 gap-1"}`}>
             <div
-              className={`flex flex-col text-black-readable ${showButtons ? "gap-2" : "gap-1"}`}>
+              className={`text-black-readable flex flex-col ${showButtons ? "gap-2" : "gap-1"}`}>
               <h1
-                className={`font-title font-bold leading-tight tracking-tight ${showButtons ? "text-3xl sm:text-4xl" : "text-lg"}`}>
+                className={`font-title leading-tight font-bold tracking-tight ${showButtons ? "text-3xl sm:text-4xl" : "text-lg"}`}>
                 Wenxuan
               </h1>
               <p
-                className={`font-article leading-relaxed text-black-readable/80 ${showButtons ? "text-base sm:text-lg" : "text-sm"}`}>
+                className={`font-article text-black-readable/80 leading-relaxed ${showButtons ? "text-base sm:text-lg" : "text-sm"}`}>
                 CyberSecurity Researcher at{" "}
-                <span className="whitespace-nowrap text-black-readable">
+                <span className="text-black-readable whitespace-nowrap">
                   Northwestern University
                 </span>
               </p>
@@ -61,7 +61,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <Link
                   href="https://github.com/whexy"
-                  className="flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 font-title text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
+                  className="font-title flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -72,7 +72,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
                 </Link>
                 <Link
                   href="https://twitter.com/whexyshi"
-                  className="flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 font-title text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
+                  className="font-title flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 300 300"
