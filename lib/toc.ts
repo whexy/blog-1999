@@ -7,6 +7,41 @@ export type Heading = {
 };
 
 /**
+ * Extract h2/h3 headings from compiled Typst HTML output.
+ *
+ * Typst maps `=` → h2, `==` → h3, `===` → h4, etc.
+ * We only surface h2/h3 in the TOC, consistent with MDX behaviour.
+ *
+ * IDs are generated with the same slugger used for MDX so the
+ * anchor links are consistent across both content types.
+ */
+export function extractHeadingsFromHtml(html: string): Heading[] {
+  const slug = createSlugger();
+  const headings: Heading[] = [];
+
+  // Match opening tags for h2–h4 and capture their text content.
+  // Typst HTML output uses simple tags without nested elements in
+  // headings, so a single-line regex is sufficient here.
+  const tagPattern = /<(h[234])[^>]*>([\s\S]*?)<\/\1>/gi;
+  let match: RegExpExecArray | null;
+
+  while ((match = tagPattern.exec(html)) !== null) {
+    const tag = match[1].toLowerCase();
+    const raw = match[2].replace(/<[^>]+>/g, "").trim(); // strip any inline tags
+    if (!raw) continue;
+
+    const depth = parseInt(tag[1], 10); // h2→2, h3→3, h4→4
+    const id = slug(raw);
+
+    if (depth === 2 || depth === 3) {
+      headings.push({ id, text: raw, depth });
+    }
+  }
+
+  return headings;
+}
+
+/**
  * Strip inline markdown from a heading's raw text so the visible
  * label (and the slug derived from it) matches what the browser
  * renders.

@@ -1,7 +1,12 @@
 # Default devshell: `nix develop`
 # Provides a reproducible Node.js + pnpm toolchain for blog-1999 and installs
 # the git-hooks.nix pre-commit hook.
-{ inputs, pkgs, ... }:
+{
+  inputs,
+  pkgs,
+  perSystem,
+  ...
+}:
 let
   pre-commit-check = import ./pre-commit-check.nix { inherit inputs pkgs; };
 in
@@ -10,7 +15,8 @@ pkgs.mkShell {
     pkgs.nodejs_22
     pkgs.pnpm_10
     pkgs.typescript
-    pkgs.git
+    perSystem.self.typst
+    perSystem.self.tinymist
   ]
   ++ pre-commit-check.enabledPackages;
 
