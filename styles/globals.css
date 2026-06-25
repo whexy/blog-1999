@@ -156,3 +156,11 @@ pre {
   color: rgb(156, 163, 175); /* Line number color */
   content: attr(line);
 }
+
+/* Typst inline SVG diagrams */
+.typst-diagram > svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  margin: 0 auto;
+}

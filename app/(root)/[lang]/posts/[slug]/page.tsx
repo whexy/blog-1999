@@ -11,6 +11,7 @@ import rehypeKatex from "rehype-katex";
 import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
+import { remarkTypst } from "@/lib/remark-typst";
 import { Metadata } from "next";
 
 type Language = "en" | "zh";
@@ -35,7 +36,12 @@ export default async function LanguagePost({ params }: PageProps) {
       rehypePrism as unknown,
       rehypeKatex as unknown,
     ],
-    remarkPlugins: [remarkGfm, remarkMath, remarkUnwrapImages],
+    remarkPlugins: [
+      remarkTypst,
+      remarkGfm,
+      remarkMath,
+      remarkUnwrapImages,
+    ],
   });
 
   const { default: MDXContent } = await run(compiled, runtime);

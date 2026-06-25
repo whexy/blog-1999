@@ -5,6 +5,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "prebuild": "node scripts/install-typst.mjs",
     "build": "next build",
     "start": "next start",
     "export": "next export",
@@ -29,6 +30,7 @@
     "image-size": "^2.0.2",
     "lodash": "^4.18.1",
     "lqip-modern": "^2.2.1",
+    "mdast-util-mdx-jsx": "^3.2.0",
     "msemoji": "^1.2.0",
     "next": "^16.2.7",
     "notion-client": "^7.10.0",
@@ -52,12 +54,14 @@
     "rss": "^1.2.2",
     "swr": "^2.4.1",
     "tailwindcss": "^4.3.0",
-    "twemoji": "^14.0.2"
+    "twemoji": "^14.0.2",
+    "unist-util-visit": "^5.0.0"
   },
   "packageManager": "pnpm@10.33.4",
   "devDependencies": {
     "@eslint/js": "^9.39.4",
     "@types/lodash": "^4.17.24",
+    "@types/mdast": "^4.0.4",
     "@types/node": "^24.10.4",
     "@types/react": "^19.2.17",
     "@typescript-eslint/eslint-plugin": "^8.60.1",

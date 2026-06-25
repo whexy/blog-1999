@@ -5,6 +5,7 @@ import { Dialog, DialogBack } from "@/components/MDX/Layouts/Dialog";
 import ImgComponent from "@/components/MDX/Overload/ImgComponent";
 import CodeComponent from "@/components/MDX/Overload/CodeComponent";
 import Diagram from "@/components/MDX/Layouts/Diagram";
+import TypstDiagram from "@/components/MDX/Layouts/TypstDiagram";
 import QuoteComponent from "@/components/MDX/Layouts/QuoteComponent";
 import Small from "@/components/MDX/Layouts/Small";
 import GithubRepo from "@/components/MDX/Extern/GithubRepo";
@@ -28,6 +29,7 @@ const staticComponents = {
   Small,
   Callout,
   Diagram,
+  TypstDiagram,
   Dialog,
   DialogBack,
   GithubRepo,

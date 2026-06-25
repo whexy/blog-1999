@@ -62,6 +62,9 @@ importers:
       lqip-modern:
         specifier: ^2.2.1
         version: 2.2.1
+      mdast-util-mdx-jsx:
+        specifier: ^3.2.0
+        version: 3.2.0
       msemoji:
         specifier: ^1.2.0
         version: 1.2.0
@@ -134,6 +137,9 @@ importers:
       twemoji:
         specifier: ^14.0.2
         version: 14.0.2
+      unist-util-visit:
+        specifier: ^5.0.0
+        version: 5.1.0
     devDependencies:
       '@eslint/js':
         specifier: ^9.39.4
@@ -141,6 +147,9 @@ importers:
       '@types/lodash':
         specifier: ^4.17.24
         version: 4.17.24
+      '@types/mdast':
+        specifier: ^4.0.4
+        version: 4.0.4
       '@types/node':
         specifier: ^24.10.4
         version: 24.10.4
@@ -3802,7 +3811,7 @@ snapshots:
       unified: 11.0.5
       unist-util-position-from-estree: 2.0.0
       unist-util-stringify-position: 4.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       vfile: 6.0.3
     transitivePeerDependencies:
       - supports-color
@@ -5699,7 +5708,7 @@ snapshots:
       micromark-util-sanitize-uri: 2.0.1
       trim-lines: 3.0.1
       unist-util-position: 5.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       vfile: 6.0.3
 
   mdast-util-to-markdown@2.1.2:
@@ -5711,7 +5720,7 @@ snapshots:
       mdast-util-to-string: 4.0.0
       micromark-util-classify-character: 2.0.1
       micromark-util-decode-string: 2.0.1
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
       zwitch: 2.0.4
 
   mdast-util-to-string@4.0.0:
@@ -6578,7 +6587,7 @@ snapshots:
     dependencies:
       '@types/mdast': 4.0.4
       hast-util-whitespace: 3.0.0
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
 
   resolve-from@4.0.0: {}
 
@@ -7059,7 +7068,7 @@ snapshots:
   unist-util-remove-position@5.0.0:
     dependencies:
       '@types/unist': 3.0.3
-      unist-util-visit: 5.0.0
+      unist-util-visit: 5.1.0
 
   unist-util-stringify-position@4.0.0:
     dependencies:
