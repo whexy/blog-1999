@@ -1,10 +1,8 @@
-import { NotionAPI } from "notion-client";
 import NotionRenderer from "@/components/UI/Dyn/NotionClientRenderer";
+import { notion } from "@/lib/notion";
 import { getPageTitle } from "notion-utils";
 import metadata from "@/data/metadata";
 import { Metadata } from "next";
-
-const notion = new NotionAPI();
 
 export const dynamic = "auto";
 export const revalidate = 600;
