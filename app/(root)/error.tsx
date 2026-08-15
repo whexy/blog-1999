@@ -8,7 +8,7 @@ export default function Error() {
   return (
     <div className="mt-[25vh] select-none">
       <Depth3D hardness={20}>
-        <div className="glass-card mb-2.5 w-full p-4">
+        <div className="glass-card mb-2.5 w-full p-4 max-sm:rounded-none">
           <div className="glass-tint from-blue-100/40 via-purple-50/30 to-pink-100/40" />
           <div className="glow-blob top-4 left-4 h-24 w-24 from-blue-200/30 to-cyan-200/30 blur-xl" />
           <div className="glow-blob right-6 bottom-4 h-20 w-20 from-purple-200/25 to-pink-200/25 blur-lg" />

@@ -11,7 +11,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
   return (
     <Depth3D hardness={60}>
       <div
-        className={`glass-card mb-2.5 w-full ${showButtons ? "p-6 lg:p-8" : "p-4"}`}>
+        className={`glass-card mb-2.5 w-full max-sm:rounded-none ${showButtons ? "p-6 lg:p-8" : "p-4"}`}>
         {/* Background decoration - contained within card */}
         <div className="glass-tint from-blue-100/30 via-purple-50/20 to-pink-100/30" />
         <div className="glow-blob top-4 left-4 h-24 w-24 from-blue-200/20 to-cyan-200/20 blur-xl" />

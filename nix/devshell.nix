@@ -21,6 +21,12 @@ pkgs.mkShell {
   ]
   ++ pre-commit-check.enabledPackages;
 
+  env = {
+    PLAYWRIGHT_BROWSERS_PATH = "${pkgs.playwright.browsers}";
+    PLAYWRIGHT_SKIP_VALIDATE_HOST_REQUIREMENTS = true;
+    PLAYWRIGHT_NODEJS_PATH = "${pkgs.nodejs_22}/bin/node";
+  };
+
   shellHook = ''
     ${pre-commit-check.shellHook}
 

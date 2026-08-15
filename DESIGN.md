@@ -116,8 +116,17 @@ red/orange (Series), neutral (QuoteComponent).
 - **`icon-tile`** — 10×10 rounded-xl tile framing a small icon; set the
   gradient inline (`bg-gradient-to-br from-red-500/20 to-orange-500/20`).
 - **`segmented`** / **`segmented-item`** + **`segmented-active`** /
-  **`segmented-idle`** — segmented control (language switcher).
+  **`segmented-idle`** — iOS-style segmented control: `black/5` track,
+  raised white active segment with `shadow-sm`.
 - **`nav-link`** + **`nav-link-active`** — header navigation links.
+
+### Code
+
+Code blocks speak **gruvbox dark** (`#282828` bg, warm retro palette:
+keywords red, strings/functions green, types yellow, constants purple,
+identifiers blue) — see `styles/prism/prism-dark.css`. The code title
+bar uses gruvbox `bg0_soft`/`bg1`. Inline code in prose stays a light
+neutral chip (dark chips would jar inside reading text).
 
 ### Chrome
 
@@ -159,5 +168,9 @@ red/orange (Series), neutral (QuoteComponent).
   are present.
 - Cards inside cards step _down_ the radius scale
   (3xl surface → 2xl inner → xl controls).
+- **Page-level surfaces go full-bleed square on mobile**
+  (`max-sm:rounded-none` on `glass-card` usages, built into `panel`
+  and `paper`); the mobile column has zero side gutter — content
+  first. Nested cards keep their radius at every size.
 - Single-use flourishes (e.g. the quote card's serif quote marks) stay
   inline; the system only covers repeated patterns.

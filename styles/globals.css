@@ -64,9 +64,10 @@
     @apply relative overflow-hidden rounded-3xl border border-black/5 bg-white/30 shadow-sm shadow-black/5 backdrop-blur-md backdrop-saturate-150;
   }
 
-  /* Opaque white panel: full-width page containers (post list). */
+  /* Opaque white panel: full-width page containers (post list).
+     Page-level surfaces go full-bleed square on mobile. */
   .panel {
-    @apply rounded-3xl border border-white/20 bg-white/80 backdrop-blur-sm backdrop-saturate-150;
+    @apply rounded-3xl border border-white/20 bg-white/80 backdrop-blur-sm backdrop-saturate-150 max-sm:rounded-none;
   }
 
   /* Paper: the long-form reading surface. Opaque by design —
@@ -158,9 +159,10 @@
     @apply flex h-10 w-10 items-center justify-center rounded-xl backdrop-blur-sm;
   }
 
-  /* Segmented control (language switcher). */
+  /* Segmented control (language switcher). iOS-style: light track,
+     raised white active segment. */
   .segmented {
-    @apply relative flex rounded-lg bg-neutral-50 p-1;
+    @apply relative flex rounded-lg bg-black/5 p-1;
   }
 
   .segmented-item {
@@ -168,11 +170,11 @@
   }
 
   .segmented-active {
-    @apply bg-neutral-900 text-white;
+    @apply bg-white text-neutral-900 shadow-sm;
   }
 
   .segmented-idle {
-    @apply text-neutral-700 hover:text-neutral-900;
+    @apply text-neutral-600 hover:text-neutral-900;
   }
 
   /* Header navigation link. */
@@ -206,7 +208,7 @@
 
 /* Code */
 .rehype-code-title {
-  @apply rounded-t-lg border border-b-0 border-black/20 bg-[#f3f3f0] px-5 py-2 font-mono text-sm font-bold;
+  @apply rounded-t-lg border border-b-0 border-[#3c3836] bg-[#32302f] px-5 py-2 font-mono text-sm font-bold text-[#a89984];
   position: relative;
 }
 
@@ -223,7 +225,7 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background-color: #f56565;
+  background-color: #fb4934; /* gruvbox red */
 }
 
 .rehype-code-title + #pre-container > pre {
@@ -244,6 +246,12 @@ sup > a {
 
 .prose:not(pre) > code {
   @apply rounded-md border border-neutral-100 bg-neutral-100 px-1 py-0.5;
+}
+
+/* The chip already signals code; drop typography's backtick decoration */
+.prose :not(pre) > code::before,
+.prose :not(pre) > code::after {
+  content: none;
 }
 
 .callout code {
@@ -271,37 +279,37 @@ pre {
 
 .code-line.inserted {
   background-color: rgba(
-    16,
-    185,
-    129,
-    0.2
-  ); /* Set inserted line (+) color */
+    184,
+    187,
+    38,
+    0.15
+  ); /* gruvbox green: inserted line (+) */
 }
 
 .code-line.deleted {
   background-color: rgba(
-    239,
-    68,
-    68,
-    0.2
-  ); /* Set deleted line (-) color */
+    251,
+    73,
+    52,
+    0.15
+  ); /* gruvbox red: deleted line (-) */
 }
 
 .highlight-line {
   margin-left: -16px;
   margin-right: -16px;
   background-color: rgba(
-    55,
-    65,
-    81,
-    0.5
-  ); /* Set highlight bg color */
+    60,
+    56,
+    54,
+    0.8
+  ); /* gruvbox bg1: highlight bg color */
   border-left-width: 4px;
   border-left-color: rgb(
-    59,
-    130,
-    246
-  ); /* Set highlight accent border color */
+    131,
+    165,
+    152
+  ); /* gruvbox blue: highlight accent border */
 }
 
 .line-number::before {
@@ -310,7 +318,7 @@ pre {
   text-align: right;
   margin-right: 16px;
   margin-left: -8px;
-  color: rgb(156, 163, 175); /* Line number color */
+  color: #7c6f64; /* gruvbox bg3: line number color */
   content: attr(line);
 }
 
