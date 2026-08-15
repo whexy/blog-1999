@@ -17,8 +17,8 @@ const Header = () => {
   const isNotionPage = pathname === "/dyn";
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-sm print:hidden">
-      <div className="mx-auto flex max-w-[720px] flex-row items-center justify-between px-4 py-2">
+    <header className="header-bar print:hidden">
+      <div className="max-w-content mx-auto flex flex-row items-center justify-between px-4 py-2">
         <div className="flex items-center gap-8">
           <Link href={`/${currentLang}`}>
             <div className="font-title text-2xl font-semibold text-black">
@@ -28,25 +28,15 @@ const Header = () => {
           <nav className="hidden gap-6 sm:flex">
             <Link
               href={`/${currentLang}`}
-              className={`font-title text-sm font-medium transition-colors duration-150 ${
-                isBlogPage
-                  ? "text-black"
-                  : "text-gray-700 hover:text-gray-900"
-              }`}>
+              className={`nav-link ${isBlogPage ? "nav-link-active" : ""}`}>
               Blogs
             </Link>
             <Link
               href="/dyn"
-              className={`font-title text-sm font-medium transition-colors duration-150 ${
-                isNotionPage
-                  ? "text-black"
-                  : "text-gray-700 hover:text-gray-900"
-              }`}>
+              className={`nav-link ${isNotionPage ? "nav-link-active" : ""}`}>
               Notion
             </Link>
-            <Link
-              href="https://shiwx.org"
-              className="font-title text-sm font-medium text-gray-700 transition-colors duration-150 hover:text-gray-900">
+            <Link href="https://shiwx.org" className="nav-link">
               About
             </Link>
           </nav>

@@ -35,7 +35,7 @@ export default function Tweet({
     referenced_tweets.find(t => t.type === "quoted");
 
   return (
-    <div className="tweet mx-auto my-4 max-w-xl rounded-lg border border-neutral-200 bg-white px-6 py-4 dark:border-neutral-800 dark:bg-neutral-900">
+    <div className="tweet mx-auto my-4 max-w-xl rounded-lg border border-neutral-200 bg-white px-6 py-4">
       <div className="flex items-center">
         <a
           className="flex h-9 w-9"
@@ -57,13 +57,13 @@ export default function Tweet({
           rel="noopener noreferrer"
           className="author ml-4 flex flex-col !no-underline">
           <span
-            className="flex items-center leading-5 font-semibold tracking-tight !text-neutral-900 dark:!text-neutral-100"
+            className="flex items-center leading-5 font-semibold tracking-tight !text-neutral-900"
             title={author.name}>
             {author.name}
             {author.verified ? (
               <svg
                 aria-label="Verified Account"
-                className="ml-1 inline h-4 w-4 text-blue-500 dark:text-white"
+                className="ml-1 inline h-4 w-4 text-blue-500"
                 viewBox="0 0 24 24">
                 <g fill="currentColor">
                   <path d="M22.5 12.5c0-1.58-.875-2.95-2.148-3.6.154-.435.238-.905.238-1.4 0-2.21-1.71-3.998-3.818-3.998-.47 0-.92.084-1.336.25C14.818 2.415 13.51 1.5 12 1.5s-2.816.917-3.437 2.25c-.415-.165-.866-.25-1.336-.25-2.11 0-3.818 1.79-3.818 4 0 .494.083.964.237 1.4-1.272.65-2.147 2.018-2.147 3.6 0 1.495.782 2.798 1.942 3.486-.02.17-.032.34-.032.514 0 2.21 1.708 4 3.818 4 .47 0 .92-.086 1.335-.25.62 1.334 1.926 2.25 3.437 2.25 1.512 0 2.818-.916 3.437-2.25.415.163.865.248 1.336.248 2.11 0 3.818-1.79 3.818-4 0-.174-.012-.344-.033-.513 1.158-.687 1.943-1.99 1.943-3.484zm-6.616-3.334l-4.334 6.5c-.145.217-.382.334-.625.334-.143 0-.288-.04-.416-.126l-.115-.094-2.415-2.415c-.293-.293-.293-.768 0-1.06s.768-.294 1.06 0l1.77 1.767 3.825-5.74c.23-.345.696-.436 1.04-.207.346.23.44.696.21 1.04z" />
@@ -72,7 +72,7 @@ export default function Tweet({
             ) : null}
           </span>
           <span
-            className="text-sm leading-4 !text-neutral-500 dark:!text-neutral-400"
+            className="text-sm leading-4 !text-neutral-500"
             title={`@${author.username}`}>
             @{author.username}
           </span>
@@ -94,7 +94,7 @@ export default function Tweet({
           </svg>
         </a>
       </div>
-      <div className="mt-4 mb-1 leading-normal whitespace-pre-wrap !text-neutral-700 dark:!text-neutral-200">
+      <div className="mt-4 mb-1 leading-normal whitespace-pre-wrap !text-neutral-700">
         {formattedText}
       </div>
       {media && media.length ? (
@@ -118,7 +118,7 @@ export default function Tweet({
       ) : null}
       {quoteTweet ? <Tweet {...quoteTweet} /> : null}
       <a
-        className="!hover:underline text-sm !text-neutral-500 dark:!text-neutral-400"
+        className="!hover:underline text-sm !text-neutral-500"
         href={tweetUrl}
         target="_blank"
         rel="noopener noreferrer">
@@ -130,7 +130,7 @@ export default function Tweet({
       </a>
       <div className="mt-2 flex text-sm">
         <a
-          className="!hover:underline mr-4 flex items-center !text-neutral-500 transition hover:!text-blue-600 dark:!text-neutral-400"
+          className="!hover:underline mr-4 flex items-center !text-neutral-500 transition hover:!text-blue-600"
           href={replyUrl}
           target="_blank"
           rel="noopener noreferrer">
@@ -154,7 +154,7 @@ export default function Tweet({
           </span>
         </a>
         <a
-          className="!hover:underline mr-4 flex items-center !text-neutral-500 transition hover:!text-green-600 dark:!text-neutral-400"
+          className="!hover:underline mr-4 flex items-center !text-neutral-500 transition hover:!text-green-600"
           href={retweetUrl}
           target="_blank"
           rel="noopener noreferrer">
@@ -178,7 +178,7 @@ export default function Tweet({
           </span>
         </a>
         <a
-          className="!hover:underline flex items-center !text-neutral-500 transition hover:!text-red-600 dark:!text-neutral-400"
+          className="!hover:underline flex items-center !text-neutral-500 transition hover:!text-red-600"
           href={likeUrl}
           target="_blank"
           rel="noopener noreferrer">

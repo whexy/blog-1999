@@ -3,11 +3,26 @@
 @plugin "@tailwindcss/aspect-ratio";
 @plugin "@tailwindcss/container-queries";
 
-@theme inline {
-  --color-white-readable: #f5f5f7;
-  --color-black-readable: #1d1d1f;
-  --color-secondary: #f6f6f6;
+/*
+ * Design language: "Frost"
+ * A light glassmorphism system on an Apple-like canvas.
+ * See DESIGN.md for the full documentation.
+ *
+ * Layer order matters: component classes live in @layer components,
+ * so any Tailwind utility (rounded-2xl, p-4, ...) overrides them.
+ */
 
+@theme inline {
+  /* Palette */
+  --color-white-readable: #f5f5f7; /* canvas */
+  --color-black-readable: #1d1d1f; /* ink */
+  --color-secondary: #f6f6f6; /* hover wash */
+  --color-highlight: #eecfcf; /* brand accent: link highlighter, focus, selection */
+
+  /* Layout */
+  --container-content: 720px; /* max-w-content: single article column */
+
+  /* Typography */
   --font-sans:
     var(--font-fira), var(--font-notosans), system-ui, -apple-system,
     BlinkMacSystemFont, "Segoe UI", sans-serif;
@@ -21,17 +36,159 @@
   --font-default: var(--font-sans);
 }
 
+/* Registered as real utilities so variants (group-hover:secondbg) work */
+@utility secondbg {
+  @apply bg-secondary/90 border-black/10 backdrop-blur;
+}
+
+@utility primary {
+  @apply rounded-2xl bg-white shadow-sm;
+}
+
 @layer base {
-  .secondbg {
-    @apply bg-secondary/90 border-black/10 backdrop-blur;
-  }
-
-  .primary {
-    @apply rounded-2xl bg-white shadow-sm;
-  }
-
   body {
     @apply bg-white-readable;
+  }
+
+  ::selection {
+    @apply bg-highlight;
+  }
+}
+
+@layer components {
+  /* ================= Surfaces ================= */
+
+  /* Frosted-glass card: the primary content surface.
+     Pair with .glass-tint / .glow-blob decorations and .glass-shine. */
+  .glass-card {
+    @apply relative overflow-hidden rounded-3xl border border-black/5 bg-white/30 shadow-sm shadow-black/5 backdrop-blur-md backdrop-saturate-150;
+  }
+
+  /* Opaque white panel: full-width page containers (post list). */
+  .panel {
+    @apply rounded-3xl border border-white/20 bg-white/80 backdrop-blur-sm backdrop-saturate-150;
+  }
+
+  /* Paper: the long-form reading surface. Opaque by design —
+     glass is for chrome and cards, paper is for reading. */
+  .paper {
+    @apply bg-white shadow-sm shadow-black/5 sm:rounded-3xl;
+  }
+
+  /* ================= Card decorations ================= */
+
+  /* Tinted gradient wash behind a card (pick color stops inline). */
+  .glass-tint {
+    @apply absolute inset-0 -z-10 bg-gradient-to-br;
+  }
+
+  /* Top-left light sweep that makes glass feel glossy. */
+  .glass-shine {
+    @apply absolute inset-0 bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60;
+  }
+
+  /* Soft blurred gradient circle; position/size/color inline. */
+  .glow-blob {
+    @apply absolute -z-10 rounded-full bg-gradient-to-r;
+  }
+
+  /* ================= Buttons ================= */
+
+  /* Translucent glass button with a subtle hover lift. */
+  .btn-glass {
+    @apply font-title focus-visible:outline-highlight flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 text-sm font-medium tracking-wide text-neutral-800 backdrop-blur-sm transition-all duration-200 hover:scale-[1.02] hover:border-white/50 hover:bg-white/40 focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  /* Solid ink button (inverse of btn-glass). */
+  .btn-solid {
+    @apply bg-black-readable font-title text-white-readable focus-visible:outline-highlight rounded-xl border border-white/30 px-4 py-2 text-sm font-medium tracking-wide focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  /* ================= Chat bubbles (iMessage style) ================= */
+
+  .bubble {
+    @apply relative max-w-xs overflow-hidden rounded-3xl bg-gradient-to-br px-4 py-3 text-base leading-snug shadow-md backdrop-blur-xl;
+  }
+
+  /* Speech-bubble tail */
+  .bubble::after {
+    content: "";
+    @apply absolute -bottom-0.5 h-3 w-3 bg-gradient-to-br;
+  }
+
+  .bubble a {
+    @apply underline transition-colors;
+  }
+
+  .bubble a::after {
+    content: "↗";
+    @apply ml-1 text-xs;
+  }
+
+  /* Outgoing message: blue, tail bottom-right */
+  .bubble-me {
+    @apply rounded-br-md from-blue-500/90 to-blue-600/90 text-white;
+  }
+
+  .bubble-me::after {
+    @apply -right-0.5 rounded-br-md from-blue-500/90 to-blue-600/90;
+  }
+
+  .bubble-me a {
+    @apply text-blue-100 hover:text-white;
+  }
+
+  /* Incoming message: gray, tail bottom-left */
+  .bubble-peer {
+    @apply rounded-bl-md from-neutral-200/90 to-neutral-300/80 text-neutral-800;
+  }
+
+  .bubble-peer::after {
+    @apply -left-0.5 rounded-bl-md from-neutral-200/90 to-neutral-300/80;
+  }
+
+  .bubble-peer a {
+    @apply text-neutral-600 hover:text-neutral-900;
+  }
+
+  /* ================= Controls ================= */
+
+  /* Gradient tile that frames a small icon (color stops inline). */
+  .icon-tile {
+    @apply flex h-10 w-10 items-center justify-center rounded-xl backdrop-blur-sm;
+  }
+
+  /* Segmented control (language switcher). */
+  .segmented {
+    @apply relative flex rounded-lg bg-neutral-50 p-1;
+  }
+
+  .segmented-item {
+    @apply font-title focus-visible:outline-highlight relative z-10 flex-shrink-0 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .segmented-active {
+    @apply bg-neutral-900 text-white;
+  }
+
+  .segmented-idle {
+    @apply text-neutral-700 hover:text-neutral-900;
+  }
+
+  /* Header navigation link. */
+  .nav-link {
+    @apply font-title focus-visible:outline-highlight text-sm font-medium text-neutral-700 transition-colors duration-150 hover:text-neutral-900 focus-visible:outline-2 focus-visible:outline-offset-2;
+  }
+
+  .nav-link-active {
+    @apply text-black;
+  }
+
+  /* ================= Chrome ================= */
+
+  /* Sticky blurred site header. */
+  .header-bar {
+    @apply sticky top-0 z-50 w-full bg-white/80 backdrop-blur-sm backdrop-saturate-150;
   }
 }
 
@@ -82,15 +239,15 @@ sup > a {
 }
 
 .footnotes a {
-  @apply font-normal text-slate-500 !shadow-none;
+  @apply font-normal text-neutral-500 !shadow-none;
 }
 
 .prose:not(pre) > code {
-  @apply rounded-md border border-gray-100 bg-gray-100 px-1 py-0.5;
+  @apply rounded-md border border-neutral-100 bg-neutral-100 px-1 py-0.5;
 }
 
 .callout code {
-  @apply rounded-md border border-gray-200 bg-gray-200 px-1 py-0.5 text-gray-800;
+  @apply rounded-md border border-neutral-200 bg-neutral-200 px-1 py-0.5 text-neutral-800;
 }
 
 pre {

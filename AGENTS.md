@@ -209,7 +209,13 @@ export default Component;
 
 ## Styling with Tailwind
 
-- Use Tailwind utility classes extensively
+- **Design system first**: the project has a documented design language
+  ("Frost") in `DESIGN.md`. Semantic classes (`glass-card`, `panel`,
+  `btn-glass`, `bubble`, `segmented`, `nav-link`, ...) and tokens
+  (`max-w-content`, `font-title`, ...) live in `styles/globals.css`.
+  Use them before writing raw utilities; promote patterns repeated 3+
+  times into `@layer components`.
+- Use Tailwind utility classes for one-off layout/spacing
 - Custom colors defined: `white-readable`, `black-readable`
 - Custom fonts: `font-title` (Lato), `font-article` (Noto Sans SC), `font-mono` (JetBrains Mono)
 - Responsive: mobile-first (`sm:`, `md:`, `lg:`)

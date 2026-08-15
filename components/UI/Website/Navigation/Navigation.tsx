@@ -31,7 +31,7 @@ const DesktopNavItem: FC<{ url: string; name: string }> = ({
     <Link
       href={url}
       className="font-title rounded-lg px-3 py-2 transition-all hover:bg-white/5">
-      <div className="font-normal text-gray-400">{name}</div>
+      <div className="font-normal text-neutral-400">{name}</div>
     </Link>
   );
 };

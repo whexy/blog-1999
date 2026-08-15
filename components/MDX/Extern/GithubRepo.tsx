@@ -22,9 +22,9 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
           <div className="secondbg overflow-hidden rounded-xl">
             <div className="flex space-x-4 p-4">
               <div className="grid flex-none place-items-center">
-                <div className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full bg-gray-200">
+                <div className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full bg-neutral-200">
                   <svg
-                    className="h-8 w-8 text-gray-400"
+                    className="h-8 w-8 text-neutral-400"
                     fill="currentColor"
                     viewBox="0 0 20 20">
                     <path
@@ -41,11 +41,11 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
                     {username}/
                     <span className="font-semibold">{repo_name}</span>
                   </p>
-                  <p className="text-sm text-gray-500">
+                  <p className="text-sm text-neutral-500">
                     Repository information unavailable
                   </p>
                 </div>
-                <div className="flex space-x-4 text-sm text-gray-400">
+                <div className="flex space-x-4 text-sm text-neutral-400">
                   <div className="flex items-center space-x-1">
                     <StarIcon className="h-4 w-4" />
                     <p>-</p>
@@ -68,7 +68,7 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
   }
 
   return (
-    <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300 sm:hover:scale-105">
+    <div className="not-prose mx-auto max-w-xl font-sans transition-all duration-200 sm:hover:scale-[1.02]">
       <Link href={html_url}>
         <div className="secondbg overflow-hidden rounded-xl">
           <div className="flex space-x-4 p-4">

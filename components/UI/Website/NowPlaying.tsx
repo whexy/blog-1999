@@ -52,7 +52,7 @@ const NowPlaying = () => {
                 className="flex flex-col">
                 <p className="text-sm text-white">{data.title}</p>
               </a>
-              <p className="text-xs text-gray-300">
+              <p className="text-xs text-neutral-300">
                 by{" "}
                 <span className="text-white/70">{data.artist}</span>
               </p>

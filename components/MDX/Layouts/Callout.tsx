@@ -25,7 +25,7 @@ const Callout = ({ pic, icon, title, children }: CalloutProps) => {
       )}
 
       {/* Glassy container */}
-      <div className="relative z-10 overflow-hidden rounded-2xl border border-black/5 bg-white/10 px-4 py-1 shadow-sm shadow-black/5 backdrop-blur-sm">
+      <div className="glass-card z-10 rounded-2xl px-4 py-1 backdrop-blur-sm">
         <div className="py-1 sm:px-4">
           {title && (
             <div className="not-prose">

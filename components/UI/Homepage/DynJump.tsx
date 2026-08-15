@@ -13,7 +13,7 @@ const DynJump = () => {
       <div className="grid min-w-[64rem] auto-cols-fr grid-flow-col gap-x-4 lg:min-w-0">
         <Link
           href={"/posts"}
-          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          className="primary px-4 py-2 transition-all hover:bg-neutral-50">
           <PaperClipIcon className="my-2 h-8 w-8 rounded-lg bg-purple-100 p-1 text-purple-500" />
           <div>
             <h2 className="font-title text-xl font-semibold">
@@ -24,7 +24,7 @@ const DynJump = () => {
         </Link>
         <Link
           href={"/dyn"}
-          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          className="primary px-4 py-2 transition-all hover:bg-neutral-50">
           <FaceSmileIcon className="my-2 h-8 w-8 rounded-lg bg-green-100 p-1 text-green-500" />
           <div>
             <h2 className="font-title text-xl font-semibold">Dyn</h2>
@@ -33,7 +33,7 @@ const DynJump = () => {
         </Link>
         <Link
           href={"/db"}
-          className="primary px-4 py-2 transition-all hover:bg-gray-50">
+          className="primary px-4 py-2 transition-all hover:bg-neutral-50">
           <StarIcon className="my-2 h-8 w-8 rounded-lg bg-yellow-100 p-1 text-yellow-500" />
           <div>
             <h2 className="font-title text-xl font-semibold">

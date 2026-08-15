@@ -25,7 +25,7 @@ const PostsView = ({ lang }: PostsViewProps) => {
   const urlPrefix = lang ? `/${lang}` : "";
 
   return (
-    <div className="flex w-full flex-col gap-12 overflow-hidden rounded-3xl border border-white/20 bg-white/80 px-6 py-8 backdrop-blur-sm sm:gap-16 sm:px-8 sm:py-12">
+    <div className="panel flex w-full flex-col gap-12 overflow-hidden px-6 py-8 sm:gap-16 sm:px-8 sm:py-12">
       {filteredBlogPosts.map(post => (
         <PostCard
           key={`${post.slug}-${post.metadata.lang}`}
@@ -44,7 +44,7 @@ const PostCard = ({ title, url, summary, showSummary = false }) => {
     <div className="flex w-full flex-col gap-2.5 text-black">
       <Link href={url ? url : "/"} className="group">
         <div className="group-hover:secondbg -m-4 rounded-2xl p-4 transition-all duration-300">
-          <h3 className="font-article text-lg leading-relaxed font-bold transition-colors duration-200 group-hover:text-gray-800 sm:text-xl">
+          <h3 className="font-title text-lg leading-snug font-bold tracking-tight transition-colors duration-200 group-hover:text-neutral-800 sm:text-xl">
             {title}
           </h3>
           {showSummary && summary && (

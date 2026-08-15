@@ -21,22 +21,18 @@ export default function LanguageSwitcher() {
   const switchPath = `/${switchLang}${pathWithoutLang}`;
 
   return (
-    <div className="relative flex rounded-lg bg-gray-50 p-1">
+    <div className="segmented">
       <Link
         href={currentLang === "en" ? pathname : switchPath}
-        className={`font-title relative z-10 flex-shrink-0 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ${
-          currentLang === "en"
-            ? "bg-neutral-900 text-white"
-            : "text-gray-700 hover:text-gray-900"
+        className={`segmented-item ${
+          currentLang === "en" ? "segmented-active" : "segmented-idle"
         }`}>
         English
       </Link>
       <Link
         href={currentLang === "zh" ? pathname : switchPath}
-        className={`font-title relative z-10 flex-shrink-0 rounded-md px-3 py-2 text-sm font-medium transition-colors duration-150 ${
-          currentLang === "zh"
-            ? "bg-neutral-900 text-white"
-            : "text-gray-700 hover:text-gray-900"
+        className={`segmented-item ${
+          currentLang === "zh" ? "segmented-active" : "segmented-idle"
         }`}>
         中文
       </Link>

@@ -1,7 +1,7 @@
 const Prose = ({ children }) => {
   return (
-    <div className="mx-auto w-full max-w-full bg-white py-10 sm:rounded-lg sm:px-8 sm:shadow-lg">
-      <div className="prose prose-neutral md:prose-lg prose-headings:font-title prose-a:break-words prose-a:no-underline prose-a:shadow-[inset_0_-0.4rem_0_#eecfcf] prose-a:transition-all prose-a:duration-[0.25s] hover:prose-a:bg-[#eecfcf] mx-auto !max-w-none px-3 break-words">
+    <div className="paper mx-auto w-full max-w-full py-10 sm:px-8">
+      <div className="prose prose-neutral md:prose-lg prose-headings:font-title prose-a:break-words prose-a:no-underline prose-a:shadow-[inset_0_-0.4rem_0_var(--color-highlight)] prose-a:transition-all prose-a:duration-[0.25s] prose-a:hover:bg-highlight mx-auto !max-w-none px-3 break-words">
         {children}
       </div>
     </div>

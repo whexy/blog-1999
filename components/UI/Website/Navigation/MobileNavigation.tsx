@@ -42,7 +42,7 @@ const MobileNavItem = ({ url, name, Icon, toggleMenuFn }) => (
     <div className="rounded-lg">
       <Icon className="h-6 w-6" />
     </div>
-    <div className="text-center text-gray-400 hover:text-white">
+    <div className="text-center text-neutral-400 hover:text-white">
       {name}
     </div>
   </Link>

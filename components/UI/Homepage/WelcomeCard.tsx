@@ -11,16 +11,16 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
   return (
     <Depth3D hardness={60}>
       <div
-        className={`relative mb-2.5 w-full overflow-hidden rounded-3xl border border-black/5 bg-white/10 shadow-sm shadow-black/5 backdrop-blur-md ${showButtons ? "p-6 lg:p-8" : "p-4"}`}>
+        className={`glass-card mb-2.5 w-full ${showButtons ? "p-6 lg:p-8" : "p-4"}`}>
         {/* Background decoration - contained within card */}
-        <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-to-br from-blue-100/30 via-purple-50/20 to-pink-100/30" />
-        <div className="absolute top-4 left-4 -z-10 h-24 w-24 rounded-full bg-gradient-to-r from-blue-200/20 to-cyan-200/20 blur-xl" />
-        <div className="absolute right-6 bottom-4 -z-10 h-20 w-20 rounded-full bg-gradient-to-r from-purple-200/15 to-pink-200/15 blur-lg" />
-        <div className="absolute top-8 right-4 -z-10 h-16 w-16 rounded-full bg-gradient-to-r from-yellow-200/15 to-orange-200/15 blur-lg" />
+        <div className="glass-tint from-blue-100/30 via-purple-50/20 to-pink-100/30" />
+        <div className="glow-blob top-4 left-4 h-24 w-24 from-blue-200/20 to-cyan-200/20 blur-xl" />
+        <div className="glow-blob right-6 bottom-4 h-20 w-20 from-purple-200/15 to-pink-200/15 blur-lg" />
+        <div className="glow-blob top-8 right-4 h-16 w-16 from-yellow-200/15 to-orange-200/15 blur-lg" />
         {/* Glass shine effect */}
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-white/20 via-transparent to-transparent opacity-60" />
+        <div className="glass-shine" />
         {/* Subtle inner glow */}
-        <div className="absolute inset-0 rounded-3xl bg-gradient-to-t from-transparent via-white/5 to-white/10" />
+        <div className="absolute inset-0 bg-gradient-to-t from-transparent via-white/5 to-white/10" />
         <div
           className={`relative z-10 ${showButtons ? "flex flex-col gap-6 md:flex-row md:items-center md:justify-between md:gap-8" : "flex flex-row items-center gap-4"}`}>
           <div
@@ -61,7 +61,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <Link
                   href="https://github.com/whexy"
-                  className="font-title flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
+                  className="btn-glass">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 24 24"
@@ -72,7 +72,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
                 </Link>
                 <Link
                   href="https://twitter.com/whexyshi"
-                  className="font-title flex items-center gap-2 rounded-xl border border-white/30 bg-white/20 px-4 py-2 text-sm font-medium tracking-wide text-gray-800 backdrop-blur-sm transition-all duration-300 hover:scale-105 hover:border-white/50 hover:bg-white/40 hover:shadow-lg hover:shadow-white/20 hover:backdrop-blur-md">
+                  className="btn-glass">
                   <svg
                     className="h-5 w-5"
                     viewBox="0 0 300 300"

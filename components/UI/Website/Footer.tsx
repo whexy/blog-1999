@@ -10,7 +10,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-2 py-4">
+    <footer className="max-w-content mx-auto flex w-full flex-col items-center justify-center px-2 py-4">
       <Depth3D hardness={5}>
         <div className="pt-2 pb-2 select-none">
           <div className="primary mx-auto flex w-60 items-center justify-center divide-x divide-white/20 rounded-xl py-2">
@@ -19,7 +19,7 @@ export default function Footer() {
               <p className="pb-2">
                 {metadata.author.name}&apos;s Blog
               </p>
-              <p className="text-xs text-gray-600">
+              <p className="text-xs text-neutral-600">
                 Copyright © 2014-{year}
               </p>
             </div>
