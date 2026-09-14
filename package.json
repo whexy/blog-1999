@@ -10,7 +10,8 @@
     "start": "next start",
     "export": "next export",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "lint:tailwind": "eslint --config eslint.shadcn.mjs --no-config-lookup ."
   },
   "dependencies": {
     "@giscus/react": "^3.1.0",
@@ -60,6 +61,7 @@
   "packageManager": "pnpm@10.33.4",
   "devDependencies": {
     "@eslint/js": "^9.39.4",
+    "@shadcn/lint": "^0.1.0",
     "@types/lodash": "^4.17.24",
     "@types/mdast": "^4.0.4",
     "@types/node": "^24.10.4",
