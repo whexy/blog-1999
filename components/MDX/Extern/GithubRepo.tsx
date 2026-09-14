@@ -17,12 +17,12 @@ const GithubRepo = async ({ repo }: { repo: string }) => {
 
   if (!ghrepo || !ghrepo.owner) {
     return (
-      <div className="not-prose transtion-all mx-auto max-w-xl font-sans duration-300">
+      <div className="not-prose mx-auto max-w-xl font-sans transition-all duration-300">
         <Link href={html_url}>
           <div className="secondbg overflow-hidden rounded-xl">
             <div className="flex space-x-4 p-4">
               <div className="grid flex-none place-items-center">
-                <div className="flex h-[60px] w-[60px] items-center justify-center overflow-hidden rounded-full bg-neutral-200">
+                <div className="flex h-15 w-15 items-center justify-center overflow-hidden rounded-full bg-neutral-200">
                   <svg
                     className="h-8 w-8 text-neutral-400"
                     fill="currentColor"

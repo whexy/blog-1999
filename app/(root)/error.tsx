@@ -13,7 +13,7 @@ export default function Error() {
           <div className="glow-blob top-4 left-4 h-24 w-24 from-blue-200/30 to-cyan-200/30 blur-xl" />
           <div className="glow-blob right-6 bottom-4 h-20 w-20 from-purple-200/25 to-pink-200/25 blur-lg" />
           <div className="glow-blob top-8 right-4 h-16 w-16 from-yellow-200/25 to-orange-200/25 blur-lg" />
-          <div className="flex items-center justify-center font-mono text-[8rem]">
+          <div className="flex items-center justify-center font-mono text-9xl">
             <p>5</p>
             <Avatar className="h-32 w-32" />
             <p>0</p>

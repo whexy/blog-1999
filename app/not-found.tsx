@@ -17,7 +17,7 @@ export default function NotFound() {
               <span className="inline-block h-3 w-3 rounded-full bg-[#ffbd2e]"></span>
               <span className="inline-block h-3 w-3 rounded-full bg-[#28ca42]"></span>
             </div>
-            <div className="mr-[60px] flex-1 text-center font-mono text-xs text-[#999]">
+            <div className="mr-15 flex-1 text-center font-mono text-xs text-[#999]">
               Terminal
             </div>
           </div>

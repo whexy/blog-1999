@@ -62,7 +62,7 @@ export default function RootLayout({
         <Analytics />
         <Header />
         <main className="text-black-readable min-h-[80vh] bg-white">
-          <div className="mx-auto box-border flex w-full max-w-[700px] flex-col">
+          <div className="mx-auto box-border flex w-full max-w-175 flex-col">
             {children}
           </div>
         </main>
