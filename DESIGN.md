@@ -40,6 +40,10 @@ the reference for how to compose them.
 use Tailwind's `gray`/`slate`/`zinc` — their undertones fight the
 decorations.
 
+`neutral-50` … `neutral-900` are declared explicitly in `@theme`, at
+Tailwind's own values, so the ramp is a theme token rather than an
+implicit fallback to the default palette.
+
 ## Radius scale (semantic)
 
 | Class          | Meaning                                                 |
