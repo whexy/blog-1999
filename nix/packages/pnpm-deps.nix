@@ -23,5 +23,5 @@ pkgs.fetchPnpmDeps {
   pname = "blog-1999";
   pnpm = pkgs.pnpm_10;
   fetcherVersion = 4;
-  hash = "sha256-VSYK+dZCW/JU+nqv7iQt1cQcReUiI9wjIb3DUwvI+5U=";
+  hash = "sha256-sK8rMqYZMlDb/6xgLt1/uOziXrXnzE2C/l51V6zMqMo=";
 }
