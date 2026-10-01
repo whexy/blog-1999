@@ -1,5 +1,5 @@
 # Shared treefmt config, consumed by nix/formatter.nix (`nix fmt`) and the
-# treefmt git-hook in nix/checks/pre-commit-check.nix.
+# treefmt git-hook in nix/pre-commit-check.nix.
 _: {
   projectRootFile = "flake.nix";
 
