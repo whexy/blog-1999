@@ -10,6 +10,14 @@ export type Heading = {
  * Strip inline markdown from a heading's raw text so the visible
  * label (and the slug derived from it) matches what the browser
  * renders.
+ *
+ * NOTE: this must stay consistent with `childrenToText` in
+ * components/MDX/MDXComponents.tsx, which derives the rendered
+ * heading ids from the compiled React children. If they disagree, the
+ * TOC link for that heading (and the de-dup counters after it) break.
+ *
+ * Like GFM, `_` / `__` emphasis only counts at word boundaries, so
+ * identifiers such as `my_var_name` keep their underscores.
  */
 function stripInlineMarkdown(raw: string): string {
   return raw
@@ -17,8 +25,10 @@ function stripInlineMarkdown(raw: string): string {
     .replace(/!\[[^\]]*\]\([^)]*\)/g, "") // images
     .replace(/\[([^\]]+)\]\([^)]*\)/g, "$1") // [text](url)
     .replace(/\[([^\]]+)\]\[[^\]]*\]/g, "$1") // [text][ref]
-    .replace(/(\*\*|__)(.*?)\1/g, "$2") // bold
-    .replace(/(\*|_)(.*?)\1/g, "$2") // italic
+    .replace(/\*\*(.+?)\*\*/g, "$1") // **bold**
+    .replace(/(^|\W)__(.+?)__(?!\w)/g, "$1$2") // __bold__
+    .replace(/\*(.+?)\*/g, "$1") // *italic*
+    .replace(/(^|\W)_(.+?)_(?!\w)/g, "$1$2") // _italic_
     .replace(/~~(.*?)~~/g, "$1") // strikethrough
     .replace(/\s+/g, " ")
     .trim();
