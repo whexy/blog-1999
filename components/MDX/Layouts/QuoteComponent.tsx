@@ -1,6 +1,18 @@
 import React from "react";
 
-const QuoteComponent = ({ cite, subcite, url, children }) => {
+interface QuoteComponentProps {
+  cite?: string;
+  subcite?: string;
+  url?: string;
+  children?: React.ReactNode;
+}
+
+const QuoteComponent = ({
+  cite,
+  subcite,
+  url,
+  children,
+}: QuoteComponentProps) => {
   return (
     <div className="not-prose relative mx-auto my-8 max-w-4xl break-inside-avoid-page">
       {/* Main quote container */}
