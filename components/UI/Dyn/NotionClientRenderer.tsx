@@ -22,10 +22,24 @@ const Modal = dynamic(
   },
 );
 
-const NotionImageWrapper = ({ src, alt, className, style }) => {
-  // In my CloudFront settings, /notion-img?url=<img_url> is cached.
+interface NotionImageWrapperProps {
+  src: string;
+  alt?: string;
+  className?: string;
+  style?: React.CSSProperties;
+}
 
-  const imageSrc = "/notion-img?url=" + encodeURIComponent(src);
+const NotionImageWrapper = ({
+  src,
+  alt,
+  className,
+  style,
+}: NotionImageWrapperProps) => {
+  // In my CloudFront settings, /notion-img?url=<img_url> is cached.
+  // Inline data: URLs need no proxying.
+  const imageSrc = src?.startsWith("data:")
+    ? src
+    : "/notion-img?url=" + encodeURIComponent(src);
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
@@ -38,6 +52,18 @@ const NotionImageWrapper = ({ src, alt, className, style }) => {
     />
   );
 };
+
+// react-notion-x passes className ("notion-page-link", ...),
+// style, etc.; forward everything to next/link.
+const NotionPageLink = ({
+  href,
+  children,
+  ...rest
+}: React.ComponentProps<typeof Link>) => (
+  <Link href={href} {...rest}>
+    {children}
+  </Link>
+);
 
 type RenderProps = React.ComponentProps<typeof NotionRenderer>;
 
@@ -52,9 +78,7 @@ export default function NotionClientRenderer(props: RenderProps) {
         Collection,
         Equation,
         Modal,
-        PageLink: ({ href, children }) => (
-          <Link href={href}>{children}</Link>
-        ),
+        PageLink: NotionPageLink,
       }}
       {...props}
     />
