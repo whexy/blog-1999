@@ -1,24 +1,28 @@
 import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
-import { parseISO } from "date-fns";
-import { getAllBlogPosts } from "@/lib/blog";
+import { postPath, type Language } from "@/lib/site";
 
-const Series = ({ slug, series, lang = "en" }) => {
-  const seriesPosts = getAllBlogPosts()
-    .filter(
-      p => p.metadata.series === series && p.metadata.lang === lang,
-    )
-    .sort(
-      (a, b) =>
-        parseISO(a.metadata.publishDate).getTime() -
-        parseISO(b.metadata.publishDate).getTime(),
-    )
-    .map(p => ({
-      title: p.metadata.title,
-      slug: p.slug,
-    }));
-  const thisSlug = slug;
+export interface SeriesEntry {
+  slug: string;
+  title: string;
+}
 
+interface SeriesProps {
+  /** Slug of the current post (highlighted in the list). */
+  slug: string;
+  /** Series name. */
+  series: string;
+  /** Posts in the series, in reading order. */
+  posts: SeriesEntry[];
+  lang: Language;
+}
+
+const Series = ({
+  slug: thisSlug,
+  series,
+  posts: seriesPosts,
+  lang,
+}: SeriesProps) => {
   return (
     <div className="not-prose relative m-4">
       <div className="glass-card rounded-2xl p-6">
@@ -47,7 +51,7 @@ const Series = ({ slug, series, lang = "en" }) => {
             return (
               <Link
                 key={slug}
-                href={`/${lang}/posts/${slug}`}
+                href={postPath(lang, slug)}
                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
                   isActive
                     ? "bg-white/40 shadow-sm"

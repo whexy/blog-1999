@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import AAV1Player from "@/components/UI/Website/404/AAV1Player";
 import "../styles/globals.css";

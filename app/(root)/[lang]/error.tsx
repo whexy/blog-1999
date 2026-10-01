@@ -1,10 +1,20 @@
 "use client";
 
+import { useEffect } from "react";
+import Link from "next/link";
 import Avatar from "@/components/UI/Graphic/icons/Avatar";
 import Depth3D from "@/components/UI/Animation/Depth3D";
-import Link from "next/link";
 
-export default function Error() {
+interface ErrorPageProps {
+  error: Error & { digest?: string };
+  reset: () => void;
+}
+
+export default function ErrorPage({ error, reset }: ErrorPageProps) {
+  useEffect(() => {
+    console.error(error);
+  }, [error]);
+
   return (
     <div className="mt-[25vh] select-none">
       <Depth3D hardness={20}>
@@ -18,7 +28,13 @@ export default function Error() {
             <Avatar className="h-32 w-32" />
             <p>0</p>
           </div>
-          <div className="flex justify-center">
+          <div className="relative flex justify-center gap-3">
+            <button
+              type="button"
+              className="btn-glass"
+              onClick={() => reset()}>
+              Try again
+            </button>
             <Link className="btn-solid" href="/">
               Return to Homepage
             </Link>
