@@ -8,6 +8,7 @@ interface WelcomeCardProps {
 }
 
 const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
+  const NameTag = showButtons ? "h1" : "p";
   return (
     <Depth3D hardness={60}>
       <div
@@ -45,10 +46,11 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
             className={`flex flex-col ${showButtons ? "gap-4 md:order-1 md:gap-5" : "order-2 gap-1"}`}>
             <div
               className={`text-black-readable flex flex-col ${showButtons ? "gap-2" : "gap-1"}`}>
-              <h1
+              {/* On post pages the post title is the page's h1. */}
+              <NameTag
                 className={`font-title leading-tight font-bold tracking-tight ${showButtons ? "text-3xl sm:text-4xl" : "text-lg"}`}>
                 Wenxuan
-              </h1>
+              </NameTag>
               <p
                 className={`font-article text-black-readable/80 leading-relaxed ${showButtons ? "text-base sm:text-lg" : "text-sm"}`}>
                 CyberSecurity Researcher at{" "}
