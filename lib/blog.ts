@@ -1,77 +1,79 @@
 import fs from "fs";
 import path from "path";
+import type { Language } from "@/lib/site";
 
-type Language = "en" | "zh";
+export type { Language } from "@/lib/site";
 
-type Metadata = {
+export type Metadata = {
   title: string;
   summary: string;
-  publishDate: string; // ISO string
+  /** Publish instant as an ISO-8601 string (for sorting, feeds). */
+  publishDate: string;
+  /** Calendar date from the frontmatter (`YYYY-MM-DD`). */
+  date: string;
   lang: Language;
   series?: string;
 };
 
-type BlogPost = {
+export type BlogPost = {
   slug: string;
   metadata: Metadata;
   content: string;
 };
 
 const blogPostDir = "data/blog";
+const isProduction = process.env.NODE_ENV === "production";
 
-/** Parse post date string and transform to ISO string. */
-function parseDate(dateString: string): string {
-  const publishDate = new Date(dateString);
-  if (isNaN(publishDate.getTime())) {
-    throw new Error(`Invalid date: ${dateString}`);
+/**
+ * Turn a frontmatter date (`YYYY-MM-DD`) into a publish instant.
+ *
+ * Posts before 2022 were written in Beijing (UTC+8) and are pinned
+ * to local midnight there. Later posts were written in Chicago; they
+ * are pinned to local noon (CST, UTC-6), which stays on the same
+ * calendar day whether or not daylight saving time is in effect.
+ */
+function parseDate(dateString: string, file: string): string {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(dateString);
+  if (!m) {
+    throw new Error(
+      `Invalid publishDate "${dateString}" in ${file} ` +
+        "(expected YYYY-MM-DD)",
+    );
   }
-  // before 2022 treat as Beijing (UTC+8), else Chicago (UTC-6)
-  const utcOffset = publishDate.getFullYear() < 2022 ? 8 : -6;
-  publishDate.setHours(publishDate.getHours() + utcOffset);
-  return publishDate.toISOString();
+  const year = Number(m[1]);
+  const time = year < 2022 ? "T00:00:00+08:00" : "T12:00:00-06:00";
+  const instant = new Date(`${dateString}${time}`);
+  if (isNaN(instant.getTime())) {
+    throw new Error(`Invalid publishDate "${dateString}" in ${file}`);
+  }
+  return instant.toISOString();
 }
 
-/** Parse raw blog post, split into metadata and content. */
-function parseFrontMatter(raw: string): {
-  metadata: Partial<Metadata>;
-  content: string;
-} {
-  const fm = /---\s*([\s\S]*?)\s*---/;
+/** Split a raw post into frontmatter key/values and content. */
+function parseFrontMatter(
+  raw: string,
+  file: string,
+): { fields: Record<string, string>; content: string } {
+  const fm = /^---[ \t]*\r?\n([\s\S]*?)\r?\n---[ \t]*(?:\r?\n|$)/;
   const m = fm.exec(raw);
   if (!m) {
-    return { metadata: {} as Metadata, content: raw.trim() };
+    throw new Error(`Missing frontmatter block in ${file}`);
   }
-  const block = m[1];
   const content = raw.slice(m[0].length).trim();
 
-  const metadata: Record<string, string> = {};
-  for (const line of block.trim().split("\n")) {
+  const fields: Record<string, string> = {};
+  for (const line of m[1].split(/\r?\n/)) {
     const idx = line.indexOf(":");
     if (idx === -1) continue;
     const key = line.slice(0, idx).trim();
     const value = line
       .slice(idx + 1)
       .trim()
-      .replace(/^['"](.*)['"]$/, "$1");
-    if (key) metadata[key] = value;
+      .replace(/^(['"])(.*)\1$/, "$2");
+    if (key) fields[key] = value;
   }
 
-  const result: Partial<Metadata> = {
-    title: metadata.title,
-    summary: metadata.summary,
-    publishDate: metadata.publishDate,
-    series: metadata.series,
-  };
-
-  if (metadata.lang === "en" || metadata.lang === "zh") {
-    result.lang = metadata.lang;
-  }
-
-  if (metadata.publishDate) {
-    result.publishDate = parseDate(metadata.publishDate);
-  }
-
-  return { metadata: result, content };
+  return { fields, content };
 }
 
 /** Parse filename into slug and optional language suffix. */
@@ -86,18 +88,61 @@ function parseFilename(file: string): {
     : { slug: base, langFromName: undefined };
 }
 
+function parsePost(dir: string, file: string): BlogPost {
+  const raw = fs.readFileSync(path.join(dir, file), "utf-8");
+  const { fields, content } = parseFrontMatter(raw, file);
+  const { slug, langFromName } = parseFilename(file);
+
+  for (const key of ["title", "summary", "publishDate"]) {
+    if (!fields[key]) {
+      throw new Error(
+        `Missing required frontmatter field "${key}" in ${file}`,
+      );
+    }
+  }
+
+  const langField =
+    fields.lang === "en" || fields.lang === "zh"
+      ? fields.lang
+      : undefined;
+  // filename suffix can supply lang
+  const lang: Language = langField ?? langFromName ?? "en";
+
+  const metadata: Metadata = {
+    title: fields.title,
+    summary: fields.summary,
+    publishDate: parseDate(fields.publishDate, file),
+    date: fields.publishDate,
+    lang,
+    ...(fields.series ? { series: fields.series } : {}),
+  };
+
+  return { slug, metadata, content };
+}
+
+/** Newest first; ties broken by slug, then language. */
+function comparePosts(a: BlogPost, b: BlogPost): number {
+  return (
+    b.metadata.publishDate.localeCompare(a.metadata.publishDate) ||
+    a.slug.localeCompare(b.slug) ||
+    a.metadata.lang.localeCompare(b.metadata.lang)
+  );
+}
+
 let cache:
   | {
       posts: BlogPost[];
-      dirMtimeMs: number;
+      version: number;
     }
   | undefined;
 
-function getDirMtimeMs(dir: string): number {
-  // Use latest mtime across files to detect changes cheaply.
-  const entries = fs.readdirSync(dir, { withFileTypes: true });
-  let latest = 0;
-  for (const e of entries) {
+/**
+ * Cheap change detector for development: the latest mtime across
+ * the directory itself (add/remove/rename) and every post file.
+ */
+function getDirVersion(dir: string): number {
+  let latest = fs.statSync(dir).mtimeMs;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
     if (!e.isFile() || !e.name.endsWith(".mdx")) continue;
     const stat = fs.statSync(path.join(dir, e.name));
     latest = Math.max(latest, stat.mtimeMs);
@@ -111,48 +156,27 @@ export function clearBlogCache(): void {
 
 export const getAllBlogPosts = (): BlogPost[] => {
   const dir = path.join(process.cwd(), blogPostDir);
-  const dirMtimeMs = getDirMtimeMs(dir);
 
-  if (cache && cache.dirMtimeMs === dirMtimeMs) {
-    return cache.posts;
-  }
+  // Content is immutable in production builds; only re-check the
+  // file system during development.
+  if (cache && isProduction) return cache.posts;
+  const version = isProduction ? 0 : getDirVersion(dir);
+  if (cache && cache.version === version) return cache.posts;
 
   const posts: BlogPost[] = fs
     .readdirSync(dir, { withFileTypes: true })
     .filter(e => e.isFile() && e.name.endsWith(".mdx"))
-    .map(e => e.name)
-    .map(file => {
-      const raw = fs.readFileSync(path.join(dir, file), "utf-8");
-      const { metadata: metaPartial, content } =
-        parseFrontMatter(raw);
+    .map(e => parsePost(dir, e.name))
+    .sort(comparePosts);
 
-      const { slug, langFromName } = parseFilename(file);
-
-      const lang: Language = metaPartial.lang ?? langFromName ?? "en"; // filename suffix can supply lang
-
-      const metadata: Metadata = {
-        title: metaPartial.title!,
-        summary: metaPartial.summary!,
-        publishDate: metaPartial.publishDate!, // already ISO
-        lang,
-        ...(metaPartial.series ? { series: metaPartial.series } : {}),
-      };
-
-      return {
-        slug,
-        metadata,
-        content,
-      } satisfies BlogPost;
-    })
-    // newest first by publishDate
-    .sort((a, b) =>
-      a.metadata.publishDate < b.metadata.publishDate ? 1 : -1,
-    );
-
-  cache = { posts, dirMtimeMs };
+  cache = { posts, version };
   return posts;
 };
 
+/**
+ * Find a post by slug, preferring the requested language and falling
+ * back to any other available language.
+ */
 export function getBlogPost(
   slug: string,
   lang: Language = "en",
@@ -171,4 +195,21 @@ export function getAvailableLanguages(slug: string): Language[] {
     if (p.slug === slug) langs.add(p.metadata.lang);
   }
   return [...langs];
+}
+
+/** Posts of a series in one language, oldest first. */
+export function getSeriesPosts(
+  series: string,
+  lang: Language,
+): BlogPost[] {
+  return getAllBlogPosts()
+    .filter(
+      p => p.metadata.series === series && p.metadata.lang === lang,
+    )
+    .reverse();
+}
+
+/** All distinct post slugs, newest first. */
+export function getAllSlugs(): string[] {
+  return [...new Set(getAllBlogPosts().map(p => p.slug))];
 }
