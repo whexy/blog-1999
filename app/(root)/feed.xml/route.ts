@@ -1,30 +1,34 @@
-import { getAllBlogPosts } from "@/lib/blog";
 import RSS from "rss";
+import { getAllBlogPosts } from "@/lib/blog";
+import { postUrl, siteUrl } from "@/lib/site";
+
+export const dynamic = "force-static";
 
 export async function GET() {
-  const allBlogs = getAllBlogPosts();
-
   const feed = new RSS({
     title: "Whexy Blog",
     description: "a student obsessed with the computing world",
-    feed_url: "https://whexy.com/feed/feed.xml",
-    site_url: "https://whexy.com",
-    image_url: "https://whexy.com/images/whexy.png",
+    feed_url: `${siteUrl}/feed.xml`,
+    site_url: siteUrl,
+    image_url: `${siteUrl}/images/whexy.png`,
     copyright: "Whexy",
   });
 
-  allBlogs.forEach(blog => {
+  for (const post of getAllBlogPosts()) {
+    // Each language version is its own item with its own URL/GUID.
+    const url = postUrl(post.metadata.lang, post.slug);
     feed.item({
-      title: blog.metadata.title,
-      description: blog.metadata.summary,
-      url: `https://www.whexy.com/posts/${blog.slug}`,
-      date: blog.metadata.publishDate,
+      title: post.metadata.title,
+      description: post.metadata.summary,
+      url,
+      guid: url,
+      date: post.metadata.publishDate,
     });
-  });
+  }
 
   return new Response(feed.xml({ indent: true }), {
     headers: {
-      "Content-Type": "text/xml",
+      "Content-Type": "application/rss+xml; charset=utf-8",
     },
   });
 }

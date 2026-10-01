@@ -1,82 +1,79 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { defaultLocale, isLocale, type Language } from "@/lib/site";
 
-const locales = ["en", "zh"];
-const defaultLocale = "en";
-
-function getLocale(request: NextRequest): string {
-  // Check if there is any supported locale in the pathname
-  const { pathname } = request.nextUrl;
-  const pathnameHasLocale = locales.some(
-    locale =>
-      pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
-
-  if (pathnameHasLocale) return pathname.split("/")[1];
-
-  // Check Accept-Language header
-  const acceptLanguage = request.headers.get("accept-language");
-  if (acceptLanguage) {
-    const preferredLocale = acceptLanguage
-      .split(",")[0]
-      .split("-")[0]
-      .toLowerCase();
-
-    if (locales.includes(preferredLocale)) {
-      return preferredLocale;
-    }
-  }
-
-  return defaultLocale;
+/**
+ * Pick the best supported locale from an Accept-Language header,
+ * honoring quality values and order (e.g.
+ * `fr-CH, fr;q=0.9, zh;q=0.8, en;q=0.7` → `zh`).
+ */
+function localeFromAcceptLanguage(
+  header: string | null,
+): Language | undefined {
+  if (!header) return undefined;
+  const ranked = header
+    .split(",")
+    .map((part, index) => {
+      const [tag, ...params] = part.trim().split(";");
+      const qParam = params
+        .map(p => p.trim())
+        .find(p => p.startsWith("q="));
+      const q = qParam ? Number(qParam.slice(2)) : 1;
+      return {
+        lang: tag.trim().split("-")[0].toLowerCase(),
+        q: Number.isNaN(q) ? 0 : q,
+        index,
+      };
+    })
+    .filter(entry => entry.q > 0)
+    .sort((a, b) => b.q - a.q || a.index - b.index);
+  return ranked.map(entry => entry.lang).find(isLocale);
 }
 
 export function proxy(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Skip middleware for:
-  // - API routes
-  // - Static files (_next/static)
-  // - Images and public files
-  // - Favicon
-  // - Specific routes that don't use localization
+  // Skip non-localized routes and anything that looks like a file.
   if (
     pathname.startsWith("/api/") ||
     pathname.startsWith("/_next/") ||
     pathname.startsWith("/images/") ||
     pathname.startsWith("/img/") ||
     pathname.startsWith("/notion-img") ||
-    pathname.startsWith("/dyn") ||
-    pathname.startsWith("/friends") ||
+    pathname === "/dyn" ||
+    pathname.startsWith("/dyn/") ||
     pathname.includes(".")
   ) {
     return NextResponse.next();
   }
 
-  // Check if there is any supported locale in the pathname
-  const pathnameHasLocale = locales.some(
-    locale =>
-      pathname.startsWith(`/${locale}/`) || pathname === `/${locale}`,
-  );
+  const first = pathname.split("/")[1];
+  const pathLocale = isLocale(first) ? first : undefined;
+  const locale =
+    pathLocale ??
+    localeFromAcceptLanguage(
+      request.headers.get("accept-language"),
+    ) ??
+    defaultLocale;
 
-  // Rewrite if there is no locale (using rewrite instead of redirect to preserve CDN)
-  if (!pathnameHasLocale) {
-    const locale = getLocale(request);
-
-    // Clone the request URL for internal rewrite
+  // There is no post index page: /posts and /{lang}/posts go home.
+  const rest = pathLocale
+    ? pathname.slice(pathLocale.length + 1)
+    : pathname;
+  if (rest === "/posts" || rest === "/posts/") {
     const url = request.nextUrl.clone();
-
-    // For root path, rewrite to language-specific root
-    if (pathname === "/") {
-      url.pathname = `/${locale}`;
-      return NextResponse.rewrite(url);
-    }
-
-    // For other paths, add language prefix
-    url.pathname = `/${locale}${pathname}`;
-    return NextResponse.rewrite(url);
+    url.pathname = `/${locale}`;
+    return NextResponse.redirect(url);
   }
 
-  return NextResponse.next();
+  if (pathLocale) return NextResponse.next();
+
+  // No locale in the path: rewrite (not redirect) so CDN-cached
+  // unprefixed URLs keep working.
+  const url = request.nextUrl.clone();
+  url.pathname =
+    pathname === "/" ? `/${locale}` : `/${locale}${pathname}`;
+  return NextResponse.rewrite(url);
 }
 
 export const config = {

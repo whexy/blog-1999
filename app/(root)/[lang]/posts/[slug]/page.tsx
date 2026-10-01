@@ -1,6 +1,11 @@
 import { createMDXComponents } from "@/components/MDX/MDXComponents";
 import metadata from "@/data/metadata";
-import { getBlogPost, getAllBlogPosts } from "@/lib/blog";
+import {
+  getAllSlugs,
+  getAvailableLanguages,
+  getBlogPost,
+} from "@/lib/blog";
+import { isLocale, postPath } from "@/lib/site";
 import { compile, run } from "@mdx-js/mdx";
 import * as runtime from "react/jsx-runtime";
 
@@ -12,21 +17,17 @@ import remarkGfm from "remark-gfm";
 import remarkUnwrapImages from "remark-unwrap-images";
 import remarkMath from "remark-math";
 import { remarkTypst } from "@/lib/remark-typst";
-import { Metadata } from "next";
-
-type Language = "en" | "zh";
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 
 interface PageProps {
-  params: Promise<{ lang: Language; slug: string }>;
+  params: Promise<{ lang: string; slug: string }>;
 }
 
 export default async function LanguagePost({ params }: PageProps) {
   const { lang, slug } = await params;
-  const post = getBlogPost(slug, lang);
-
-  if (!post) {
-    return <div>Post not found</div>;
-  }
+  const post = isLocale(lang) ? getBlogPost(slug, lang) : undefined;
+  if (!post) notFound();
 
   // Compile and render MDX content
   const compiled = await compile(post.content, {
@@ -49,31 +50,35 @@ export default async function LanguagePost({ params }: PageProps) {
   return <MDXContent components={createMDXComponents()} />;
 }
 
+// Every slug is generated for both languages (the parent layout
+// supplies `lang`); a post missing in one language falls back to the
+// other and points its canonical URL there.
 export async function generateStaticParams() {
-  return getAllBlogPosts().map(post => ({
-    lang: post.metadata.lang,
-    slug: post.slug,
-  }));
+  return getAllSlugs().map(slug => ({ slug }));
 }
 
 export async function generateMetadata({
   params,
 }: PageProps): Promise<Metadata> {
   const { lang, slug } = await params;
-  const post = getBlogPost(slug, lang);
+  const post = isLocale(lang) ? getBlogPost(slug, lang) : undefined;
+  if (!post) notFound();
 
-  if (!post) {
-    return {
-      title: "Post Not Found",
-      description: "The requested post could not be found.",
-    };
-  }
+  const languages = Object.fromEntries(
+    getAvailableLanguages(slug).map(l => [l, postPath(l, slug)]),
+  );
 
   return {
     title: post.metadata.title,
     description: post.metadata.summary,
+    alternates: {
+      canonical: postPath(post.metadata.lang, slug),
+      languages,
+    },
     openGraph: {
       type: "article",
+      locale: post.metadata.lang === "zh" ? "zh_CN" : "en_US",
+      url: postPath(post.metadata.lang, slug),
       title: post.metadata.title,
       description: post.metadata.summary,
       publishedTime: post.metadata.publishDate,
