@@ -71,7 +71,6 @@ overrides them (e.g. `glass-card rounded-2xl p-4 backdrop-blur-sm`).
   from `sm:` up, full-bleed square on mobile.
 - **`secondbg`** (`@utility`) — hover wash for clickable rows
   (`group-hover:secondbg`).
-- **`primary`** (`@utility`) — plain white rounded-2xl card (footer).
 
 Frosted glass recipe: **blur + `backdrop-saturate-150`**. Saturation
 is what makes colors behind the glass feel alive; blur alone just

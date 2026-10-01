@@ -2,28 +2,6 @@ import type { NextConfig } from "next";
 
 const config: NextConfig = {
   reactStrictMode: true,
-  headers: async () => {
-    return [
-      {
-        source: "/giscus.css",
-        headers: [
-          {
-            key: "Access-Control-Allow-Origin",
-            value: "https://giscus.app",
-          },
-          {
-            key: "Access-Control-Allow-Methods",
-            value: "GET, OPTIONS",
-          },
-          {
-            key: "Access-Control-Allow-Headers",
-            value: "Origin, Content-Type, Accept",
-          },
-          { key: "Timing-Allow-Origin", value: "https://giscus.app" },
-        ],
-      },
-    ];
-  },
   images: {
     remotePatterns: [
       {
@@ -32,15 +10,7 @@ const config: NextConfig = {
         port: "",
         pathname: "/u/**",
       },
-      new URL("https://opengraph.githubassets.com/**"),
-      new URL("https://i.scdn.co/**"),
-      new URL("https://img.foreverblog.cn/**"),
-      new URL("https://img.cdn.whexy.com/**"),
-      new URL("https://is1-ssl.mzstatic.com/**"),
-      new URL("https://is2-ssl.mzstatic.com/**"),
-      new URL("https://is3-ssl.mzstatic.com/**"),
-      new URL("https://is4-ssl.mzstatic.com/**"),
-      new URL("https://is5-ssl.mzstatic.com/**"),
+      // Bilibili video thumbnails (URLs come from API data at runtime).
       new URL("https://i1.hdslb.com/**"),
       new URL("http://i1.hdslb.com/**"),
     ],

@@ -1,7 +1,5 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
-@plugin "@tailwindcss/aspect-ratio";
-@plugin "@tailwindcss/container-queries";
 
 /*
  * Design language: "Frost"
@@ -53,10 +51,6 @@
 /* Registered as real utilities so variants (group-hover:secondbg) work */
 @utility secondbg {
   @apply bg-secondary/90 border-black/10 backdrop-blur;
-}
-
-@utility primary {
-  @apply rounded-2xl bg-white shadow-sm;
 }
 
 @layer base {
@@ -205,18 +199,6 @@
   /* Sticky blurred site header. */
   .header-bar {
     @apply sticky top-0 z-50 w-full bg-white/80 backdrop-blur-sm backdrop-saturate-150;
-  }
-}
-
-@layer utilities {
-  /* Chrome, Safari and Opera */
-  .no-scrollbar::-webkit-scrollbar {
-    display: none;
-  }
-
-  .no-scrollbar {
-    -ms-overflow-style: none; /* IE and Edge */
-    scrollbar-width: none; /* Firefox */
   }
 }
 
