@@ -1,6 +1,10 @@
 import twemoji from "msemoji";
 
-const Twemoji = ({ emoji }) => (
+interface TwemojiProps {
+  emoji: string;
+}
+
+const Twemoji = ({ emoji }: TwemojiProps) => (
   <span
     className="not-prose"
     dangerouslySetInnerHTML={{

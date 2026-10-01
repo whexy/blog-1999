@@ -1,4 +1,11 @@
-const Diagram = ({ src, alt, width = "100%" }) => {
+interface DiagramProps {
+  /** Path under public/, without a leading slash. */
+  src: string;
+  alt?: string;
+  width?: string | number;
+}
+
+const Diagram = ({ src, alt, width = "100%" }: DiagramProps) => {
   return (
     <div>
       <object

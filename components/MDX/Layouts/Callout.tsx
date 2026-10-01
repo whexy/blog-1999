@@ -9,7 +9,6 @@ interface CalloutProps {
 }
 
 const Callout = ({ pic, icon, title, children }: CalloutProps) => {
-  // const Callout = ({ pic, icon, title, children }) => {
   return (
     <div className="callout relative mx-auto my-2 break-inside-avoid-page">
       {/* Icon/pic background - outside the blurred container */}

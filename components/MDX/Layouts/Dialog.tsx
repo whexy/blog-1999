@@ -1,6 +1,10 @@
 import Avatar from "@/components/UI/Graphic/icons/Avatar";
 
-export const Dialog = ({ children }) => {
+interface DialogProps {
+  children?: React.ReactNode;
+}
+
+export const Dialog = ({ children }: DialogProps) => {
   return (
     <div className="not-prose my-3 ml-4 flex break-inside-avoid-page items-end justify-end gap-2">
       <div className="bubble bubble-me">
@@ -15,7 +19,7 @@ export const Dialog = ({ children }) => {
   );
 };
 
-export const DialogBack = ({ children }) => {
+export const DialogBack = ({ children }: DialogProps) => {
   return (
     <div className="not-prose my-3 mr-4 flex items-end justify-start gap-2">
       <div className="flex-shrink-0">
