@@ -2,40 +2,48 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { isLocale, locales, type Language } from "@/lib/site";
 
-type Language = "en" | "zh";
+const labels: Record<Language, string> = {
+  en: "English",
+  zh: "中文",
+};
 
-export default function LanguageSwitcher() {
-  const pathname = usePathname();
+interface LanguageSwitcherProps {
+  /** Language of the current page (from the [lang] layout). */
+  lang: Language;
+}
 
-  // Extract current language and path
+/**
+ * Links to the current page in each language. Works on prefixed
+ * (`/en/posts/x`) and proxy-rewritten unprefixed (`/posts/x`) URLs.
+ * Every post exists in both languages (missing translations fall
+ * back to the other language), so the target is always valid.
+ */
+export default function LanguageSwitcher({
+  lang,
+}: LanguageSwitcherProps) {
+  const pathname = usePathname() ?? "/";
   const segments = pathname.split("/");
-  const currentLang =
-    segments[1] === "en" || segments[1] === "zh"
-      ? (segments[1] as Language)
-      : "en";
-  const pathWithoutLang =
-    segments.length > 2 ? `/${segments.slice(2).join("/")}` : "";
-
-  const switchLang = currentLang === "en" ? "zh" : "en";
-  const switchPath = `/${switchLang}${pathWithoutLang}`;
+  const rest = isLocale(segments[1])
+    ? segments.slice(2).join("/")
+    : segments.slice(1).join("/");
+  const pathFor = (l: Language) => (rest ? `/${l}/${rest}` : `/${l}`);
 
   return (
     <div className="segmented">
-      <Link
-        href={currentLang === "en" ? pathname : switchPath}
-        className={`segmented-item ${
-          currentLang === "en" ? "segmented-active" : "segmented-idle"
-        }`}>
-        English
-      </Link>
-      <Link
-        href={currentLang === "zh" ? pathname : switchPath}
-        className={`segmented-item ${
-          currentLang === "zh" ? "segmented-active" : "segmented-idle"
-        }`}>
-        中文
-      </Link>
+      {locales.map(l => (
+        <Link
+          key={l}
+          href={pathFor(l)}
+          hrefLang={l}
+          aria-current={l === lang ? "page" : undefined}
+          className={`segmented-item ${
+            l === lang ? "segmented-active" : "segmented-idle"
+          }`}>
+          {labels[l]}
+        </Link>
+      ))}
     </div>
   );
 }
