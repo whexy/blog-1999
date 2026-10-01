@@ -242,7 +242,7 @@
   background-color: #fb4934; /* gruvbox red */
 }
 
-.rehype-code-title + #pre-container > pre {
+.rehype-code-title + .pre-container > pre {
   @apply !mt-0 !rounded-t-none;
 }
 
