@@ -33,7 +33,12 @@ const staticComponents = {
   Twemoji,
 };
 
-/** Flatten React children into plain text for slug generation. */
+/**
+ * Flatten React children into plain text for slug generation.
+ *
+ * Must produce the same text as `stripInlineMarkdown` in lib/toc.ts
+ * (which works on the raw markdown) or TOC anchors stop resolving.
+ */
 function childrenToText(children: React.ReactNode): string {
   let out = "";
   React.Children.forEach(children, child => {
