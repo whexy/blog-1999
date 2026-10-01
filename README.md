@@ -10,9 +10,9 @@
   Yet Another Blog system with <b>Next.js</b>
 </p>
 
-- Framework: Next.js 13
+- Framework: Next.js 16 (App Router)
 - Deployment: Vercel
-- Content: MDX with [contentlayer](https://github.com/contentlayerdev/contentlayer), Notion with [react-notion-x](https://github.com/NotionX/react-notion-x)
+- Content: MDX compiled with [@mdx-js/mdx](https://mdxjs.com), Notion with [react-notion-x](https://github.com/NotionX/react-notion-x)
 - Styling: Tailwind CSS
 
 ## Live Demo

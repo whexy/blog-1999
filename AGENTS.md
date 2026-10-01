@@ -27,8 +27,8 @@ pnpm run lint
 # Auto-fix lint/formatting issues
 pnpm run lint:fix
 
-# Export static site
-pnpm run export
+# Opt-in Tailwind design-system audit (warnings only)
+pnpm run lint:tailwind
 ```
 
 ### Nix (Blueprint layout)
@@ -133,7 +133,6 @@ data/              - Static content (MDX blog posts, metadata)
   blog/            - MDX blog post files
 public/            - Static assets (images, files, etc.)
 styles/            - Global CSS, Prism themes, KaTeX styles
-locales/           - i18n translations (en, zh)
 ```
 
 ## Naming Conventions
@@ -217,7 +216,7 @@ export default Component;
   times into `@layer components`.
 - Use Tailwind utility classes for one-off layout/spacing
 - Custom colors defined: `white-readable`, `black-readable`
-- Custom fonts: `font-title` (Lato), `font-article` (Noto Sans SC), `font-mono` (JetBrains Mono)
+- Custom fonts: `font-title` (Lato), `font-article` (Fira Sans, then Noto Sans SC), `font-mono` (JetBrains Mono)
 - Responsive: mobile-first (`sm:`, `md:`, `lg:`)
 - Dark mode: not currently implemented
 
@@ -255,13 +254,19 @@ export function getBlogPost(slug: string): BlogPost | undefined {
 2. **Image optimization**: Always use `next/image` for images
 3. **Font loading**: Fonts configured in `app/(root)/layout.tsx`
 4. **Path aliases**: Use `@/` imports, not relative paths across directories
-5. **Caching**: Blog posts cached in memory, cleared with `clearBlogCache()`
-6. **Date handling**: Posts have timezone logic (pre-2022: UTC+8, post-2022: UTC-6)
+5. **Caching**: Blog posts are parsed once and cached in memory by
+   `lib/blog.ts`
+6. **Date handling**: `publishDate` is date-only; pre-2022 posts are
+   Beijing time, later posts Chicago time
 7. **pnpm config**: Dependency `overrides` / `onlyBuiltDependencies` live in
    `pnpm-workspace.yaml` (pnpm 10), not the deprecated `pnpm` field in
    `package.json`.
 8. **Nix deps hash**: After changing `pnpm-lock.yaml`, regenerate the hash in
    `nix/packages/pnpm-deps.nix` or `nix flake check` will fail.
+9. **`next-env.d.ts`**: Tracked on purpose (it provides the image module
+   types `tsc --noEmit` needs on a fresh checkout and in the Nix
+   typecheck). `next dev` / `next build` rewrite its routes import; don't
+   commit that churn.
 
 ## Before Committing
 
