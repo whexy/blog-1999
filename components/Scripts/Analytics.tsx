@@ -2,6 +2,7 @@
 // Currently using Umami(https://github.com/umami-software/umami) for analytics.
 
 import Script from "next/script";
+import OutboundLinkTracker from "@/components/Scripts/OutboundLinkTracker";
 import { siteUrl } from "@/lib/site";
 
 export default function Analytics() {
@@ -34,6 +35,7 @@ export default function Analytics() {
           src={recorderSrc}
         />
       )}
+      <OutboundLinkTracker />
     </>
   );
 }

@@ -63,6 +63,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
               <div className="flex flex-col gap-3 sm:flex-row sm:gap-4">
                 <Link
                   href="https://github.com/whexy"
+                  rel="me"
                   className="btn-glass">
                   <svg
                     className="h-5 w-5"
@@ -74,6 +75,7 @@ const WelcomeCard = ({ showButtons = true }: WelcomeCardProps) => {
                 </Link>
                 <Link
                   href="https://twitter.com/whexyshi"
+                  rel="me"
                   className="btn-glass">
                   <svg
                     className="h-5 w-5"

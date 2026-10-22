@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { track } from "@/lib/analytics";
 import { isLocale, locales, type Language } from "@/lib/site";
 
 const labels: Record<Language, string> = {
@@ -38,6 +39,11 @@ export default function LanguageSwitcher({
           href={pathFor(l)}
           hrefLang={l}
           aria-current={l === lang ? "page" : undefined}
+          onClick={
+            l === lang
+              ? undefined
+              : () => track("language-switch", { from: lang, to: l })
+          }
           className={`segmented-item ${
             l === lang ? "segmented-active" : "segmented-idle"
           }`}>

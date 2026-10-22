@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { format, parseISO } from "date-fns";
 import Prose from "@/components/Layouts/Prose";
+import ReadTracker from "@/components/Scripts/ReadTracker";
 import License from "@/components/UI/Blog/License";
 import Series from "@/components/UI/Blog/Series";
 import WelcomeCard from "@/components/UI/Homepage/WelcomeCard";
@@ -80,6 +81,7 @@ export default async function BlogLayout({
             </div>
             {series}
             {children}
+            <ReadTracker slug={post.slug} lang={postLang} />
             {series}
             <License />
           </Prose>

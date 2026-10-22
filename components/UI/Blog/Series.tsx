@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
+import { track } from "@/lib/analytics";
 import { postPath, type Language } from "@/lib/site";
 
 export interface SeriesEntry {
@@ -52,6 +55,12 @@ const Series = ({
               <Link
                 key={slug}
                 href={postPath(lang, slug)}
+                onClick={
+                  isActive
+                    ? undefined
+                    : () =>
+                        track("series-click", { series, to: slug })
+                }
                 className={`group relative flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200 ${
                   isActive
                     ? "bg-white/40 shadow-sm"

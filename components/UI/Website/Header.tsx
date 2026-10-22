@@ -49,7 +49,10 @@ const Header = ({ lang }: HeaderProps) => {
             className={`nav-link ${isNotionPage ? "nav-link-active" : ""}`}>
             Notion
           </Link>
-          <Link href="https://shiwx.org" className="nav-link">
+          <Link
+            href="https://shiwx.org"
+            rel="me"
+            className="nav-link">
             About
           </Link>
         </nav>
