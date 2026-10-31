@@ -23,7 +23,7 @@
     "image-size": "^2.0.4",
     "mdast-util-mdx-jsx": "^3.2.0",
     "msemoji": "^1.2.1",
-    "next": "^16.3.8",
+    "next": "^16.4.1",
     "notion-client": "^7.12.1",
     "notion-types": "^7.12.1",
     "notion-utils": "^7.12.1",
